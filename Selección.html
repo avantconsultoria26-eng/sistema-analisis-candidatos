@@ -1,1062 +1,1631 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AVANT - Consultoría de Talento Humano</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        body {
-            background: linear-gradient(135deg, #f5f7fa 0%, #e8edf3 100%);
-            min-height: 100vh;
-            padding: 20px;
-            color: #333;
-        }
-
-        /* ===== ENCABEZADO LLAMATIVO AVANT ===== */
-        .avant-header {
-            text-align: center;
-            padding: 35px 20px;
-            background: linear-gradient(135deg, #0066cc 0%, #004999 50%, #003366 100%);
-            color: white;
-            margin-bottom: 30px;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 102, 204, 0.35);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .avant-header::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(255,255,255,0.15) 0%, transparent 70%);
-            animation: shimmer 4s infinite;
-        }
-
-        .avant-header::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: linear-gradient(90deg, #00d4ff, #ffffff, #00d4ff);
-        }
-
-        @keyframes shimmer {
-            0% { transform: translate(0, 0); }
-            100% { transform: translate(50%, 50%); }
-        }
-
-        .avant-header h1 {
-            font-size: 3em;
-            font-weight: 900;
-            margin: 0;
-            text-shadow: 2px 2px 10px rgba(0,0,0,0.4);
-            letter-spacing: 3px;
-            position: relative;
-            z-index: 1;
-            animation: fadeInDown 1s ease;
-        }
-
-        .avant-header .subtitle {
-            font-size: 1.3em;
-            margin-top: 12px;
-            font-weight: 400;
-            opacity: 0.95;
-            position: relative;
-            z-index: 1;
-            letter-spacing: 1.5px;
-            animation: fadeInUp 1s ease;
-        }
-
-        .avant-header .heart {
-            display: inline-block;
-            animation: pulse 1.5s infinite;
-            font-size: 1.1em;
-        }
-
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.15); }
-        }
-
-        @keyframes fadeInDown {
-            from { opacity: 0; transform: translateY(-30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* ===== CONTENEDOR PRINCIPAL ===== */
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            background: white;
-            border-radius: 15px;
-            box-shadow: 0 5px 25px rgba(0,0,0,0.1);
-            overflow: hidden;
-        }
-
-        .main-title {
-            background: linear-gradient(135deg, #0066cc, #004999);
-            color: white;
-            padding: 20px;
-            text-align: center;
-        }
-
-        .main-title h2 {
-            font-size: 1.8em;
-            margin-bottom: 5px;
-        }
-
-        .main-title p {
-            opacity: 0.9;
-            font-size: 1em;
-        }
-
-        /* ===== PESTAÑAS ===== */
-        .tabs {
-            display: flex;
-            background: #f8f9fa;
-            border-bottom: 2px solid #e0e0e0;
-            flex-wrap: wrap;
-        }
-
-        .tab {
-            flex: 1;
-            min-width: 150px;
-            padding: 15px 20px;
-            background: transparent;
-            border: none;
-            cursor: pointer;
-            font-size: 1em;
-            font-weight: 600;
-            color: #666;
-            transition: all 0.3s;
-            border-bottom: 3px solid transparent;
-        }
-
-        .tab:hover {
-            background: #e9ecef;
-            color: #0066cc;
-        }
-
-        .tab.active {
-            color: #0066cc;
-            border-bottom-color: #0066cc;
-            background: white;
-        }
-
-        /* ===== CONTENIDO DE PESTAÑAS ===== */
-        .tab-content {
-            display: none;
-            padding: 30px;
-            animation: fadeIn 0.4s ease;
-        }
-
-        .tab-content.active {
-            display: block;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        .section-title {
-            color: #0066cc;
-            margin-bottom: 20px;
-            font-size: 1.5em;
-            border-left: 5px solid #0066cc;
-            padding-left: 15px;
-        }
-
-        /* ===== FORMULARIOS ===== */
-        .form-group {
-            margin-bottom: 18px;
-        }
-
-        .form-row {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 15px;
-            margin-bottom: 15px;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 6px;
-            font-weight: 600;
-            color: #444;
-        }
-
-        input, select, textarea {
-            width: 100%;
-            padding: 10px 12px;
-            border: 2px solid #e0e0e0;
-            border-radius: 8px;
-            font-size: 1em;
-            transition: all 0.3s;
-        }
-
-        input:focus, select:focus, textarea:focus {
-            outline: none;
-            border-color: #0066cc;
-            box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.15);
-        }
-
-        /* ===== BOTONES ===== */
-        .btn {
-            padding: 12px 25px;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 1em;
-            font-weight: 600;
-            transition: all 0.3s;
-            margin: 5px;
-        }
-
-        .btn-primary {
-            background: linear-gradient(135deg, #0066cc, #004999);
-            color: white;
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0, 102, 204, 0.4);
-        }
-
-        .btn-success {
-            background: linear-gradient(135deg, #28a745, #1e7e34);
-            color: white;
-        }
-
-        .btn-success:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(40, 167, 69, 0.4);
-        }
-
-        .btn-danger {
-            background: #dc3545;
-            color: white;
-            padding: 6px 12px;
-            font-size: 0.85em;
-        }
-
-        .btn-print {
-            background: linear-gradient(135deg, #6c757d, #495057);
-            color: white;
-        }
-
-        /* ===== TABLAS ===== */
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 15px;
-            background: white;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-        }
-
-        th {
-            background: linear-gradient(135deg, #0066cc, #004999);
-            color: white;
-            padding: 12px;
-            text-align: left;
-            font-weight: 600;
-        }
-
-        td {
-            padding: 10px 12px;
-            border-bottom: 1px solid #e0e0e0;
-        }
-
-        tr:hover {
-            background: #f8f9fa;
-        }
-
-        /* ===== INFO CARDS ===== */
-        .info-card {
-            background: linear-gradient(135deg, #e3f2fd, #bbdefb);
-            border-left: 5px solid #0066cc;
-            padding: 15px;
-            border-radius: 8px;
-            margin-bottom: 20px;
-        }
-
-        .info-card strong {
-            color: #0066cc;
-        }
-
-        /* ===== ESCALA DE CALIFICACIÓN ===== */
-        .scale-container {
-            background: #f8f9fa;
-            padding: 20px;
-            border-radius: 10px;
-            margin: 20px 0;
-        }
-
-        .scale-item {
-            padding: 10px;
-            margin: 8px 0;
-            background: white;
-            border-radius: 6px;
-            border-left: 4px solid;
-        }
-
-        .scale-5 { border-left-color: #28a745; }
-        .scale-4 { border-left-color: #5cb85c; }
-        .scale-3 { border-left-color: #f0ad4e; }
-        .scale-2 { border-left-color: #ff9800; }
-        .scale-1 { border-left-color: #dc3545; }
-
-        /* ===== MATRIZ DE EVALUACIÓN ===== */
-        .evaluation-matrix {
-            margin-top: 20px;
-        }
-
-        .question-row {
-            background: white;
-            padding: 15px;
-            margin: 10px 0;
-            border-radius: 8px;
-            border: 1px solid #e0e0e0;
-        }
-
-        .question-text {
-            font-weight: 600;
-            margin-bottom: 10px;
-            color: #333;
-        }
-
-        .rating-buttons {
-            display: flex;
-            gap: 8px;
-            flex-wrap: wrap;
-        }
-
-        .rating-btn {
-            flex: 1;
-            min-width: 60px;
-            padding: 8px;
-            border: 2px solid #e0e0e0;
-            background: white;
-            border-radius: 6px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: all 0.3s;
-        }
-
-        .rating-btn:hover {
-            transform: translateY(-2px);
-        }
-
-        .rating-btn.selected {
-            color: white;
-            border-color: transparent;
-        }
-
-        .rating-btn[data-value="5"].selected { background: #28a745; }
-        .rating-btn[data-value="4"].selected { background: #5cb85c; }
-        .rating-btn[data-value="3"].selected { background: #f0ad4e; }
-        .rating-btn[data-value="2"].selected { background: #ff9800; }
-        .rating-btn[data-value="1"].selected { background: #dc3545; }
-
-        /* ===== RESULTADOS ===== */
-        .result-card {
-            background: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 3px 15px rgba(0,0,0,0.08);
-            margin: 15px 0;
-        }
-
-        .score-display {
-            font-size: 3em;
-            font-weight: 900;
-            text-align: center;
-            margin: 20px 0;
-            padding: 20px;
-            border-radius: 10px;
-            color: white;
-        }
-
-        .score-excellent { background: linear-gradient(135deg, #28a745, #1e7e34); }
-        .score-good { background: linear-gradient(135deg, #5cb85c, #449d44); }
-        .score-acceptable { background: linear-gradient(135deg, #f0ad4e, #ec971f); }
-        .score-low { background: linear-gradient(135deg, #ff9800, #f57c00); }
-        .score-deficient { background: linear-gradient(135deg, #dc3545, #c82333); }
-
-        /* ===== ESTILOS PARA IMPRESIÓN/PDF ===== */
-        @media print {
-            body {
-                background: white !important;
-                padding: 0;
-                -webkit-print-color-adjust: exact !important;
-                print-color-adjust: exact !important;
-            }
-
-            .avant-header {
-                background: linear-gradient(135deg, #0066cc 0%, #004999 100%) !important;
-                -webkit-print-color-adjust: exact !important;
-                print-color-adjust: exact !important;
-                page-break-after: avoid;
-                margin-bottom: 20px;
-                box-shadow: none;
-            }
-
-            .avant-header h1,
-            .avant-header .subtitle {
-                color: white !important;
-                -webkit-print-color-adjust: exact !important;
-                print-color-adjust: exact !important;
-            }
-
-            .avant-header::after {
-                background: #ffffff !important;
-                -webkit-print-color-adjust: exact !important;
-                print-color-adjust: exact !important;
-            }
-
-            .tabs, .btn, .btn-danger {
-                display: none !important;
-            }
-
-            .tab-content {
-                display: block !important;
-                padding: 15px;
-                page-break-inside: avoid;
-            }
-
-            .container {
-                box-shadow: none;
-                border-radius: 0;
-            }
-
-            .main-title {
-                background: #0066cc !important;
-                color: white !important;
-                -webkit-print-color-adjust: exact !important;
-                print-color-adjust: exact !important;
-            }
-
-            th {
-                background: #0066cc !important;
-                color: white !important;
-                -webkit-print-color-adjust: exact !important;
-                print-color-adjust: exact !important;
-            }
-
-            table {
-                page-break-inside: auto;
-            }
-
-            tr {
-                page-break-inside: avoid;
-                page-break-after: auto;
-            }
-
-            .score-display {
-                -webkit-print-color-adjust: exact !important;
-                print-color-adjust: exact !important;
-            }
-
-            .scale-item, .info-card, .question-row, .result-card {
-                page-break-inside: avoid;
-            }
-
-            input, select, textarea {
-                border: 1px solid #999 !important;
-            }
-        }
-
-        /* ===== RESPONSIVE ===== */
-        @media (max-width: 768px) {
-            .avant-header h1 {
-                font-size: 2em;
-            }
-            .avant-header .subtitle {
-                font-size: 1em;
-            }
-            .form-row {
-                grid-template-columns: 1fr;
-            }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sistema de Análisis de Candidatos</title>
+<!-- Recomendación: renombra este archivo a index.html y súbelo al root del repo para usar GitHub Pages -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+    min-height: 100vh;
+    padding: 20px;
+    color: #333;
+  }
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+    overflow: hidden;
+  }
+  header {
+    background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+    color: #fff;
+    padding: 25px 30px;
+    text-align: center;
+  }
+  header h1 { font-size: 28px; margin-bottom: 5px; }
+  header p { opacity: 0.85; font-size: 14px; }
+
+  .tabs {
+    display: flex;
+    background: #f4f6f9;
+    border-bottom: 2px solid #e1e5eb;
+    overflow-x: auto;
+  }
+  .tab {
+    flex: 1;
+    min-width: 150px;
+    padding: 15px 20px;
+    cursor: pointer;
+    text-align: center;
+    font-weight: 600;
+    color: #666;
+    border-bottom: 3px solid transparent;
+    transition: all 0.3s;
+    font-size: 14px;
+  }
+  .tab:hover { background: #e9eef5; color: #2a5298; }
+  .tab.active {
+    color: #2a5298;
+    border-bottom-color: #2a5298;
+    background: #fff;
+  }
+
+  .tab-content { display: none; padding: 30px; }
+  .tab-content.active { display: block; animation: fadeIn 0.4s; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+  .form-section { margin-bottom: 25px; }
+  .form-section h3 {
+    color: #2a5298;
+    margin-bottom: 15px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid #e1e5eb;
+    font-size: 18px;
+  }
+  .form-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 15px;
+  }
+  .form-group { display: flex; flex-direction: column; }
+  label {
+    font-weight: 600;
+    margin-bottom: 6px;
+    color: #444;
+    font-size: 13px;
+  }
+  label .required { color: #e74c3c; }
+  input, select, textarea {
+    padding: 10px 12px;
+    border: 1px solid #ccd3dc;
+    border-radius: 8px;
+    font-size: 14px;
+    transition: border 0.2s, box-shadow 0.2s;
+    font-family: inherit;
+    background: #fff;
+  }
+  input:focus, select:focus, textarea:focus {
+    outline: none;
+    border-color: #2a5298;
+    box-shadow: 0 0 0 3px rgba(42,82,152,0.15);
+  }
+  select:disabled { background: #f0f2f5; color: #999; cursor: not-allowed; }
+
+  .btn {
+    padding: 11px 22px;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.25s;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .btn-primary { background: #2a5298; color: #fff; }
+  .btn-primary:hover { background: #1e3c72; transform: translateY(-2px); box-shadow: 0 4px 12px rgba(42,82,152,0.3); }
+  .btn-success { background: #27ae60; color: #fff; }
+  .btn-success:hover { background: #1e8449; transform: translateY(-2px); }
+  .btn-danger { background: #e74c3c; color: #fff; }
+  .btn-danger:hover { background: #c0392b; transform: translateY(-2px); }
+  .btn-warning { background: #f39c12; color: #fff; }
+  .btn-warning:hover { background: #d68910; }
+  .btn-secondary { background: #95a5a6; color: #fff; }
+  .btn-secondary:hover { background: #7f8c8d; }
+  .btn-pdf { background: #c0392b; color: #fff; }
+  .btn-pdf:hover { background: #a93226; transform: translateY(-2px); box-shadow: 0 4px 12px rgba(192,57,43,0.3); }
+  .btn-group { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 15px; }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+    background: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  }
+  th {
+    background: #2a5298;
+    color: #fff;
+    padding: 12px;
+    text-align: left;
+    font-size: 13px;
+  }
+  td {
+    padding: 11px 12px;
+    border-bottom: 1px solid #eef1f5;
+    font-size: 14px;
+  }
+  tr:hover { background: #f8fafc; }
+  .badge {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 600;
+  }
+  .badge-success { background: #d4edda; color: #155724; }
+  .badge-warning { background: #fff3cd; color: #856404; }
+  .badge-danger { background: #f8d7da; color: #721c24; }
+  .badge-info { background: #d1ecf1; color: #0c5460; }
+  .badge-primary { background: #d6e4f5; color: #1e3c72; }
+
+  .traffic-light {
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    margin-right: 6px;
+    vertical-align: middle;
+    box-shadow: 0 0 4px rgba(0,0,0,0.2);
+  }
+  .traffic-red { background: #e74c3c; }
+  .traffic-orange { background: #f39c12; }
+  .traffic-green { background: #27ae60; }
+
+  .matrix-table th, .matrix-table td { text-align: center; }
+  .matrix-table td:first-child, .matrix-table th:first-child { text-align: left; }
+  .matrix-table select { width: 100%; }
+  .total-row { background: #f0f4f9 !important; font-weight: 700; }
+
+  /* Tabla comparativa */
+  .comparativa-table th, .comparativa-table td { text-align: center; font-size: 12px; padding: 8px; }
+  .comparativa-table td:first-child, .comparativa-table th:first-child { text-align: left; font-weight: 600; }
+  .comparativa-table .selected-col { background: #fff9e6 !important; font-weight: 700; }
+  .comparativa-table .best-cell { background: #d4edda; color: #155724; font-weight: 700; }
+  .comparativa-table .worst-cell { background: #f8d7da; color: #721c24; }
+
+  .scale-reference {
+    background: #f8fafc;
+    border-left: 4px solid #2a5298;
+    padding: 15px 20px;
+    border-radius: 6px;
+    margin-bottom: 20px;
+    font-size: 13px;
+  }
+  .scale-reference h4 { color: #2a5298; margin-bottom: 10px; }
+  .scale-reference ul { list-style: none; padding-left: 0; }
+  .scale-reference li { padding: 4px 0; border-bottom: 1px dashed #dde3ea; }
+  .scale-reference li:last-child { border-bottom: none; }
+  .scale-reference strong { color: #2a5298; }
+
+  .podium {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    margin: 20px 0;
+  }
+  .podium-card {
+    background: linear-gradient(135deg, #fff, #f8fafc);
+    border-radius: 12px;
+    padding: 25px;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    border: 2px solid transparent;
+    transition: transform 0.3s;
+  }
+  .podium-card:hover { transform: translateY(-5px); }
+  .podium-card.gold { border-color: #f1c40f; background: linear-gradient(135deg, #fff9e6, #fff); }
+  .podium-card.silver { border-color: #bdc3c7; background: linear-gradient(135deg, #f8f9fa, #fff); }
+  .podium-card.bronze { border-color: #cd7f32; background: linear-gradient(135deg, #faebd7, #fff); }
+  .podium-card.selected-cand { border-color: #2a5298; box-shadow: 0 0 0 4px rgba(42,82,152,0.2); }
+  .medal { font-size: 48px; margin-bottom: 10px; }
+  .podium-card h3 { color: #2a5298; margin-bottom: 8px; }
+  .podium-score {
+    font-size: 32px;
+    font-weight: 700;
+    margin: 10px 0;
+  }
+  .podium-card p { font-size: 13px; color: #666; margin: 4px 0; }
+
+  .chart-container {
+    background: #fff;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    margin: 20px 0;
+  }
+  .chart-container h3 { color: #2a5298; margin-bottom: 15px; text-align: center; }
+  .chart-wrapper { max-width: 550px; margin: 0 auto; }
+
+  .summary-box {
+    background: linear-gradient(135deg, #f0f4f9, #fff);
+    border-radius: 12px;
+    padding: 25px;
+    margin: 20px 0;
+    border-left: 5px solid #2a5298;
+  }
+  .summary-box h3 { color: #2a5298; margin-bottom: 15px; }
+  .summary-box p { line-height: 1.7; margin-bottom: 10px; color: #444; }
+
+  .decision-box {
+    padding: 20px;
+    border-radius: 10px;
+    margin: 15px 0;
+    font-weight: 600;
+    text-align: center;
+    font-size: 16px;
+  }
+  .decision-hire { background: #d4edda; color: #155724; border: 2px solid #27ae60; }
+  .decision-recommend { background: #d1ecf1; color: #0c5460; border: 2px solid #17a2b8; }
+  .decision-reserve { background: #fff3cd; color: #856404; border: 2px solid #f39c12; }
+  .decision-no { background: #f8d7da; color: #721c24; border: 2px solid #e74c3c; }
+
+  .alert {
+    padding: 15px 20px;
+    border-radius: 8px;
+    margin: 15px 0;
+    font-size: 14px;
+  }
+  .alert-info { background: #d1ecf1; color: #0c5460; border-left: 4px solid #17a2b8; }
+  .alert-warning { background: #fff3cd; color: #856404; border-left: 4px solid #f39c12; }
+  .alert-success { background: #d4edda; color: #155724; border-left: 4px solid #27ae60; }
+
+  .empty-state {
+    text-align: center;
+    padding: 40px 20px;
+    color: #888;
+  }
+  .empty-state .icon { font-size: 60px; margin-bottom: 15px; }
+
+  .cargo-selector {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 10px;
+    flex-wrap: wrap;
+  }
+  .vacancy-badge {
+    background: #27ae60;
+    color: #fff;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-weight: 700;
+    font-size: 13px;
+    white-space: nowrap;
+  }
+  .vacancy-badge.zero { background: #e74c3c; }
+  .candidates-badge {
+    background: #2a5298;
+    color: #fff;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-weight: 700;
+    font-size: 13px;
+    white-space: nowrap;
+  }
+
+  .candidate-list-item {
+    background: #f8fafc;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-left: 4px solid #2a5298;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .candidate-info strong { color: #2a5298; }
+  .candidate-info small { color: #777; display: block; margin-top: 3px; }
+
+  .cascade-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 15px;
+    margin-bottom: 20px;
+    background: linear-gradient(135deg, #f0f4f9, #fff);
+    padding: 20px;
+    border-radius: 10px;
+    border: 1px solid #e1e5eb;
+  }
+  .cascade-step { position: relative; }
+  .cascade-step::before {
+    content: attr(data-step);
+    position: absolute;
+    top: -10px;
+    left: 10px;
+    background: #2a5298;
+    color: #fff;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 700;
+  }
+  .cascade-info {
+    background: #e8f0fb;
+    border-left: 4px solid #2a5298;
+    padding: 12px 16px;
+    border-radius: 6px;
+    margin-bottom: 15px;
+    font-size: 14px;
+    color: #1e3c72;
+  }
+  .cascade-info strong { color: #2a5298; }
+
+  /* Selector destacado de candidato en resultados */
+  .candidate-selector-box {
+    background: linear-gradient(135deg, #fff9e6, #fff);
+    border: 2px solid #f1c40f;
+    border-radius: 12px;
+    padding: 20px;
+    margin: 20px 0;
+  }
+  .candidate-selector-box h4 {
+    color: #856404;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .candidate-detail-card {
+    background: #fff;
+    border-radius: 10px;
+    padding: 15px;
+    margin-top: 15px;
+    border-left: 4px solid #f1c40f;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 10px;
+    font-size: 13px;
+  }
+  .candidate-detail-card div strong { color: #2a5298; display: block; font-size: 11px; text-transform: uppercase; margin-bottom: 3px; }
+
+  @media (max-width: 768px) {
+    .tab { font-size: 12px; padding: 12px 10px; min-width: 100px; }
+    .tab-content { padding: 20px 15px; }
+    header h1 { font-size: 22px; }
+  }
+</style>
 </head>
 <body>
+<div class="container">
+  <header>
+    <h1>🎯 Sistema de Análisis de Perfiles de Candidatos</h1>
+    <p>Plataforma integral para gestión de vacantes y evaluación de talento</p>
+  </header>
 
-    <!-- ===== ENCABEZADO LLAMATIVO AVANT ===== -->
-    <div class="avant-header">
-        <h1>AVANT <span class="heart">💙</span></h1>
-        <div class="subtitle">CONSULTORÍA DE TALENTO HUMANO</div>
+  <div class="tabs">
+    <div class="tab active" data-tab="empresa">1. Empresa y Cargo</div>
+    <div class="tab" data-tab="candidatos">2. Candidatos</div>
+    <div class="tab" data-tab="evaluacion">3. Evaluación</div>
+    <div class="tab" data-tab="resultados">4. Resultados</div>
+  </div>
+
+  <!-- TAB 1: EMPRESA Y CARGO -->
+  <div class="tab-content active" id="tab-empresa">
+    <div class="form-section">
+      <h3>🏢 Registrar Empresa</h3>
+      <div class="form-grid">
+        <div class="form-group">
+          <label>NIT <span class="required">*</span></label>
+          <input type="text" id="nit" placeholder="Ej: 900.123.456-7">
+        </div>
+        <div class="form-group">
+          <label>Nombre de la Empresa <span class="required">*</span></label>
+          <input type="text" id="nombreEmpresa" placeholder="Ej: Tech Solutions S.A.S">
+        </div>
+      </div>
+      <div class="btn-group">
+        <button class="btn btn-primary" onclick="agregarEmpresa()">➕ Agregar Empresa</button>
+      </div>
     </div>
 
-    <!-- ===== CONTENEDOR PRINCIPAL ===== -->
-    <div class="container">
-        <div class="main-title">
-            <h2>🎯 Validación Completa - Sistema de Análisis de Perfiles de Candidatos</h2>
-            <p>Plataforma integral para gestión de vacantes y evaluación de talento</p>
+    <div class="form-section">
+      <h3>💼 Gestionar Cargos / Vacantes</h3>
+      <div class="form-grid">
+        <div class="form-group">
+          <label>Seleccionar Empresa <span class="required">*</span></label>
+          <select id="empresaCargo">
+            <option value="">-- Seleccione --</option>
+          </select>
         </div>
-
-        <!-- PESTAÑAS -->
-        <div class="tabs">
-            <button class="tab active" onclick="openTab(event, 'tab1')">1. Empresa y Cargo</button>
-            <button class="tab" onclick="openTab(event, 'tab2')">2. Candidatos</button>
-            <button class="tab" onclick="openTab(event, 'tab3')">3. Evaluación</button>
-            <button class="tab" onclick="openTab(event, 'tab4')">4. Resultados</button>
+        <div class="form-group">
+          <label>Nombre del Cargo <span class="required">*</span></label>
+          <input type="text" id="nombreCargo" placeholder="Ej: Gerente de Marketing Digital">
         </div>
-
-        <!-- PESTAÑA 1: EMPRESA Y CARGO -->
-        <div id="tab1" class="tab-content active">
-            <h3 class="section-title">🏢 Registrar Empresa</h3>
-            <div class="form-row">
-                <div class="form-group">
-                    <label>NIT *</label>
-                    <input type="text" id="nitEmpresa" placeholder="Ingrese el NIT">
-                </div>
-                <div class="form-group">
-                    <label>Nombre de la Empresa *</label>
-                    <input type="text" id="nombreEmpresa" placeholder="Nombre de la empresa">
-                </div>
-            </div>
-            <button class="btn btn-primary" onclick="agregarEmpresa()">➕ Agregar Empresa</button>
-
-            <hr style="margin: 30px 0; border: none; border-top: 2px dashed #e0e0e0;">
-
-            <h3 class="section-title">💼 Gestionar Cargos / Vacantes</h3>
-            <div class="form-row">
-                <div class="form-group">
-                    <label>Seleccionar Empresa *</label>
-                    <select id="empresaCargo">
-                        <option value="">-- Seleccione --</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label>Nombre del Cargo *</label>
-                    <input type="text" id="nombreCargo" placeholder="Nombre del cargo">
-                </div>
-                <div class="form-group">
-                    <label>Número de Vacantes *</label>
-                    <input type="number" id="numVacantes" min="1" value="1">
-                </div>
-            </div>
-            <button class="btn btn-primary" onclick="agregarCargo()">➕ Agregar Cargo</button>
-
-            <h3 class="section-title" style="margin-top: 30px;">📋 Empresas y Cargos Registrados</h3>
-            <table id="tablaEmpresasCargos">
-                <thead>
-                    <tr>
-                        <th>Empresa</th>
-                        <th>NIT</th>
-                        <th>Cargo</th>
-                        <th>Vacantes</th>
-                        <th>Acciones</th>
-                    </tr>
-                </thead>
-                <tbody></tbody>
-            </table>
+        <div class="form-group">
+          <label>Número de Vacantes <span class="required">*</span></label>
+          <input type="number" id="numVacantes" min="1" value="1">
         </div>
-
-        <!-- PESTAÑA 2: CANDIDATOS -->
-        <div id="tab2" class="tab-content">
-            <h3 class="section-title">👤 Registrar Candidato</h3>
-            <div class="info-card">
-                💡 <strong>Nota:</strong> Puede registrar múltiples candidatos para la misma vacante. 
-                Todos los campos marcados con <strong>*</strong> son obligatorios.
-            </div>
-
-            <div class="form-row">
-                <div class="form-group">
-                    <label>Empresa *</label>
-                    <select id="empresaCandidato" onchange="actualizarCargosCandidato()">
-                        <option value="">-- Seleccione --</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label>Cargo *</label>
-                    <select id="cargoCandidato">
-                        <option value="">-- Primero seleccione empresa --</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label>Información</label>
-                    <div id="infoVacantes" style="padding: 10px; background: #f0f8ff; border-radius: 6px; color: #0066cc; font-weight: 600;">
-                        0 vacantes | 0 candidatos
-                    </div>
-                </div>
-            </div>
-
-            <div class="form-row">
-                <div class="form-group">
-                    <label>Cédula *</label>
-                    <input type="text" id="cedulaCandidato" placeholder="Número de cédula">
-                </div>
-                <div class="form-group">
-                    <label>Nombres y Apellidos *</label>
-                    <input type="text" id="nombreCandidato" placeholder="Nombre completo">
-                </div>
-            </div>
-
-            <div class="form-row">
-                <div class="form-group">
-                    <label>Profesión *</label>
-                    <input type="text" id="profesionCandidato" placeholder="Profesión">
-                </div>
-                <div class="form-group">
-                    <label>Edad *</label>
-                    <input type="number" id="edadCandidato" min="18" max="70" placeholder="Edad">
-                </div>
-                <div class="form-group">
-                    <label>Tiempo de Experiencia (años) *</label>
-                    <input type="number" id="experienciaCandidato" min="0" placeholder="Años">
-                </div>
-            </div>
-
-            <div class="form-row">
-                <div class="form-group">
-                    <label>Teléfono *</label>
-                    <input type="tel" id="telefonoCandidato" placeholder="Teléfono">
-                </div>
-                <div class="form-group">
-                    <label>Correo Electrónico *</label>
-                    <input type="email" id="correoCandidato" placeholder="correo@ejemplo.com">
-                </div>
-                <div class="form-group">
-                    <label>Dirección *</label>
-                    <input type="text" id="direccionCandidato" placeholder="Dirección">
-                </div>
-            </div>
-
-            <button class="btn btn-primary" onclick="registrarCandidato()">➕ Registrar Candidato</button>
-
-            <h3 class="section-title" style="margin-top: 30px;">👥 Candidatos Registrados</h3>
-            <table id="tablaCandidatos">
-                <thead>
-                    <tr>
-                        <th>Cédula</th>
-                        <th>Nombre</th>
-                        <th>Profesión</th>
-                        <th>Edad</th>
-                        <th>Experiencia</th>
-                        <th>Teléfono</th>
-                        <th>Correo</th>
-                        <th>Acciones</th>
-                    </tr>
-                </thead>
-                <tbody></tbody>
-            </table>
-        </div>
-
-        <!-- PESTAÑA 3: EVALUACIÓN -->
-        <div id="tab3" class="tab-content">
-            <h3 class="section-title">📊 Matriz de Evaluación</h3>
-            
-            <div class="form-row">
-                <div class="form-group">
-                    <label>1. Seleccione Empresa *</label>
-                    <select id="empresaEval" onchange="actualizarCargosEval()">
-                        <option value="">-- Seleccione empresa --</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label>2. Seleccione Cargo *</label>
-                    <select id="cargoEval" onchange="actualizarCandidatosEval()">
-                        <option value="">-- Primero seleccione empresa --</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label>3. Seleccione Candidato *</label>
-                    <select id="candidatoEval">
-                        <option value="">-- Primero seleccione cargo --</option>
-                    </select>
-                </div>
-            </div>
-
-            <h4 style="margin-top: 25px; color: #0066cc;">📖 Escala de Calificación</h4>
-            <div class="scale-container">
-                <div class="scale-item scale-5"><strong>5 - Excelente:</strong> Responde con seguridad, ejemplos reales, resultados medibles, pensamiento estratégico, ideas innovadoras, liderazgo.</div>
-                <div class="scale-item scale-4"><strong>4 - Bueno:</strong> Tiene experiencia, responde correctamente, presenta indicadores, lidera con poca supervisión.</div>
-                <div class="scale-item scale-3"><strong>3 - Aceptable:</strong> Conoce la teoría, ha ejecutado campañas, le falta visión estratégica, requiere acompañamiento.</div>
-                <div class="scale-item scale-2"><strong>2 - Bajo:</strong> Respuestas generales, sin métricas, poco conocimiento práctico, escasa creatividad.</div>
-                <div class="scale-item scale-1"><strong>1 - Deficiente:</strong> No demuestra experiencia, evita ejemplos, desconoce conceptos, no evidencia liderazgo.</div>
-            </div>
-
-            <h4 style="margin-top: 25px; color: #0066cc;">📝 Preguntas de Evaluación</h4>
-            <div class="evaluation-matrix" id="evaluationMatrix">
-                <!-- Las preguntas se generan dinámicamente -->
-            </div>
-
-            <div style="margin-top: 25px; text-align: center;">
-                <button class="btn btn-success" onclick="guardarEvaluacion()">💾 Guardar Evaluación</button>
-            </div>
-        </div>
-
-        <!-- PESTAÑA 4: RESULTADOS -->
-        <div id="tab4" class="tab-content">
-            <h3 class="section-title">🏆 Resultados del Análisis</h3>
-            
-            <div class="form-row">
-                <div class="form-group">
-                    <label>1. Empresa *</label>
-                    <select id="empresaResult" onchange="actualizarCargosResult()">
-                        <option value="">-- Seleccione empresa --</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label>2. Cargo *</label>
-                    <select id="cargoResult" onchange="actualizarCandidatosResult()">
-                        <option value="">-- Primero seleccione empresa --</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label>3. Candidato a Analizar *</label>
-                    <select id="candidatoResult">
-                        <option value="">-- Primero seleccione cargo --</option>
-                    </select>
-                </div>
-            </div>
-
-            <div style="text-align: center; margin: 20px 0;">
-                <button class="btn btn-primary" onclick="mostrarResultados()">📊 Analizar Candidato</button>
-                <button class="btn btn-print" onclick="window.print()">🖨️ Imprimir / Guardar PDF</button>
-            </div>
-
-            <div id="resultadosContainer"></div>
-        </div>
+      </div>
+      <div class="btn-group">
+        <button class="btn btn-success" onclick="agregarCargo()">➕ Agregar Cargo</button>
+      </div>
     </div>
 
-    <script>
-        // ===== DATOS =====
-        let empresas = [];
-        let cargos = [];
-        let candidatos = [];
-        let evaluaciones = [];
+    <div class="form-section">
+      <h3>📋 Empresas y Cargos Registrados</h3>
+      <div id="listaEmpresas"></div>
+    </div>
+  </div>
 
-        const preguntas = [
-            "Experiencia en el cargo o área relacionada",
-            "Conocimientos técnicos específicos",
-            "Habilidades de liderazgo",
-            "Capacidad de trabajo en equipo",
-            "Comunicación efectiva",
-            "Resolución de problemas",
-            "Orientación a resultados",
-            "Adaptabilidad al cambio",
-            "Pensamiento estratégico",
-            "Manejo de indicadores y métricas"
-        ];
+  <!-- TAB 2: CANDIDATOS -->
+  <div class="tab-content" id="tab-candidatos">
+    <div class="form-section">
+      <h3>👤 Registrar Candidato</h3>
+      <div class="alert alert-info">
+        💡 <strong>Nota:</strong> Puede registrar múltiples candidatos para la misma vacante. Todos los campos marcados con <span style="color:#e74c3c">*</span> son obligatorios.
+      </div>
+      <div class="form-grid">
+        <div class="form-group">
+          <label>Empresa <span class="required">*</span></label>
+          <select id="empresaCandidato" onchange="cargarCargosCandidato()">
+            <option value="">-- Seleccione --</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Cargo <span class="required">*</span></label>
+          <div class="cargo-selector">
+            <select id="cargoCandidato" style="flex:1" onchange="mostrarVacantes()">
+              <option value="">-- Seleccione cargo --</option>
+            </select>
+          </div>
+          <div id="infoVacanteCargo" style="margin-top:8px; display:none">
+            <span class="vacancy-badge" id="vacanteInfo">0 vacantes</span>
+            <span class="candidates-badge" id="candidatosInfo">0 candidatos</span>
+          </div>
+        </div>
+      </div>
+      <div class="form-grid" style="margin-top:15px">
+        <div class="form-group">
+          <label>Cédula <span class="required">*</span></label>
+          <input type="text" id="cedula" placeholder="Ej: 1020304050">
+        </div>
+        <div class="form-group">
+          <label>Nombres y Apellidos <span class="required">*</span></label>
+          <input type="text" id="nombreCandidato" placeholder="Ej: Juan Pérez García">
+        </div>
+        <div class="form-group">
+          <label>Profesión <span class="required">*</span></label>
+          <input type="text" id="profesion" placeholder="Ej: Administrador de Empresas">
+        </div>
+        <div class="form-group">
+          <label>Edad <span class="required">*</span></label>
+          <input type="number" id="edad" min="18" max="70" placeholder="Ej: 32">
+        </div>
+        <div class="form-group">
+          <label>Tiempo de Experiencia (años) <span class="required">*</span></label>
+          <input type="number" id="experiencia" min="0" max="50" placeholder="Ej: 5">
+        </div>
+        <div class="form-group">
+          <label>Teléfono <span class="required">*</span></label>
+          <input type="tel" id="telefono" placeholder="Ej: 3001234567">
+        </div>
+        <div class="form-group">
+          <label>Correo Electrónico <span class="required">*</span></label>
+          <input type="email" id="correo" placeholder="Ej: juan@email.com">
+        </div>
+        <div class="form-group" style="grid-column: span 2">
+          <label>Dirección <span class="required">*</span></label>
+          <input type="text" id="direccion" placeholder="Ej: Calle 123 # 45-67, Bogotá">
+        </div>
+      </div>
+      <div class="btn-group">
+        <button class="btn btn-success" onclick="agregarCandidato()">➕ Registrar Candidato</button>
+      </div>
+    </div>
 
-        // ===== PESTAÑAS =====
-        function openTab(evt, tabName) {
-            document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
-            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-            document.getElementById(tabName).classList.add('active');
-            evt.currentTarget.classList.add('active');
+    <div class="form-section">
+      <h3>👥 Candidatos Registrados</h3>
+      <div id="listaCandidatos"></div>
+    </div>
+  </div>
+
+  <!-- TAB 3: EVALUACIÓN -->
+  <div class="tab-content" id="tab-evaluacion">
+    <div class="form-section">
+      <h3>📊 Matriz de Evaluación</h3>
+
+      <div class="cascade-grid">
+        <div class="cascade-step" data-step="1">
+          <label>1. Seleccione Empresa <span class="required">*</span></label>
+          <select id="evalEmpresa" onchange="cargarCargosEval()" style="width:100%">
+            <option value="">-- Seleccione empresa --</option>
+          </select>
+        </div>
+        <div class="cascade-step" data-step="2">
+          <label>2. Seleccione Cargo <span class="required">*</span></label>
+          <select id="evalCargo" onchange="cargarCandidatosEval()" disabled style="width:100%">
+            <option value="">-- Primero seleccione empresa --</option>
+          </select>
+        </div>
+        <div class="cascade-step" data-step="3">
+          <label>3. Seleccione Candidato <span class="required">*</span></label>
+          <select id="evalCandidato" onchange="cargarEvaluacion()" disabled style="width:100%">
+            <option value="">-- Primero seleccione cargo --</option>
+          </select>
+        </div>
+      </div>
+
+      <div id="infoCandidatoEval"></div>
+
+      <div class="scale-reference">
+        <h4>📖 Escala de Calificación</h4>
+        <ul>
+          <li><strong>5 - Excelente:</strong> Responde con seguridad, ejemplos reales, resultados medibles, pensamiento estratégico, ideas innovadoras, liderazgo.</li>
+          <li><strong>4 - Bueno:</strong> Tiene experiencia, responde correctamente, presenta indicadores, lidera con poca supervisión.</li>
+          <li><strong>3 - Aceptable:</strong> Conoce la teoría, ha ejecutado campañas, le falta visión estratégica, requiere acompañamiento.</li>
+          <li><strong>2 - Bajo:</strong> Respuestas generales, sin métricas, poco conocimiento práctico, escasa creatividad.</li>
+          <li><strong>1 - Deficiente:</strong> No demuestra experiencia, evita ejemplos, desconoce conceptos, no evidencia liderazgo.</li>
+        </ul>
+      </div>
+
+      <div id="matrizEvaluacion"></div>
+      <div class="btn-group">
+        <button class="btn btn-primary" onclick="guardarEvaluacion()">💾 Guardar Evaluación</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- TAB 4: RESULTADOS -->
+  <div class="tab-content" id="tab-resultados">
+    <div class="form-section">
+      <h3>🏆 Resultados del Análisis</h3>
+      <div class="cascade-grid">
+        <div class="cascade-step" data-step="1">
+          <label>1. Empresa <span class="required">*</span></label>
+          <select id="filtroEmpresa" onchange="cargarCargosResultados()" style="width:100%">
+            <option value="">-- Seleccione empresa --</option>
+          </select>
+        </div>
+        <div class="cascade-step" data-step="2">
+          <label>2. Cargo <span class="required">*</span></label>
+          <select id="filtroCargo" onchange="cargarCandidatosResultados()" disabled style="width:100%">
+            <option value="">-- Primero seleccione empresa --</option>
+          </select>
+        </div>
+        <div class="cascade-step" data-step="3">
+          <label>3. Candidato a Analizar <span class="required">*</span></label>
+          <select id="filtroCandidato" onchange="mostrarResultados()" disabled style="width:100%">
+            <option value="">-- Primero seleccione cargo --</option>
+          </select>
+        </div>
+      </div>
+      <div id="contenidoResultados"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ============ ESTADO GLOBAL ============
+let empresas = JSON.parse(localStorage.getItem('empresas') || '[]');
+let candidatos = JSON.parse(localStorage.getItem('candidatos') || '[]');
+let evaluaciones = JSON.parse(localStorage.getItem('evaluaciones') || '{}');
+
+const COMPETENCIAS = [
+  { nombre: 'Experiencia', peso: 10 },
+  { nombre: 'Meta Ads', peso: 15 },
+  { nombre: 'Generación de Leads', peso: 10 },
+  { nombre: 'Analítica', peso: 5 },
+  { nombre: 'Estrategia Digital', peso: 15 },
+  { nombre: 'Creatividad', peso: 10 },
+  { nombre: 'Liderazgo', peso: 10 },
+  { nombre: 'Comunicación', peso: 5 },
+  { nombre: 'Caso Práctico', peso: 10 },
+  { nombre: 'Ajuste Cultural', peso: 10 }
+];
+
+// ============ NAVEGACIÓN TABS ============
+document.querySelectorAll('.tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+    tab.classList.add('active');
+    document.getElementById('tab-' + tab.dataset.tab).classList.add('active');
+    if (tab.dataset.tab === 'evaluacion') inicializarEvalCascada();
+    if (tab.dataset.tab === 'resultados') inicializarResultadosCascada();
+  });
+});
+
+// ============ PERSISTENCIA ============
+function guardar() {
+  localStorage.setItem('empresas', JSON.stringify(empresas));
+  localStorage.setItem('candidatos', JSON.stringify(candidatos));
+  localStorage.setItem('evaluaciones', JSON.stringify(evaluaciones));
+}
+
+// ============ SEMAFORIZACIÓN ============
+function obtenerSemaforo(puntaje) {
+  if (puntaje >= 86) return { clase: 'traffic-green', color: '#27ae60', texto: 'Verde' };
+  if (puntaje >= 71) return { clase: 'traffic-orange', color: '#f39c12', texto: 'Naranja' };
+  return { clase: 'traffic-red', color: '#e74c3c', texto: 'Rojo' };
+}
+
+// ============ GESTIÓN DE EMPRESAS ============
+function agregarEmpresa() {
+  const nit = document.getElementById('nit').value.trim();
+  const nombre = document.getElementById('nombreEmpresa').value.trim();
+  if (!nit || !nombre) { alert('⚠️ NIT y Nombre son obligatorios'); return; }
+  if (empresas.find(e => e.nit === nit)) { alert('⚠️ Ya existe una empresa con ese NIT'); return; }
+  empresas.push({ nit, nombre, cargos: [] });
+  guardar();
+  document.getElementById('nit').value = '';
+  document.getElementById('nombreEmpresa').value = '';
+  renderEmpresas();
+  actualizarSelectsEmpresas();
+}
+
+function eliminarEmpresa(nit) {
+  if (!confirm('¿Eliminar esta empresa y todos sus cargos/candidatos?')) return;
+  const candsAEliminar = candidatos.filter(c => c.nitEmpresa === nit);
+  candsAEliminar.forEach(c => delete evaluaciones[c.id]);
+  empresas = empresas.filter(e => e.nit !== nit);
+  candidatos = candidatos.filter(c => c.nitEmpresa !== nit);
+  guardar();
+  renderEmpresas();
+  actualizarSelectsEmpresas();
+  renderCandidatos();
+}
+
+function agregarCargo() {
+  const nit = document.getElementById('empresaCargo').value;
+  const nombre = document.getElementById('nombreCargo').value.trim();
+  const vacantes = parseInt(document.getElementById('numVacantes').value);
+  if (!nit || !nombre || !vacantes) { alert('⚠️ Complete todos los campos'); return; }
+  const empresa = empresas.find(e => e.nit === nit);
+  if (empresa.cargos.find(c => c.nombre.toLowerCase() === nombre.toLowerCase())) {
+    alert('⚠️ Ya existe ese cargo en esta empresa'); return;
+  }
+  empresa.cargos.push({ nombre, vacantes, vacantesDisponibles: vacantes });
+  guardar();
+  document.getElementById('nombreCargo').value = '';
+  document.getElementById('numVacantes').value = 1;
+  renderEmpresas();
+  actualizarSelectsEmpresas();
+}
+
+function eliminarCargo(nit, idxCargo) {
+  if (!confirm('¿Eliminar este cargo y sus candidatos asociados?')) return;
+  const empresa = empresas.find(e => e.nit === nit);
+  const cargoNombre = empresa.cargos[idxCargo].nombre;
+  const candsAEliminar = candidatos.filter(c => c.nitEmpresa === nit && c.cargo === cargoNombre);
+  candsAEliminar.forEach(c => delete evaluaciones[c.id]);
+  empresa.cargos.splice(idxCargo, 1);
+  candidatos = candidatos.filter(c => !(c.nitEmpresa === nit && c.cargo === cargoNombre));
+  guardar();
+  renderEmpresas();
+  renderCandidatos();
+}
+
+function renderEmpresas() {
+  const cont = document.getElementById('listaEmpresas');
+  if (empresas.length === 0) {
+    cont.innerHTML = '<div class="empty-state"><div class="icon">🏢</div><p>No hay empresas registradas</p></div>';
+    return;
+  }
+  let html = '';
+  empresas.forEach(emp => {
+    html += `<div style="background:#f8fafc; padding:15px; border-radius:10px; margin-bottom:15px; border-left:4px solid #2a5298">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px; flex-wrap:wrap; gap:10px">
+        <div><strong style="color:#2a5298; font-size:16px">${emp.nombre}</strong><br>
+        <small style="color:#777">NIT: ${emp.nit}</small></div>
+        <button class="btn btn-danger" onclick="eliminarEmpresa('${emp.nit}')" style="padding:6px 12px; font-size:12px">🗑️ Eliminar</button>
+      </div>`;
+    if (emp.cargos.length > 0) {
+      html += '<table><thead><tr><th>Cargo</th><th>Vacantes</th><th>Candidatos</th><th>Acción</th></tr></thead><tbody>';
+      emp.cargos.forEach((c, i) => {
+        const candsCount = candidatos.filter(x => x.nitEmpresa === emp.nit && x.cargo === c.nombre).length;
+        const disp = c.vacantesDisponibles;
+        const badgeVac = disp > 0 ? `<span class="badge badge-success">${disp} disp.</span>` : `<span class="badge badge-danger">Agotado</span>`;
+        const badgeCand = `<span class="badge badge-primary">${candsCount} postulados</span>`;
+        html += `<tr><td>${c.nombre}</td><td>${badgeVac} / ${c.vacantes}</td><td>${badgeCand}</td>
+          <td><button class="btn btn-danger" onclick="eliminarCargo('${emp.nit}', ${i})" style="padding:5px 10px; font-size:11px">🗑️</button></td></tr>`;
+      });
+      html += '</tbody></table>';
+    } else {
+      html += '<p style="color:#888; font-size:13px; padding:10px">Sin cargos registrados</p>';
+    }
+    html += '</div>';
+  });
+  cont.innerHTML = html;
+}
+
+function actualizarSelectsEmpresas() {
+  const sel1 = document.getElementById('empresaCargo');
+  const sel2 = document.getElementById('empresaCandidato');
+  const opts = '<option value="">-- Seleccione --</option>' + empresas.map(e => `<option value="${e.nit}">${e.nombre} (${e.nit})</option>`).join('');
+  sel1.innerHTML = opts;
+  sel2.innerHTML = opts;
+  document.getElementById('cargoCandidato').innerHTML = '<option value="">-- Seleccione cargo --</option>';
+  document.getElementById('infoVacanteCargo').style.display = 'none';
+}
+
+// ============ GESTIÓN DE CANDIDATOS ============
+function cargarCargosCandidato() {
+  const nit = document.getElementById('empresaCandidato').value;
+  const sel = document.getElementById('cargoCandidato');
+  sel.innerHTML = '<option value="">-- Seleccione cargo --</option>';
+  document.getElementById('infoVacanteCargo').style.display = 'none';
+  if (!nit) return;
+  const empresa = empresas.find(e => e.nit === nit);
+  if (!empresa) return;
+  empresa.cargos.forEach((c, i) => {
+    const candsCount = candidatos.filter(x => x.nitEmpresa === nit && x.cargo === c.nombre).length;
+    const opt = document.createElement('option');
+    opt.value = c.nombre;
+    opt.textContent = `${c.nombre} (${c.vacantes} vac. | ${candsCount} cand.)`;
+    sel.appendChild(opt);
+  });
+}
+
+function mostrarVacantes() {
+  const nit = document.getElementById('empresaCandidato').value;
+  const cargo = document.getElementById('cargoCandidato').value;
+  const cont = document.getElementById('infoVacanteCargo');
+  if (!nit || !cargo) { cont.style.display = 'none'; return; }
+  const empresa = empresas.find(e => e.nit === nit);
+  const c = empresa.cargos.find(x => x.nombre === cargo);
+  const candsCount = candidatos.filter(x => x.nitEmpresa === nit && x.cargo === cargo).length;
+  document.getElementById('vacanteInfo').textContent = `${c.vacantes} vacante${c.vacantes!==1?'s':''}`;
+  document.getElementById('vacanteInfo').className = 'vacancy-badge' + (c.vacantesDisponibles === 0 ? ' zero' : '');
+  document.getElementById('candidatosInfo').textContent = `${candsCount} candidato${candsCount!==1?'s':''}`;
+  cont.style.display = 'block';
+}
+
+function agregarCandidato() {
+  const nit = document.getElementById('empresaCandidato').value;
+  const cargo = document.getElementById('cargoCandidato').value;
+  const cedula = document.getElementById('cedula').value.trim();
+  const nombre = document.getElementById('nombreCandidato').value.trim();
+  const profesion = document.getElementById('profesion').value.trim();
+  const edad = document.getElementById('edad').value;
+  const exp = document.getElementById('experiencia').value;
+  const telefono = document.getElementById('telefono').value.trim();
+  const correo = document.getElementById('correo').value.trim();
+  const direccion = document.getElementById('direccion').value.trim();
+
+  if (!nit || !cargo || !cedula || !nombre || !profesion || !edad || exp === '' || !telefono || !correo || !direccion) {
+    alert('⚠️ Todos los campos son obligatorios'); return;
+  }
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailRegex.test(correo)) { alert('⚠️ El correo electrónico no es válido'); return; }
+  if (candidatos.find(c => c.cedula === cedula)) {
+    alert('⚠️ Ya existe un candidato con esa cédula'); return;
+  }
+  const empresa = empresas.find(e => e.nit === nit);
+  candidatos.push({
+    id: Date.now(),
+    cedula, nombre, profesion,
+    edad: parseInt(edad),
+    experiencia: parseInt(exp),
+    telefono, correo, direccion,
+    nitEmpresa: nit,
+    empresa: empresa.nombre,
+    cargo
+  });
+  guardar();
+  ['cedula','nombreCandidato','profesion','edad','experiencia','telefono','correo','direccion'].forEach(id => document.getElementById(id).value = '');
+  renderCandidatos();
+  renderEmpresas();
+  cargarCargosCandidato();
+  mostrarVacantes();
+  alert('✅ Candidato registrado exitosamente. Puede continuar registrando más candidatos.');
+}
+
+function eliminarCandidato(id) {
+  if (!confirm('¿Eliminar este candidato?')) return;
+  delete evaluaciones[id];
+  candidatos = candidatos.filter(c => c.id !== id);
+  guardar();
+  renderCandidatos();
+  renderEmpresas();
+}
+
+function renderCandidatos() {
+  const cont = document.getElementById('listaCandidatos');
+  if (candidatos.length === 0) {
+    cont.innerHTML = '<div class="empty-state"><div class="icon">👥</div><p>No hay candidatos registrados</p></div>';
+    return;
+  }
+  const grupos = {};
+  candidatos.forEach(c => {
+    const key = `${c.nitEmpresa}|${c.cargo}`;
+    if (!grupos[key]) grupos[key] = { empresa: c.empresa, cargo: c.cargo, cands: [] };
+    grupos[key].cands.push(c);
+  });
+  let html = '';
+  Object.values(grupos).forEach(g => {
+    html += `<div style="background:#e8f0fb; padding:12px 16px; border-radius:8px 8px 0 0; margin-top:15px; border-left:4px solid #2a5298">
+      <strong style="color:#2a5298">${g.empresa}</strong> - ${g.cargo}
+      <span class="badge badge-primary" style="margin-left:10px">${g.cands.length} candidato${g.cands.length!==1?'s':''}</span>
+    </div>`;
+    g.cands.forEach(c => {
+      const eval_ = evaluaciones[c.id];
+      let estado = '';
+      if (eval_) {
+        const sem = obtenerSemaforo(eval_.puntajeTotal);
+        estado = `<span class="badge badge-success"><span class="traffic-light ${sem.clase}"></span>${eval_.puntajeTotal.toFixed(1)} pts</span>`;
+      } else {
+        estado = `<span class="badge badge-warning">Pendiente</span>`;
+      }
+      html += `<div class="candidate-list-item" style="border-radius:0; margin-bottom:0; border-top:1px solid #e1e5eb">
+        <div class="candidate-info">
+          <strong>${c.nombre}</strong> - CC ${c.cedula}
+          <small>${c.profesion} | ${c.edad} años | ${c.experiencia} años exp.</small>
+          <small>📞 ${c.telefono} | ✉️ ${c.correo}</small>
+          <small>📍 ${c.direccion}</small>
+        </div>
+        <div style="display:flex; gap:8px; align-items:center; flex-wrap:wrap">
+          ${estado}
+          <button class="btn btn-danger" onclick="eliminarCandidato(${c.id})" style="padding:6px 12px; font-size:12px">🗑️</button>
+        </div>
+      </div>`;
+    });
+  });
+  cont.innerHTML = html;
+}
+
+// ============ EVALUACIÓN EN CASCADA ============
+function inicializarEvalCascada() {
+  const selEmp = document.getElementById('evalEmpresa');
+  selEmp.innerHTML = '<option value="">-- Seleccione empresa --</option>' +
+    empresas.map(e => `<option value="${e.nit}">${e.nombre}</option>`).join('');
+  document.getElementById('evalCargo').innerHTML = '<option value="">-- Primero seleccione empresa --</option>';
+  document.getElementById('evalCargo').disabled = true;
+  document.getElementById('evalCandidato').innerHTML = '<option value="">-- Primero seleccione cargo --</option>';
+  document.getElementById('evalCandidato').disabled = true;
+  document.getElementById('infoCandidatoEval').innerHTML = '';
+  document.getElementById('matrizEvaluacion').innerHTML = '';
+}
+
+function cargarCargosEval() {
+  const nit = document.getElementById('evalEmpresa').value;
+  const selCargo = document.getElementById('evalCargo');
+  const selCand = document.getElementById('evalCandidato');
+  selCand.innerHTML = '<option value="">-- Primero seleccione cargo --</option>';
+  selCand.disabled = true;
+  document.getElementById('infoCandidatoEval').innerHTML = '';
+  document.getElementById('matrizEvaluacion').innerHTML = '';
+  if (!nit) {
+    selCargo.innerHTML = '<option value="">-- Primero seleccione empresa --</option>';
+    selCargo.disabled = true;
+    return;
+  }
+  const empresa = empresas.find(e => e.nit === nit);
+  const cargsConCands = empresa.cargos.filter(c =>
+    candidatos.some(x => x.nitEmpresa === nit && x.cargo === c.nombre)
+  );
+  if (cargsConCands.length === 0) {
+    selCargo.innerHTML = '<option value="">-- Sin candidatos registrados --</option>';
+    selCargo.disabled = true;
+    return;
+  }
+  selCargo.innerHTML = '<option value="">-- Seleccione cargo --</option>';
+  cargsConCands.forEach(c => {
+    const candsCount = candidatos.filter(x => x.nitEmpresa === nit && x.cargo === c.nombre).length;
+    const opt = document.createElement('option');
+    opt.value = c.nombre;
+    opt.textContent = `${c.nombre} (${candsCount} candidato${candsCount!==1?'s':''})`;
+    selCargo.appendChild(opt);
+  });
+  selCargo.disabled = false;
+}
+
+function cargarCandidatosEval() {
+  const nit = document.getElementById('evalEmpresa').value;
+  const cargo = document.getElementById('evalCargo').value;
+  const selCand = document.getElementById('evalCandidato');
+  document.getElementById('infoCandidatoEval').innerHTML = '';
+  document.getElementById('matrizEvaluacion').innerHTML = '';
+  if (!nit || !cargo) {
+    selCand.innerHTML = '<option value="">-- Primero seleccione cargo --</option>';
+    selCand.disabled = true;
+    return;
+  }
+  const cands = candidatos.filter(c => c.nitEmpresa === nit && c.cargo === cargo);
+  if (cands.length === 0) {
+    selCand.innerHTML = '<option value="">-- Sin candidatos --</option>';
+    selCand.disabled = true;
+    return;
+  }
+  selCand.innerHTML = '<option value="">-- Seleccione candidato --</option>';
+  cands.forEach(c => {
+    const eval_ = evaluaciones[c.id];
+    const estado = eval_ ? ` ✓ (${eval_.puntajeTotal.toFixed(1)} pts)` : '';
+    const opt = document.createElement('option');
+    opt.value = c.id;
+    opt.textContent = `${c.nombre} - CC ${c.cedula}${estado}`;
+    selCand.appendChild(opt);
+  });
+  selCand.disabled = false;
+}
+
+function cargarEvaluacion() {
+  const id = document.getElementById('evalCandidato').value;
+  const cont = document.getElementById('matrizEvaluacion');
+  const infoCont = document.getElementById('infoCandidatoEval');
+  if (!id) { cont.innerHTML = ''; infoCont.innerHTML = ''; return; }
+  const cand = candidatos.find(c => c.id == id);
+  const eval_ = evaluaciones[id] || {};
+
+  infoCont.innerHTML = `<div class="cascade-info">
+    <strong>👤 Evaluando a:</strong> ${cand.nombre} (CC ${cand.cedula}) |
+    <strong>Profesión:</strong> ${cand.profesion} |
+    <strong>Edad:</strong> ${cand.edad} años |
+    <strong>Experiencia:</strong> ${cand.experiencia} años |
+    <strong>Cargo:</strong> ${cand.cargo} en ${cand.empresa}
+  </div>`;
+
+  let html = `<table class="matrix-table">
+    <thead><tr><th>Competencia</th><th>Peso</th><th>Calificación (1-5)</th><th>Puntaje</th></tr></thead><tbody>`;
+  COMPETENCIAS.forEach((comp, i) => {
+    const calif = eval_.calificaciones ? (eval_.calificaciones[i] || '') : '';
+    const puntaje = calif ? ((calif / 5) * comp.peso).toFixed(2) : '-';
+    html += `<tr>
+      <td><strong>${comp.nombre}</strong></td>
+      <td>${comp.peso}%</td>
+      <td><select onchange="actualizarPuntaje(${i}, this.value)" style="width:100%">
+        <option value="">--</option>
+        ${[5,4,3,2,1].map(n => `<option value="${n}" ${calif==n?'selected':''}>${n} - ${['','Deficiente','Bajo','Aceptable','Bueno','Excelente'][n]}</option>`).join('')}
+      </select></td>
+      <td id="puntaje-${i}">${puntaje}</td>
+    </tr>`;
+  });
+  const total = eval_.puntajeTotal || 0;
+  html += `<tr class="total-row"><td colspan="3"><strong>TOTAL</strong></td><td id="puntajeTotal"><strong>${total.toFixed(1)} / 100</strong></td></tr>`;
+  html += '</tbody></table>';
+  cont.innerHTML = html;
+}
+
+function actualizarPuntaje(idx, valor) {
+  const id = document.getElementById('evalCandidato').value;
+  if (!id) return;
+  if (!evaluaciones[id]) evaluaciones[id] = { calificaciones: new Array(COMPETENCIAS.length).fill(''), puntajeTotal: 0 };
+  evaluaciones[id].calificaciones[idx] = valor ? parseInt(valor) : '';
+  let total = 0;
+  evaluaciones[id].calificaciones.forEach((v, i) => {
+    if (v) {
+      const p = (v / 5) * COMPETENCIAS[i].peso;
+      total += p;
+      document.getElementById('puntaje-' + i).textContent = p.toFixed(2);
+    } else {
+      document.getElementById('puntaje-' + i).textContent = '-';
+    }
+  });
+  evaluaciones[id].puntajeTotal = total;
+  document.getElementById('puntajeTotal').innerHTML = `<strong>${total.toFixed(1)} / 100</strong>`;
+}
+
+function guardarEvaluacion() {
+  const id = document.getElementById('evalCandidato').value;
+  if (!id) { alert('⚠️ Seleccione un candidato'); return; }
+  const eval_ = evaluaciones[id];
+  if (!eval_ || eval_.calificaciones.some(v => !v)) {
+    alert('⚠️ Debe calificar todas las competencias'); return;
+  }
+  guardar();
+  const cand = candidatos.find(c => c.id == id);
+  alert(`✅ Evaluación guardada para ${cand.nombre}. Puntaje: ${eval_.puntajeTotal.toFixed(1)}/100`);
+  renderCandidatos();
+  cargarCandidatosEval();
+  document.getElementById('evalCandidato').value = id;
+}
+
+// ============ RESULTADOS EN CASCADA ============
+function inicializarResultadosCascada() {
+  const selEmp = document.getElementById('filtroEmpresa');
+  selEmp.innerHTML = '<option value="">-- Seleccione empresa --</option>' +
+    empresas.map(e => `<option value="${e.nit}">${e.nombre}</option>`).join('');
+  document.getElementById('filtroCargo').innerHTML = '<option value="">-- Primero seleccione empresa --</option>';
+  document.getElementById('filtroCargo').disabled = true;
+  document.getElementById('filtroCandidato').innerHTML = '<option value="">-- Primero seleccione cargo --</option>';
+  document.getElementById('filtroCandidato').disabled = true;
+  document.getElementById('contenidoResultados').innerHTML = '';
+}
+
+function cargarCargosResultados() {
+  const nit = document.getElementById('filtroEmpresa').value;
+  const selCargo = document.getElementById('filtroCargo');
+  const selCand = document.getElementById('filtroCandidato');
+  selCand.innerHTML = '<option value="">-- Primero seleccione cargo --</option>';
+  selCand.disabled = true;
+  document.getElementById('contenidoResultados').innerHTML = '';
+  if (!nit) {
+    selCargo.innerHTML = '<option value="">-- Primero seleccione empresa --</option>';
+    selCargo.disabled = true;
+    return;
+  }
+  const empresa = empresas.find(e => e.nit === nit);
+  const cargsConCands = empresa.cargos.filter(c =>
+    candidatos.some(x => x.nitEmpresa === nit && x.cargo === c.nombre)
+  );
+  if (cargsConCands.length === 0) {
+    selCargo.innerHTML = '<option value="">-- Sin candidatos --</option>';
+    selCargo.disabled = true;
+    return;
+  }
+  selCargo.innerHTML = '<option value="">-- Seleccione cargo --</option>';
+  cargsConCands.forEach(c => {
+    const candsCount = candidatos.filter(x => x.nitEmpresa === nit && x.cargo === c.nombre).length;
+    const opt = document.createElement('option');
+    opt.value = c.nombre;
+    opt.textContent = `${c.nombre} (${candsCount} candidato${candsCount!==1?'s':''})`;
+    selCargo.appendChild(opt);
+  });
+  selCargo.disabled = false;
+}
+
+function cargarCandidatosResultados() {
+  const nit = document.getElementById('filtroEmpresa').value;
+  const cargo = document.getElementById('filtroCargo').value;
+  const selCand = document.getElementById('filtroCandidato');
+  document.getElementById('contenidoResultados').innerHTML = '';
+  if (!nit || !cargo) {
+    selCand.innerHTML = '<option value="">-- Primero seleccione cargo --</option>';
+    selCand.disabled = true;
+    return;
+  }
+  const cands = candidatos.filter(c => c.nitEmpresa === nit && c.cargo === cargo);
+  const evaluados = cands.filter(c => evaluaciones[c.id] && evaluaciones[c.id].puntajeTotal > 0);
+  if (evaluados.length === 0) {
+    selCand.innerHTML = '<option value="">-- Sin candidatos evaluados --</option>';
+    selCand.disabled = true;
+    return;
+  }
+  // Ordenar por puntaje descendente
+  evaluados.sort((a, b) => evaluaciones[b.id].puntajeTotal - evaluaciones[a.id].puntajeTotal);
+  selCand.innerHTML = '<option value="">-- Seleccione candidato --</option>';
+  evaluados.forEach((c, i) => {
+    const eval_ = evaluaciones[c.id];
+    const sem = obtenerSemaforo(eval_.puntajeTotal);
+    const opt = document.createElement('option');
+    opt.value = c.id;
+    opt.textContent = `${i+1}. ${c.nombre} - ${eval_.puntajeTotal.toFixed(1)} pts (${sem.texto})`;
+    selCand.appendChild(opt);
+  });
+  selCand.disabled = false;
+}
+
+function mostrarResultados() {
+  const nit = document.getElementById('filtroEmpresa').value;
+  const cargo = document.getElementById('filtroCargo').value;
+  const candId = document.getElementById('filtroCandidato').value;
+  const cont = document.getElementById('contenidoResultados');
+
+  if (!nit || !cargo || !candId) { cont.innerHTML = ''; return; }
+
+  const empresa = empresas.find(e => e.nit === nit);
+  const cargoObj = empresa.cargos.find(c => c.nombre === cargo);
+  const cands = candidatos.filter(c => c.nitEmpresa === nit && c.cargo === cargo);
+  const evaluados = cands.filter(c => evaluaciones[c.id] && evaluaciones[c.id].puntajeTotal > 0)
+    .map(c => ({ ...c, eval: evaluaciones[c.id] }))
+    .sort((a, b) => b.eval.puntajeTotal - a.eval.puntajeTotal);
+
+  const candidatoSeleccionado = evaluados.find(c => c.id == candId);
+  if (!candidatoSeleccionado) {
+    cont.innerHTML = '<div class="alert alert-warning">⚠️ Candidato no encontrado</div>';
+    return;
+  }
+
+  const ganador = evaluados[0];
+  const posicion = evaluados.findIndex(c => c.id == candId) + 1;
+  const decision = obtenerDecision(candidatoSeleccionado.eval.puntajeTotal);
+  const sem = obtenerSemaforo(candidatoSeleccionado.eval.puntajeTotal);
+
+  // Calcular promedios por competencia
+  const promedios = COMPETENCIAS.map((comp, i) => {
+    const suma = evaluados.reduce((acc, c) => acc + c.eval.calificaciones[i], 0);
+    return suma / evaluados.length;
+  });
+
+  // Calcular mejores por competencia
+  const mejoresPorComp = COMPETENCIAS.map((comp, i) => {
+    return Math.max(...evaluados.map(c => c.eval.calificaciones[i]));
+  });
+
+  // PODIO (referencia)
+  let podiumHtml = '<h3 style="color:#2a5298; margin:20px 0 10px">🏆 Podio General</h3><div class="podium">';
+  const medals = ['🥇','🥈','🥉'];
+  const classes = ['gold','silver','bronze'];
+  evaluados.slice(0, 3).forEach((c, i) => {
+    const cSem = obtenerSemaforo(c.eval.puntajeTotal);
+    const isSelected = c.id == candId;
+    podiumHtml += `<div class="podium-card ${classes[i]} ${isSelected ? 'selected-cand' : ''}">
+      <div class="medal">${medals[i]}${isSelected ? ' 👈' : ''}</div>
+      <h3>${c.nombre}</h3>
+      <div class="podium-score" style="color:${cSem.color}">${c.eval.puntajeTotal.toFixed(1)}</div>
+      <p><strong>${c.profesion}</strong></p>
+      <p>${c.edad} años | ${c.experiencia} años exp.</p>
+      <p>CC: ${c.cedula}</p>
+      <div style="margin-top:10px">${obtenerBadgeDecision(c.eval.puntajeTotal)}</div>
+    </div>`;
+  });
+  podiumHtml += '</div>';
+
+  // TABLA DE RANKING
+  let tablaHtml = '<h3 style="color:#2a5298; margin:20px 0 10px">📋 Ranking Completo</h3><table><thead><tr><th>#</th><th>Candidato</th><th>Profesión</th><th>Experiencia</th><th>Puntaje</th><th>Semáforo</th><th>Decisión</th></tr></thead><tbody>';
+  evaluados.forEach((c, i) => {
+    const cSem = obtenerSemaforo(c.eval.puntajeTotal);
+    const highlight = c.id == candId ? 'style="background:#fff9e6 !important; font-weight:700"' : '';
+    tablaHtml += `<tr ${highlight}><td><strong>${i+1}</strong></td><td>${c.nombre}${c.id==candId?' 👈':''}<br><small>CC ${c.cedula}</small></td><td>${c.profesion}</td><td>${c.experiencia} años</td><td><strong>${c.eval.puntajeTotal.toFixed(1)}</strong></td><td><span class="traffic-light ${cSem.clase}"></span>${cSem.texto}</td><td>${obtenerBadgeDecision(c.eval.puntajeTotal)}</td></tr>`;
+  });
+  tablaHtml += '</tbody></table>';
+
+  // TABLA COMPARATIVA POR COMPETENCIA
+  let compHtml = `<h3 style="color:#2a5298; margin:20px 0 10px">📊 Comparativa Detallada por Competencia</h3>
+    <div class="alert alert-info">💡 La columna resaltada en amarillo corresponde al candidato seleccionado. <span style="background:#d4edda; padding:2px 6px; border-radius:4px; font-weight:700">Verde</span> = mejor puntaje | <span style="background:#f8d7da; padding:2px 6px; border-radius:4px; font-weight:700">Rojo</span> = puntaje más bajo.</div>
+    <div style="overflow-x:auto"><table class="comparativa-table">
+    <thead><tr><th>Competencia</th><th>Peso</th>`;
+  evaluados.forEach(c => {
+    const isSel = c.id == candId;
+    compHtml += `<th ${isSel ? 'class="selected-col"' : ''}>${c.nombre.split(' ')[0]}${isSel ? ' 👈' : ''}</th>`;
+  });
+  compHtml += `<th>Promedio</th><th>Mejor</th></tr></thead><tbody>`;
+
+  COMPETENCIAS.forEach((comp, i) => {
+    const valores = evaluados.map(c => c.eval.calificaciones[i]);
+    const maxVal = Math.max(...valores);
+    const minVal = Math.min(...valores);
+    compHtml += `<tr><td><strong>${comp.nombre}</strong></td><td>${comp.peso}%</td>`;
+    evaluados.forEach(c => {
+      const v = c.eval.calificaciones[i];
+      const isSel = c.id == candId;
+      let cellClass = '';
+      if (v === maxVal && evaluados.length > 1) cellClass = 'best-cell';
+      else if (v === minVal && evaluados.length > 1 && maxVal !== minVal) cellClass = 'worst-cell';
+      compHtml += `<td ${isSel ? 'class="selected-col ' + cellClass + '"' : `class="${cellClass}"`}>${v}/5</td>`;
+    });
+    compHtml += `<td><strong>${promedios[i].toFixed(2)}</strong></td><td><strong>${maxVal}/5</strong></td></tr>`;
+  });
+
+  // Fila total
+  compHtml += `<tr class="total-row"><td><strong>TOTAL</strong></td><td><strong>100%</strong></td>`;
+  evaluados.forEach(c => {
+    const isSel = c.id == candId;
+    compHtml += `<td ${isSel ? 'class="selected-col"' : ''}><strong>${c.eval.puntajeTotal.toFixed(1)}</strong></td>`;
+  });
+  const promTotal = evaluados.reduce((acc, c) => acc + c.eval.puntajeTotal, 0) / evaluados.length;
+  compHtml += `<td><strong>${promTotal.toFixed(1)}</strong></td><td><strong>${ganador.eval.puntajeTotal.toFixed(1)}</strong></td></tr>`;
+  compHtml += `<tr><td><strong>Posición</strong></td><td>-</td>`;
+  evaluados.forEach((c, idx) => {
+    const isSel = c.id == candId;
+    compHtml += `<td ${isSel ? 'class="selected-col"' : ''}><strong>#${idx+1}</strong></td>`;
+  });
+  compHtml += `<td>-</td><td>#1</td></tr>`;
+  compHtml += '</tbody></table></div>';
+
+  // GRÁFICA RADAR COMPARATIVA
+  const chartHtml = `<div class="chart-container">
+    <h3>📈 Análisis Radial Comparativo: ${candidatoSeleccionado.nombre}</h3>
+    <div class="chart-wrapper"><canvas id="radarChart"></canvas></div>
+  </div>`;
+
+  // Tarjeta de datos del candidato seleccionado
+  const detailCard = `<div class="candidate-selector-box">
+    <h4>🎯 Candidato Seleccionado para Análisis</h4>
+    <div class="candidate-detail-card">
+      <div><strong>Nombre</strong>${candidatoSeleccionado.nombre}</div>
+      <div><strong>Cédula</strong>${candidatoSeleccionado.cedula}</div>
+      <div><strong>Profesión</strong>${candidatoSeleccionado.profesion}</div>
+      <div><strong>Edad</strong>${candidatoSeleccionado.edad} años</div>
+      <div><strong>Experiencia</strong>${candidatoSeleccionado.experiencia} años</div>
+      <div><strong>Teléfono</strong>${candidatoSeleccionado.telefono}</div>
+      <div><strong>Correo</strong>${candidatoSeleccionado.correo}</div>
+      <div><strong>Dirección</strong>${candidatoSeleccionado.direccion}</div>
+      <div><strong>Empresa</strong>${candidatoSeleccionado.empresa}</div>
+      <div><strong>Cargo</strong>${candidatoSeleccionado.cargo}</div>
+      <div><strong>Puntaje</strong><span style="color:${sem.color}; font-weight:700; font-size:16px">${candidatoSeleccionado.eval.puntajeTotal.toFixed(1)}/100</span></div>
+      <div><strong>Posición</strong>#${posicion} de ${evaluados.length}</div>
+    </div>
+  </div>`;
+
+  // RESUMEN PERSONALIZADO
+  const resumenHtml = `<div class="summary-box">
+    <h3>📝 Análisis Personalizado: ${candidatoSeleccionado.nombre}</h3>
+    <p><strong>Puntaje Total:</strong> ${candidatoSeleccionado.eval.puntajeTotal.toFixed(1)} / 100 puntos | <strong>Posición:</strong> #${posicion} de ${evaluados.length} candidatos</p>
+    <p><strong>Promedio del grupo:</strong> ${promTotal.toFixed(1)} puntos | <strong>Diferencia vs promedio:</strong> <span style="color:${candidatoSeleccionado.eval.puntajeTotal >= promTotal ? '#27ae60' : '#e74c3c'}; font-weight:700">${candidatoSeleccionado.eval.puntajeTotal >= promTotal ? '+' : ''}${(candidatoSeleccionado.eval.puntajeTotal - promTotal).toFixed(1)} pts</span></p>
+    <div class="decision-box ${decision.clase}">${decision.texto}</div>
+    <p><strong>Análisis individual:</strong> ${generarAnalisis(candidatoSeleccionado)}</p>
+    <p><strong>Análisis comparativo:</strong> ${generarAnalisisComparativo(candidatoSeleccionado, evaluados, promedios, mejoresPorComp, posicion)}</p>
+    <p><strong>Competencias destacadas:</strong> ${obtenerFortalezas(candidatoSeleccionado.eval)}</p>
+    <p><strong>Áreas de mejora:</strong> ${obtenerDebilidades(candidatoSeleccionado.eval)}</p>
+    <p><strong>Ventajas competitivas vs grupo:</strong> ${obtenerVentajasComparativas(candidatoSeleccionado, promedios)}</p>
+    <p><strong>Brechas vs grupo:</strong> ${obtenerBrechasComparativas(candidatoSeleccionado, promedios)}</p>
+  </div>`;
+
+  // BOTONES
+  const accionesHtml = `<div class="btn-group" style="justify-content:center; margin-top:30px">
+    <button class="btn btn-success" onclick="finalizarProceso('${nit}', '${cargo}')">✅ Finalizar Proceso (Cerrar Vacante)</button>
+    <button class="btn btn-warning" onclick="reiniciarAnalisis('${nit}', '${cargo}')">🔄 Nuevo Análisis de Candidatos</button>
+    <button class="btn btn-pdf" onclick="generarPDF('${nit}', '${cargo}', ${candId})">📄 Descargar PDF</button>
+  </div>`;
+
+  cont.innerHTML = `
+    <div class="alert alert-info">
+      <strong>📌 Vacante:</strong> ${cargo} en <strong>${empresa.nombre}</strong> |
+      <strong>Vacantes:</strong> ${cargoObj.vacantes} |
+      <strong>Candidatos evaluados:</strong> ${evaluados.length} de ${cands.length}
+    </div>
+    ${detailCard}
+    ${podiumHtml}
+    ${tablaHtml}
+    ${compHtml}
+    ${chartHtml}
+    ${resumenHtml}
+    ${accionesHtml}
+  `;
+
+  setTimeout(() => dibujarRadar(candidatoSeleccionado, evaluados, promedios), 100);
+}
+
+function obtenerDecision(puntaje) {
+  if (puntaje >= 90) return { texto: '✅ CONTRATAR - Perfil sobresaliente con liderazgo estratégico y fuerte orientación a resultados.', clase: 'decision-hire' };
+  if (puntaje >= 80) return { texto: '👍 MUY RECOMENDADO - Puede asumir el cargo con una curva de adaptación corta.', clase: 'decision-recommend' };
+  if (puntaje >= 70) return { texto: '⚠️ RECOMENDADO CON RESERVAS - Tiene potencial, pero presenta brechas en competencias clave; validar referencias.', clase: 'decision-reserve' };
+  if (puntaje >= 60) return { texto: '⛔ NO RECOMENDADO para este nivel de liderazgo. Podría encajar en rol de ejecución.', clase: 'decision-no' };
+  return { texto: '❌ NO CONTINUAR - El perfil no cumple con los requisitos críticos del cargo.', clase: 'decision-no' };
+}
+
+function obtenerBadgeDecision(puntaje) {
+  if (puntaje >= 90) return '<span class="badge badge-success">Contratar</span>';
+  if (puntaje >= 80) return '<span class="badge badge-info">Muy Recomendado</span>';
+  if (puntaje >= 70) return '<span class="badge badge-warning">Con Reservas</span>';
+  return '<span class="badge badge-danger">No Recomendado</span>';
+}
+
+function generarAnalisis(cand) {
+  const p = cand.eval.puntajeTotal;
+  const exp = cand.experiencia;
+  if (p >= 90) return `El candidato demuestra un perfil excepcional con dominio integral de las competencias evaluadas. Con ${exp} años de experiencia, evidencia liderazgo estratégico, visión innovadora y capacidad para generar resultados medibles. Es el candidato ideal para asumir el cargo con autonomía total.`;
+  if (p >= 80) return `Perfil sólido con ${exp} años de experiencia. Demuestra dominio en la mayoría de competencias con resultados comprobables. Su curva de adaptación será corta y puede aportar valor inmediato al equipo.`;
+  if (p >= 70) return `Candidato con potencial y ${exp} años de experiencia. Presenta fortalezas claras pero también brechas en algunas competencias clave que requieren validación adicional mediante referencias y expectativas salariales.`;
+  if (p >= 60) return `Perfil con conocimientos básicos y ${exp} años de experiencia. Podría desempeñarse mejor en roles de ejecución o especialista en lugar de posiciones de liderazgo.`;
+  return `El candidato no evidencia las competencias críticas requeridas para el cargo. A pesar de ${exp} años de experiencia, las respuestas no demuestran capacidad para asumir las responsabilidades del puesto.`;
+}
+
+function generarAnalisisComparativo(cand, evaluados, promedios, mejoresPorComp, posicion) {
+  const total = evaluados.length;
+  const porcentaje = ((total - posicion + 1) / total * 100).toFixed(0);
+  let txt = `Se ubica en la posición #${posicion} de ${total} candidatos (top ${porcentaje}%). `;
+  
+  // Competencias donde supera al promedio
+  const superaProm = COMPETENCIAS.filter((c, i) => cand.eval.calificaciones[i] > promedios[i]);
+  if (superaProm.length > 0) {
+    txt += `Supera el promedio del grupo en ${superaProm.length} competencia${superaProm.length>1?'s':''}: ${superaProm.map(c => c.nombre).join(', ')}. `;
+  }
+  
+  // Competencias donde está por debajo
+  const bajoProm = COMPETENCIAS.filter((c, i) => cand.eval.calificaciones[i] < promedios[i]);
+  if (bajoProm.length > 0) {
+    txt += `Está por debajo del promedio en: ${bajoProm.map(c => c.nombre).join(', ')}. `;
+  }
+
+  // Diferencia con el ganador
+  const ganador = evaluados[0];
+  if (cand.id !== ganador.id) {
+    const diff = ganador.eval.puntajeTotal - cand.eval.puntajeTotal;
+    txt += `La diferencia con el primer lugar (${ganador.nombre}) es de ${diff.toFixed(1)} puntos.`;
+  } else {
+    txt = `🏆 <strong>Es el candidato mejor posicionado del grupo.</strong> Lidera el ranking con un puntaje sobresaliente. ` + txt;
+  }
+  return txt;
+}
+
+function obtenerFortalezas(eval_) {
+  const ordenadas = COMPETENCIAS.map((c, i) => ({ nombre: c.nombre, calif: eval_.calificaciones[i] }))
+    .filter(x => x.calif >= 4)
+    .sort((a, b) => b.calif - a.calif);
+  return ordenadas.length ? ordenadas.map(x => `${x.nombre} (${x.calif}/5)`).join(', ') : 'No se identificaron fortalezas destacadas';
+}
+
+function obtenerDebilidades(eval_) {
+  const ordenadas = COMPETENCIAS.map((c, i) => ({ nombre: c.nombre, calif: eval_.calificaciones[i] }))
+    .filter(x => x.calif <= 3)
+    .sort((a, b) => a.calif - b.calif);
+  return ordenadas.length ? ordenadas.map(x => `${x.nombre} (${x.calif}/5)`).join(', ') : 'No se identificaron debilidades significativas';
+}
+
+function obtenerVentajasComparativas(cand, promedios) {
+  const ventajas = COMPETENCIAS.map((c, i) => ({ nombre: c.nombre, diff: cand.eval.calificaciones[i] - promedios[i] }))
+    .filter(x => x.diff > 0.3)
+    .sort((a, b) => b.diff - a.diff);
+  return ventajas.length ? ventajas.map(x => `${x.nombre} (+${x.diff.toFixed(2)} vs promedio)`).join(', ') : 'No presenta ventajas comparativas significativas';
+}
+
+function obtenerBrechasComparativas(cand, promedios) {
+  const brechas = COMPETENCIAS.map((c, i) => ({ nombre: c.nombre, diff: promedios[i] - cand.eval.calificaciones[i] }))
+    .filter(x => x.diff > 0.3)
+    .sort((a, b) => b.diff - a.diff);
+  return brechas.length ? brechas.map(x => `${x.nombre} (-${x.diff.toFixed(2)} vs promedio)`).join(', ') : 'No presenta brechas significativas frente al grupo';
+}
+
+let radarChartInstance = null;
+function dibujarRadar(candSeleccionado, evaluados, promedios) {
+  const ctx = document.getElementById('radarChart').getContext('2d');
+  if (radarChartInstance) radarChartInstance.destroy();
+  
+  const datasets = [
+    {
+      label: candSeleccionado.nombre + ' (Seleccionado)',
+      data: candSeleccionado.eval.calificaciones,
+      backgroundColor: 'rgba(42, 82, 152, 0.3)',
+      borderColor: '#2a5298',
+      borderWidth: 3,
+      pointBackgroundColor: '#2a5298',
+      pointBorderColor: '#fff',
+      pointRadius: 6
+    },
+    {
+      label: 'Promedio del grupo',
+      data: promedios,
+      backgroundColor: 'rgba(149, 165, 166, 0.2)',
+      borderColor: '#95a5a6',
+      borderWidth: 2,
+      borderDash: [5, 5],
+      pointBackgroundColor: '#95a5a6',
+      pointBorderColor: '#fff',
+      pointRadius: 4
+    }
+  ];
+
+  // Si hay más de un candidato, agregar el mejor
+  if (evaluados.length > 1 && evaluados[0].id !== candSeleccionado.id) {
+    datasets.push({
+      label: evaluados[0].nombre + ' (Líder)',
+      data: evaluados[0].eval.calificaciones,
+      backgroundColor: 'rgba(241, 196, 15, 0.15)',
+      borderColor: '#f1c40f',
+      borderWidth: 2,
+      pointBackgroundColor: '#f1c40f',
+      pointBorderColor: '#fff',
+      pointRadius: 4
+    });
+  }
+
+  radarChartInstance = new Chart(ctx, {
+    type: 'radar',
+    data: {
+      labels: COMPETENCIAS.map(c => c.nombre),
+      datasets: datasets
+    },
+    options: {
+      responsive: true,
+      scales: {
+        r: {
+          beginAtZero: true,
+          max: 5,
+          ticks: { stepSize: 1, font: { size: 11 } },
+          pointLabels: { font: { size: 12, weight: '600' } }
         }
+      },
+      plugins: {
+        legend: { position: 'top', labels: { font: { size: 13, weight: '600' } } }
+      }
+    }
+  });
+}
 
-        // ===== EMPRESA =====
-        function agregarEmpresa() {
-            const nit = document.getElementById('nitEmpresa').value.trim();
-            const nombre = document.getElementById('nombreEmpresa').value.trim();
-            if (!nit || !nombre) { alert('Complete todos los campos'); return; }
-            empresas.push({ nit, nombre });
-            actualizarSelectsEmpresas();
-            document.getElementById('nitEmpresa').value = '';
-            document.getElementById('nombreEmpresa').value = '';
-            alert('✅ Empresa registrada correctamente');
-        }
+// ============ GENERAR PDF ============
+async function generarPDF(nit, cargo, candId) {
+  const { jsPDF } = window.jspdf;
+  const pdf = new jsPDF('p', 'mm', 'a4');
+  
+  const empresa = empresas.find(e => e.nit === nit);
+  const cargoObj = empresa.cargos.find(c => c.nombre === cargo);
+  const cands = candidatos.filter(c => c.nitEmpresa === nit && c.cargo === cargo);
+  const evaluados = cands.filter(c => evaluaciones[c.id] && evaluaciones[c.id].puntajeTotal > 0)
+    .map(c => ({ ...c, eval: evaluaciones[c.id] }))
+    .sort((a, b) => b.eval.puntajeTotal - a.eval.puntajeTotal);
 
-        function actualizarSelectsEmpresas() {
-            const selects = ['empresaCargo', 'empresaCandidato', 'empresaEval', 'empresaResult'];
-            selects.forEach(id => {
-                const sel = document.getElementById(id);
-                const current = sel.value;
-                sel.innerHTML = '<option value="">-- Seleccione --</option>';
-                empresas.forEach((e, i) => {
-                    sel.innerHTML += `<option value="${i}">${e.nombre}</option>`;
-                });
-                sel.value = current;
-            });
-        }
+  const candidatoSeleccionado = evaluados.find(c => c.id == candId);
+  if (!candidatoSeleccionado) {
+    alert('⚠️ Candidato no encontrado');
+    return;
+  }
 
-        // ===== CARGOS =====
-        function agregarCargo() {
-            const empIdx = document.getElementById('empresaCargo').value;
-            const nombre = document.getElementById('nombreCargo').value.trim();
-            const vacantes = document.getElementById('numVacantes').value;
-            if (empIdx === '' || !nombre || !vacantes) { alert('Complete todos los campos'); return; }
-            cargos.push({
-                empresaIdx: parseInt(empIdx),
-                nombre,
-                vacantes: parseInt(vacantes)
-            });
-            actualizarTablaCargos();
-            document.getElementById('nombreCargo').value = '';
-            document.getElementById('numVacantes').value = '1';
-            alert('✅ Cargo registrado correctamente');
-        }
+  const ganador = evaluados[0];
+  const posicion = evaluados.findIndex(c => c.id == candId) + 1;
+  const fecha = new Date().toLocaleDateString('es-CO');
+  const promedios = COMPETENCIAS.map((comp, i) => {
+    const suma = evaluados.reduce((acc, c) => acc + c.eval.calificaciones[i], 0);
+    return suma / evaluados.length;
+  });
+  const promTotal = evaluados.reduce((acc, c) => acc + c.eval.puntajeTotal, 0) / evaluados.length;
 
-        function actualizarTablaCargos() {
-            const tbody = document.querySelector('#tablaEmpresasCargos tbody');
-            tbody.innerHTML = '';
-            cargos.forEach((c, i) => {
-                const emp = empresas[c.empresaIdx];
-                tbody.innerHTML += `
-                    <tr>
-                        <td>${emp.nombre}</td>
-                        <td>${emp.nit}</td>
-                        <td>${c.nombre}</td>
-                        <td>${c.vacantes}</td>
-                        <td><button class="btn btn-danger" onclick="eliminarCargo(${i})">🗑️</button></td>
-                    </tr>
-                `;
-            });
-        }
+  // Encabezado
+  pdf.setFillColor(42, 82, 152);
+  pdf.rect(0, 0, 210, 30, 'F');
+  pdf.setTextColor(255, 255, 255);
+  pdf.setFontSize(18);
+  pdf.setFont(undefined, 'bold');
+  pdf.text('Análisis Individual de Candidato', 105, 15, { align: 'center' });
+  pdf.setFontSize(10);
+  pdf.setFont(undefined, 'normal');
+  pdf.text(`Generado: ${fecha}`, 105, 23, { align: 'center' });
 
-        function eliminarCargo(idx) {
-            if (confirm('¿Eliminar este cargo?')) {
-                cargos.splice(idx, 1);
-                actualizarTablaCargos();
-            }
-        }
+  // Info vacante
+  pdf.setTextColor(0, 0, 0);
+  pdf.setFontSize(13);
+  pdf.setFont(undefined, 'bold');
+  pdf.text('Información de la Vacante', 20, 42);
+  pdf.setLineWidth(0.5);
+  pdf.line(20, 44, 190, 44);
+  
+  pdf.setFontSize(10);
+  pdf.setFont(undefined, 'normal');
+  let yPos = 77;
+  pdf.text(`Nombre: ${candidatoSeleccionado.nombre} | CC: ${candidatoSeleccionado.cedula}`, 20, yPos); yPos += 6;
+  pdf.text(`Profesión: ${candidatoSeleccionado.profesion} | Edad: ${candidatoSeleccionado.edad} años | Experiencia: ${candidatoSeleccionado.experiencia} años`, 20, yPos); yPos += 6;
+  pdf.text(`Teléfono: ${candidatoSeleccionado.telefono} | Correo: ${candidatoSeleccionado.correo}`, 20, yPos); yPos += 6;
+  pdf.text(`Dirección: ${candidatoSeleccionado.direccion}`, 20, yPos); yPos += 6;
+  pdf.setFont(undefined, 'bold');
+  pdf.text(`Puntaje: ${candidatoSeleccionado.eval.puntajeTotal.toFixed(1)}/100 | Posición: #${posicion} de ${evaluados.length} | vs Promedio: ${candidatoSeleccionado.eval.puntajeTotal >= promTotal ? '+' : ''}${(candidatoSeleccionado.eval.puntajeTotal - promTotal).toFixed(1)} pts`, 20, yPos); yPos += 10;
 
-        // ===== CANDIDATOS =====
-        function actualizarCargosCandidato() {
-            const empIdx = document.getElementById('empresaCandidato').value;
-            const sel = document.getElementById('cargoCandidato');
-            sel.innerHTML = '<option value="">-- Seleccione cargo --</option>';
-            if (empIdx === '') return;
-            cargos.forEach((c, i) => {
-                if (c.empresaIdx === parseInt(empIdx)) {
-                    sel.innerHTML += `<option value="${i}">${c.nombre}</option>`;
-                }
-            });
-        }
+  // Tabla de competencias
+  pdf.setFontSize(12);
+  pdf.setFont(undefined, 'bold');
+  pdf.text('Evaluación por Competencia', 20, yPos);
+  pdf.line(20, yPos + 2, 190, yPos + 2);
+  yPos += 7;
 
-        function registrarCandidato() {
-            const empIdx = document.getElementById('empresaCandidato').value;
-            const cargoIdx = document.getElementById('cargoCandidato').value;
-            const cedula = document.getElementById('cedulaCandidato').value.trim();
-            const nombre = document.getElementById('nombreCandidato').value.trim();
-            const profesion = document.getElementById('profesionCandidato').value.trim();
-            const edad = document.getElementById('edadCandidato').value;
-            const experiencia = document.getElementById('experienciaCandidato').value;
-            const telefono = document.getElementById('telefonoCandidato').value.trim();
-            const correo = document.getElementById('correoCandidato').value.trim();
-            const direccion = document.getElementById('direccionCandidato').value.trim();
+  // Encabezado tabla
+  pdf.setFillColor(42, 82, 152);
+  pdf.setTextColor(255, 255, 255);
+  pdf.setFontSize(9);
+  pdf.rect(20, yPos, 170, 7, 'F');
+  pdf.text('Competencia', 22, yPos + 5);
+  pdf.text('Peso', 90, yPos + 5);
+  pdf.text('Candidato', 115, yPos + 5);
+  pdf.text('Promedio', 145, yPos + 5);
+  pdf.text('Diferencia', 172, yPos + 5);
+  yPos += 7;
 
-            if (!empIdx || !cargoIdx || !cedula || !nombre || !profesion || !edad || experiencia === '' || !telefono || !correo || !direccion) {
-                alert('Complete todos los campos obligatorios');
-                return;
-            }
+  pdf.setTextColor(0, 0, 0);
+  pdf.setFont(undefined, 'normal');
+  COMPETENCIAS.forEach((comp, i) => {
+    if (yPos > 270) { pdf.addPage(); yPos = 20; }
+    const calif = candidatoSeleccionado.eval.calificaciones[i];
+    const diff = calif - promedios[i];
+    if (yPos % 14 < 7) {
+      pdf.setFillColor(248, 250, 252);
+      pdf.rect(20, yPos - 4, 170, 7, 'F');
+    }
+    pdf.text(comp.nombre, 22, yPos);
+    pdf.text(comp.peso + '%', 93, yPos);
+    pdf.text(calif + '/5', 118, yPos);
+    pdf.text(promedios[i].toFixed(2), 148, yPos);
+    pdf.text((diff >= 0 ? '+' : '') + diff.toFixed(2), 175, yPos);
+    yPos += 7;
+  });
 
-            candidatos.push({
-                empresaIdx: parseInt(empIdx),
-                cargoIdx: parseInt(cargoIdx),
-                cedula, nombre, profesion,
-                edad: parseInt(edad),
-                experiencia: parseInt(experiencia),
-                telefono, correo, direccion
-            });
+  // Total
+  yPos += 2;
+  pdf.setFont(undefined, 'bold');
+  pdf.text('TOTAL', 22, yPos);
+  pdf.text('100%', 93, yPos);
+  pdf.text(candidatoSeleccionado.eval.puntajeTotal.toFixed(1), 118, yPos);
+  pdf.text(promTotal.toFixed(1), 148, yPos);
+  const diffTotal = candidatoSeleccionado.eval.puntajeTotal - promTotal;
+  pdf.text((diffTotal >= 0 ? '+' : '') + diffTotal.toFixed(1), 175, yPos);
+  yPos += 10;
 
-            actualizarTablaCandidatos();
-            ['cedulaCandidato','nombreCandidato','profesionCandidato','edadCandidato','experienciaCandidato','telefonoCandidato','correoCandidato','direccionCandidato']
-                .forEach(id => document.getElementById(id).value = '');
-            alert('✅ Candidato registrado correctamente');
-        }
+  // Análisis
+  if (yPos > 230) { pdf.addPage(); yPos = 20; }
+  pdf.setFontSize(12);
+  pdf.text('Análisis y Decisión', 20, yPos);
+  pdf.line(20, yPos + 2, 190, yPos + 2);
+  yPos += 8;
 
-        function actualizarTablaCandidatos() {
-            const tbody = document.querySelector('#tablaCandidatos tbody');
-            tbody.innerHTML = '';
-            candidatos.forEach((c, i) => {
-                tbody.innerHTML += `
-                    <tr>
-                        <td>${c.cedula}</td>
-                        <td>${c.nombre}</td>
-                        <td>${c.profesion}</td>
-                        <td>${c.edad}</td>
-                        <td>${c.experiencia} años</td>
-                        <td>${c.telefono}</td>
-                        <td>${c.correo}</td>
-                        <td><button class="btn btn-danger" onclick="eliminarCandidato(${i})">🗑️</button></td>
-                    </tr>
-                `;
-            });
-        }
+  const decision = obtenerDecision(candidatoSeleccionado.eval.puntajeTotal);
+  pdf.setFontSize(10);
+  pdf.setFont(undefined, 'bold');
+  pdf.text('Decisión:', 20, yPos);
+  yPos += 5;
+  pdf.setFont(undefined, 'normal');
+  const decLines = pdf.splitTextToSize(decision.texto, 170);
+  pdf.text(decLines, 20, yPos);
+  yPos += decLines.length * 5 + 3;
 
-        function eliminarCandidato(idx) {
-            if (confirm('¿Eliminar este candidato?')) {
-                candidatos.splice(idx, 1);
-                actualizarTablaCandidatos();
-            }
-        }
+  pdf.setFont(undefined, 'bold');
+  pdf.text('Análisis individual:', 20, yPos);
+  yPos += 5;
+  pdf.setFont(undefined, 'normal');
+  const analisis = generarAnalisis(candidatoSeleccionado);
+  const anaLines = pdf.splitTextToSize(analisis, 170);
+  pdf.text(anaLines, 20, yPos);
+  yPos += anaLines.length * 5 + 3;
 
-        // ===== EVALUACIÓN =====
-        function actualizarCargosEval() {
-            const empIdx = document.getElementById('empresaEval').value;
-            const sel = document.getElementById('cargoEval');
-            sel.innerHTML = '<option value="">-- Seleccione cargo --</option>';
-            document.getElementById('candidatoEval').innerHTML = '<option value="">-- Primero seleccione cargo --</option>';
-            if (empIdx === '') return;
-            cargos.forEach((c, i) => {
-                if (c.empresaIdx === parseInt(empIdx)) {
-                    sel.innerHTML += `<option value="${i}">${c.nombre}</option>`;
-                }
-            });
-        }
+  pdf.setFont(undefined, 'bold');
+  pdf.text('Análisis comparativo:', 20, yPos);
+  yPos += 5;
+  pdf.setFont(undefined, 'normal');
+  const compTxt = generarAnalisisComparativo(candidatoSeleccionado, evaluados, promedios, null, posicion);
+  const compLines = pdf.splitTextToSize(compTxt, 170);
+  pdf.text(compLines, 20, yPos);
+  yPos += compLines.length * 5 + 3;
 
-        function actualizarCandidatosEval() {
-            const cargoIdx = document.getElementById('cargoEval').value;
-            const sel = document.getElementById('candidatoEval');
-            sel.innerHTML = '<option value="">-- Seleccione candidato --</option>';
-            if (cargoIdx === '') return;
-            candidatos.forEach((c, i) => {
-                if (c.cargoIdx === parseInt(cargoIdx)) {
-                    sel.innerHTML += `<option value="${i}">${c.nombre} - ${c.cedula}</option>`;
-                }
-            });
-        }
+  pdf.setFont(undefined, 'bold');
+  pdf.text('Competencias destacadas:', 20, yPos);
+  yPos += 5;
+  pdf.setFont(undefined, 'normal');
+  const fort = obtenerFortalezas(candidatoSeleccionado.eval);
+  pdf.text(pdf.splitTextToSize(fort, 170), 20, yPos);
+  yPos += 10;
 
-        function generarPreguntas() {
-            const container = document.getElementById('evaluationMatrix');
-            container.innerHTML = '';
-            preguntas.forEach((p, i) => {
-                container.innerHTML += `
-                    <div class="question-row">
-                        <div class="question-text">${i+1}. ${p}</div>
-                        <div class="rating-buttons">
-                            ${[1,2,3,4,5].map(v => `
-                                <button class="rating-btn" data-question="${i}" data-value="${v}" onclick="seleccionarRating(this)">${v}</button>
-                            `).join('')}
-                        </div>
-                    </div>
-                `;
-            });
-        }
+  pdf.setFont(undefined, 'bold');
+  pdf.text('Áreas de mejora:', 20, yPos);
+  yPos += 5;
+  pdf.setFont(undefined, 'normal');
+  const deb = obtenerDebilidades(candidatoSeleccionado.eval);
+  pdf.text(pdf.splitTextToSize(deb, 170), 20, yPos);
+  yPos += 10;
 
-        function seleccionarRating(btn) {
-            const q = btn.dataset.question;
-            document.querySelectorAll(`.rating-btn[data-question="${q}"]`).forEach(b => b.classList.remove('selected'));
-            btn.classList.add('selected');
-        }
+  pdf.setFont(undefined, 'bold');
+  pdf.text('Ventajas comparativas vs grupo:', 20, yPos);
+  yPos += 5;
+  pdf.setFont(undefined, 'normal');
+  const vent = obtenerVentajasComparativas(candidatoSeleccionado, promedios);
+  pdf.text(pdf.splitTextToSize(vent, 170), 20, yPos);
+  yPos += 10;
 
-        function guardarEvaluacion() {
-            const empIdx = document.getElementById('empresaEval').value;
-            const cargoIdx = document.getElementById('cargoEval').value;
-            const candIdx = document.getElementById('candidatoEval').value;
-            if (!empIdx || !cargoIdx || !candIdx) { alert('Seleccione empresa, cargo y candidato'); return; }
+  pdf.setFont(undefined, 'bold');
+  pdf.text('Brechas vs grupo:', 20, yPos);
+  yPos += 5;
+  pdf.setFont(undefined, 'normal');
+  const brech = obtenerBrechasComparativas(candidatoSeleccionado, promedios);
+  pdf.text(pdf.splitTextToSize(brech, 170), 20, yPos);
 
-            const respuestas = {};
-            let total = 0, count = 0;
-            for (let i = 0; i < preguntas.length; i++) {
-                const sel = document.querySelector(`.rating-btn[data-question="${i}"].selected`);
-                if (!sel) { alert(`Responda la pregunta ${i+1}`); return; }
-                const val = parseInt(sel.dataset.value);
-                respuestas[i] = val;
-                total += val;
-                count++;
-            }
+  // Guardar
+  const nombreArchivo = `Analisis_${candidatoSeleccionado.nombre.replace(/\s/g, '_')}_${empresa.nombre.replace(/\s/g, '_')}_${fecha.replace(/\//g, '-')}.pdf`;
+  pdf.save(nombreArchivo);
+  alert('✅ PDF generado exitosamente');
+}
 
-            evaluaciones.push({
-                empresaIdx: parseInt(empIdx),
-                cargoIdx: parseInt(cargoIdx),
-                candidatoIdx: parseInt(candIdx),
-                respuestas,
-                promedio: total / count
-            });
+// ============ ACCIONES FINALES ============
+function finalizarProceso(nit, cargo) {
+  if (!confirm('¿Confirmar el cierre de esta vacante? Se marcará como finalizada.')) return;
+  const empresa = empresas.find(e => e.nit === nit);
+  const cargoObj = empresa.cargos.find(c => c.nombre === cargo);
+  cargoObj.estado = 'CERRADA';
+  cargoObj.vacantesDisponibles = 0;
+  guardar();
+  alert('✅ Proceso finalizado. La vacante ha sido cerrada exitosamente.');
+  renderEmpresas();
+  document.getElementById('contenidoResultados').innerHTML = `
+    <div class="alert alert-success">
+      <h3>✅ Proceso Finalizado</h3>
+      <p>La vacante <strong>${cargo}</strong> en <strong>${empresa.nombre}</strong> ha sido cerrada.</p>
+      <p>El proceso de selección ha concluido exitosamente.</p>
+    </div>
+  `;
+}
 
-            alert('✅ Evaluación guardada correctamente. Promedio: ' + (total/count).toFixed(2));
-        }
+function reiniciarAnalisis(nit, cargo) {
+  if (!confirm('¿Eliminar todos los candidatos y evaluaciones de este cargo para iniciar un nuevo análisis?')) return;
+  const empresa = empresas.find(e => e.nit === nit);
+  const cargoObj = empresa.cargos.find(c => c.nombre === cargo);
+  const candsAEliminar = candidatos.filter(c => c.nitEmpresa === nit && c.cargo === cargo);
+  candsAEliminar.forEach(c => delete evaluaciones[c.id]);
+  candidatos = candidatos.filter(c => !(c.nitEmpresa === nit && c.cargo === cargo));
+  cargoObj.vacantesDisponibles = cargoObj.vacantes;
+  delete cargoObj.estado;
+  guardar();
+  alert('🔄 Candidatos eliminados. Vacante restablecida para nuevo análisis.');
+  renderCandidatos();
+  renderEmpresas();
+  inicializarResultadosCascada();
+}
 
-        // ===== RESULTADOS =====
-        function actualizarCargosResult() {
-            const empIdx = document.getElementById('empresaResult').value;
-            const sel = document.getElementById('cargoResult');
-            sel.innerHTML = '<option value="">-- Seleccione cargo --</option>';
-            document.getElementById('candidatoResult').innerHTML = '<option value="">-- Primero seleccione cargo --</option>';
-            if (empIdx === '') return;
-            cargos.forEach((c, i) => {
-                if (c.empresaIdx === parseInt(empIdx)) {
-                    sel.innerHTML += `<option value="${i}">${c.nombre}</option>`;
-                }
-            });
-        }
-
-        function actualizarCandidatosResult() {
-            const cargoIdx = document.getElementById('cargoResult').value;
-            const sel = document.getElementById('candidatoResult');
-            sel.innerHTML = '<option value="">-- Seleccione candidato --</option>';
-            if (cargoIdx === '') return;
-            candidatos.forEach((c, i) => {
-                if (c.cargoIdx === parseInt(cargoIdx)) {
-                    sel.innerHTML += `<option value="${i}">${c.nombre}</option>`;
-                }
-            });
-        }
-
-        function mostrarResultados() {
-            const candIdx = document.getElementById('candidatoResult').value;
-            if (!candIdx) { alert('Seleccione un candidato'); return; }
-
-            const eval_ = evaluaciones.filter(e => e.candidatoIdx === parseInt(candIdx)).pop();
-            const cand = candidatos[candIdx];
-            const container = document.getElementById('resultadosContainer');
-
-            if (!eval_) {
-                container.innerHTML = '<div class="info-card">⚠️ No hay evaluación registrada para este candidato.</div>';
-                return;
-            }
-
-            let clase = 'score-acceptable';
-            let nivel = 'ACEPTABLE';
-            if (eval_.promedio >= 4.5) { clase = 'score-excellent'; nivel = 'EXCELENTE'; }
-            else if (eval_.promedio >= 3.5) { clase = 'score-good'; nivel = 'BUENO'; }
-            else if (eval_.promedio >= 2.5) { clase = 'score-acceptable'; nivel = 'ACEPTABLE'; }
-            else if (eval_.promedio >= 1.5) { clase = 'score-low'; nivel = 'BAJO'; }
-            else { clase = 'score-deficient'; nivel = 'DEFICIENTE'; }
-
-            let html = `
-                <div class="result-card">
-                    <h3 style="color: #0066cc;">📋 Información del Candidato</h3>
-                    <p><strong>Nombre:</strong> ${cand.nombre}</p>
-                    <p><strong>Cédula:</strong> ${cand.cedula}</p>
-                    <p><strong>Profesión:</strong> ${cand.profesion}</p>
-                    <p><strong>Edad:</strong> ${cand.edad} años</p>
-                    <p><strong>Experiencia:</strong> ${cand.experiencia} años</p>
-                    <div class="score-display ${clase}">
-                        ${eval_.promedio.toFixed(2)} / 5.00<br>
-                        <span style="font-size: 0.5em;">${nivel}</span>
-                    </div>
-                    <h4 style="margin-top: 20px; color: #0066cc;">📊 Detalle por Criterio</h4>
-                    <table>
-                        <thead><tr><th>Criterio</th><th>Calificación</th></tr></thead>
-                        <tbody>
-            `;
-            preguntas.forEach((p, i) => {
-                html += `<tr><td>${p}</td><td><strong>${eval_.respuestas[i]} / 5</strong></td></tr>`;
-            });
-            html += `</tbody></table></div>`;
-            container.innerHTML = html;
-        }
-
-        // ===== INICIALIZACIÓN =====
-        generarPreguntas();
-    </script>
+// ============ INIT ============
+renderEmpresas();
+actualizarSelectsEmpresas();
+renderCandidatos();
+</script>
 </body>
 </html>
