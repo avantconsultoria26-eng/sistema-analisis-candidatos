@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AVANT - Sistema de Análisis de Candidatos</title>
+<title>Sistema de Análisis de Candidatos</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <style>
@@ -23,61 +23,14 @@
     box-shadow: 0 20px 60px rgba(0,0,0,0.3);
     overflow: hidden;
   }
-  
-  /* === ENCABEZADO LLAMATIVO AVANT === */
   header {
-    background: linear-gradient(135deg, #0a192f 0%, #112240 50%, #1d4ed8 100%);
+    background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
     color: #fff;
-    padding: 35px 30px;
+    padding: 25px 30px;
     text-align: center;
-    border-bottom: 4px solid #3b82f6;
-    position: relative;
-    overflow: hidden;
   }
-  header::before {
-    content: '';
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: radial-gradient(circle, rgba(59, 130, 246, 0.15) 0%, transparent 70%);
-    animation: pulse 4s ease-in-out infinite;
-  }
-  @keyframes pulse {
-    0%, 100% { transform: scale(1); opacity: 0.5; }
-    50% { transform: scale(1.1); opacity: 0.8; }
-  }
-  .brand-name {
-    font-size: 36px;
-    font-weight: 900;
-    letter-spacing: 2px;
-    margin-bottom: 12px;
-    background: linear-gradient(to right, #ffffff, #60a5fa, #ffffff);
-    background-size: 200% auto;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    animation: shine 3s linear infinite;
-    position: relative;
-    z-index: 1;
-    text-shadow: 0 2px 10px rgba(0,0,0,0.2);
-  }
-  @keyframes shine {
-    to { background-position: 200% center; }
-  }
-  header h1 { 
-    font-size: 22px; 
-    margin-bottom: 8px; 
-    font-weight: 600;
-    position: relative;
-    z-index: 1;
-  }
-  header p { 
-    opacity: 0.9; 
-    font-size: 15px; 
-    position: relative;
-    z-index: 1;
-  }
+  header h1 { font-size: 28px; margin-bottom: 5px; }
+  header p { opacity: 0.85; font-size: 14px; }
 
   .tabs {
     display: flex;
@@ -122,7 +75,12 @@
     gap: 15px;
   }
   .form-group { display: flex; flex-direction: column; }
-  label { font-weight: 600; margin-bottom: 6px; color: #444; font-size: 13px; }
+  label {
+    font-weight: 600;
+    margin-bottom: 6px;
+    color: #444;
+    font-size: 13px;
+  }
   label .required { color: #e74c3c; }
   input, select, textarea {
     padding: 10px 12px;
@@ -160,6 +118,8 @@
   .btn-danger:hover { background: #c0392b; transform: translateY(-2px); }
   .btn-warning { background: #f39c12; color: #fff; }
   .btn-warning:hover { background: #d68910; }
+  .btn-secondary { background: #95a5a6; color: #fff; }
+  .btn-secondary:hover { background: #7f8c8d; }
   .btn-pdf { background: #c0392b; color: #fff; }
   .btn-pdf:hover { background: #a93226; transform: translateY(-2px); box-shadow: 0 4px 12px rgba(192,57,43,0.3); }
   .btn-group { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 15px; }
@@ -173,10 +133,26 @@
     overflow: hidden;
     box-shadow: 0 2px 8px rgba(0,0,0,0.08);
   }
-  th { background: #2a5298; color: #fff; padding: 12px; text-align: left; font-size: 13px; }
-  td { padding: 11px 12px; border-bottom: 1px solid #eef1f5; font-size: 14px; }
+  th {
+    background: #2a5298;
+    color: #fff;
+    padding: 12px;
+    text-align: left;
+    font-size: 13px;
+  }
+  td {
+    padding: 11px 12px;
+    border-bottom: 1px solid #eef1f5;
+    font-size: 14px;
+  }
   tr:hover { background: #f8fafc; }
-  .badge { display: inline-block; padding: 4px 10px; border-radius: 12px; font-size: 12px; font-weight: 600; }
+  .badge {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 600;
+  }
   .badge-success { background: #d4edda; color: #155724; }
   .badge-warning { background: #fff3cd; color: #856404; }
   .badge-danger { background: #f8d7da; color: #721c24; }
@@ -221,7 +197,12 @@
   .scale-reference li:last-child { border-bottom: none; }
   .scale-reference strong { color: #2a5298; }
 
-  .podium { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin: 20px 0; }
+  .podium {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    margin: 20px 0;
+  }
   .podium-card {
     background: linear-gradient(135deg, #fff, #f8fafc);
     border-radius: 12px;
@@ -238,10 +219,20 @@
   .podium-card.selected-cand { border-color: #2a5298; box-shadow: 0 0 0 4px rgba(42,82,152,0.2); }
   .medal { font-size: 48px; margin-bottom: 10px; }
   .podium-card h3 { color: #2a5298; margin-bottom: 8px; }
-  .podium-score { font-size: 32px; font-weight: 700; margin: 10px 0; }
+  .podium-score {
+    font-size: 32px;
+    font-weight: 700;
+    margin: 10px 0;
+  }
   .podium-card p { font-size: 13px; color: #666; margin: 4px 0; }
 
-  .chart-container { background: #fff; padding: 20px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); margin: 20px 0; }
+  .chart-container {
+    background: #fff;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    margin: 20px 0;
+  }
   .chart-container h3 { color: #2a5298; margin-bottom: 15px; text-align: center; }
   .chart-wrapper { max-width: 550px; margin: 0 auto; }
 
@@ -255,24 +246,62 @@
   .summary-box h3 { color: #2a5298; margin-bottom: 15px; }
   .summary-box p { line-height: 1.7; margin-bottom: 10px; color: #444; }
 
-  .decision-box { padding: 20px; border-radius: 10px; margin: 15px 0; font-weight: 600; text-align: center; font-size: 16px; }
+  .decision-box {
+    padding: 20px;
+    border-radius: 10px;
+    margin: 15px 0;
+    font-weight: 600;
+    text-align: center;
+    font-size: 16px;
+  }
   .decision-hire { background: #d4edda; color: #155724; border: 2px solid #27ae60; }
   .decision-recommend { background: #d1ecf1; color: #0c5460; border: 2px solid #17a2b8; }
   .decision-reserve { background: #fff3cd; color: #856404; border: 2px solid #f39c12; }
   .decision-no { background: #f8d7da; color: #721c24; border: 2px solid #e74c3c; }
 
-  .alert { padding: 15px 20px; border-radius: 8px; margin: 15px 0; font-size: 14px; }
+  .alert {
+    padding: 15px 20px;
+    border-radius: 8px;
+    margin: 15px 0;
+    font-size: 14px;
+  }
   .alert-info { background: #d1ecf1; color: #0c5460; border-left: 4px solid #17a2b8; }
   .alert-warning { background: #fff3cd; color: #856404; border-left: 4px solid #f39c12; }
   .alert-success { background: #d4edda; color: #155724; border-left: 4px solid #27ae60; }
 
-  .empty-state { text-align: center; padding: 40px 20px; color: #888; }
+  .empty-state {
+    text-align: center;
+    padding: 40px 20px;
+    color: #888;
+  }
   .empty-state .icon { font-size: 60px; margin-bottom: 15px; }
 
-  .cargo-selector { display: flex; align-items: center; gap: 10px; margin-top: 10px; flex-wrap: wrap; }
-  .vacancy-badge { background: #27ae60; color: #fff; padding: 6px 14px; border-radius: 20px; font-weight: 700; font-size: 13px; white-space: nowrap; }
+  .cargo-selector {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 10px;
+    flex-wrap: wrap;
+  }
+  .vacancy-badge {
+    background: #27ae60;
+    color: #fff;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-weight: 700;
+    font-size: 13px;
+    white-space: nowrap;
+  }
   .vacancy-badge.zero { background: #e74c3c; }
-  .candidates-badge { background: #2a5298; color: #fff; padding: 6px 14px; border-radius: 20px; font-weight: 700; font-size: 13px; white-space: nowrap; }
+  .candidates-badge {
+    background: #2a5298;
+    color: #fff;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-weight: 700;
+    font-size: 13px;
+    white-space: nowrap;
+  }
 
   .candidate-list-item {
     background: #f8fafc;
@@ -334,7 +363,13 @@
     padding: 20px;
     margin: 20px 0;
   }
-  .candidate-selector-box h4 { color: #856404; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
+  .candidate-selector-box h4 {
+    color: #856404;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
   .candidate-detail-card {
     background: #fff;
     border-radius: 10px;
@@ -348,19 +383,57 @@
   }
   .candidate-detail-card div strong { color: #2a5298; display: block; font-size: 11px; text-transform: uppercase; margin-bottom: 3px; }
 
+  /* Estilos para la guía de entrevista desplegable */
+  details.guia-entrevista {
+    background: #fff;
+    border: 1px solid #e1e5eb;
+    border-radius: 8px;
+    margin-top: 15px;
+    overflow: hidden;
+  }
+  details.guia-entrevista summary {
+    cursor: pointer;
+    font-weight: 600;
+    color: #2a5298;
+    padding: 15px;
+    background: #f8fafc;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  details.guia-entrevista summary::-webkit-details-marker { display: none; }
+  details.guia-entrevista summary::before {
+    content: '📖';
+    font-size: 18px;
+  }
+  details.guia-entrevista[open] summary {
+    border-bottom: 1px solid #e1e5eb;
+  }
+  .guia-content {
+    padding: 20px;
+    font-size: 14px;
+    line-height: 1.6;
+    color: #444;
+  }
+  .guia-content h4 { color: #2a5298; margin: 15px 0 8px; font-size: 15px; }
+  .guia-content h5 { color: #555; margin: 12px 0 6px; font-size: 14px; }
+  .guia-content ul { margin-left: 20px; margin-bottom: 10px; }
+  .guia-content li { margin-bottom: 6px; }
+  .guia-content p { margin-bottom: 10px; }
+  .guia-content strong { color: #2a5298; }
+
   @media (max-width: 768px) {
     .tab { font-size: 12px; padding: 12px 10px; min-width: 100px; }
     .tab-content { padding: 20px 15px; }
-    .brand-name { font-size: 26px; }
-    header h1 { font-size: 18px; }
+    header h1 { font-size: 22px; }
   }
 </style>
 </head>
 <body>
 <div class="container">
   <header>
-    <div class="brand-name">AVANT, CONSULTORÍA DE TALENTO HUMANO 💙</div>
-    <h1> Sistema de Análisis de Perfiles de Candidatos</h1>
+    <h1>🎯 Sistema de Análisis de Perfiles de Candidatos</h1>
     <p>Plataforma integral para gestión de vacantes y evaluación de talento</p>
   </header>
 
@@ -395,11 +468,13 @@
       <div class="form-grid">
         <div class="form-group">
           <label>Seleccionar Empresa <span class="required">*</span></label>
-          <select id="empresaCargo"><option value="">-- Seleccione --</option></select>
+          <select id="empresaCargo">
+            <option value="">-- Seleccione --</option>
+          </select>
         </div>
         <div class="form-group">
           <label>Nombre del Cargo <span class="required">*</span></label>
-          <input type="text" id="nombreCargo" placeholder="Ej: Gerente de Marketing Digital">
+          <input type="text" id="nombreCargo" placeholder="Ej: Líder de Marketing Digital o Asesor Comercial">
         </div>
         <div class="form-group">
           <label>Número de Vacantes <span class="required">*</span></label>
@@ -427,12 +502,16 @@
       <div class="form-grid">
         <div class="form-group">
           <label>Empresa <span class="required">*</span></label>
-          <select id="empresaCandidato" onchange="cargarCargosCandidato()"><option value="">-- Seleccione --</option></select>
+          <select id="empresaCandidato" onchange="cargarCargosCandidato()">
+            <option value="">-- Seleccione --</option>
+          </select>
         </div>
         <div class="form-group">
           <label>Cargo <span class="required">*</span></label>
           <div class="cargo-selector">
-            <select id="cargoCandidato" style="flex:1" onchange="mostrarVacantes()"><option value="">-- Seleccione cargo --</option></select>
+            <select id="cargoCandidato" style="flex:1" onchange="mostrarVacantes()">
+              <option value="">-- Seleccione cargo --</option>
+            </select>
           </div>
           <div id="infoVacanteCargo" style="margin-top:8px; display:none">
             <span class="vacancy-badge" id="vacanteInfo">0 vacantes</span>
@@ -441,17 +520,41 @@
         </div>
       </div>
       <div class="form-grid" style="margin-top:15px">
-        <div class="form-group"><label>Cédula <span class="required">*</span></label><input type="text" id="cedula" placeholder="Ej: 1020304050"></div>
-        <div class="form-group"><label>Nombres y Apellidos <span class="required">*</span></label><input type="text" id="nombreCandidato" placeholder="Ej: Juan Pérez García"></div>
-        <div class="form-group"><label>Profesión <span class="required">*</span></label><input type="text" id="profesion" placeholder="Ej: Administrador de Empresas"></div>
-        <div class="form-group"><label>Edad <span class="required">*</span></label><input type="number" id="edad" min="18" max="70" placeholder="Ej: 32"></div>
-        <div class="form-group"><label>Tiempo de Experiencia (años) <span class="required">*</span></label><input type="number" id="experiencia" min="0" max="50" placeholder="Ej: 5"></div>
-        <div class="form-group"><label>Teléfono <span class="required">*</span></label><input type="tel" id="telefono" placeholder="Ej: 3001234567"></div>
-        <div class="form-group"><label>Correo Electrónico <span class="required">*</span></label><input type="email" id="correo" placeholder="Ej: juan@email.com"></div>
-        <div class="form-group" style="grid-column: span 2"><label>Dirección <span class="required">*</span></label><input type="text" id="direccion" placeholder="Ej: Calle 123 # 45-67, Bogotá"></div>
+        <div class="form-group">
+          <label>Cédula <span class="required">*</span></label>
+          <input type="text" id="cedula" placeholder="Ej: 1020304050">
+        </div>
+        <div class="form-group">
+          <label>Nombres y Apellidos <span class="required">*</span></label>
+          <input type="text" id="nombreCandidato" placeholder="Ej: Juan Pérez García">
+        </div>
+        <div class="form-group">
+          <label>Profesión <span class="required">*</span></label>
+          <input type="text" id="profesion" placeholder="Ej: Administrador de Empresas">
+        </div>
+        <div class="form-group">
+          <label>Edad <span class="required">*</span></label>
+          <input type="number" id="edad" min="18" max="70" placeholder="Ej: 32">
+        </div>
+        <div class="form-group">
+          <label>Tiempo de Experiencia (años) <span class="required">*</span></label>
+          <input type="number" id="experiencia" min="0" max="50" placeholder="Ej: 5">
+        </div>
+        <div class="form-group">
+          <label>Teléfono <span class="required">*</span></label>
+          <input type="tel" id="telefono" placeholder="Ej: 3001234567">
+        </div>
+        <div class="form-group">
+          <label>Correo Electrónico <span class="required">*</span></label>
+          <input type="email" id="correo" placeholder="Ej: juan@email.com">
+        </div>
+        <div class="form-group" style="grid-column: span 2">
+          <label>Dirección <span class="required">*</span></label>
+          <input type="text" id="direccion" placeholder="Ej: Calle 123 # 45-67, Bogotá">
+        </div>
       </div>
       <div class="btn-group">
-        <button class="btn btn-success" onclick="agregarCandidato()"> Registrar Candidato</button>
+        <button class="btn btn-success" onclick="agregarCandidato()">➕ Registrar Candidato</button>
       </div>
     </div>
 
@@ -465,32 +568,31 @@
   <div class="tab-content" id="tab-evaluacion">
     <div class="form-section">
       <h3>📊 Matriz de Evaluación</h3>
+
       <div class="cascade-grid">
         <div class="cascade-step" data-step="1">
           <label>1. Seleccione Empresa <span class="required">*</span></label>
-          <select id="evalEmpresa" onchange="cargarCargosEval()" style="width:100%"><option value="">-- Seleccione empresa --</option></select>
+          <select id="evalEmpresa" onchange="cargarCargosEval()" style="width:100%">
+            <option value="">-- Seleccione empresa --</option>
+          </select>
         </div>
         <div class="cascade-step" data-step="2">
           <label>2. Seleccione Cargo <span class="required">*</span></label>
-          <select id="evalCargo" onchange="cargarCandidatosEval()" disabled style="width:100%"><option value="">-- Primero seleccione empresa --</option></select>
+          <select id="evalCargo" onchange="cargarCandidatosEval()" disabled style="width:100%">
+            <option value="">-- Primero seleccione empresa --</option>
+          </select>
         </div>
         <div class="cascade-step" data-step="3">
           <label>3. Seleccione Candidato <span class="required">*</span></label>
-          <select id="evalCandidato" onchange="cargarEvaluacion()" disabled style="width:100%"><option value="">-- Primero seleccione cargo --</option></select>
+          <select id="evalCandidato" onchange="cargarEvaluacion()" disabled style="width:100%">
+            <option value="">-- Primero seleccione cargo --</option>
+          </select>
         </div>
       </div>
+
       <div id="infoCandidatoEval"></div>
-      <div class="scale-reference">
-        <h4>📖 Escala de Calificación</h4>
-        <ul>
-          <li><strong>5 - Excelente:</strong> Responde con seguridad, ejemplos reales, resultados medibles, pensamiento estratégico, ideas innovadoras, liderazgo.</li>
-          <li><strong>4 - Bueno:</strong> Tiene experiencia, responde correctamente, presenta indicadores, lidera con poca supervisión.</li>
-          <li><strong>3 - Aceptable:</strong> Conoce la teoría, ha ejecutado campañas, le falta visión estratégica, requiere acompañamiento.</li>
-          <li><strong>2 - Bajo:</strong> Respuestas generales, sin métricas, poco conocimiento práctico, escasa creatividad.</li>
-          <li><strong>1 - Deficiente:</strong> No demuestra experiencia, evita ejemplos, desconoce conceptos, no evidencia liderazgo.</li>
-        </ul>
-      </div>
       <div id="matrizEvaluacion"></div>
+      
       <div class="btn-group">
         <button class="btn btn-primary" onclick="guardarEvaluacion()">💾 Guardar Evaluación</button>
       </div>
@@ -504,15 +606,21 @@
       <div class="cascade-grid">
         <div class="cascade-step" data-step="1">
           <label>1. Empresa <span class="required">*</span></label>
-          <select id="filtroEmpresa" onchange="cargarCargosResultados()" style="width:100%"><option value="">-- Seleccione empresa --</option></select>
+          <select id="filtroEmpresa" onchange="cargarCargosResultados()" style="width:100%">
+            <option value="">-- Seleccione empresa --</option>
+          </select>
         </div>
         <div class="cascade-step" data-step="2">
           <label>2. Cargo <span class="required">*</span></label>
-          <select id="filtroCargo" onchange="cargarCandidatosResultados()" disabled style="width:100%"><option value="">-- Primero seleccione empresa --</option></select>
+          <select id="filtroCargo" onchange="cargarCandidatosResultados()" disabled style="width:100%">
+            <option value="">-- Primero seleccione empresa --</option>
+          </select>
         </div>
         <div class="cascade-step" data-step="3">
           <label>3. Candidato a Analizar <span class="required">*</span></label>
-          <select id="filtroCandidato" onchange="mostrarResultados()" disabled style="width:100%"><option value="">-- Primero seleccione cargo --</option></select>
+          <select id="filtroCandidato" onchange="mostrarResultados()" disabled style="width:100%">
+            <option value="">-- Primero seleccione cargo --</option>
+          </select>
         </div>
       </div>
       <div id="contenidoResultados"></div>
@@ -525,19 +633,147 @@
 let empresas = JSON.parse(localStorage.getItem('empresas') || '[]');
 let candidatos = JSON.parse(localStorage.getItem('candidatos') || '[]');
 let evaluaciones = JSON.parse(localStorage.getItem('evaluaciones') || '{}');
+let currentEvalConfig = null; // Configuración dinámica del cargo en evaluación
 
-const COMPETENCIAS = [
-  { nombre: 'Experiencia', peso: 10 },
-  { nombre: 'Meta Ads', peso: 15 },
-  { nombre: 'Generación de Leads', peso: 10 },
-  { nombre: 'Analítica', peso: 5 },
-  { nombre: 'Estrategia Digital', peso: 15 },
-  { nombre: 'Creatividad', peso: 10 },
-  { nombre: 'Liderazgo', peso: 10 },
-  { nombre: 'Comunicación', peso: 5 },
-  { nombre: 'Caso Práctico', peso: 10 },
-  { nombre: 'Ajuste Cultural', peso: 10 }
-];
+// ============ CONFIGURACIÓN DINÁMICA POR CARGO ============
+const CONFIGURACION_CARGOS = {
+  marketing: {
+    nombre: "Líder de Marketing Digital",
+    competencias: [
+      { nombre: 'Experiencia', peso: 10 },
+      { nombre: 'Meta Ads', peso: 15 },
+      { nombre: 'Generación de Leads', peso: 10 },
+      { nombre: 'Analítica', peso: 5 },
+      { nombre: 'Estrategia Digital', peso: 15 },
+      { nombre: 'Creatividad', peso: 10 },
+      { nombre: 'Liderazgo', peso: 10 },
+      { nombre: 'Comunicación', peso: 5 },
+      { nombre: 'Caso Práctico', peso: 10 },
+      { nombre: 'Ajuste Cultural', peso: 10 }
+    ],
+    escala: [
+      "5 - Excelente: Responde con seguridad, ejemplos reales, resultados medibles, pensamiento estratégico, ideas innovadoras, liderazgo.",
+      "4 - Bueno: Tiene experiencia, responde correctamente, presenta indicadores, lidera con poca supervisión.",
+      "3 - Aceptable: Conoce la teoría, ha ejecutado campañas, le falta visión estratégica, requiere acompañamiento.",
+      "2 - Bajo: Respuestas generales, sin métricas, poco conocimiento práctico, escasa creatividad.",
+      "1 - Deficiente: No demuestra experiencia, evita ejemplos, desconoce conceptos, no evidencia liderazgo."
+    ],
+    interpretacion: [
+      { min: 90, max: 100, texto: '✅ CONTRATAR - Perfil sobresaliente con liderazgo estratégico y fuerte orientación a resultados.', clase: 'decision-hire' },
+      { min: 80, max: 89.99, texto: '👍 MUY RECOMENDADO - Puede asumir el cargo con una curva de adaptación corta.', clase: 'decision-recommend' },
+      { min: 70, max: 79.99, texto: '⚠️ RECOMENDADO CON RESERVAS - Tiene potencial, pero presenta brechas en competencias clave; validar referencias.', clase: 'decision-reserve' },
+      { min: 60, max: 69.99, texto: '⛔ NO RECOMENDADO para este nivel de liderazgo. Podría encajar en rol de ejecución.', clase: 'decision-no' },
+      { min: 0, max: 59.99, texto: '❌ NO CONTINUAR - El perfil no cumple con los requisitos críticos del cargo.', clase: 'decision-no' }
+    ],
+    guiaEntrevista: "<p>Guía estándar de evaluación para roles de liderazgo en marketing digital. Enfocarse en casos de éxito, métricas de ROI, gestión de equipos y estrategia omnicanal.</p>"
+  },
+  asesor: {
+    nombre: "Asesor Comercial",
+    competencias: [
+      { nombre: 'Orientación al cliente', peso: 20 },
+      { nombre: 'Orientación al logro y ventas', peso: 20 },
+      { nombre: 'Honestidad e integridad', peso: 15 },
+      { nombre: 'Organización y disciplina', peso: 15 },
+      { nombre: 'Trabajo en equipo', peso: 10 },
+      { nombre: 'Manejo de presión', peso: 10 },
+      { nombre: 'Comunicación', peso: 10 }
+    ],
+    escala: [
+      "5 - Excelente: Supera ampliamente lo esperado.",
+      "4 - Bueno: Cumple completamente con la competencia.",
+      "3 - Aceptable: Cumple parcialmente; requiere acompañamiento inicial.",
+      "2 - Bajo: Presenta debilidades importantes.",
+      "1 - Deficiente: No evidencia la competencia."
+    ],
+    interpretacion: [
+      { min: 92, max: 100, texto: '✅ ALTAMENTE RECOMENDADO - Evidencia un excelente ajuste al cargo y alto potencial de desempeño (Promedio 4.6 - 5.0).', clase: 'decision-hire' },
+      { min: 80, max: 91.99, texto: '👍 RECOMENDADO - Cumple con el perfil y presenta fortalezas relevantes (Promedio 4.0 - 4.5).', clase: 'decision-recommend' },
+      { min: 70, max: 79.99, texto: '⚠️ RECOMENDADO CON PLAN DE DESARROLLO - Requiere fortalecimiento en algunas competencias (Promedio 3.5 - 3.9).', clase: 'decision-reserve' },
+      { min: 60, max: 69.99, texto: '🔍 AJUSTE PARCIAL - Conviene comparar con otros candidatos antes de decidir (Promedio 3.0 - 3.4).', clase: 'decision-reserve' },
+      { min: 0, max: 59.99, texto: '❌ NO RECOMENDADO - No demuestra las competencias clave para el cargo (Promedio < 3.0).', clase: 'decision-no' }
+    ],
+    guiaEntrevista: `
+      <h4>1. Apertura (5 minutos)</h4>
+      <ul>
+        <li>Cuéntame sobre ti.</li>
+        <li>¿Qué te llamó la atención de esta oportunidad laboral?</li>
+        <li>¿Por qué te gustaría trabajar en ventas?</li>
+      </ul>
+      
+      <h4>2. Entrevista por competencias</h4>
+      <h5>A. Orientación al cliente</h5>
+      <ul>
+        <li>Cuéntame sobre una ocasión en la que atendiste un cliente difícil y lograste resolver la situación. <em>(Evaluar: Escucha activa, Empatía, Solución de problemas, Actitud positiva)</em></li>
+        <li>¿Qué significa para ti brindar un excelente servicio al cliente?</li>
+      </ul>
+      
+      <h5>B. Orientación al logro y ventas</h5>
+      <ul>
+        <li>Háblame de una meta comercial que hayas tenido que cumplir. <em>(¿Cuál era la meta? ¿Cómo la alcanzaste? ¿Cuál fue el resultado?)</em></li>
+        <li>¿Qué haces cuando notas que estás lejos de cumplir tus metas de ventas?</li>
+      </ul>
+      
+      <h5>C. Honestidad e integridad</h5>
+      <ul>
+        <li>Si al cerrar caja encuentras dinero de más, ¿qué harías?</li>
+        <li>Si un compañero registra una venta a tu nombre sin corresponderte, ¿cómo actuarías?</li>
+      </ul>
+      
+      <h5>D. Organización y disciplina</h5>
+      <ul>
+        <li>¿Cómo organizas tus tareas cuando tienes clientes, reposición de mercancía y cierre de caja al mismo tiempo?</li>
+      </ul>
+      
+      <h5>E. Trabajo en equipo</h5>
+      <ul>
+        <li>Cuéntame sobre una ocasión en la que ayudaste a un compañero para alcanzar un objetivo común.</li>
+      </ul>
+      
+      <h5>F. Manejo de presión</h5>
+      <ul>
+        <li>Describe una situación donde el punto de venta estaba lleno de clientes. ¿Cómo mantuviste una buena atención?</li>
+      </ul>
+      
+      <h5>G. Compromiso</h5>
+      <ul>
+        <li>¿Qué significa para ti ser una persona comprometida? Cuéntame una experiencia donde demostraste ese compromiso.</li>
+      </ul>
+
+      <h4>3. Preguntas de cierre</h4>
+      <ul>
+        <li>¿Qué esperas de tu próximo jefe?</li>
+        <li>¿Qué tipo de ambiente laboral te permite dar lo mejor de ti?</li>
+        <li>¿Tienes disponibilidad para trabajar de lunes a sábado?</li>
+        <li>¿Tienes alguna pregunta sobre la vacante?</li>
+      </ul>
+
+      <h4>4. Casos Prácticos</h4>
+      <h5>Caso Práctico Principal (20 min)</h5>
+      <p><strong>Escenario:</strong> Es sábado a las 4:30 p.m. El almacén está lleno de clientes. Al mismo tiempo: un cliente quiere cambiar un producto, otro espera para pagar, suena el teléfono preguntando por disponibilidad, un compañero pide ayuda en bodega, y debes hacer cierre parcial de caja en 15 minutos.</p>
+      <p><strong>Debe justificar:</strong> ¿Qué atendería primero? ¿Cómo priorizaría las tareas? ¿Qué diría a cada cliente? ¿Cómo garantizaría un buen servicio y no afectaría las ventas?</p>
+      
+      <h5>Caso Comercial Adicional</h5>
+      <p>El cliente entra diciendo: <em>"Solo estoy mirando."</em> ¿Qué haría para convertir esa visita en una venta sin generar presión? <em>(Evaluar: Técnicas de venta consultiva, identificación de necesidades, comunicación, cierre comercial)</em></p>
+      
+      <h5>Caso de Honestidad</h5>
+      <p>Durante el cierre de caja encuentra un faltante de $50.000. ¿Qué haría? Explique el procedimiento que seguiría.</p>
+      
+      <h5>Caso de Inventario</h5>
+      <p>Mientras organiza la mercancía detecta que faltan tres productos en el sistema. ¿Qué acciones realizaría?</p>
+    `
+  }
+};
+
+function getConfiguracionCargo(nombreCargo) {
+  const nombre = (nombreCargo || "").toLowerCase();
+  if (nombre.includes('marketing') || nombre.includes('líder') || nombre.includes('lider')) {
+    return CONFIGURACION_CARGOS.marketing;
+  }
+  if (nombre.includes('asesor') || nombre.includes('comercial') || nombre.includes('venta')) {
+    return CONFIGURACION_CARGOS.asesor;
+  }
+  return CONFIGURACION_CARGOS.marketing; // Fallback por defecto
+}
 
 // ============ NAVEGACIÓN TABS ============
 document.querySelectorAll('.tab').forEach(tab => {
@@ -563,18 +799,6 @@ function obtenerSemaforo(puntaje) {
   if (puntaje >= 86) return { clase: 'traffic-green', color: '#27ae60', texto: 'Verde' };
   if (puntaje >= 71) return { clase: 'traffic-orange', color: '#f39c12', texto: 'Naranja' };
   return { clase: 'traffic-red', color: '#e74c3c', texto: 'Rojo' };
-}
-
-// ============ LIMPIEZA DE TEXTO PARA PDF ============
-function limpiarTexto(texto) {
-  if (!texto) return '';
-  // Eliminar etiquetas HTML
-  let limpio = texto.replace(/<[^>]*>/g, '');
-  // Eliminar emojis
-  limpio = limpio.replace(/[\u{1F600}-\u{1F64F}\u{1F300}-\u{1F5FF}\u{1F680}-\u{1F6FF}\u{1F1E0}-\u{1F1FF}\u{2600}-\u{26FF}\u{2700}-\u{27BF}]/gu, '');
-  // Eliminar espacios extra
-  limpio = limpio.replace(/\s+/g, ' ').trim();
-  return limpio;
 }
 
 // ============ GESTIÓN DE EMPRESAS ============
@@ -745,7 +969,7 @@ function agregarCandidato() {
   renderEmpresas();
   cargarCargosCandidato();
   mostrarVacantes();
-  alert('✅ Candidato registrado exitosamente. Puede continuar registrando más candidatos.');
+  alert('✅ Candidato registrado exitosamente.');
 }
 
 function eliminarCandidato(id) {
@@ -760,7 +984,7 @@ function eliminarCandidato(id) {
 function renderCandidatos() {
   const cont = document.getElementById('listaCandidatos');
   if (candidatos.length === 0) {
-    cont.innerHTML = '<div class="empty-state"><div class="icon"></div><p>No hay candidatos registrados</p></div>';
+    cont.innerHTML = '<div class="empty-state"><div class="icon">👥</div><p>No hay candidatos registrados</p></div>';
     return;
   }
   const grupos = {};
@@ -804,13 +1028,15 @@ function renderCandidatos() {
 // ============ EVALUACIÓN EN CASCADA ============
 function inicializarEvalCascada() {
   const selEmp = document.getElementById('evalEmpresa');
-  selEmp.innerHTML = '<option value="">-- Seleccione empresa --</option>' + empresas.map(e => `<option value="${e.nit}">${e.nombre}</option>`).join('');
+  selEmp.innerHTML = '<option value="">-- Seleccione empresa --</option>' +
+    empresas.map(e => `<option value="${e.nit}">${e.nombre}</option>`).join('');
   document.getElementById('evalCargo').innerHTML = '<option value="">-- Primero seleccione empresa --</option>';
   document.getElementById('evalCargo').disabled = true;
   document.getElementById('evalCandidato').innerHTML = '<option value="">-- Primero seleccione cargo --</option>';
   document.getElementById('evalCandidato').disabled = true;
   document.getElementById('infoCandidatoEval').innerHTML = '';
   document.getElementById('matrizEvaluacion').innerHTML = '';
+  currentEvalConfig = null;
 }
 
 function cargarCargosEval() {
@@ -821,13 +1047,16 @@ function cargarCargosEval() {
   selCand.disabled = true;
   document.getElementById('infoCandidatoEval').innerHTML = '';
   document.getElementById('matrizEvaluacion').innerHTML = '';
+  currentEvalConfig = null;
   if (!nit) {
     selCargo.innerHTML = '<option value="">-- Primero seleccione empresa --</option>';
     selCargo.disabled = true;
     return;
   }
   const empresa = empresas.find(e => e.nit === nit);
-  const cargsConCands = empresa.cargos.filter(c => candidatos.some(x => x.nitEmpresa === nit && x.cargo === c.nombre));
+  const cargsConCands = empresa.cargos.filter(c =>
+    candidatos.some(x => x.nitEmpresa === nit && x.cargo === c.nombre)
+  );
   if (cargsConCands.length === 0) {
     selCargo.innerHTML = '<option value="">-- Sin candidatos registrados --</option>';
     selCargo.disabled = true;
@@ -850,6 +1079,7 @@ function cargarCandidatosEval() {
   const selCand = document.getElementById('evalCandidato');
   document.getElementById('infoCandidatoEval').innerHTML = '';
   document.getElementById('matrizEvaluacion').innerHTML = '';
+  currentEvalConfig = null;
   if (!nit || !cargo) {
     selCand.innerHTML = '<option value="">-- Primero seleccione cargo --</option>';
     selCand.disabled = true;
@@ -877,8 +1107,10 @@ function cargarEvaluacion() {
   const id = document.getElementById('evalCandidato').value;
   const cont = document.getElementById('matrizEvaluacion');
   const infoCont = document.getElementById('infoCandidatoEval');
-  if (!id) { cont.innerHTML = ''; infoCont.innerHTML = ''; return; }
+  if (!id) { cont.innerHTML = ''; infoCont.innerHTML = ''; currentEvalConfig = null; return; }
+  
   const cand = candidatos.find(c => c.id == id);
+  currentEvalConfig = getConfiguracionCargo(cand.cargo);
   const eval_ = evaluaciones[id] || {};
 
   infoCont.innerHTML = `<div class="cascade-info">
@@ -887,11 +1119,23 @@ function cargarEvaluacion() {
     <strong>Edad:</strong> ${cand.edad} años |
     <strong>Experiencia:</strong> ${cand.experiencia} años |
     <strong>Cargo:</strong> ${cand.cargo} en ${cand.empresa}
-  </div>`;
+  </div>
+  <details class="guia-entrevista">
+    <summary>Ver Guía de Entrevista y Casos Prácticos para ${currentEvalConfig.nombre}</summary>
+    <div class="guia-content">
+      ${currentEvalConfig.guiaEntrevista}
+    </div>
+  </details>`;
+
+  let escalaHtml = '<div class="scale-reference"><h4>📖 Escala de Calificación</h4><ul>';
+  currentEvalConfig.escala.forEach(item => {
+    escalaHtml += `<li>${item}</li>`;
+  });
+  escalaHtml += '</ul></div>';
 
   let html = `<table class="matrix-table">
-    <thead><tr><th>Competencia</th><th>Peso</th><th>Calificación (1-5)</th><th>Puntaje</th></tr></thead><tbody>`;
-  COMPETENCIAS.forEach((comp, i) => {
+    <thead><tr><th>Competencia</th><th>Peso</th><th>Calificación (1-5)</th><th>Puntaje Ponderado</th></tr></thead><tbody>`;
+  currentEvalConfig.competencias.forEach((comp, i) => {
     const calif = eval_.calificaciones ? (eval_.calificaciones[i] || '') : '';
     const puntaje = calif ? ((calif / 5) * comp.peso).toFixed(2) : '-';
     html += `<tr>
@@ -907,18 +1151,19 @@ function cargarEvaluacion() {
   const total = eval_.puntajeTotal || 0;
   html += `<tr class="total-row"><td colspan="3"><strong>TOTAL</strong></td><td id="puntajeTotal"><strong>${total.toFixed(1)} / 100</strong></td></tr>`;
   html += '</tbody></table>';
-  cont.innerHTML = html;
+  
+  cont.innerHTML = escalaHtml + html;
 }
 
 function actualizarPuntaje(idx, valor) {
   const id = document.getElementById('evalCandidato').value;
-  if (!id) return;
-  if (!evaluaciones[id]) evaluaciones[id] = { calificaciones: new Array(COMPETENCIAS.length).fill(''), puntajeTotal: 0 };
+  if (!id || !currentEvalConfig) return;
+  if (!evaluaciones[id]) evaluaciones[id] = { calificaciones: new Array(currentEvalConfig.competencias.length).fill(''), puntajeTotal: 0 };
   evaluaciones[id].calificaciones[idx] = valor ? parseInt(valor) : '';
   let total = 0;
   evaluaciones[id].calificaciones.forEach((v, i) => {
     if (v) {
-      const p = (v / 5) * COMPETENCIAS[i].peso;
+      const p = (v / 5) * currentEvalConfig.competencias[i].peso;
       total += p;
       document.getElementById('puntaje-' + i).textContent = p.toFixed(2);
     } else {
@@ -947,7 +1192,8 @@ function guardarEvaluacion() {
 // ============ RESULTADOS EN CASCADA ============
 function inicializarResultadosCascada() {
   const selEmp = document.getElementById('filtroEmpresa');
-  selEmp.innerHTML = '<option value="">-- Seleccione empresa --</option>' + empresas.map(e => `<option value="${e.nit}">${e.nombre}</option>`).join('');
+  selEmp.innerHTML = '<option value="">-- Seleccione empresa --</option>' +
+    empresas.map(e => `<option value="${e.nit}">${e.nombre}</option>`).join('');
   document.getElementById('filtroCargo').innerHTML = '<option value="">-- Primero seleccione empresa --</option>';
   document.getElementById('filtroCargo').disabled = true;
   document.getElementById('filtroCandidato').innerHTML = '<option value="">-- Primero seleccione cargo --</option>';
@@ -968,7 +1214,9 @@ function cargarCargosResultados() {
     return;
   }
   const empresa = empresas.find(e => e.nit === nit);
-  const cargsConCands = empresa.cargos.filter(c => candidatos.some(x => x.nitEmpresa === nit && x.cargo === c.nombre));
+  const cargsConCands = empresa.cargos.filter(c =>
+    candidatos.some(x => x.nitEmpresa === nit && x.cargo === c.nombre)
+  );
   if (cargsConCands.length === 0) {
     selCargo.innerHTML = '<option value="">-- Sin candidatos --</option>';
     selCargo.disabled = true;
@@ -1036,16 +1284,22 @@ function mostrarResultados() {
     return;
   }
 
+  const config = getConfiguracionCargo(candidatoSeleccionado.cargo);
   const ganador = evaluados[0];
   const posicion = evaluados.findIndex(c => c.id == candId) + 1;
-  const decision = obtenerDecision(candidatoSeleccionado.eval.puntajeTotal);
+  const decision = obtenerDecision(candidatoSeleccionado.eval.puntajeTotal, candidatoSeleccionado.cargo);
   const sem = obtenerSemaforo(candidatoSeleccionado.eval.puntajeTotal);
 
-  const promedios = COMPETENCIAS.map((comp, i) => {
+  const promedios = config.competencias.map((comp, i) => {
     const suma = evaluados.reduce((acc, c) => acc + c.eval.calificaciones[i], 0);
     return suma / evaluados.length;
   });
 
+  const mejoresPorComp = config.competencias.map((comp, i) => {
+    return Math.max(...evaluados.map(c => c.eval.calificaciones[i]));
+  });
+
+  // PODIO
   let podiumHtml = '<h3 style="color:#2a5298; margin:20px 0 10px">🏆 Podio General</h3><div class="podium">';
   const medals = ['🥇','🥈','🥉'];
   const classes = ['gold','silver','bronze'];
@@ -1059,21 +1313,23 @@ function mostrarResultados() {
       <p><strong>${c.profesion}</strong></p>
       <p>${c.edad} años | ${c.experiencia} años exp.</p>
       <p>CC: ${c.cedula}</p>
-      <div style="margin-top:10px">${obtenerBadgeDecision(c.eval.puntajeTotal)}</div>
+      <div style="margin-top:10px">${obtenerBadgeDecision(c.eval.puntajeTotal, c.cargo)}</div>
     </div>`;
   });
   podiumHtml += '</div>';
 
+  // TABLA DE RANKING
   let tablaHtml = '<h3 style="color:#2a5298; margin:20px 0 10px">📋 Ranking Completo</h3><table><thead><tr><th>#</th><th>Candidato</th><th>Profesión</th><th>Experiencia</th><th>Puntaje</th><th>Semáforo</th><th>Decisión</th></tr></thead><tbody>';
   evaluados.forEach((c, i) => {
     const cSem = obtenerSemaforo(c.eval.puntajeTotal);
     const highlight = c.id == candId ? 'style="background:#fff9e6 !important; font-weight:700"' : '';
-    tablaHtml += `<tr ${highlight}><td><strong>${i+1}</strong></td><td>${c.nombre}${c.id==candId?' 👈':''}<br><small>CC ${c.cedula}</small></td><td>${c.profesion}</td><td>${c.experiencia} años</td><td><strong>${c.eval.puntajeTotal.toFixed(1)}</strong></td><td><span class="traffic-light ${cSem.clase}"></span>${cSem.texto}</td><td>${obtenerBadgeDecision(c.eval.puntajeTotal)}</td></tr>`;
+    tablaHtml += `<tr ${highlight}><td><strong>${i+1}</strong></td><td>${c.nombre}${c.id==candId?' 👈':''}<br><small>CC ${c.cedula}</small></td><td>${c.profesion}</td><td>${c.experiencia} años</td><td><strong>${c.eval.puntajeTotal.toFixed(1)}</strong></td><td><span class="traffic-light ${cSem.clase}"></span>${cSem.texto}</td><td>${obtenerBadgeDecision(c.eval.puntajeTotal, c.cargo)}</td></tr>`;
   });
   tablaHtml += '</tbody></table>';
 
-  let compHtml = `<h3 style="color:#2a5298; margin:20px 0 10px"> Comparativa Detallada por Competencia</h3>
-    <div class="alert alert-info"> La columna resaltada en amarillo corresponde al candidato seleccionado. <span style="background:#d4edda; padding:2px 6px; border-radius:4px; font-weight:700">Verde</span> = mejor puntaje | <span style="background:#f8d7da; padding:2px 6px; border-radius:4px; font-weight:700">Rojo</span> = puntaje más bajo.</div>
+  // TABLA COMPARATIVA POR COMPETENCIA
+  let compHtml = `<h3 style="color:#2a5298; margin:20px 0 10px">📊 Comparativa Detallada por Competencia</h3>
+    <div class="alert alert-info">💡 La columna resaltada en amarillo corresponde al candidato seleccionado. <span style="background:#d4edda; padding:2px 6px; border-radius:4px; font-weight:700">Verde</span> = mejor puntaje | <span style="background:#f8d7da; padding:2px 6px; border-radius:4px; font-weight:700">Rojo</span> = puntaje más bajo.</div>
     <div style="overflow-x:auto"><table class="comparativa-table">
     <thead><tr><th>Competencia</th><th>Peso</th>`;
   evaluados.forEach(c => {
@@ -1082,7 +1338,7 @@ function mostrarResultados() {
   });
   compHtml += `<th>Promedio</th><th>Mejor</th></tr></thead><tbody>`;
 
-  COMPETENCIAS.forEach((comp, i) => {
+  config.competencias.forEach((comp, i) => {
     const valores = evaluados.map(c => c.eval.calificaciones[i]);
     const maxVal = Math.max(...valores);
     const minVal = Math.min(...valores);
@@ -1112,13 +1368,15 @@ function mostrarResultados() {
   });
   compHtml += `<td>-</td><td>#1</td></tr></tbody></table></div>`;
 
+  // GRÁFICA RADAR
   const chartHtml = `<div class="chart-container">
     <h3>📈 Análisis Radial Comparativo: ${candidatoSeleccionado.nombre}</h3>
     <div class="chart-wrapper"><canvas id="radarChart"></canvas></div>
   </div>`;
 
+  // Tarjeta de datos
   const detailCard = `<div class="candidate-selector-box">
-    <h4> Candidato Seleccionado para Análisis</h4>
+    <h4>🎯 Candidato Seleccionado para Análisis</h4>
     <div class="candidate-detail-card">
       <div><strong>Nombre</strong>${candidatoSeleccionado.nombre}</div>
       <div><strong>Cédula</strong>${candidatoSeleccionado.cedula}</div>
@@ -1135,22 +1393,24 @@ function mostrarResultados() {
     </div>
   </div>`;
 
+  // RESUMEN PERSONALIZADO
   const resumenHtml = `<div class="summary-box">
-    <h3> Análisis Personalizado: ${candidatoSeleccionado.nombre}</h3>
+    <h3>📝 Análisis Personalizado: ${candidatoSeleccionado.nombre}</h3>
     <p><strong>Puntaje Total:</strong> ${candidatoSeleccionado.eval.puntajeTotal.toFixed(1)} / 100 puntos | <strong>Posición:</strong> #${posicion} de ${evaluados.length} candidatos</p>
     <p><strong>Promedio del grupo:</strong> ${promTotal.toFixed(1)} puntos | <strong>Diferencia vs promedio:</strong> <span style="color:${candidatoSeleccionado.eval.puntajeTotal >= promTotal ? '#27ae60' : '#e74c3c'}; font-weight:700">${candidatoSeleccionado.eval.puntajeTotal >= promTotal ? '+' : ''}${(candidatoSeleccionado.eval.puntajeTotal - promTotal).toFixed(1)} pts</span></p>
     <div class="decision-box ${decision.clase}">${decision.texto}</div>
     <p><strong>Análisis individual:</strong> ${generarAnalisis(candidatoSeleccionado)}</p>
-    <p><strong>Análisis comparativo:</strong> ${generarAnalisisComparativo(candidatoSeleccionado, evaluados, promedios, null, posicion)}</p>
-    <p><strong>Competencias destacadas:</strong> ${obtenerFortalezas(candidatoSeleccionado.eval)}</p>
-    <p><strong>Áreas de mejora:</strong> ${obtenerDebilidades(candidatoSeleccionado.eval)}</p>
-    <p><strong>Ventajas competitivas vs grupo:</strong> ${obtenerVentajasComparativas(candidatoSeleccionado, promedios)}</p>
-    <p><strong>Brechas vs grupo:</strong> ${obtenerBrechasComparativas(candidatoSeleccionado, promedios)}</p>
+    <p><strong>Análisis comparativo:</strong> ${generarAnalisisComparativo(candidatoSeleccionado, evaluados, promedios, mejoresPorComp, posicion)}</p>
+    <p><strong>Competencias destacadas:</strong> ${obtenerFortalezas(candidatoSeleccionado.eval, candidatoSeleccionado.cargo)}</p>
+    <p><strong>Áreas de mejora:</strong> ${obtenerDebilidades(candidatoSeleccionado.eval, candidatoSeleccionado.cargo)}</p>
+    <p><strong>Ventajas competitivas vs grupo:</strong> ${obtenerVentajasComparativas(candidatoSeleccionado, promedios, candidatoSeleccionado.cargo)}</p>
+    <p><strong>Brechas vs grupo:</strong> ${obtenerBrechasComparativas(candidatoSeleccionado, promedios, candidatoSeleccionado.cargo)}</p>
   </div>`;
 
+  // BOTONES
   const accionesHtml = `<div class="btn-group" style="justify-content:center; margin-top:30px">
     <button class="btn btn-success" onclick="finalizarProceso('${nit}', '${cargo}')">✅ Finalizar Proceso (Cerrar Vacante)</button>
-    <button class="btn btn-warning" onclick="reiniciarAnalisis('${nit}', '${cargo}')"> Nuevo Análisis de Candidatos</button>
+    <button class="btn btn-warning" onclick="reiniciarAnalisis('${nit}', '${cargo}')">🔄 Nuevo Análisis de Candidatos</button>
     <button class="btn btn-pdf" onclick="generarPDF('${nit}', '${cargo}', ${candId})">📄 Descargar PDF</button>
   </div>`;
 
@@ -1172,18 +1432,18 @@ function mostrarResultados() {
   setTimeout(() => dibujarRadar(candidatoSeleccionado, evaluados, promedios), 100);
 }
 
-function obtenerDecision(puntaje) {
-  if (puntaje >= 90) return { texto: '✅ CONTRATAR - Perfil sobresaliente con liderazgo estratégico y fuerte orientación a resultados.', clase: 'decision-hire' };
-  if (puntaje >= 80) return { texto: ' MUY RECOMENDADO - Puede asumir el cargo con una curva de adaptación corta.', clase: 'decision-recommend' };
-  if (puntaje >= 70) return { texto: '⚠️ RECOMENDADO CON RESERVAS - Tiene potencial, pero presenta brechas en competencias clave; validar referencias.', clase: 'decision-reserve' };
-  if (puntaje >= 60) return { texto: '⛔ NO RECOMENDADO para este nivel de liderazgo. Podría encajar en rol de ejecución.', clase: 'decision-no' };
-  return { texto: '❌ NO CONTINUAR - El perfil no cumple con los requisitos críticos del cargo.', clase: 'decision-no' };
+function obtenerDecision(puntaje, nombreCargo) {
+  const config = getConfiguracionCargo(nombreCargo);
+  const interp = config.interpretacion.find(i => puntaje >= i.min && puntaje <= i.max) || config.interpretacion[config.interpretacion.length - 1];
+  return { texto: interp.texto, clase: interp.clase };
 }
 
-function obtenerBadgeDecision(puntaje) {
-  if (puntaje >= 90) return '<span class="badge badge-success">Contratar</span>';
-  if (puntaje >= 80) return '<span class="badge badge-info">Muy Recomendado</span>';
-  if (puntaje >= 70) return '<span class="badge badge-warning">Con Reservas</span>';
+function obtenerBadgeDecision(puntaje, nombreCargo) {
+  const config = getConfiguracionCargo(nombreCargo);
+  const interp = config.interpretacion.find(i => puntaje >= i.min && puntaje <= i.max) || config.interpretacion[config.interpretacion.length - 1];
+  if (interp.clase === 'decision-hire') return '<span class="badge badge-success">Altamente Recomendado</span>';
+  if (interp.clase === 'decision-recommend') return '<span class="badge badge-info">Recomendado</span>';
+  if (interp.clase === 'decision-reserve') return '<span class="badge badge-warning">Con Plan de Desarrollo / Ajuste Parcial</span>';
   return '<span class="badge badge-danger">No Recomendado</span>';
 }
 
@@ -1198,16 +1458,17 @@ function generarAnalisis(cand) {
 }
 
 function generarAnalisisComparativo(cand, evaluados, promedios, mejoresPorComp, posicion) {
+  const config = getConfiguracionCargo(cand.cargo);
   const total = evaluados.length;
   const porcentaje = ((total - posicion + 1) / total * 100).toFixed(0);
   let txt = `Se ubica en la posición #${posicion} de ${total} candidatos (top ${porcentaje}%). `;
   
-  const superaProm = COMPETENCIAS.filter((c, i) => cand.eval.calificaciones[i] > promedios[i]);
+  const superaProm = config.competencias.filter((c, i) => cand.eval.calificaciones[i] > promedios[i]);
   if (superaProm.length > 0) {
     txt += `Supera el promedio del grupo en ${superaProm.length} competencia${superaProm.length>1?'s':''}: ${superaProm.map(c => c.nombre).join(', ')}. `;
   }
   
-  const bajoProm = COMPETENCIAS.filter((c, i) => cand.eval.calificaciones[i] < promedios[i]);
+  const bajoProm = config.competencias.filter((c, i) => cand.eval.calificaciones[i] < promedios[i]);
   if (bajoProm.length > 0) {
     txt += `Está por debajo del promedio en: ${bajoProm.map(c => c.nombre).join(', ')}. `;
   }
@@ -1217,34 +1478,38 @@ function generarAnalisisComparativo(cand, evaluados, promedios, mejoresPorComp, 
     const diff = ganador.eval.puntajeTotal - cand.eval.puntajeTotal;
     txt += `La diferencia con el primer lugar (${ganador.nombre}) es de ${diff.toFixed(1)} puntos.`;
   } else {
-    txt = ` <strong>Es el candidato mejor posicionado del grupo.</strong> Lidera el ranking con un puntaje sobresaliente. ` + txt;
+    txt = `🏆 <strong>Es el candidato mejor posicionado del grupo.</strong> Lidera el ranking con un puntaje sobresaliente. ` + txt;
   }
   return txt;
 }
 
-function obtenerFortalezas(eval_) {
-  const ordenadas = COMPETENCIAS.map((c, i) => ({ nombre: c.nombre, calif: eval_.calificaciones[i] }))
+function obtenerFortalezas(eval_, nombreCargo) {
+  const config = getConfiguracionCargo(nombreCargo);
+  const ordenadas = config.competencias.map((c, i) => ({ nombre: c.nombre, calif: eval_.calificaciones[i] }))
     .filter(x => x.calif >= 4)
     .sort((a, b) => b.calif - a.calif);
   return ordenadas.length ? ordenadas.map(x => `${x.nombre} (${x.calif}/5)`).join(', ') : 'No se identificaron fortalezas destacadas';
 }
 
-function obtenerDebilidades(eval_) {
-  const ordenadas = COMPETENCIAS.map((c, i) => ({ nombre: c.nombre, calif: eval_.calificaciones[i] }))
+function obtenerDebilidades(eval_, nombreCargo) {
+  const config = getConfiguracionCargo(nombreCargo);
+  const ordenadas = config.competencias.map((c, i) => ({ nombre: c.nombre, calif: eval_.calificaciones[i] }))
     .filter(x => x.calif <= 3)
     .sort((a, b) => a.calif - b.calif);
   return ordenadas.length ? ordenadas.map(x => `${x.nombre} (${x.calif}/5)`).join(', ') : 'No se identificaron debilidades significativas';
 }
 
-function obtenerVentajasComparativas(cand, promedios) {
-  const ventajas = COMPETENCIAS.map((c, i) => ({ nombre: c.nombre, diff: cand.eval.calificaciones[i] - promedios[i] }))
+function obtenerVentajasComparativas(cand, promedios, nombreCargo) {
+  const config = getConfiguracionCargo(nombreCargo);
+  const ventajas = config.competencias.map((c, i) => ({ nombre: c.nombre, diff: cand.eval.calificaciones[i] - promedios[i] }))
     .filter(x => x.diff > 0.3)
     .sort((a, b) => b.diff - a.diff);
   return ventajas.length ? ventajas.map(x => `${x.nombre} (+${x.diff.toFixed(2)} vs promedio)`).join(', ') : 'No presenta ventajas comparativas significativas';
 }
 
-function obtenerBrechasComparativas(cand, promedios) {
-  const brechas = COMPETENCIAS.map((c, i) => ({ nombre: c.nombre, diff: promedios[i] - cand.eval.calificaciones[i] }))
+function obtenerBrechasComparativas(cand, promedios, nombreCargo) {
+  const config = getConfiguracionCargo(nombreCargo);
+  const brechas = config.competencias.map((c, i) => ({ nombre: c.nombre, diff: promedios[i] - cand.eval.calificaciones[i] }))
     .filter(x => x.diff > 0.3)
     .sort((a, b) => b.diff - a.diff);
   return brechas.length ? brechas.map(x => `${x.nombre} (-${x.diff.toFixed(2)} vs promedio)`).join(', ') : 'No presenta brechas significativas frente al grupo';
@@ -1254,6 +1519,8 @@ let radarChartInstance = null;
 function dibujarRadar(candSeleccionado, evaluados, promedios) {
   const ctx = document.getElementById('radarChart').getContext('2d');
   if (radarChartInstance) radarChartInstance.destroy();
+  
+  const config = getConfiguracionCargo(candSeleccionado.cargo);
   
   const datasets = [
     {
@@ -1295,7 +1562,7 @@ function dibujarRadar(candSeleccionado, evaluados, promedios) {
   radarChartInstance = new Chart(ctx, {
     type: 'radar',
     data: {
-      labels: COMPETENCIAS.map(c => c.nombre),
+      labels: config.competencias.map(c => c.nombre),
       datasets: datasets
     },
     options: {
@@ -1315,7 +1582,7 @@ function dibujarRadar(candSeleccionado, evaluados, promedios) {
   });
 }
 
-// ============ GENERAR PDF (CORREGIDO Y COMPLETO) ============
+// ============ GENERAR PDF ============
 async function generarPDF(nit, cargo, candId) {
   const { jsPDF } = window.jspdf;
   const pdf = new jsPDF('p', 'mm', 'a4');
@@ -1328,202 +1595,162 @@ async function generarPDF(nit, cargo, candId) {
 
   const candidatoSeleccionado = evaluados.find(c => c.id == candId);
   if (!candidatoSeleccionado) {
-    alert('️ Candidato no encontrado');
+    alert('⚠️ Candidato no encontrado');
     return;
   }
 
+  const config = getConfiguracionCargo(candidatoSeleccionado.cargo);
   const posicion = evaluados.findIndex(c => c.id == candId) + 1;
   const fecha = new Date().toLocaleDateString('es-CO');
-  const promedios = COMPETENCIAS.map((comp, i) => {
+  
+  const promedios = config.competencias.map((comp, i) => {
     const suma = evaluados.reduce((acc, c) => acc + c.eval.calificaciones[i], 0);
     return suma / evaluados.length;
   });
   const promTotal = evaluados.reduce((acc, c) => acc + c.eval.puntajeTotal, 0) / evaluados.length;
-  const decision = obtenerDecision(candidatoSeleccionado.eval.puntajeTotal);
 
-  // === ENCABEZADO ===
-  pdf.setFillColor(10, 25, 47);
-  pdf.rect(0, 0, 210, 35, 'F');
-  
-  pdf.setTextColor(96, 165, 250);
-  pdf.setFontSize(16);
-  pdf.setFont(undefined, 'bold');
-  pdf.text('AVANT, CONSULTORIA DE TALENTO HUMANO', 105, 12, { align: 'center' });
-  
+  // Encabezado
+  pdf.setFillColor(42, 82, 152);
+  pdf.rect(0, 0, 210, 30, 'F');
   pdf.setTextColor(255, 255, 255);
-  pdf.setFontSize(13);
-  pdf.setFont(undefined, 'normal');
-  pdf.text('Analisis Individual de Candidato', 105, 22, { align: 'center' });
-  
-  pdf.setFontSize(9);
-  pdf.setTextColor(200, 200, 200);
-  pdf.text('Generado: ' + fecha, 105, 30, { align: 'center' });
-
-  // === INFORMACION DEL CANDIDATO ===
-  let yPos = 47;
-  pdf.setTextColor(42, 82, 152);
-  pdf.setFontSize(11);
+  pdf.setFontSize(18);
   pdf.setFont(undefined, 'bold');
-  pdf.text('Informacion del Candidato', 20, yPos);
-  yPos += 7;
-  
-  pdf.setFillColor(240, 244, 249);
-  pdf.rect(20, yPos - 5, 170, 32, 'F');
-  
-  pdf.setTextColor(0, 0, 0);
-  pdf.setFontSize(9);
-  pdf.setFont(undefined, 'normal');
-  
-  pdf.text('Nombre: ' + candidatoSeleccionado.nombre, 23, yPos); yPos += 5;
-  pdf.text('Cedula: ' + candidatoSeleccionado.cedula, 23, yPos); yPos += 5;
-  pdf.text('Profesion: ' + candidatoSeleccionado.profesion, 23, yPos); yPos += 5;
-  pdf.text('Edad: ' + candidatoSeleccionado.edad + ' anos | Experiencia: ' + candidatoSeleccionado.experiencia + ' anos', 23, yPos); yPos += 5;
-  pdf.text('Telefono: ' + candidatoSeleccionado.telefono + ' | Correo: ' + candidatoSeleccionado.correo, 23, yPos); yPos += 5;
-  pdf.text('Direccion: ' + candidatoSeleccionado.direccion, 23, yPos); yPos += 5;
-  pdf.text('Empresa: ' + candidatoSeleccionado.empresa + ' | Cargo: ' + candidatoSeleccionado.cargo, 23, yPos);
-  yPos += 10;
-
-  // === PUNTAJE Y POSICION ===
-  pdf.setFont(undefined, 'bold');
+  pdf.text('Análisis Individual de Candidato', 105, 15, { align: 'center' });
   pdf.setFontSize(10);
-  pdf.text('PUNTAJE TOTAL: ' + candidatoSeleccionado.eval.puntajeTotal.toFixed(1) + '/100', 20, yPos);
-  pdf.text('Posicion: #' + posicion + ' de ' + evaluados.length, 95, yPos);
-  const diffProm = candidatoSeleccionado.eval.puntajeTotal - promTotal;
-  pdf.text('vs Promedio: ' + (diffProm >= 0 ? '+' : '') + diffProm.toFixed(1) + ' pts', 150, yPos);
-  yPos += 10;
+  pdf.setFont(undefined, 'normal');
+  pdf.text(`Generado: ${fecha}`, 105, 23, { align: 'center' });
 
-  // === DECISION ===
-  if (candidatoSeleccionado.eval.puntajeTotal >= 80) {
-    pdf.setFillColor(212, 237, 218); pdf.setTextColor(21, 87, 36);
-  } else if (candidatoSeleccionado.eval.puntajeTotal >= 70) {
-    pdf.setFillColor(255, 243, 205); pdf.setTextColor(133, 100, 4);
-  } else {
-    pdf.setFillColor(248, 215, 218); pdf.setTextColor(114, 28, 36);
-  }
-  
-  pdf.roundedRect(20, yPos - 5, 170, 12, 2, 2, 'F');
-  
-  // Limpiar texto de decision (quitar emojis y formato)
-  let decisionText = limpiarTexto(decision.texto);
-  const decisionLines = pdf.splitTextToSize(decisionText, 165);
-  pdf.text(decisionLines, 23, yPos + 2);
-  yPos += 15;
-
-  // === TABLA DE COMPETENCIAS ===
-  pdf.setFontSize(11);
-  pdf.setTextColor(42, 82, 152);
+  // Info vacante
+  pdf.setTextColor(0, 0, 0);
+  pdf.setFontSize(13);
   pdf.setFont(undefined, 'bold');
-  pdf.text('Evaluacion por Competencia', 20, yPos);
+  pdf.text('Información de la Vacante', 20, 42);
+  pdf.setLineWidth(0.5);
+  pdf.line(20, 44, 190, 44);
+  
+  pdf.setFontSize(10);
+  pdf.setFont(undefined, 'normal');
+  let yPos = 77;
+  pdf.text(`Nombre: ${candidatoSeleccionado.nombre} | CC: ${candidatoSeleccionado.cedula}`, 20, yPos); yPos += 6;
+  pdf.text(`Profesión: ${candidatoSeleccionado.profesion} | Edad: ${candidatoSeleccionado.edad} años | Experiencia: ${candidatoSeleccionado.experiencia} años`, 20, yPos); yPos += 6;
+  pdf.text(`Teléfono: ${candidatoSeleccionado.telefono} | Correo: ${candidatoSeleccionado.correo}`, 20, yPos); yPos += 6;
+  pdf.text(`Dirección: ${candidatoSeleccionado.direccion}`, 20, yPos); yPos += 6;
+  pdf.setFont(undefined, 'bold');
+  pdf.text(`Puntaje: ${candidatoSeleccionado.eval.puntajeTotal.toFixed(1)}/100 | Posición: #${posicion} de ${evaluados.length} | vs Promedio: ${candidatoSeleccionado.eval.puntajeTotal >= promTotal ? '+' : ''}${(candidatoSeleccionado.eval.puntajeTotal - promTotal).toFixed(1)} pts`, 20, yPos); yPos += 10;
+
+  // Tabla de competencias
+  pdf.setFontSize(12);
+  pdf.setFont(undefined, 'bold');
+  pdf.text('Evaluación por Competencia', 20, yPos);
+  pdf.line(20, yPos + 2, 190, yPos + 2);
   yPos += 7;
 
   pdf.setFillColor(42, 82, 152);
   pdf.setTextColor(255, 255, 255);
-  pdf.setFontSize(8);
-  pdf.rect(20, yPos, 170, 6, 'F');
-  pdf.text('Competencia', 22, yPos + 4);
-  pdf.text('Peso', 85, yPos + 4);
-  pdf.text('Candidato', 110, yPos + 4);
-  pdf.text('Promedio', 140, yPos + 4);
-  pdf.text('Diferencia', 170, yPos + 4);
-  yPos += 6;
+  pdf.setFontSize(9);
+  pdf.rect(20, yPos, 170, 7, 'F');
+  pdf.text('Competencia', 22, yPos + 5);
+  pdf.text('Peso', 90, yPos + 5);
+  pdf.text('Candidato', 115, yPos + 5);
+  pdf.text('Promedio', 145, yPos + 5);
+  pdf.text('Diferencia', 172, yPos + 5);
+  yPos += 7;
 
   pdf.setTextColor(0, 0, 0);
   pdf.setFont(undefined, 'normal');
-  COMPETENCIAS.forEach((comp, i) => {
-    if (yPos > 240) { pdf.addPage(); yPos = 20; }
-    
+  config.competencias.forEach((comp, i) => {
+    if (yPos > 270) { pdf.addPage(); yPos = 20; }
     const calif = candidatoSeleccionado.eval.calificaciones[i];
     const diff = calif - promedios[i];
-    
-    if (i % 2 === 0) {
+    if (yPos % 14 < 7) {
       pdf.setFillColor(248, 250, 252);
-      pdf.rect(20, yPos - 4, 170, 5, 'F');
+      pdf.rect(20, yPos - 4, 170, 7, 'F');
     }
-    
-    pdf.text(comp.nombre.substring(0, 16), 22, yPos);
-    pdf.text(comp.peso + '%', 88, yPos);
-    pdf.text(calif + '/5', 113, yPos);
-    pdf.text(promedios[i].toFixed(2), 143, yPos);
-    pdf.text((diff >= 0 ? '+' : '') + diff.toFixed(2), 173, yPos);
-    yPos += 5;
+    pdf.text(comp.nombre, 22, yPos);
+    pdf.text(comp.peso + '%', 93, yPos);
+    pdf.text(calif + '/5', 118, yPos);
+    pdf.text(promedios[i].toFixed(2), 148, yPos);
+    pdf.text((diff >= 0 ? '+' : '') + diff.toFixed(2), 175, yPos);
+    yPos += 7;
   });
 
-  // === ANALISIS ===
-  yPos += 5;
-  if (yPos > 190) { pdf.addPage(); yPos = 20; }
-  
-  pdf.setFontSize(11);
-  pdf.setTextColor(42, 82, 152);
+  yPos += 2;
   pdf.setFont(undefined, 'bold');
-  pdf.text('Analisis Detallado', 20, yPos);
+  pdf.text('TOTAL', 22, yPos);
+  pdf.text('100%', 93, yPos);
+  pdf.text(candidatoSeleccionado.eval.puntajeTotal.toFixed(1), 118, yPos);
+  pdf.text(promTotal.toFixed(1), 148, yPos);
+  const diffTotal = candidatoSeleccionado.eval.puntajeTotal - promTotal;
+  pdf.text((diffTotal >= 0 ? '+' : '') + diffTotal.toFixed(1), 175, yPos);
+  yPos += 10;
+
+  // Análisis
+  if (yPos > 230) { pdf.addPage(); yPos = 20; }
+  pdf.setFontSize(12);
+  pdf.text('Análisis y Decisión', 20, yPos);
+  pdf.line(20, yPos + 2, 190, yPos + 2);
   yPos += 8;
 
-  pdf.setFontSize(9);
-  pdf.setTextColor(0, 0, 0);
+  const decision = obtenerDecision(candidatoSeleccionado.eval.puntajeTotal, candidatoSeleccionado.cargo);
+  pdf.setFontSize(10);
   pdf.setFont(undefined, 'bold');
-  pdf.text('Analisis Individual:', 20, yPos);
+  pdf.text('Decisión:', 20, yPos);
   yPos += 5;
   pdf.setFont(undefined, 'normal');
-  const analisisInd = limpiarTexto(generarAnalisis(candidatoSeleccionado));
-  const analisisIndLines = pdf.splitTextToSize(analisisInd, 170);
-  pdf.text(analisisIndLines, 20, yPos);
-  yPos += analisisIndLines.length * 4 + 3;
-
-  if (yPos > 220) { pdf.addPage(); yPos = 20; }
-  pdf.setFont(undefined, 'bold');
-  pdf.text('Analisis Comparativo:', 20, yPos);
-  yPos += 5;
-  pdf.setFont(undefined, 'normal');
-  const analisisComp = limpiarTexto(generarAnalisisComparativo(candidatoSeleccionado, evaluados, promedios, null, posicion));
-  const analisisCompLines = pdf.splitTextToSize(analisisComp, 170);
-  pdf.text(analisisCompLines, 20, yPos);
-  yPos += analisisCompLines.length * 4 + 3;
-
-  if (yPos > 210) { pdf.addPage(); yPos = 20; }
-  pdf.setFont(undefined, 'bold');
-  pdf.text('Competencias Destacadas:', 20, yPos);
-  yPos += 5;
-  pdf.setFont(undefined, 'normal');
-  const fortalezas = limpiarTexto(obtenerFortalezas(candidatoSeleccionado.eval));
-  const fortalezasLines = pdf.splitTextToSize(fortalezas, 170);
-  pdf.text(fortalezasLines, 20, yPos);
-  yPos += fortalezasLines.length * 4 + 3;
+  const decLines = pdf.splitTextToSize(decision.texto, 170);
+  pdf.text(decLines, 20, yPos);
+  yPos += decLines.length * 5 + 3;
 
   pdf.setFont(undefined, 'bold');
-  pdf.text('Areas de Mejora:', 20, yPos);
+  pdf.text('Análisis individual:', 20, yPos);
   yPos += 5;
   pdf.setFont(undefined, 'normal');
-  const debilidades = limpiarTexto(obtenerDebilidades(candidatoSeleccionado.eval));
-  const debilidadesLines = pdf.splitTextToSize(debilidades, 170);
-  pdf.text(debilidadesLines, 20, yPos);
-  yPos += debilidadesLines.length * 4 + 3;
-
-  if (yPos > 210) { pdf.addPage(); yPos = 20; }
-  pdf.setFont(undefined, 'bold');
-  pdf.text('Ventajas Competitivas vs Grupo:', 20, yPos);
-  yPos += 5;
-  pdf.setFont(undefined, 'normal');
-  const ventajas = limpiarTexto(obtenerVentajasComparativas(candidatoSeleccionado, promedios));
-  const ventajasLines = pdf.splitTextToSize(ventajas, 170);
-  pdf.text(ventajasLines, 20, yPos);
-  yPos += ventajasLines.length * 4 + 3;
+  const analisis = generarAnalisis(candidatoSeleccionado);
+  pdf.text(pdf.splitTextToSize(analisis, 170), 20, yPos);
+  yPos += (pdf.splitTextToSize(analisis, 170)).length * 5 + 3;
 
   pdf.setFont(undefined, 'bold');
-  pdf.text('Brechas vs Grupo:', 20, yPos);
+  pdf.text('Análisis comparativo:', 20, yPos);
   yPos += 5;
   pdf.setFont(undefined, 'normal');
-  const brechas = limpiarTexto(obtenerBrechasComparativas(candidatoSeleccionado, promedios));
-  const brechasLines = pdf.splitTextToSize(brechas, 170);
-  pdf.text(brechasLines, 20, yPos);
+  const compTxt = generarAnalisisComparativo(candidatoSeleccionado, evaluados, promedios, null, posicion);
+  pdf.text(pdf.splitTextToSize(compTxt, 170), 20, yPos);
+  yPos += (pdf.splitTextToSize(compTxt, 170)).length * 5 + 3;
 
-  // === NOMBRE DEL ARCHIVO ===
-  const nombreLimpio = candidatoSeleccionado.nombre.replace(/\s+/g, '_').replace(/[^a-zA-Z0-9_]/g, '');
-  const empresaLimpia = empresa.nombre.replace(/\s+/g, '_').replace(/[^a-zA-Z0-9_]/g, '');
-  const fechaLimpia = fecha.replace(/\//g, '-');
-  const nombreArchivo = 'Analisis_' + nombreLimpio + '_' + empresaLimpia + '_' + fechaLimpia + '.pdf';
-  
+  pdf.setFont(undefined, 'bold');
+  pdf.text('Competencias destacadas:', 20, yPos);
+  yPos += 5;
+  pdf.setFont(undefined, 'normal');
+  const fort = obtenerFortalezas(candidatoSeleccionado.eval, candidatoSeleccionado.cargo);
+  pdf.text(pdf.splitTextToSize(fort, 170), 20, yPos);
+  yPos += 10;
+
+  pdf.setFont(undefined, 'bold');
+  pdf.text('Áreas de mejora:', 20, yPos);
+  yPos += 5;
+  pdf.setFont(undefined, 'normal');
+  const deb = obtenerDebilidades(candidatoSeleccionado.eval, candidatoSeleccionado.cargo);
+  pdf.text(pdf.splitTextToSize(deb, 170), 20, yPos);
+  yPos += 10;
+
+  pdf.setFont(undefined, 'bold');
+  pdf.text('Ventajas comparativas vs grupo:', 20, yPos);
+  yPos += 5;
+  pdf.setFont(undefined, 'normal');
+  const vent = obtenerVentajasComparativas(candidatoSeleccionado, promedios, candidatoSeleccionado.cargo);
+  pdf.text(pdf.splitTextToSize(vent, 170), 20, yPos);
+  yPos += 10;
+
+  pdf.setFont(undefined, 'bold');
+  pdf.text('Brechas vs grupo:', 20, yPos);
+  yPos += 5;
+  pdf.setFont(undefined, 'normal');
+  const brech = obtenerBrechasComparativas(candidatoSeleccionado, promedios, candidatoSeleccionado.cargo);
+  pdf.text(pdf.splitTextToSize(brech, 170), 20, yPos);
+
+  const nombreArchivo = `Analisis_${candidatoSeleccionado.nombre.replace(/\s/g, '_')}_${empresa.nombre.replace(/\s/g, '_')}_${fecha.replace(/\//g, '-')}.pdf`;
   pdf.save(nombreArchivo);
-  alert('✅ PDF generado exitosamente: ' + nombreArchivo);
+  alert('✅ PDF generado exitosamente');
 }
 
 // ============ ACCIONES FINALES ============
