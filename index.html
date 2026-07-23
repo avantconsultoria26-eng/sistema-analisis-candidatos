@@ -1468,16 +1468,15 @@ function dibujarRadar(candSeleccionado, evaluados, promedios) {
   });
 }
 
-// ============ GENERAR PDF AVANZADO (CON PODIO Y GRÁFICAS) ============
+// ============ GENERAR PDF MEJORADO ============
 async function generarPDF(nit, cargo, candId) {
   const btn = event.target;
   const originalText = btn.innerHTML;
-  btn.innerHTML = '⏳ Generando PDF visual...';
+  btn.innerHTML = '⏳ Generando PDF...';
   btn.disabled = true;
 
   try {
     const { jsPDF } = window.jspdf;
-    // Formato Carta: 215.9 x 279.4 mm
     const pdf = new jsPDF('p', 'mm', 'letter');
     const pageWidth = pdf.internal.pageSize.getWidth();
     
@@ -1489,8 +1488,7 @@ async function generarPDF(nit, cargo, candId) {
 
     const candidatoSeleccionado = evaluados.find(c => c.id == candId);
     if (!candidatoSeleccionado) {
-      alert('⚠️ Candidato no encontrado');
-      return;
+      throw new Error('Candidato no encontrado');
     }
 
     const config = getConfiguracionCargo(candidatoSeleccionado.cargo);
@@ -1505,12 +1503,10 @@ async function generarPDF(nit, cargo, candId) {
 
     let yPos = 15;
 
-    // 1. ENCABEZADO CORPORATIVO (Escala de azules cálida)
-    pdf.setFillColor(10, 37, 64); // #0a2540
+    // ENCABEZADO
+    pdf.setFillColor(10, 37, 64);
     pdf.rect(0, 0, pageWidth, 35, 'F');
-    
-    // Efecto degradado simulado con rectángulos superpuestos
-    pdf.setFillColor(30, 60, 114); // #1e3c72
+    pdf.setFillColor(30, 60, 114);
     pdf.rect(0, 15, pageWidth, 20, 'F');
 
     pdf.setTextColor(255, 255, 255);
@@ -1522,11 +1518,11 @@ async function generarPDF(nit, cargo, candId) {
     pdf.setFont('helvetica', 'normal');
     pdf.text('Sistema de Análisis de Perfiles de Candidatos', pageWidth / 2, 23, { align: 'center' });
     pdf.setFontSize(9);
-    pdf.text(`Reporte generado el: ${fecha}`, pageWidth / 2, 30, { align: 'center' });
+    pdf.text(`Reporte generado: ${fecha}`, pageWidth / 2, 30, { align: 'center' });
 
     yPos = 45;
 
-    // 2. INFORMACIÓN DEL CANDIDATO
+    // INFORMACIÓN DEL CANDIDATO
     pdf.setTextColor(30, 60, 114);
     pdf.setFontSize(14);
     pdf.setFont('helvetica', 'bold');
@@ -1541,66 +1537,43 @@ async function generarPDF(nit, cargo, candId) {
     pdf.setFontSize(10);
     pdf.setFont('helvetica', 'normal');
     pdf.text(`Nombre: ${candidatoSeleccionado.nombre} | CC: ${candidatoSeleccionado.cedula}`, 15, yPos); yPos += 6;
-    pdf.text(`Profesión: ${candidatoSeleccionado.profesion} | Edad: ${candidatoSeleccionado.edad} años | Exp: ${candidatoSeleccionado.experiencia} años`, 15, yPos); yPos += 6;
-    pdf.text(`Teléfono: ${candidatoSeleccionado.telefono} | Correo: ${candidatoSeleccionado.correo}`, 15, yPos); yPos += 6;
-    pdf.text(`Dirección: ${candidatoSeleccionado.direccion}`, 15, yPos); yPos += 6;
+    pdf.text(`Profesión: ${candidatoSeleccionado.profesion} | Edad: ${candidatoSeleccionado.edad} años`, 15, yPos); yPos += 6;
+    pdf.text(`Experiencia: ${candidatoSeleccionado.experiencia} años | Tel: ${candidatoSeleccionado.telefono}`, 15, yPos); yPos += 6;
+    pdf.text(`Email: ${candidatoSeleccionado.correo}`, 15, yPos); yPos += 6;
     pdf.setFont('helvetica', 'bold');
-    pdf.text(`Puntaje: ${candidatoSeleccionado.eval.puntajeTotal.toFixed(1)}/100 | Posición: #${posicion} de ${evaluados.length}`, 15, yPos); yPos += 12;
+    pdf.text(`Puntaje: ${candidatoSeleccionado.eval.puntajeTotal.toFixed(1)}/100 | Posición: #${posicion}`, 15, yPos); yPos += 12;
 
-    // 3. CAPTURAR Y AGREGAR EL PODIO (Usando html2canvas)
-    const podiumElement = document.getElementById('podiumToCapture');
-    if (podiumElement) {
-      if (yPos > 180) { pdf.addPage(); yPos = 15; }
-      pdf.setFontSize(14);
-      pdf.setTextColor(30, 60, 114);
-      pdf.text('CLASIFICACIÓN GENERAL (PODIO)', 15, yPos);
-      yPos += 5;
-      
-      // Capturar el podio como imagen
-      const canvasPodium = await html2canvas(podiumElement, { 
-        scale: 2, 
-        backgroundColor: '#ffffff',
-        useCORS: true
-      });
-      const imgDataPodium = canvasPodium.toDataURL('image/png');
-      
-      // Calcular proporciones para que quepa en el ancho de la página carta (215.9mm - 30mm margenes = 185.9mm)
-      const podiumWidth = 185;
-      const podiumHeight = (canvasPodium.height * podiumWidth) / canvasPodium.width;
-      
-      pdf.addImage(imgDataPodium, 'PNG', 15, yPos, podiumWidth, podiumHeight);
-      yPos += podiumHeight + 10;
-    }
-
-    // 4. CAPTURAR Y AGREGAR LA GRÁFICA DE RADAR
-    const chartElement = document.getElementById('chartToCapture');
-    if (chartElement) {
-      if (yPos > 200) { pdf.addPage(); yPos = 15; }
-      pdf.setFontSize(14);
-      pdf.setTextColor(30, 60, 114);
-      pdf.text('ANÁLISIS RADIAL DE COMPETENCIAS', 15, yPos);
-      yPos += 5;
-
-      const canvasChart = await html2canvas(chartElement, { 
-        scale: 2, 
-        backgroundColor: '#ffffff',
-        useCORS: true
-      });
-      const imgDataChart = canvasChart.toDataURL('image/png');
-      
-      const chartWidth = 160;
-      const chartHeight = (canvasChart.height * chartWidth) / canvasChart.width;
-      
-      pdf.addImage(imgDataChart, 'PNG', 27, yPos, chartWidth, chartHeight);
-      yPos += chartHeight + 10;
-    }
-
-    // 5. TABLA DE COMPETENCIAS
-    if (yPos > 220) { pdf.addPage(); yPos = 15; }
+    // PODIO - VERSIÓN TEXTO
+    if (yPos > 150) { pdf.addPage(); yPos = 15; }
     pdf.setFontSize(14);
     pdf.setTextColor(30, 60, 114);
-    pdf.text('EVALUACIÓN DETALLADA POR COMPETENCIA', 15, yPos);
-    yPos += 5;
+    pdf.text('🏆 CLASIFICACIÓN GENERAL', 15, yPos);
+    yPos += 7;
+
+    const podiumData = evaluados.slice(0, 3);
+    const medals = ['🥇 1er Lugar', '🥈 2do Lugar', '🥉 3er Lugar'];
+    const colors = [[241, 196, 15], [189, 195, 199], [205, 127, 50]];
+    
+    podiumData.forEach((c, i) => {
+      if (yPos > 260) { pdf.addPage(); yPos = 15; }
+      pdf.setFillColor(...colors[i]);
+      pdf.roundedRect(15, yPos, pageWidth - 30, 18, 3, 3, 'F');
+      pdf.setTextColor(255, 255, 255);
+      pdf.setFontSize(10);
+      pdf.setFont('helvetica', 'bold');
+      pdf.text(`${medals[i]}: ${c.nombre} - ${c.eval.puntajeTotal.toFixed(1)} pts`, 20, yPos + 10);
+      
+      pdf.setFont('helvetica', 'normal');
+      pdf.text(`${c.profesion} | ${c.experiencia} años exp.`, 20, yPos + 16);
+      yPos += 22;
+    });
+
+    // TABLA DE COMPETENCIAS
+    if (yPos > 200) { pdf.addPage(); yPos = 15; }
+    pdf.setFontSize(14);
+    pdf.setTextColor(30, 60, 114);
+    pdf.text('EVALUACIÓN POR COMPETENCIA', 15, yPos);
+    yPos += 7;
 
     const tableData = config.competencias.map((comp, i) => {
       const calif = candidatoSeleccionado.eval.calificaciones[i];
@@ -1614,7 +1587,6 @@ async function generarPDF(nit, cargo, candId) {
       ];
     });
 
-    // Agregar fila de totales
     const diffTotal = candidatoSeleccionado.eval.puntajeTotal - promTotal;
     tableData.push([
       'TOTAL',
@@ -1626,67 +1598,61 @@ async function generarPDF(nit, cargo, candId) {
 
     pdf.autoTable({
       startY: yPos,
-      head: [['Competencia', 'Peso', 'Candidato', 'Promedio Grupo', 'Diferencia']],
+      head: [['Competencia', 'Peso', 'Candidato', 'Promedio', 'Diferencia']],
       body: tableData,
       theme: 'grid',
       headStyles: {
-        fillColor: [30, 60, 114], // #1e3c72
+        fillColor: [30, 60, 114],
         textColor: 255,
         fontStyle: 'bold',
         fontSize: 9
       },
-      bodyStyles: {
-        fontSize: 9
-      },
-      alternateRowStyles: {
-        fillColor: [248, 250, 252]
-      },
+      bodyStyles: { fontSize: 8 },
+      alternateRowStyles: { fillColor: [248, 250, 252] },
       margin: { left: 15, right: 15 },
-      styles: {
-        cellPadding: 3,
-        halign: 'center'
-      },
-      columnStyles: {
-        0: { halign: 'left' }
-      }
+      styles: { cellPadding: 3, halign: 'center' },
+      columnStyles: { 0: { halign: 'left' } }
     });
 
     yPos = pdf.lastAutoTable.finalY + 10;
 
-    // 6. ANÁLISIS Y DECISIÓN
+    // ANÁLISIS Y DECISIÓN
     if (yPos > 230) { pdf.addPage(); yPos = 15; }
     pdf.setFontSize(14);
     pdf.setTextColor(30, 60, 114);
-    pdf.text('ANÁLISIS Y DECISIÓN FINAL', 15, yPos);
-    yPos += 5;
+    pdf.text('ANÁLISIS Y DECISIÓN', 15, yPos);
+    yPos += 7;
 
     const decision = obtenerDecision(candidatoSeleccionado.eval.puntajeTotal, candidatoSeleccionado.cargo);
     
-    // Caja de decisión
-    pdf.setFillColor(212, 237, 218); // Verde claro por defecto, se ajustará
-    if (decision.clase === 'decision-no') pdf.setFillColor(248, 215, 218);
-    if (decision.clase === 'decision-reserve') pdf.setFillColor(255, 243, 205);
+    const decisionColor = decision.clase === 'decision-hire' ? [39, 174, 96] : 
+                          decision.clase === 'decision-no' ? [231, 76, 60] : 
+                          decision.clase === 'decision-reserve' ? [243, 156, 18] : [52, 152, 219];
     
-    pdf.roundedRect(15, yPos, pageWidth - 30, 20, 3, 3, 'F');
-    pdf.setTextColor(0, 0, 0);
+    pdf.setFillColor(...decisionColor);
+    pdf.roundedRect(15, yPos, pageWidth - 30, 25, 3, 3, 'F');
+    pdf.setTextColor(255, 255, 255);
     pdf.setFontSize(10);
     pdf.setFont('helvetica', 'bold');
     
     const decLines = pdf.splitTextToSize(decision.texto, pageWidth - 40);
-    pdf.text(decLines, 20, yPos + 7);
-    yPos += 25;
+    pdf.text(decLines, 20, yPos + 8);
+    yPos += 30;
 
-    pdf.setFont('helvetica', 'normal');
+    pdf.setTextColor(0, 0, 0);
     pdf.setFontSize(10);
+    pdf.setFont('helvetica', 'normal');
     
     const analisis = generarAnalisis(candidatoSeleccionado);
-    pdf.text('Análisis individual:', 15, yPos); yPos += 5;
+    pdf.setFont('helvetica', 'bold');
+    pdf.text('Análisis:', 15, yPos); yPos += 5;
+    pdf.setFont('helvetica', 'normal');
     pdf.text(pdf.splitTextToSize(analisis, pageWidth - 30), 15, yPos);
     yPos += (pdf.splitTextToSize(analisis, pageWidth - 30)).length * 5 + 5;
 
     const fort = obtenerFortalezas(candidatoSeleccionado.eval, candidatoSeleccionado.cargo);
     pdf.setFont('helvetica', 'bold');
-    pdf.text('Competencias destacadas:', 15, yPos); yPos += 5;
+    pdf.text('Fortalezas:', 15, yPos); yPos += 5;
     pdf.setFont('helvetica', 'normal');
     pdf.text(pdf.splitTextToSize(fort, pageWidth - 30), 15, yPos);
     yPos += 10;
@@ -1697,33 +1663,31 @@ async function generarPDF(nit, cargo, candId) {
     pdf.setFont('helvetica', 'normal');
     pdf.text(pdf.splitTextToSize(deb, pageWidth - 30), 15, yPos);
 
-    // 7. PIE DE PÁGINA
+    // PIE DE PÁGINA
     const pageCount = pdf.internal.getNumberOfPages();
     for (let i = 1; i <= pageCount; i++) {
       pdf.setPage(i);
       pdf.setFillColor(10, 37, 64);
-      pdf.rect(0, 264, pageWidth, 15.4, 'F'); // 279.4 - 15.4 = 264
+      pdf.rect(0, 264, pageWidth, 15.4, 'F');
       pdf.setTextColor(255, 255, 255);
       pdf.setFontSize(9);
-      pdf.setFont('helvetica', 'normal');
       pdf.text('AVANT, CONSULTORÍA DE TALENTO HUMANO 💙', pageWidth / 2, 270, { align: 'center' });
       pdf.setFontSize(8);
-      pdf.text(`Página ${i} de ${pageCount} | Documento confidencial`, pageWidth / 2, 275, { align: 'center' });
+      pdf.text(`Página ${i} de ${pageCount}`, pageWidth / 2, 275, { align: 'center' });
     }
 
-    const nombreArchivo = `Analisis_${candidatoSeleccionado.nombre.replace(/\s/g, '_')}_${fecha.replace(/\//g, '-')}.pdf`;
+    const nombreArchivo = `Analisis_${candidatoSeleccionado.nombre.replace(/\s/g, '_')}_${new Date().toISOString().split('T')[0]}.pdf`;
     pdf.save(nombreArchivo);
-    alert('✅ PDF generado exitosamente con gráficas y podio');
+    alert('✅ PDF generado exitosamente');
 
   } catch (error) {
-    console.error('Error generando PDF:', error);
-    alert('❌ Error al generar el PDF. Por favor, intente nuevamente.');
+    console.error('Error detallado:', error);
+    alert(`❌ Error al generar el PDF: ${error.message}\n\nPor favor verifique la consola del navegador.`);
   } finally {
     btn.innerHTML = originalText;
     btn.disabled = false;
   }
 }
-
 // ============ ACCIONES FINALES ============
 function finalizarProceso(nit, cargo) {
   if (!confirm('¿Confirmar el cierre de esta vacante? Se marcará como finalizada.')) return;
