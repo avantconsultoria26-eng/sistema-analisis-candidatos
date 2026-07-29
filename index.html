@@ -777,7 +777,7 @@ const CONFIGURACION_CARGOS = {
       <p><strong>Escenario:</strong> Es sábado a las 4:30 p.m. El almacén está lleno. Un cliente quiere cambiar un producto, otro espera para pagar, suena el teléfono y debes hacer cierre parcial de caja en 15 minutos. ¿Cómo prioriza?</p>
     `
   },
-    auxiliar_cartera: {
+  auxiliar_cartera: {
     nombre: "Auxiliar de Cartera",
     competencias: [
       { nombre: 'Servicio al Cliente y Comunicación Asertiva', peso: 20 },
@@ -806,11 +806,11 @@ const CONFIGURACION_CARGOS = {
         <table class="guia-table">
           <thead>
             <tr>
-              <th style="width:18%">Competencia (Peso)</th>
-              <th style="width:25%">Pregunta Clave</th>
-              <th style="width:11%">1 - Deficiente</th>
-              <th style="width:11%">2 - Básico</th>
-              <th style="width:11%">3 - Aceptable</th>
+              <th style="width:16%">Competencia</th>
+              <th style="width:24%">Pregunta Clave</th>
+              <th style="width:12%">1 - Deficiente</th>
+              <th style="width:12%">2 - Básico</th>
+              <th style="width:12%">3 - Aceptable</th>
               <th style="width:12%">4 - Bueno</th>
               <th style="width:12%">5 - Sobresaliente</th>
             </tr>
@@ -818,45 +818,46 @@ const CONFIGURACION_CARGOS = {
           <tbody>
             <tr>
               <td><strong>Servicio al Cliente y Comunicación Asertiva</strong><br><small>(20%)</small></td>
-              <td>Cuéntame sobre una ocasión en la que un cliente manifestó inconformidad por un proceso de cobro. ¿Cómo manejaste la situación?</td>
-              <td>Responde de forma confrontativa o evita el conflicto.</td>
-              <td>Escucha al cliente, pero ofrece pocas soluciones.</td>
-              <td>Atiende con respeto, explica la situación y resuelve parcialmente.</td>
-              <td>Escucha activamente, muestra empatía, negocia alternativas y mantiene la relación.</td>
-              <td>Convierte una situación difícil en una oportunidad de fidelización con un acuerdo beneficioso.</td>
+              <td>Cuéntame sobre una ocasión en la que un cliente manifestó inconformidad por un proceso de cobro. ¿Cómo manejaste la situación y qué hiciste para conservar una buena relación?</td>
+              <td>No demuestra habilidades. Responde de forma confrontativa o evita el conflicto.</td>
+              <td>Escucha al cliente, pero ofrece pocas soluciones o no controla la situación.</td>
+              <td>Atiende con respeto, explica la situación y logra resolver parcialmente el inconveniente.</td>
+              <td>Escucha activamente, muestra empatía, negocia alternativas y mantiene la relación comercial.</td>
+              <td>Convierte una situación difícil en una oportunidad de fidelización, logrando un acuerdo beneficioso para ambas partes.</td>
             </tr>
             <tr>
               <td><strong>Visión Comercial y Enfoque en Resultados</strong><br><small>(15%)</small></td>
-              <td>El área comercial solicita aprobar un pedido urgente para un cliente con pagos vencidos. ¿Qué decisión tomarías?</td>
+              <td>Imagina que el área comercial solicita aprobar un pedido urgente para un cliente con pagos vencidos. ¿Cómo analizarías la situación y qué decisión tomarías?</td>
               <td>Aprueba o rechaza sin analizar el riesgo o las políticas.</td>
               <td>Considera algunos aspectos, pero su decisión carece de argumentos sólidos.</td>
               <td>Evalúa la cartera, consulta políticas y propone una decisión razonable.</td>
-              <td>Analiza el riesgo, plantea alternativas (abonos, garantías) y comunica su decisión objetivamente.</td>
-              <td>Equilibra el riesgo financiero con la necesidad comercial, protegiendo la cartera sin afectar la relación.</td>
+              <td>Analiza el riesgo, plantea alternativas (abonos, acuerdos, garantías) y comunica su decisión objetivamente.</td>
+              <td>Equilibra el riesgo financiero con la necesidad comercial, proponiendo soluciones que protegen la cartera sin afectar la relación.</td>
             </tr>
             <tr>
               <td><strong>Manejo de Cartera y Gestión de Cobro</strong><br><small>(35%)</small></td>
-              <td>Con una cartera amplia y múltiples facturas vencidas, ¿qué criterios utilizas para definir el orden de contacto y recuperación?</td>
-              <td>No tiene un método de priorización. Trabaja de manera improvisada.</td>
-              <td>Prioriza únicamente por fecha o monto sin considerar otros factores.</td>
-              <td>Utiliza criterios básicos como antigüedad de la deuda, valor y compromiso de pago.</td>
-              <td>Prioriza según riesgo, antigüedad, monto, historial de pago y probabilidad de recuperación.</td>
-              <td>Aplica una metodología estructurada basada en indicadores, optimizando el tiempo y mejorando la recuperación.</td>
+              <td>Con una cartera amplia y facturas vencidas, ¿qué criterios utilizas para priorizar el contacto y qué estrategias has implementado para incentivar pagos oportunos?</td>
+              <td>No tiene método de priorización ni aporta ejemplos de estrategias. Trabaja de manera improvisada.</td>
+              <td>Prioriza únicamente por fecha/monto y solo ha participado en acciones sin evidenciar impacto.</td>
+              <td>Utiliza criterios básicos (antigüedad, valor) y describe una estrategia sencilla con resultados aceptables.</td>
+              <td>Prioriza según riesgo, historial y probabilidad de recuperación; implementó acciones de seguimiento/negociación que mejoraron indicadores.</td>
+              <td>Aplica metodología estructurada basada en indicadores y lideró/propuso iniciativas innovadoras con resultados medibles en recuperación y disminución de mora.</td>
             </tr>
             <tr>
               <td><strong>Análisis y Atención al Detalle</strong><br><small>(30%)</small></td>
-              <td>¿Cómo verificas que notas crédito, devoluciones y pagos queden correctamente aplicados, y qué haces al detectar una inconsistencia?</td>
-              <td>No tiene un proceso de validación y depende de otros.</td>
-              <td>Realiza revisiones superficiales que pueden generar errores.</td>
-              <td>Sigue procedimientos establecidos y verifica la información antes de cerrar el proceso.</td>
-              <td>Realiza cruces de información, conciliaciones y valida soportes para garantizar exactitud.</td>
-              <td>Implementa controles preventivos, detecta inconsistencias antes de que impacten la cartera y propone mejoras.</td>
+              <td>¿Cómo verificas que pagos, notas crédito y devoluciones queden correctamente aplicados? Háblame de una ocasión en la que detectaste y solucionaste una inconsistencia en la cartera.</td>
+              <td>No tiene proceso de validación, depende de otros y no identifica errores o responsabiliza a otros.</td>
+              <td>Realiza revisiones superficiales que pueden generar errores; detecta el error pero no plantea acciones correctivas.</td>
+              <td>Sigue procedimientos establecidos, verifica información, identifica el problema, lo corrige y documenta la solución.</td>
+              <td>Realiza cruces de información y conciliaciones; analiza la causa raíz, coordina la corrección y propone controles preventivos.</td>
+              <td>Implementa controles preventivos, detecta inconsistencias antes de que impacten, fortalece controles y evita la recurrencia del error.</td>
             </tr>
           </tbody>
         </table>
       </div>
     `
-  },
+  }
+};
 
 function getConfiguracionCargo(nombreCargo) {
   const nombre = (nombreCargo || "").toLowerCase();
