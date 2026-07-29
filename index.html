@@ -25,7 +25,6 @@
     overflow: hidden;
   }
   
-  /* ENCABEZADO ACTUALIZADO CON ESCALA DE AZULES CÁLIDA */
   header {
     background: linear-gradient(135deg, #0a2540 0%, #1e3c72 50%, #2a5298 100%);
     color: #fff;
@@ -211,12 +210,6 @@
   .matrix-table td:first-child, .matrix-table th:first-child { text-align: left; }
   .matrix-table select { width: 100%; }
   .total-row { background: #f0f4f9 !important; font-weight: 700; }
-
-  .comparativa-table th, .comparativa-table td { text-align: center; font-size: 12px; padding: 8px; }
-  .comparativa-table td:first-child, .comparativa-table th:first-child { text-align: left; font-weight: 600; }
-  .comparativa-table .selected-col { background: #fff9e6 !important; font-weight: 700; }
-  .comparativa-table .best-cell { background: #d4edda; color: #155724; font-weight: 700; }
-  .comparativa-table .worst-cell { background: #f8d7da; color: #721c24; }
 
   .scale-reference {
     background: #f8fafc;
@@ -418,12 +411,14 @@
   }
   .candidate-detail-card div strong { color: #2a5298; display: block; font-size: 11px; text-transform: uppercase; margin-bottom: 3px; }
 
+  /* ESTILOS MEJORADOS PARA DESPLEGABLES DE PERFILES */
   details.guia-entrevista {
     background: #fff;
     border: 1px solid #e1e5eb;
     border-radius: 8px;
     margin-top: 15px;
     overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
   }
   details.guia-entrevista summary {
     cursor: pointer;
@@ -435,6 +430,10 @@
     display: flex;
     align-items: center;
     gap: 8px;
+    transition: background 0.2s;
+  }
+  details.guia-entrevista summary:hover {
+    background: #e8f0fb;
   }
   details.guia-entrevista summary::-webkit-details-marker { display: none; }
   details.guia-entrevista summary::before {
@@ -443,6 +442,7 @@
   }
   details.guia-entrevista[open] summary {
     border-bottom: 1px solid #e1e5eb;
+    background: #e8f0fb;
   }
   .guia-content {
     padding: 20px;
@@ -456,6 +456,39 @@
   .guia-content li { margin-bottom: 6px; }
   .guia-content p { margin-bottom: 10px; }
   .guia-content strong { color: #2a5298; }
+  
+  /* Tabla responsiva dentro del desplegable */
+  .guia-table-wrapper {
+    overflow-x: auto;
+    margin-top: 10px;
+    border-radius: 6px;
+    border: 1px solid #e1e5eb;
+  }
+  .guia-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12px;
+    min-width: 800px;
+  }
+  .guia-table th {
+    background: #2a5298;
+    color: #fff;
+    padding: 10px;
+    text-align: left;
+    font-weight: 600;
+    border: 1px solid #1e3c72;
+  }
+  .guia-table td {
+    padding: 10px;
+    border: 1px solid #e1e5eb;
+    vertical-align: top;
+  }
+  .guia-table tr:nth-child(even) {
+    background: #f8fafc;
+  }
+  .guia-table tr:hover {
+    background: #e8f0fb;
+  }
 
   @media (max-width: 768px) {
     .tab { font-size: 12px; padding: 12px 10px; min-width: 100px; }
@@ -492,7 +525,7 @@
           <input type="text" id="nombreEmpresa" placeholder="Ej: Tech Solutions S.A.S">
         </div>
       </div>
-      <div class="btn-group">
+      <div class="btn-group" style="margin-top:15px">
         <button class="btn btn-primary" onclick="agregarEmpresa()">➕ Agregar Empresa</button>
       </div>
     </div>
@@ -508,14 +541,14 @@
         </div>
         <div class="form-group">
           <label>Nombre del Cargo <span class="required">*</span></label>
-          <input type="text" id="nombreCargo" placeholder="Ej: Líder de Marketing Digital o Asesor Comercial">
+          <input type="text" id="nombreCargo" placeholder="Ej: Líder de Marketing, Asesor Comercial, Auxiliar de Cartera">
         </div>
         <div class="form-group">
           <label>Número de Vacantes <span class="required">*</span></label>
           <input type="number" id="numVacantes" min="1" value="1">
         </div>
       </div>
-      <div class="btn-group">
+      <div class="btn-group" style="margin-top:15px">
         <button class="btn btn-success" onclick="agregarCargo()">➕ Agregar Cargo</button>
       </div>
     </div>
@@ -587,7 +620,7 @@
           <input type="text" id="direccion" placeholder="Ej: Calle 123 # 45-67, Bogotá">
         </div>
       </div>
-      <div class="btn-group">
+      <div class="btn-group" style="margin-top:15px">
         <button class="btn btn-success" onclick="agregarCandidato()">➕ Registrar Candidato</button>
       </div>
     </div>
@@ -627,7 +660,7 @@
       <div id="infoCandidatoEval"></div>
       <div id="matrizEvaluacion"></div>
       
-      <div class="btn-group">
+      <div class="btn-group" style="margin-top:15px">
         <button class="btn btn-primary" onclick="guardarEvaluacion()">💾 Guardar Evaluación</button>
       </div>
     </div>
@@ -743,6 +776,106 @@ const CONFIGURACION_CARGOS = {
       <h4>3. Casos Prácticos</h4>
       <p><strong>Escenario:</strong> Es sábado a las 4:30 p.m. El almacén está lleno. Un cliente quiere cambiar un producto, otro espera para pagar, suena el teléfono y debes hacer cierre parcial de caja en 15 minutos. ¿Cómo prioriza?</p>
     `
+  },
+  auxiliar_cartera: {
+    nombre: "Auxiliar de Cartera",
+    competencias: [
+      { nombre: 'Servicio al Cliente y Comunicación Asertiva', peso: 20 },
+      { nombre: 'Visión Comercial y Enfoque en Resultados', peso: 20 },
+      { nombre: 'Manejo de Cartera y Gestión de Cobro', peso: 20 },
+      { nombre: 'Manejo de Cartera y Negociación', peso: 15 },
+      { nombre: 'Análisis y Atención al Detalle (Conciliación)', peso: 15 },
+      { nombre: 'Análisis y Atención al Detalle (Resolución de Errores)', peso: 10 }
+    ],
+    escala: [
+      "5 - Sobresaliente: Demuestra dominio total, propone mejoras, maneja situaciones complejas con excelencia y genera impacto positivo medible.",
+      "4 - Bueno: Aplica metodologías estructuradas, resuelve problemas eficazmente y mantiene altos estándares de calidad.",
+      "3 - Aceptable: Sigue procedimientos establecidos, cumple con lo esperado y resuelve inconvenientes de manera estándar.",
+      "2 - Básico: Conocimiento superficial, requiere supervisión constante, soluciones limitadas o reactivas.",
+      "1 - Deficiente: No demuestra las competencias, carece de método, evita responsabilidades o genera conflictos."
+    ],
+    interpretacion: [
+      { min: 90, max: 100, texto: '✅ ALTAMENTE RECOMENDADO - Perfil sobresaliente con excelente manejo de cartera, negociación y atención al detalle.', clase: 'decision-hire' },
+      { min: 80, max: 89.99, texto: '👍 RECOMENDADO - Cumple con el perfil, demuestra buenas prácticas de cobro y análisis. Curva de aprendizaje corta.', clase: 'decision-recommend' },
+      { min: 70, max: 79.99, texto: '⚠️ RECOMENDADO CON PLAN DE DESARROLLO - Tiene bases aceptables, pero requiere fortalecimiento en negociación o análisis detallado.', clase: 'decision-reserve' },
+      { min: 60, max: 69.99, texto: '🔍 AJUSTE PARCIAL - Conviene comparar con otros candidatos. Presenta debilidades en gestión de cobro o atención al detalle.', clase: 'decision-reserve' },
+      { min: 0, max: 59.99, texto: '❌ NO RECOMENDADO - No demuestra las competencias clave para el manejo de cartera y conciliación.', clase: 'decision-no' }
+    ],
+    guiaEntrevista: `
+      <h4>📋 Matriz de Evaluación Detallada - Auxiliar de Cartera</h4>
+      <p style="font-size:13px; color:#666; margin-bottom:15px">Utilice esta guía para calificar del 1 al 5 según el nivel de evidencia en las respuestas del candidato.</p>
+      <div class="guia-table-wrapper">
+        <table class="guia-table">
+          <thead>
+            <tr>
+              <th style="width:15%">Competencia</th>
+              <th style="width:25%">Pregunta Clave</th>
+              <th style="width:12%">1 - Deficiente</th>
+              <th style="width:12%">2 - Básico</th>
+              <th style="width:12%">3 - Aceptable</th>
+              <th style="width:12%">4 - Bueno</th>
+              <th style="width:12%">5 - Sobresaliente</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Servicio al Cliente y Comunicación Asertiva</strong></td>
+              <td>Cuéntame sobre una ocasión en la que un cliente manifestó inconformidad por un proceso de cobro. ¿Cómo manejaste la situación?</td>
+              <td>No demuestra habilidades. Responde de forma confrontativa o evita el conflicto.</td>
+              <td>Escucha al cliente, pero ofrece pocas soluciones o no controla la situación.</td>
+              <td>Atiende con respeto, explica la situación y logra resolver parcialmente el inconveniente.</td>
+              <td>Escucha activamente, muestra empatía, negocia alternativas y mantiene la relación comercial.</td>
+              <td>Convierte una situación difícil en una oportunidad de fidelización, logrando un acuerdo beneficioso para ambas partes.</td>
+            </tr>
+            <tr>
+              <td><strong>Visión Comercial y Enfoque en Resultados</strong></td>
+              <td>Imagina que el área comercial solicita aprobar un pedido urgente para un cliente con pagos vencidos. ¿Qué decisión tomarías?</td>
+              <td>Aprueba o rechaza sin analizar el riesgo o las políticas.</td>
+              <td>Considera algunos aspectos, pero su decisión carece de argumentos sólidos.</td>
+              <td>Evalúa la cartera, consulta políticas y propone una decisión razonable.</td>
+              <td>Analiza el riesgo, plantea alternativas (abonos, acuerdos, garantías) y comunica su decisión objetivamente.</td>
+              <td>Equilibra el riesgo financiero con la necesidad comercial, proponiendo soluciones que protegen la cartera sin afectar la relación.</td>
+            </tr>
+            <tr>
+              <td><strong>Manejo de Cartera y Gestión de Cobro</strong></td>
+              <td>Cuando tienes una cartera amplia con múltiples facturas vencidas, ¿qué criterios utilizas para definir el orden de contacto?</td>
+              <td>No tiene un método de priorización. Trabaja de manera improvisada.</td>
+              <td>Prioriza únicamente por fecha o monto sin considerar otros factores.</td>
+              <td>Utiliza criterios básicos como antigüedad de la deuda, valor y compromiso de pago.</td>
+              <td>Prioriza según riesgo, antigüedad, monto, historial de pago y probabilidad de recuperación.</td>
+              <td>Aplica una metodología estructurada basada en indicadores, optimiza el tiempo y mejora los resultados de recuperación.</td>
+            </tr>
+            <tr>
+              <td><strong>Manejo de Cartera y Negociación</strong></td>
+              <td>Cuéntame una iniciativa o estrategia que hayas implementado para incentivar pagos oportunos o reducir días de cartera vencida.</td>
+              <td>No aporta ejemplos o solo sigue instrucciones.</td>
+              <td>Participó en acciones sin evidenciar impacto.</td>
+              <td>Describe una estrategia sencilla con resultados aceptables.</td>
+              <td>Implementó acciones de seguimiento, recordatorios o negociación que mejoraron los indicadores de recaudo.</td>
+              <td>Lideró o propuso iniciativas innovadoras con resultados medibles en recuperación de cartera y disminución de mora.</td>
+            </tr>
+            <tr>
+              <td><strong>Análisis y Atención al Detalle (Conciliación)</strong></td>
+              <td>¿Cómo verificas que las notas crédito, devoluciones, descuentos y pagos queden correctamente aplicados a las facturas?</td>
+              <td>No tiene un proceso de validación y depende de otros.</td>
+              <td>Realiza revisiones superficiales que pueden generar errores.</td>
+              <td>Sigue procedimientos establecidos y verifica la información antes de cerrar el proceso.</td>
+              <td>Realiza cruces de información, conciliaciones y valida soportes para garantizar exactitud.</td>
+              <td>Implementa controles preventivos, detecta inconsistencias antes de que impacten la cartera y propone mejoras.</td>
+            </tr>
+            <tr>
+              <td><strong>Análisis y Atención al Detalle (Resolución de Errores)</strong></td>
+              <td>Háblame de una ocasión en la que detectaste un error en la aplicación de un pago o inconsistencia en la cartera. ¿Cómo lo solucionaste?</td>
+              <td>No identifica errores o responsabiliza a otros.</td>
+              <td>Detecta el error, pero no plantea acciones correctivas.</td>
+              <td>Identifica el problema, lo corrige y documenta la solución.</td>
+              <td>Analiza la causa raíz, coordina la corrección y propone controles preventivos.</td>
+              <td>Implementa mejoras al proceso, fortalece controles y evita la recurrencia del error, generando impacto positivo.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    `
   }
 };
 
@@ -750,7 +883,8 @@ function getConfiguracionCargo(nombreCargo) {
   const nombre = (nombreCargo || "").toLowerCase();
   if (nombre.includes('marketing') || nombre.includes('líder') || nombre.includes('lider')) return CONFIGURACION_CARGOS.marketing;
   if (nombre.includes('asesor') || nombre.includes('comercial') || nombre.includes('venta')) return CONFIGURACION_CARGOS.asesor;
-  return CONFIGURACION_CARGOS.marketing;
+  if (nombre.includes('auxiliar') || nombre.includes('cartera') || nombre.includes('cobro') || nombre.includes('recibo')) return CONFIGURACION_CARGOS.auxiliar_cartera;
+  return CONFIGURACION_CARGOS.marketing; // Fallback por defecto
 }
 
 // ============ NAVEGACIÓN TABS ============
@@ -1091,21 +1225,22 @@ function cargarEvaluacion() {
   currentEvalConfig = getConfiguracionCargo(cand.cargo);
   const eval_ = evaluaciones[id] || {};
 
-  infoCont.innerHTML = `<div class="cascade-info">
-    <strong>👤 Evaluando a:</strong> ${cand.nombre} (CC ${cand.cedula}) |
-    <strong>Profesión:</strong> ${cand.profesion} |
-    <strong>Edad:</strong> ${cand.edad} años |
-    <strong>Experiencia:</strong> ${cand.experiencia} años |
-    <strong>Cargo:</strong> ${cand.cargo} en ${cand.empresa}
-  </div>
-  <details class="guia-entrevista">
-    <summary>Ver Guía de Entrevista y Casos Prácticos para ${currentEvalConfig.nombre}</summary>
-    <div class="guia-content">
-      ${currentEvalConfig.guiaEntrevista}
+  infoCont.innerHTML = `
+    <div class="cascade-info">
+      <strong>👤 Evaluando a:</strong> ${cand.nombre} (CC ${cand.cedula}) |
+      <strong>Profesión:</strong> ${cand.profesion} |
+      <strong>Edad:</strong> ${cand.edad} años |
+      <strong>Experiencia:</strong> ${cand.experiencia} años |
+      <strong>Cargo:</strong> ${cand.cargo} en ${cand.empresa}
     </div>
-  </details>`;
+    <details class="guia-entrevista">
+      <summary>📖 Ver Guía de Evaluación y Criterios del Perfil (Clic para desplegar)</summary>
+      <div class="guia-content">
+        ${currentEvalConfig.guiaEntrevista}
+      </div>
+    </details>`;
 
-  let escalaHtml = '<div class="scale-reference"><h4>📖 Escala de Calificación</h4><ul>';
+  let escalaHtml = '<div class="scale-reference"><h4>📖 Escala de Calificación General</h4><ul>';
   currentEvalConfig.escala.forEach(item => {
     escalaHtml += `<li>${item}</li>`;
   });
@@ -1121,7 +1256,7 @@ function cargarEvaluacion() {
       <td>${comp.peso}%</td>
       <td><select onchange="actualizarPuntaje(${i}, this.value)" style="width:100%">
         <option value="">--</option>
-        ${[5,4,3,2,1].map(n => `<option value="${n}" ${calif==n?'selected':''}>${n} - ${['','Deficiente','Bajo','Aceptable','Bueno','Excelente'][n]}</option>`).join('')}
+        ${[5,4,3,2,1].map(n => `<option value="${n}" ${calif==n?'selected':''}>${n} - ${['','Deficiente','Básico','Aceptable','Bueno','Sobresaliente'][n]}</option>`).join('')}
       </select></td>
       <td id="puntaje-${i}">${puntaje}</td>
     </tr>`;
@@ -1336,7 +1471,7 @@ function mostrarResultados() {
   </div>`;
 
   // BOTONES
-  const accionesHtml = `<div class="btn-group" style="justify-content:center; margin-top:30px">
+  const accionesHtml = `<div class="btn-group" style="justify-content:center; margin-top:30px; flex-wrap:wrap; gap:10px">
     <button class="btn btn-success" onclick="finalizarProceso('${nit}', '${cargo}')">✅ Finalizar Proceso (Cerrar Vacante)</button>
     <button class="btn btn-warning" onclick="reiniciarAnalisis('${nit}', '${cargo}')">🔄 Nuevo Análisis de Candidatos</button>
     <button class="btn btn-pdf" onclick="generarPDF('${nit}', '${cargo}', ${candId})">📄 Descargar PDF con Podio y Gráficas</button>
@@ -1467,11 +1602,11 @@ function dibujarRadar(candSeleccionado, evaluados, promedios) {
   });
 }
 
-// ============ GENERAR PDF - VERSIÓN CORREGIDA ============
+// ============ GENERAR PDF ============
 async function generarPDF(nit, cargo, candId) {
   const btn = event.target;
   const originalText = btn.innerHTML;
-  btn.innerHTML = ' Generando PDF...';
+  btn.innerHTML = '⏳ Generando PDF...';
   btn.disabled = true;
 
   try {
@@ -1543,7 +1678,7 @@ async function generarPDF(nit, cargo, candId) {
     pdf.setFont('helvetica', 'bold');
     pdf.text('Puntaje: ' + candidatoSeleccionado.eval.puntajeTotal.toFixed(1) + '/100 | Posicion: #' + posicion + ' de ' + evaluados.length, 15, yPos); yPos += 10;
 
-    // PODIO - SIN EMOJIS
+    // PODIO
     if (yPos > 140) { pdf.addPage(); yPos = 15; }
     pdf.setFontSize(12);
     pdf.setTextColor(30, 60, 114);
@@ -1641,7 +1776,6 @@ async function generarPDF(nit, cargo, candId) {
     pdf.setFontSize(8);
     pdf.setFont('helvetica', 'bold');
     
-    // Eliminar emojis del texto de decisión
     const decisionText = decision.texto.replace(/[✅👍️❌]/g, '').trim();
     const decLines = pdf.splitTextToSize(decisionText, pageWidth - 34);
     pdf.text(decLines, 18, yPos + 7);
@@ -1689,16 +1823,17 @@ async function generarPDF(nit, cargo, candId) {
 
     const nombreArchivo = 'Analisis_' + candidatoSeleccionado.nombre.replace(/\s/g, '_') + '_' + new Date().toISOString().split('T')[0] + '.pdf';
     pdf.save(nombreArchivo);
-    alert('PDF generado exitosamente');
+    alert('✅ PDF generado exitosamente');
 
   } catch (error) {
     console.error('Error detallado:', error);
-    alert('Error al generar el PDF: ' + error.message);
+    alert('❌ Error al generar el PDF: ' + error.message);
   } finally {
     btn.innerHTML = originalText;
     btn.disabled = false;
   }
 }
+
 // ============ ACCIONES FINALES ============
 function finalizarProceso(nit, cargo) {
   if (!confirm('¿Confirmar el cierre de esta vacante? Se marcará como finalizada.')) return;
