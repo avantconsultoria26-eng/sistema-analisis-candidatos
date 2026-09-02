@@ -411,7 +411,6 @@
   }
   .candidate-detail-card div strong { color: #2a5298; display: block; font-size: 11px; text-transform: uppercase; margin-bottom: 3px; }
 
-  /* ESTILOS MEJORADOS PARA DESPLEGABLES DE PERFILES */
   details.guia-entrevista {
     background: #fff;
     border: 1px solid #e1e5eb;
@@ -432,24 +431,11 @@
     gap: 8px;
     transition: background 0.2s;
   }
-  details.guia-entrevista summary:hover {
-    background: #e8f0fb;
-  }
+  details.guia-entrevista summary:hover { background: #e8f0fb; }
   details.guia-entrevista summary::-webkit-details-marker { display: none; }
-  details.guia-entrevista summary::before {
-    content: '📖';
-    font-size: 18px;
-  }
-  details.guia-entrevista[open] summary {
-    border-bottom: 1px solid #e1e5eb;
-    background: #e8f0fb;
-  }
-  .guia-content {
-    padding: 20px;
-    font-size: 14px;
-    line-height: 1.6;
-    color: #444;
-  }
+  details.guia-entrevista summary::before { content: '📖'; font-size: 18px; }
+  details.guia-entrevista[open] summary { border-bottom: 1px solid #e1e5eb; background: #e8f0fb; }
+  .guia-content { padding: 20px; font-size: 14px; line-height: 1.6; color: #444; }
   .guia-content h4 { color: #2a5298; margin: 15px 0 8px; font-size: 15px; }
   .guia-content h5 { color: #555; margin: 12px 0 6px; font-size: 14px; }
   .guia-content ul { margin-left: 20px; margin-bottom: 10px; }
@@ -457,38 +443,12 @@
   .guia-content p { margin-bottom: 10px; }
   .guia-content strong { color: #2a5298; }
   
-  /* Tabla responsiva dentro del desplegable */
-  .guia-table-wrapper {
-    overflow-x: auto;
-    margin-top: 10px;
-    border-radius: 6px;
-    border: 1px solid #e1e5eb;
-  }
-  .guia-table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 12px;
-    min-width: 800px;
-  }
-  .guia-table th {
-    background: #2a5298;
-    color: #fff;
-    padding: 10px;
-    text-align: left;
-    font-weight: 600;
-    border: 1px solid #1e3c72;
-  }
-  .guia-table td {
-    padding: 10px;
-    border: 1px solid #e1e5eb;
-    vertical-align: top;
-  }
-  .guia-table tr:nth-child(even) {
-    background: #f8fafc;
-  }
-  .guia-table tr:hover {
-    background: #e8f0fb;
-  }
+  .guia-table-wrapper { overflow-x: auto; margin-top: 10px; border-radius: 6px; border: 1px solid #e1e5eb; }
+  .guia-table { width: 100%; border-collapse: collapse; font-size: 12px; min-width: 800px; }
+  .guia-table th { background: #2a5298; color: #fff; padding: 10px; text-align: left; font-weight: 600; border: 1px solid #1e3c72; }
+  .guia-table td { padding: 10px; border: 1px solid #e1e5eb; vertical-align: top; }
+  .guia-table tr:nth-child(even) { background: #f8fafc; }
+  .guia-table tr:hover { background: #e8f0fb; }
 
   @media (max-width: 768px) {
     .tab { font-size: 12px; padding: 12px 10px; min-width: 100px; }
@@ -856,12 +816,111 @@ const CONFIGURACION_CARGOS = {
         </table>
       </div>
     `
+  },
+  // ============ NUEVO CARGO AGREGADO ============
+  asesor_campo: {
+    nombre: "Asesor Comercial de Campo",
+    competencias: [
+      { nombre: 'Orientación al logro', peso: 20 },
+      { nombre: 'Orientación al cliente y abordaje en calle', peso: 18 },
+      { nombre: 'Honestidad e integridad', peso: 17 },
+      { nombre: 'Organización y dinamismo', peso: 13 },
+      { nombre: 'Manejo de presión y resiliencia', peso: 12 },
+      { nombre: 'Trabajo en equipo', peso: 10 },
+      { nombre: 'Compromiso', peso: 10 }
+    ],
+    escala: [
+      "5 - Sobresaliente: Demuestra dominio total, presenta ejemplos concretos con resultados medibles, evidencia liderazgo y autonomía en situaciones complejas.",
+      "4 - Bueno: Cumple completamente con la competencia, aporta ejemplos claros, muestra iniciativa y capacidad de respuesta efectiva.",
+      "3 - Aceptable: Conoce y aplica parcialmente la competencia, requiere algo de acompañamiento pero puede desarrollarse bien en el rol.",
+      "2 - Básico: Demuestra conocimiento superficial, respuestas vagas o sin ejemplos concretos, necesitaría supervisión constante.",
+      "1 - Deficiente: No evidencia la competencia, evita respuestas, no demuestra experiencias previas relevantes o presenta actitudes contrarias al perfil."
+    ],
+    interpretacion: [
+      { min: 90, max: 100, texto: '✅ ALTAMENTE RECOMENDADO - Perfil ideal para ventas de campo. Demuestra orientación al logro excepcional, abordaje comercial efectivo, alta integridad y capacidad para trabajar en entornos dinámicos con autonomía.', clase: 'decision-hire' },
+      { min: 80, max: 89.99, texto: '👍 RECOMENDADO - Cumple con el perfil comercial de campo requerido. Buen manejo de clientes, orientación a resultados y valores sólidos. Curva de adaptación corta.', clase: 'decision-recommend' },
+      { min: 70, max: 79.99, texto: '⚠️ RECOMENDADO CON PLAN DE DESARROLLO - Tiene potencial comercial, pero presenta brechas en alguna competencia clave (manejo de presión, organización o abordaje de clientes). Requiere acompañamiento inicial.', clase: 'decision-reserve' },
+      { min: 60, max: 69.99, texto: '🔍 AJUSTE PARCIAL - Conviene comparar con otros candidatos. Podría desempeñarse en roles de apoyo comercial o con supervisión cercana, pero no de forma autónoma en campo.', clase: 'decision-reserve' },
+      { min: 0, max: 59.99, texto: '❌ NO RECOMENDADO - No demuestra las competencias críticas para el trabajo comercial en campo (manejo de inventario, dinero, clientes y presión por metas).', clase: 'decision-no' }
+    ],
+    guiaEntrevista: `
+      <h4>1. Apertura (5 minutos)</h4>
+      <ul>
+        <li>Cuéntame sobre tu trayectoria profesional y experiencia en ventas o trabajo de campo.</li>
+        <li>¿Qué te motivó a aplicar a este cargo de asesor comercial de campo?</li>
+        <li>¿Cómo describirías tu estilo de trabajo en ambientes dinámicos y con metas exigentes?</li>
+      </ul>
+
+      <h4>2. Entrevista por Competencias</h4>
+      
+      <h5>A. Orientación al logro (20%)</h5>
+      <p style="color:#666; font-style:italic; font-size:13px">Fundamental: el cargo está directamente relacionado con ventas, cumplimiento de metas e indicadores.</p>
+      <ul>
+        <li>Háblame de una meta comercial ambiciosa que hayas tenido que cumplir. ¿Cuál era el objetivo, qué estrategia usaste y cuál fue el resultado final?</li>
+        <li>¿Cómo haces seguimiento a tus indicadores de ventas diarios/semanales? Dame un ejemplo concreto de cómo mejoraste un indicador bajo.</li>
+        <li>Cuéntame sobre una ocasión en la que superaste significativamente tu meta. ¿Qué hiciste diferente?</li>
+      </ul>
+
+      <h5>B. Orientación al cliente y abordaje en calle (18%)</h5>
+      <p style="color:#666; font-style:italic; font-size:13px">Debe tener facilidad para acercarse al cliente, generar confianza, asesorar y convertir oportunidades en ventas.</p>
+      <ul>
+        <li>Imagina que vas por una zona comercial visitando puntos de venta. ¿Cómo abordas a un cliente que no te conoce y parece desinteresado? Describe tu proceso paso a paso.</li>
+        <li>Cuéntame sobre una ocasión en la que convertiste un "no" inicial en una venta exitosa.</li>
+        <li>¿Cómo generas confianza con un cliente nuevo en los primeros 3 minutos de interacción?</li>
+      </ul>
+
+      <h5>C. Honestidad e integridad (17%)</h5>
+      <p style="color:#666; font-style:italic; font-size:13px">Existe manejo de inventario, dinero, puntos de venta y relaciones con aliados. Es una competencia que no conviene sacrificar por resultados.</p>
+      <ul>
+        <li>En tu experiencia manejando dinero o inventario en campo, ¿alguna vez detectaste una inconsistencia? ¿Cómo la manejaste?</li>
+        <li>Imagina que un aliado comercial te ofrece un beneficio personal a cambio de favorecer su punto de venta sobre otros. ¿Qué harías?</li>
+        <li>Si al final del día te das cuenta de que faltan $50.000 en tu caja pero nadie lo notará, ¿qué harías?</li>
+      </ul>
+
+      <h5>D. Organización y dinamismo (13%)</h5>
+      <p style="color:#666; font-style:italic; font-size:13px">Necesaria para manejar diferentes puntos, desplazamientos, seguimiento de indicadores y múltiples actividades durante el día.</p>
+      <ul>
+        <li>Describe cómo planificas tu ruta de visitas diarias. ¿Qué herramientas usas para organizarte?</li>
+        <li>Tienes 8 puntos que visitar en un día, pero uno te toma más tiempo del esperado. ¿Cómo reorganizas tu agenda?</li>
+        <li>¿Cómo mantienes el seguimiento de tus actividades, reportes y compromisos cuando estás en constante movimiento?</li>
+      </ul>
+
+      <h5>E. Manejo de presión y resiliencia (12%)</h5>
+      <p style="color:#666; font-style:italic; font-size:13px">En ventas habrá rechazo, presión por metas, cambios y situaciones difíciles. La capacidad de mantenerse funcional es importante.</p>
+      <ul>
+        <li>Cuéntame sobre un día particularmente difícil en tu trabajo anterior. ¿Cómo lo manejaste emocional y operativamente?</li>
+        <li>Has recibido 10 rechazos consecutivos de clientes. ¿Qué haces para mantenerte motivado y seguir adelante?</li>
+        <li>¿Cómo manejas la presión cuando te falta una semana para cerrar el mes y aún estás lejos de tu meta?</li>
+      </ul>
+
+      <h5>F. Trabajo en equipo (10%)</h5>
+      <p style="color:#666; font-style:italic; font-size:13px">Debe coordinarse con asesores, aliados y demás integrantes del equipo comercial.</p>
+      <ul>
+        <li>Cuéntame sobre una ocasión en la que colaboraste con un compañero para cerrar una venta o resolver un problema con un cliente.</li>
+        <li>¿Cómo compartes información de clientes o aprendizajes con tu equipo de trabajo?</li>
+        <li>¿Cómo manejas desacuerdos o competencias internas con otros asesores comerciales?</li>
+      </ul>
+
+      <h5>G. Compromiso (10%)</h5>
+      <p style="color:#666; font-style:italic; font-size:13px">Importante, aunque muchas manifestaciones se observan también a través de organización, orientación al logro y responsabilidad.</p>
+      <ul>
+        <li>¿Qué significa para ti el compromiso con una empresa y con tus clientes?</li>
+        <li>Cuéntame sobre una ocasión en la que fuiste más allá de tus responsabilidades habituales por cumplir un objetivo o ayudar a un cliente.</li>
+        <li>¿Qué te mantiene motivado a largo plazo en un cargo comercial de campo?</li>
+      </ul>
+
+      <h4>3. Caso Práctico Integrador</h4>
+      <p><strong>Escenario:</strong> Es martes a las 10:00 a.m. Estás en una ruta de visitas comerciales. Tu meta del mes va al 60% y faltan 8 días. En el primer punto el dueño no está, en el segundo te reciben fríamente, en el tercero hay una inconsistencia de inventario que debes reportar, y te llaman del centro comercial para una reunión urgente a las 2:00 p.m. con tu supervisor. ¿Cómo organizas tu día y qué decisiones tomas?</p>
+      <p style="color:#666; font-size:13px"><em>Evaluar: priorización, orientación al logro, manejo de presión, organización, comunicación y compromiso.</em></p>
+    `
   }
 };
 
 function getConfiguracionCargo(nombreCargo) {
   const nombre = (nombreCargo || "").toLowerCase();
   if (nombre.includes('marketing') || nombre.includes('líder') || nombre.includes('lider')) return CONFIGURACION_CARGOS.marketing;
+  // NUEVO: detectar cargo de asesor de campo / ruta / calle / visitador
+  if (nombre.includes('campo') || nombre.includes('ruta') || nombre.includes('calle') || nombre.includes('visitador') || nombre.includes('terreno')) return CONFIGURACION_CARGOS.asesor_campo;
   if (nombre.includes('asesor') || nombre.includes('comercial') || nombre.includes('venta')) return CONFIGURACION_CARGOS.asesor;
   if (nombre.includes('auxiliar') || nombre.includes('cartera') || nombre.includes('cobro') || nombre.includes('recibo')) return CONFIGURACION_CARGOS.auxiliar_cartera;
   return CONFIGURACION_CARGOS.marketing; // Fallback por defecto
