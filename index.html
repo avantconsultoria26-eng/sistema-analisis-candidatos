@@ -501,7 +501,7 @@
         </div>
         <div class="form-group">
           <label>Nombre del Cargo <span class="required">*</span></label>
-          <input type="text" id="nombreCargo" placeholder="Ej: Líder de Marketing, Asesor Comercial, Auxiliar de Cartera">
+          <input type="text" id="nombreCargo" placeholder="Ej: Coordinador de Tiendas, Asesor Comercial, Auxiliar de Cartera">
         </div>
         <div class="form-group">
           <label>Número de Vacantes <span class="required">*</span></label>
@@ -817,7 +817,6 @@ const CONFIGURACION_CARGOS = {
       </div>
     `
   },
-  // ============ NUEVO CARGO AGREGADO ============
   asesor_campo: {
     nombre: "Asesor Comercial de Campo",
     competencias: [
@@ -850,68 +849,110 @@ const CONFIGURACION_CARGOS = {
         <li>¿Qué te motivó a aplicar a este cargo de asesor comercial de campo?</li>
         <li>¿Cómo describirías tu estilo de trabajo en ambientes dinámicos y con metas exigentes?</li>
       </ul>
-
       <h4>2. Entrevista por Competencias</h4>
-      
       <h5>A. Orientación al logro (20%)</h5>
       <p style="color:#666; font-style:italic; font-size:13px">Fundamental: el cargo está directamente relacionado con ventas, cumplimiento de metas e indicadores.</p>
       <ul>
         <li>Háblame de una meta comercial ambiciosa que hayas tenido que cumplir. ¿Cuál era el objetivo, qué estrategia usaste y cuál fue el resultado final?</li>
         <li>¿Cómo haces seguimiento a tus indicadores de ventas diarios/semanales? Dame un ejemplo concreto de cómo mejoraste un indicador bajo.</li>
-        <li>Cuéntame sobre una ocasión en la que superaste significativamente tu meta. ¿Qué hiciste diferente?</li>
       </ul>
-
       <h5>B. Orientación al cliente y abordaje en calle (18%)</h5>
       <p style="color:#666; font-style:italic; font-size:13px">Debe tener facilidad para acercarse al cliente, generar confianza, asesorar y convertir oportunidades en ventas.</p>
       <ul>
         <li>Imagina que vas por una zona comercial visitando puntos de venta. ¿Cómo abordas a un cliente que no te conoce y parece desinteresado? Describe tu proceso paso a paso.</li>
         <li>Cuéntame sobre una ocasión en la que convertiste un "no" inicial en una venta exitosa.</li>
-        <li>¿Cómo generas confianza con un cliente nuevo en los primeros 3 minutos de interacción?</li>
       </ul>
-
       <h5>C. Honestidad e integridad (17%)</h5>
       <p style="color:#666; font-style:italic; font-size:13px">Existe manejo de inventario, dinero, puntos de venta y relaciones con aliados. Es una competencia que no conviene sacrificar por resultados.</p>
       <ul>
         <li>En tu experiencia manejando dinero o inventario en campo, ¿alguna vez detectaste una inconsistencia? ¿Cómo la manejaste?</li>
         <li>Imagina que un aliado comercial te ofrece un beneficio personal a cambio de favorecer su punto de venta sobre otros. ¿Qué harías?</li>
-        <li>Si al final del día te das cuenta de que faltan $50.000 en tu caja pero nadie lo notará, ¿qué harías?</li>
       </ul>
-
       <h5>D. Organización y dinamismo (13%)</h5>
       <p style="color:#666; font-style:italic; font-size:13px">Necesaria para manejar diferentes puntos, desplazamientos, seguimiento de indicadores y múltiples actividades durante el día.</p>
       <ul>
         <li>Describe cómo planificas tu ruta de visitas diarias. ¿Qué herramientas usas para organizarte?</li>
         <li>Tienes 8 puntos que visitar en un día, pero uno te toma más tiempo del esperado. ¿Cómo reorganizas tu agenda?</li>
-        <li>¿Cómo mantienes el seguimiento de tus actividades, reportes y compromisos cuando estás en constante movimiento?</li>
       </ul>
-
       <h5>E. Manejo de presión y resiliencia (12%)</h5>
       <p style="color:#666; font-style:italic; font-size:13px">En ventas habrá rechazo, presión por metas, cambios y situaciones difíciles. La capacidad de mantenerse funcional es importante.</p>
       <ul>
         <li>Cuéntame sobre un día particularmente difícil en tu trabajo anterior. ¿Cómo lo manejaste emocional y operativamente?</li>
-        <li>Has recibido 10 rechazos consecutivos de clientes. ¿Qué haces para mantenerte motivado y seguir adelante?</li>
         <li>¿Cómo manejas la presión cuando te falta una semana para cerrar el mes y aún estás lejos de tu meta?</li>
       </ul>
-
-      <h5>F. Trabajo en equipo (10%)</h5>
-      <p style="color:#666; font-style:italic; font-size:13px">Debe coordinarse con asesores, aliados y demás integrantes del equipo comercial.</p>
+      <h5>F. Trabajo en equipo (10%) y G. Compromiso (10%)</h5>
       <ul>
         <li>Cuéntame sobre una ocasión en la que colaboraste con un compañero para cerrar una venta o resolver un problema con un cliente.</li>
-        <li>¿Cómo compartes información de clientes o aprendizajes con tu equipo de trabajo?</li>
-        <li>¿Cómo manejas desacuerdos o competencias internas con otros asesores comerciales?</li>
+        <li>¿Qué te mantiene motivado a largo plazo en un cargo comercial de campo?</li>
+      </ul>
+      <h4>3. Caso Práctico Integrador</h4>
+      <p><strong>Escenario:</strong> Es martes a las 10:00 a.m. Estás en una ruta de visitas comerciales. Tu meta del mes va al 60% y faltan 8 días. En el primer punto el dueño no está, en el segundo te reciben fríamente, en el tercero hay una inconsistencia de inventario que debes reportar, y te llaman del centro comercial para una reunión urgente a las 2:00 p.m. con tu supervisor. ¿Cómo organizas tu día y qué decisiones tomas?</p>
+    `
+  },
+  // ============ NUEVO CARGO: COORDINADOR DE TIENDAS ============
+  coordinador_tiendas: {
+    nombre: "Coordinador de Tiendas / Supervisor Retail",
+    competencias: [
+      { nombre: 'Orientación a Resultados y Cumplimiento de Metas', peso: 30 },
+      { nombre: 'Liderazgo y Desarrollo de Equipos / Aliados', peso: 25 },
+      { nombre: 'Visión Comercial y Activación de Ventas', peso: 25 },
+      { nombre: 'Gestión Operativa y Resolución de Problemas', peso: 20 }
+    ],
+    escala: [
+      "5 - Sobresaliente: Demuestra dominio total, presenta ejemplos concretos con resultados medibles, evidencia liderazgo estratégico y autonomía en la gestión de múltiples puntos de venta.",
+      "4 - Bueno: Cumple completamente con la competencia, aporta ejemplos claros de gestión de equipos y KPIs, muestra iniciativa y capacidad de respuesta efectiva.",
+      "3 - Aceptable: Conoce y aplica parcialmente la competencia, requiere algo de acompañamiento en el análisis de indicadores o gestión de conflictos, pero tiene potencial.",
+      "2 - Básico: Demuestra conocimiento superficial, respuestas vagas o sin ejemplos concretos de liderazgo, necesitaría supervisión constante en terreno.",
+      "1 - Deficiente: No evidencia la competencia, evita respuestas, no demuestra experiencias previas relevantes en gestión retail o presenta actitudes contrarias al perfil."
+    ],
+    interpretacion: [
+      { min: 90, max: 100, texto: '✅ ALTAMENTE RECOMENDADO - Perfil excepcional para la coordinación de tiendas. Demuestra sólida orientación a resultados, liderazgo transformador de equipos y excelente visión comercial y operativa.', clase: 'decision-hire' },
+      { min: 80, max: 89.99, texto: '👍 RECOMENDADO - Cumple con el perfil de coordinación retail. Buen manejo de KPIs, capacidad para desarrollar equipos y resolver problemas operativos. Curva de adaptación corta.', clase: 'decision-recommend' },
+      { min: 70, max: 79.99, texto: '⚠️ RECOMENDADO CON PLAN DE DESARROLLO - Tiene potencial de liderazgo, pero presenta brechas en alguna competencia clave (ej: análisis de indicadores o activación comercial). Requiere acompañamiento inicial.', clase: 'decision-reserve' },
+      { min: 60, max: 69.99, texto: '🔍 AJUSTE PARCIAL - Conviene comparar con otros candidatos. Podría desempeñarse como jefe de tienda individual, pero aún no evidencia madurez para coordinar múltiples puntos de venta.', clase: 'decision-reserve' },
+      { min: 0, max: 59.99, texto: '❌ NO RECOMENDADO - No demuestra las competencias críticas para la coordinación retail (gestión de presupuestos, desarrollo de equipos y control operativo).', clase: 'decision-no' }
+    ],
+    guiaEntrevista: `
+      <h4>1. Apertura (5 minutos)</h4>
+      <ul>
+        <li>Cuéntame sobre tu trayectoria profesional en el sector retail y tu experiencia gestionando puntos de venta o equipos comerciales.</li>
+        <li>¿Qué te motivó a aplicar a este cargo de Coordinador de Tiendas?</li>
+        <li>¿Cómo describirías tu estilo de liderazgo cuando debes supervisar a varios administradores de tienda a la vez?</li>
       </ul>
 
-      <h5>G. Compromiso (10%)</h5>
-      <p style="color:#666; font-style:italic; font-size:13px">Importante, aunque muchas manifestaciones se observan también a través de organización, orientación al logro y responsabilidad.</p>
+      <h4>2. Entrevista por Competencias</h4>
+      
+      <h5>A. Orientación a Resultados y Cumplimiento de Metas (30%)</h5>
+      <p style="color:#666; font-style:italic; font-size:13px"><strong>Definición:</strong> Capacidad para dirigir esfuerzos al logro de presupuestos de venta, análisis de indicadores y ejecución de planes correctivos.</p>
       <ul>
-        <li>¿Qué significa para ti el compromiso con una empresa y con tus clientes?</li>
-        <li>Cuéntame sobre una ocasión en la que fuiste más allá de tus responsabilidades habituales por cumplir un objetivo o ayudar a un cliente.</li>
-        <li>¿Qué te mantiene motivado a largo plazo en un cargo comercial de campo?</li>
+        <li>Háblame de una ocasión en la que las tiendas a tu cargo estaban por debajo del presupuesto de ventas. ¿Qué indicadores analizaste y qué plan correctivo ejecutaste para revertir la situación?</li>
+        <li>¿Cómo haces el seguimiento semanal o quincenal a los KPIs de tus tiendas? Dame un ejemplo de una acción que tomaste basándote en esos datos.</li>
+      </ul>
+
+      <h5>B. Liderazgo y Desarrollo de Equipos / Aliados (25%)</h5>
+      <p style="color:#666; font-style:italic; font-size:13px"><strong>Definición:</strong> Habilidad para guiar, capacitar y potenciar el desempeño comercial de administradores y equipos en punto de venta.</p>
+      <ul>
+        <li>Cuéntame sobre un administrador o vendedor con bajo desempeño que lograste desarrollar y convertir en un colaborador destacado. ¿Qué acciones específicas tomaste?</li>
+        <li>¿Cómo garantizas que los estándares de atención y venta se mantengan uniformes en todas las tiendas que coordinas, a pesar de la distancia?</li>
+      </ul>
+
+      <h5>C. Visión Comercial y Activación de Ventas (25%)</h5>
+      <p style="color:#666; font-style:italic; font-size:13px"><strong>Definición:</strong> Destreza para identificar oportunidades de negocio, proponer estrategias locales y dinamizar la rotación de mercancía.</p>
+      <ul>
+        <li>Describe una estrategia local o activación comercial que hayas propuesto e implementado en una tienda específica para dinamizar la rotación de un producto con baja salida. ¿Cuál fue el resultado?</li>
+        <li>¿Cómo identificas nuevas oportunidades de negocio o mejoras en la exhibición cuando realizas tus visitas a terreno?</li>
+      </ul>
+
+      <h5>D. Gestión Operativa y Resolución de Problemas (20%)</h5>
+      <p style="color:#666; font-style:italic; font-size:13px"><strong>Definición:</strong> Eficiencia en el control de estándares de marca, inventarios y autonomía en la resolución de situaciones imprevistas en terreno.</p>
+      <ul>
+        <li>Cuéntame sobre una situación imprevista crítica en una tienda (ej: falla de sistema, problema grave de inventario, conflicto con un cliente importante). ¿Cómo la resolviste con autonomía?</li>
+        <li>¿Qué metodología utilizas para auditar y asegurar el cumplimiento de los estándares de marca e inventarios durante tus visitas?</li>
       </ul>
 
       <h4>3. Caso Práctico Integrador</h4>
-      <p><strong>Escenario:</strong> Es martes a las 10:00 a.m. Estás en una ruta de visitas comerciales. Tu meta del mes va al 60% y faltan 8 días. En el primer punto el dueño no está, en el segundo te reciben fríamente, en el tercero hay una inconsistencia de inventario que debes reportar, y te llaman del centro comercial para una reunión urgente a las 2:00 p.m. con tu supervisor. ¿Cómo organizas tu día y qué decisiones tomas?</p>
-      <p style="color:#666; font-size:13px"><em>Evaluar: priorización, orientación al logro, manejo de presión, organización, comunicación y compromiso.</em></p>
+      <p><strong>Escenario:</strong> Eres Coordinador de 5 tiendas. A mitad de mes, la Tienda A va con un 40% de cumplimiento de meta y su administrador acaba de renunciar. La Tienda B tiene un faltante de inventario significativo detectado esta mañana. La Tienda C te solicita aprobación urgente para una activación comercial no presupuestada que podría recuperar ventas. Tienes solo un día para visitar una de ellas personalmente. ¿Cuál visitas, por qué y cómo gestionas las otras dos situaciones a distancia?</p>
+      <p style="color:#666; font-size:13px"><em>Evaluar: priorización, orientación a resultados, liderazgo a distancia, visión comercial y resolución de problemas.</em></p>
     `
   }
 };
@@ -919,8 +960,9 @@ const CONFIGURACION_CARGOS = {
 function getConfiguracionCargo(nombreCargo) {
   const nombre = (nombreCargo || "").toLowerCase();
   if (nombre.includes('marketing') || nombre.includes('líder') || nombre.includes('lider')) return CONFIGURACION_CARGOS.marketing;
-  // NUEVO: detectar cargo de asesor de campo / ruta / calle / visitador
   if (nombre.includes('campo') || nombre.includes('ruta') || nombre.includes('calle') || nombre.includes('visitador') || nombre.includes('terreno')) return CONFIGURACION_CARGOS.asesor_campo;
+  // NUEVO: detectar cargo de coordinador de tiendas o supervisor retail
+  if (nombre.includes('coordinador') || nombre.includes('tiendas') || nombre.includes('supervisor') || nombre.includes('retail') || nombre.includes('punto de venta')) return CONFIGURACION_CARGOS.coordinador_tiendas;
   if (nombre.includes('asesor') || nombre.includes('comercial') || nombre.includes('venta')) return CONFIGURACION_CARGOS.asesor;
   if (nombre.includes('auxiliar') || nombre.includes('cartera') || nombre.includes('cobro') || nombre.includes('recibo')) return CONFIGURACION_CARGOS.auxiliar_cartera;
   return CONFIGURACION_CARGOS.marketing; // Fallback por defecto
