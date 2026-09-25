@@ -889,7 +889,6 @@ const CONFIGURACION_CARGOS = {
       <p><strong>Escenario:</strong> Es martes a las 10:00 a.m. Estás en una ruta de visitas comerciales. Tu meta del mes va al 60% y faltan 8 días. En el primer punto el dueño no está, en el segundo te reciben fríamente, en el tercero hay una inconsistencia de inventario que debes reportar, y te llaman del centro comercial para una reunión urgente a las 2:00 p.m. con tu supervisor. ¿Cómo organizas tu día y qué decisiones tomas?</p>
     `
   },
-  // ============ NUEVO CARGO: COORDINADOR DE TIENDAS ============
   coordinador_tiendas: {
     nombre: "Coordinador de Tiendas / Supervisor Retail",
     competencias: [
@@ -954,14 +953,107 @@ const CONFIGURACION_CARGOS = {
       <p><strong>Escenario:</strong> Eres Coordinador de 5 tiendas. A mitad de mes, la Tienda A va con un 40% de cumplimiento de meta y su administrador acaba de renunciar. La Tienda B tiene un faltante de inventario significativo detectado esta mañana. La Tienda C te solicita aprobación urgente para una activación comercial no presupuestada que podría recuperar ventas. Tienes solo un día para visitar una de ellas personalmente. ¿Cuál visitas, por qué y cómo gestionas las otras dos situaciones a distancia?</p>
       <p style="color:#666; font-size:13px"><em>Evaluar: priorización, orientación a resultados, liderazgo a distancia, visión comercial y resolución de problemas.</em></p>
     `
+  },
+  // ============ NUEVO CARGO: LÍDER DE DEPARTAMENTO DE VENTAS ONLINE ============
+  lider_ventas_online: {
+    nombre: "Líder de Departamento de Ventas Online",
+    competencias: [
+      { nombre: 'Orientación a Resultados y Cumplimiento de Metas Digitales', peso: 25, critica: true },
+      { nombre: 'Gestión Comercial de Canales Online / E-commerce', peso: 20, critica: true },
+      { nombre: 'Liderazgo y Desarrollo de Equipos', peso: 18, critica: true },
+      { nombre: 'Analítica Comercial y Toma de Decisiones', peso: 15 },
+      { nombre: 'Experiencia del Cliente y Conversión Digital', peso: 12 },
+      { nombre: 'Gestión Operativa, Inventarios y Coordinación Interáreas', peso: 10 }
+    ],
+    escala: [
+      "5 - Sobresaliente: Dominio sólido, experiencia demostrable y capacidad para generar impacto.",
+      "4 - Alto: Supera lo esperado; evidencia experiencia y autonomía.",
+      "3 - Adecuado: Cumple con lo esperado para desempeñar el cargo.",
+      "2 - Bajo: Evidencia parcial; requiere acompañamiento importante.",
+      "1 - Muy bajo: No evidencia la competencia requerida."
+    ],
+    interpretacion: [
+      { min: 90, max: 100, texto: '✅ PERFIL ALTAMENTE ALINEADO - Excelente dominio de las competencias críticas y capacidad probada para liderar el canal digital.', clase: 'decision-hire' },
+      { min: 80, max: 89.99, texto: '👍 PERFIL CON ALTA ALINEACIÓN - Buen manejo de las dimensiones clave, listo para asumir el rol con una curva de adaptación corta.', clase: 'decision-recommend' },
+      { min: 70, max: 79.99, texto: '⚠️ PERFIL ADECUADO, CON ASPECTOS POR VALIDAR - Cumple lo esperado, pero requiere revisar brechas en competencias críticas antes de decidir.', clase: 'decision-reserve' },
+      { min: 60, max: 69.99, texto: '🔍 PRESENTA BRECHAS RELEVANTES - El perfil muestra debilidades en áreas clave. Se recomienda solo si no hay mejores candidatos y con un plan de desarrollo fuerte.', clase: 'decision-reserve' },
+      { min: 0, max: 59.99, texto: '❌ BAJO NIVEL DE ALINEACIÓN - No cumple con las exigencias del cargo, especialmente en responsabilidades centrales.', clase: 'decision-no' }
+    ],
+    guiaEntrevista: `
+      <h4>📋 Matriz de Evaluación Detallada - Líder de Ventas Online</h4>
+      <p style="font-size:13px; color:#666; margin-bottom:15px">⚠️ <strong>Nota importante:</strong> Las competencias marcadas como <strong>críticas</strong> (Resultados, Gestión Comercial Online y Liderazgo) concentran el 63% de la evaluación. Una calificación menor a 3 en estas áreas es una señal de alerta, independientemente del puntaje total.</p>
+      
+      <h4>1. Orientación a Resultados y Cumplimiento de Metas Digitales (25% - Crítica)</h4>
+      <p><strong>Qué evaluar:</strong> Capacidad para asumir metas, realizar seguimiento al presupuesto, identificar desviaciones y ejecutar planes de acción.</p>
+      <ul>
+        <li><strong>1:</strong> No evidencia experiencia trabajando con metas ni indicadores. Respuestas generales, sin acciones concretas.</li>
+        <li><strong>2:</strong> Ha trabajado con metas, pero su seguimiento es reactivo y depende de instrucciones de terceros.</li>
+        <li><strong>3:</strong> Realiza seguimiento adecuado, reconoce desviaciones y propone acciones razonables para recuperar resultados.</li>
+        <li><strong>4:</strong> Gestiona metas de manera estructurada, utiliza indicadores, anticipa desviaciones y establece planes de acción medibles.</li>
+        <li><strong>5:</strong> Alta orientación a resultados, anticipación, seguimiento riguroso y capacidad comprobada para superar metas mediante decisiones basadas en datos.</li>
+      </ul>
+
+      <h4>2. Gestión Comercial de Canales Online / E-commerce (20% - Crítica)</h4>
+      <p><strong>Qué evaluar:</strong> Capacidad para administrar comercialmente un canal digital y generar crecimiento sostenible.</p>
+      <ul>
+        <li><strong>1:</strong> No demuestra conocimiento práctico de ventas digitales o e-commerce.</li>
+        <li><strong>2:</strong> Conocimientos básicos, depende principalmente de promociones o descuentos para impulsar ventas.</li>
+        <li><strong>3:</strong> Comprende la dinámica comercial online y propone estrategias funcionales para aumentar ventas.</li>
+        <li><strong>4:</strong> Maneja integralmente categorías, promociones, conversión, campañas y oportunidades de crecimiento.</li>
+        <li><strong>5:</strong> Visión estratégica del canal, conecta comportamiento del cliente, rentabilidad, conversión y crecimiento con experiencia generando resultados digitales.</li>
+      </ul>
+
+      <h4>3. Liderazgo y Desarrollo de Equipos (18% - Crítica)</h4>
+      <p><strong>Qué evaluar:</strong> Capacidad para dirigir, desarrollar, acompañar y exigir resultados al equipo.</p>
+      <ul>
+        <li><strong>1:</strong> Dificultades para explicar cómo lideraría, delegaría o corregiría situaciones del equipo.</li>
+        <li><strong>2:</strong> Experiencia limitada en liderazgo, se enfoca principalmente en control o supervisión.</li>
+        <li><strong>3:</strong> Lidera adecuadamente, establece objetivos, realiza seguimiento y brinda retroalimentación.</li>
+        <li><strong>4:</strong> Desarrolla activamente al equipo, identifica brechas, realiza coaching y gestiona el desempeño.</li>
+        <li><strong>5:</strong> Liderazgo sólido, capacidad para desarrollar talento, gestionar alto y bajo desempeño y construir equipos autónomos orientados al resultado.</li>
+      </ul>
+
+      <h4>4. Analítica Comercial y Toma de Decisiones (15%)</h4>
+      <p><strong>Qué evaluar:</strong> Capacidad para transformar datos comerciales en decisiones y acciones concretas.</p>
+      <ul>
+        <li><strong>1:</strong> Toma decisiones por intuición, dificultades para interpretar indicadores.</li>
+        <li><strong>2:</strong> Reconoce indicadores básicos, pero con poca profundidad analítica.</li>
+        <li><strong>3:</strong> Interpreta correctamente los principales KPIs y los utiliza para tomar decisiones.</li>
+        <li><strong>4:</strong> Relaciona varios indicadores, identifica causas y establece acciones basadas en análisis.</li>
+        <li><strong>5:</strong> Pensamiento analítico avanzado, identifica relaciones causa-efecto y convierte rápidamente los datos en decisiones comerciales estratégicas.</li>
+      </ul>
+
+      <h4>5. Experiencia del Cliente y Conversión Digital (12%)</h4>
+      <p><strong>Qué evaluar:</strong> Capacidad para garantizar que la experiencia del cliente contribuya directamente a la conversión, recompra y fidelización.</p>
+      <ul>
+        <li><strong>1:</strong> Considera la experiencia del cliente como responsabilidad exclusiva de servicio al cliente.</li>
+        <li><strong>2:</strong> Reconoce su importancia, pero plantea acciones poco estructuradas.</li>
+        <li><strong>3:</strong> Identifica puntos críticos del recorrido del cliente y propone soluciones adecuadas.</li>
+        <li><strong>4:</strong> Relaciona experiencia del cliente con conversión, recompra y resultados comerciales.</li>
+        <li><strong>5:</strong> Visión integral del customer journey, capacidad para convertir hallazgos del cliente en mejoras comerciales medibles.</li>
+      </ul>
+
+      <h4>6. Gestión Operativa, Inventarios y Coordinación Interáreas (10%)</h4>
+      <p><strong>Qué evaluar:</strong> Capacidad para coordinar ventas online con logística, inventarios, tecnología, mercadeo y servicio al cliente.</p>
+      <ul>
+        <li><strong>1:</strong> Visión aislada del área comercial, dificultades para coordinar con otras áreas.</li>
+        <li><strong>2:</strong> Reconoce dependencias operativas, pero actúa principalmente de forma reactiva.</li>
+        <li><strong>3:</strong> Coordina adecuadamente con las áreas involucradas y resuelve situaciones operativas habituales.</li>
+        <li><strong>4:</strong> Anticipa riesgos, establece acuerdos de trabajo y coordina efectivamente múltiples áreas.</li>
+        <li><strong>5:</strong> Visión integral de la operación, previene impactos comerciales y articula las áreas para asegurar continuidad, servicio y cumplimiento.</li>
+      </ul>
+    `
   }
 };
 
 function getConfiguracionCargo(nombreCargo) {
   const nombre = (nombreCargo || "").toLowerCase();
+  // Detectar primero el nuevo cargo de Líder de Ventas Online
+  if (nombre.includes('lider') && (nombre.includes('ventas') || nombre.includes('online') || nombre.includes('digital') || nombre.includes('e-commerce') || nombre.includes('departamento'))) {
+    return CONFIGURACION_CARGOS.lider_ventas_online;
+  }
   if (nombre.includes('marketing') || nombre.includes('líder') || nombre.includes('lider')) return CONFIGURACION_CARGOS.marketing;
   if (nombre.includes('campo') || nombre.includes('ruta') || nombre.includes('calle') || nombre.includes('visitador') || nombre.includes('terreno')) return CONFIGURACION_CARGOS.asesor_campo;
-  // NUEVO: detectar cargo de coordinador de tiendas o supervisor retail
   if (nombre.includes('coordinador') || nombre.includes('tiendas') || nombre.includes('supervisor') || nombre.includes('retail') || nombre.includes('punto de venta')) return CONFIGURACION_CARGOS.coordinador_tiendas;
   if (nombre.includes('asesor') || nombre.includes('comercial') || nombre.includes('venta')) return CONFIGURACION_CARGOS.asesor;
   if (nombre.includes('auxiliar') || nombre.includes('cartera') || nombre.includes('cobro') || nombre.includes('recibo')) return CONFIGURACION_CARGOS.auxiliar_cartera;
@@ -1333,11 +1425,11 @@ function cargarEvaluacion() {
     const calif = eval_.calificaciones ? (eval_.calificaciones[i] || '') : '';
     const puntaje = calif ? ((calif / 5) * comp.peso).toFixed(2) : '-';
     html += `<tr>
-      <td><strong>${comp.nombre}</strong></td>
+      <td><strong>${comp.nombre}</strong> ${comp.critica ? '<span style="color:#e74c3c; font-size:11px">(Crítica)</span>' : ''}</td>
       <td>${comp.peso}%</td>
       <td><select onchange="actualizarPuntaje(${i}, this.value)" style="width:100%">
         <option value="">--</option>
-        ${[5,4,3,2,1].map(n => `<option value="${n}" ${calif==n?'selected':''}>${n} - ${['','Deficiente','Básico','Aceptable','Bueno','Sobresaliente'][n]}</option>`).join('')}
+        ${[5,4,3,2,1].map(n => `<option value="${n}" ${calif==n?'selected':''}>${n} - ${['','Muy bajo','Bajo','Adecuado','Alto','Sobresaliente'][n]}</option>`).join('')}
       </select></td>
       <td id="puntaje-${i}">${puntaje}</td>
     </tr>`;
@@ -1375,8 +1467,26 @@ function guardarEvaluacion() {
   if (!eval_ || eval_.calificaciones.some(v => !v)) {
     alert('⚠️ Debe calificar todas las competencias'); return;
   }
-  guardar();
+  
+  // Validar competencias críticas
   const cand = candidatos.find(c => c.id == id);
+  const config = getConfiguracionCargo(cand.cargo);
+  let alertasCriticas = [];
+  
+  if (config && config.competencias) {
+    config.competencias.forEach((comp, i) => {
+      if (comp.critica && eval_.calificaciones[i] < 3) {
+        alertasCriticas.push(`• ${comp.nombre} (Nota: ${eval_.calificaciones[i]}/5)`);
+      }
+    });
+  }
+  
+  if (alertasCriticas.length > 0) {
+    const confirmar = confirm(`⚠️ ADVERTENCIA DE COMPETENCIAS CRÍTICAS:\n\nLas siguientes competencias críticas tienen una calificación menor a 3, lo cual representa un riesgo alto para el rol, independientemente del puntaje total:\n\n${alertasCriticas.join('\n')}\n\n¿Desea guardar la evaluación de todos modos?`);
+    if (!confirmar) return;
+  }
+
+  guardar();
   alert(`✅ Evaluación guardada para ${cand.nombre}. Puntaje: ${eval_.puntajeTotal.toFixed(1)}/100`);
   renderCandidatos();
   cargarCandidatosEval();
@@ -1489,6 +1599,26 @@ function mostrarResultados() {
     return suma / evaluados.length;
   });
 
+  // Verificar alertas de competencias críticas
+  let alertasCriticasHtml = '';
+  if (config.competencias) {
+    const criticasBajas = config.competencias.filter((comp, i) => comp.critica && candidatoSeleccionado.eval.calificaciones[i] < 3);
+    if (criticasBajas.length > 0) {
+      alertasCriticasHtml = `
+        <div class="alert alert-warning" style="margin-bottom: 20px;">
+          <strong>⚠️ ALERTA DE COMPETENCIAS CRÍTICAS:</strong><br>
+          El candidato presenta calificaciones inferiores a 3 en competencias fundamentales para el rol (que concentran el 63% de la evaluación). Esto representa un riesgo alto, independientemente del puntaje total.
+          <ul style="margin-top: 8px; margin-bottom: 0;">
+            ${criticasBajas.map(c => {
+              const idx = config.competencias.findIndex(comp => comp.nombre === c.nombre);
+              return `<li><strong>${c.nombre}</strong>: ${candidatoSeleccionado.eval.calificaciones[idx]}/5</li>`;
+            }).join('')}
+          </ul>
+        </div>
+      `;
+    }
+  }
+
   // PODIO
   let podiumHtml = '<h3 style="color:#2a5298; margin:20px 0 10px">🏆 Podio General</h3><div class="podium" id="podiumToCapture">';
   const medals = ['🥇','🥈','🥉'];
@@ -1564,6 +1694,7 @@ function mostrarResultados() {
       <strong>Vacantes:</strong> ${cargoObj.vacantes} |
       <strong>Candidatos evaluados:</strong> ${evaluados.length} de ${cands.length}
     </div>
+    ${alertasCriticasHtml}
     ${detailCard}
     ${podiumHtml}
     ${tablaHtml}
@@ -1593,11 +1724,19 @@ function obtenerBadgeDecision(puntaje, nombreCargo) {
 function generarAnalisis(cand) {
   const p = cand.eval.puntajeTotal;
   const exp = cand.experiencia;
-  if (p >= 90) return `El candidato demuestra un perfil excepcional con dominio integral de las competencias evaluadas. Con ${exp} años de experiencia, evidencia liderazgo estratégico, visión innovadora y capacidad para generar resultados medibles. Es el candidato ideal para asumir el cargo con autonomía total.`;
-  if (p >= 80) return `Perfil sólido con ${exp} años de experiencia. Demuestra dominio en la mayoría de competencias con resultados comprobables. Su curva de adaptación será corta y puede aportar valor inmediato al equipo.`;
-  if (p >= 70) return `Candidato con potencial y ${exp} años de experiencia. Presenta fortalezas claras pero también brechas en algunas competencias clave que requieren validación adicional mediante referencias y expectativas salariales.`;
-  if (p >= 60) return `Perfil con conocimientos básicos y ${exp} años de experiencia. Podría desempeñarse mejor en roles de ejecución o especialista en lugar de posiciones de liderazgo.`;
-  return `El candidato no evidencia las competencias críticas requeridas para el cargo. A pesar de ${exp} años de experiencia, las respuestas no demuestran capacidad para asumir las responsabilidades del puesto.`;
+  const config = getConfiguracionCargo(cand.cargo);
+  const criticasBajas = config.competencias.filter((comp, i) => comp.critica && cand.eval.calificaciones[i] < 3);
+  
+  let analisisBase = "";
+  if (criticasBajas.length > 0) {
+    analisisBase += `⚠️ A pesar de un puntaje total de ${p}, se detectan brechas significativas en competencias críticas del rol (${criticasBajas.map(c => c.nombre).join(', ')}). Esto representa un riesgo operativo y comercial. `;
+  }
+
+  if (p >= 90) return analisisBase + `El candidato demuestra un perfil excepcional con dominio integral de las competencias evaluadas. Con ${exp} años de experiencia, evidencia liderazgo estratégico, visión innovadora y capacidad para generar resultados medibles. Es el candidato ideal para asumir el cargo con autonomía total.`;
+  if (p >= 80) return analisisBase + `Perfil sólido con ${exp} años de experiencia. Demuestra dominio en la mayoría de competencias con resultados comprobables. Su curva de adaptación será corta y puede aportar valor inmediato al equipo.`;
+  if (p >= 70) return analisisBase + `Candidato con potencial y ${exp} años de experiencia. Presenta fortalezas claras pero también brechas en algunas competencias clave que requieren validación adicional mediante referencias y expectativas salariales.`;
+  if (p >= 60) return analisisBase + `Perfil con conocimientos básicos y ${exp} años de experiencia. Podría desempeñarse mejor en roles de ejecución o especialista en lugar de posiciones de liderazgo.`;
+  return analisisBase + `El candidato no evidencia las competencias críticas requeridas para el cargo. A pesar de ${exp} años de experiencia, las respuestas no demuestran capacidad para asumir las responsabilidades del puesto.`;
 }
 
 function obtenerFortalezas(eval_, nombreCargo) {
@@ -1795,7 +1934,7 @@ async function generarPDF(nit, cargo, candId) {
       const calif = candidatoSeleccionado.eval.calificaciones[i];
       const diff = calif - promedios[i];
       return [
-        comp.nombre,
+        comp.nombre + (comp.critica ? ' (Critica)' : ''),
         comp.peso + '%',
         calif + '/5',
         promedios[i].toFixed(2),
@@ -1828,11 +1967,11 @@ async function generarPDF(nit, cargo, candId) {
       margin: { left: 15, right: 15 },
       styles: { cellPadding: 2, halign: 'center', overflow: 'linebreak' },
       columnStyles: { 
-        0: { halign: 'left', cellWidth: 55 },
-        1: { cellWidth: 18 },
+        0: { halign: 'left', cellWidth: 60 },
+        1: { cellWidth: 15 },
         2: { cellWidth: 18 },
         3: { cellWidth: 20 },
-        4: { cellWidth: 22 }
+        4: { cellWidth: 20 }
       }
     });
 
@@ -1847,6 +1986,18 @@ async function generarPDF(nit, cargo, candId) {
 
     const decision = obtenerDecision(candidatoSeleccionado.eval.puntajeTotal, candidatoSeleccionado.cargo);
     
+    // Verificar competencias críticas para el PDF
+    const criticasBajasPDF = config.competencias.filter((comp, i) => comp.critica && candidatoSeleccionado.eval.calificaciones[i] < 3);
+    if (criticasBajasPDF.length > 0) {
+      pdf.setFillColor(243, 156, 18); // Naranja
+      pdf.rect(15, yPos, pageWidth - 30, 15, 'F');
+      pdf.setTextColor(255, 255, 255);
+      pdf.setFontSize(8);
+      pdf.setFont('helvetica', 'bold');
+      pdf.text('ALERTA: Calificaciones < 3 en competencias criticas (Riesgo alto)', 18, yPos + 7);
+      yPos += 18;
+    }
+
     const decisionColor = decision.clase === 'decision-hire' ? [39, 174, 96] : 
                           decision.clase === 'decision-no' ? [231, 76, 60] : 
                           decision.clase === 'decision-reserve' ? [243, 156, 18] : [52, 152, 219];
