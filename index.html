@@ -501,7 +501,7 @@
         </div>
         <div class="form-group">
           <label>Nombre del Cargo <span class="required">*</span></label>
-          <input type="text" id="nombreCargo" placeholder="Ej: Jefe de Recursos Humanos, Coordinador de Tiendas, Asesor Comercial">
+          <input type="text" id="nombreCargo" placeholder="Ej: Jefe de Recursos Humanos, Jefe Talento Humano, Asesor Comercial">
         </div>
         <div class="form-group">
           <label>Número de Vacantes <span class="required">*</span></label>
@@ -664,6 +664,73 @@ let currentEvalConfig = null;
 
 // ============ CONFIGURACIÓN DINÁMICA POR CARGO ============
 const CONFIGURACION_CARGOS = {
+  jefe_rrhh: {
+    nombre: "Jefe de Recursos Humanos / Talento Humano",
+    competencias: [
+      { nombre: 'Conocimiento laboral y manejo de nómina', peso: 30, critica: true, minCritica: 4 },
+      { nombre: 'Liderazgo y gestión de equipos', peso: 25 },
+      { nombre: 'Gestión del talento humano y resolución de conflictos', peso: 20 },
+      { nombre: 'Confidencialidad, comunicación y toma de decisiones', peso: 15 },
+      { nombre: 'Organización, análisis y cumplimiento de procesos', peso: 10 }
+    ],
+    escala: [
+      "5 - Excelente: Domina legislación laboral, nómina, prestaciones, seguridad social, PILA, EPS, AFP, ARL, cajas de compensación, novedades, contratación y retiro.",
+      "4 - Bueno: Tiene conocimientos sólidos y experiencia práctica; puede requerir consultas puntuales.",
+      "3 - Aceptable: Conoce los procesos, pero presenta vacíos importantes o necesita supervisión.",
+      "2 - Bajo: Conocimientos superficiales y poca experiencia práctica.",
+      "1 - Insuficiente: No demuestra dominio de los procesos esenciales."
+    ],
+    interpretacion: [
+      { min: 90, max: 100, texto: '✅ ALTAMENTE RECOMENDADO - Perfil sobresaliente con dominio integral de la gestión de RRHH, nómina y liderazgo estratégico.', clase: 'decision-hire' },
+      { min: 80, max: 89.99, texto: '👍 RECOMENDADO - Cumple con el perfil, demuestra sólidos conocimientos en legislación y gestión de equipos.', clase: 'decision-recommend' },
+      { min: 70, max: 79.99, texto: '⚠️ RECOMENDADO CON PLAN DE DESARROLLO - Tiene bases aceptables, pero requiere fortalecimiento en áreas clave de nómina o liderazgo.', clase: 'decision-reserve' },
+      { min: 60, max: 69.99, texto: '🔍 AJUSTE PARCIAL - Conviene comparar con otros candidatos. Presenta debilidades en gestión laboral o cumplimiento de procesos.', clase: 'decision-reserve' },
+      { min: 0, max: 59.99, texto: '❌ NO RECOMENDADO - No demuestra las competencias clave para la jefatura de recursos humanos.', clase: 'decision-no' }
+    ],
+    guiaEntrevista: `
+      <h4>📋 Matriz de Evaluación Detallada - Jefe de Recursos Humanos / Talento Humano</h4>
+      <p style="font-size:13px; color:#666; margin-bottom:15px">⚠️ <strong>Nota importante:</strong> La competencia <strong>"Conocimiento laboral y manejo de nómina"</strong> es crítica y obligatoria. Una calificación menor a 4 en esta área representa un riesgo alto para el cargo, independientemente del puntaje total.</p>
+      
+      <h4>1. Conocimiento laboral y manejo de nómina (30% - Crítica)</h4>
+      <p><strong>Qué evaluar:</strong> Dominio de legislación laboral, nómina, prestaciones, seguridad social, PILA, EPS, AFP, ARL, cajas de compensación, novedades, contratación y retiro.</p>
+      <ul>
+        <li><strong>5 - Excelente:</strong> Domina legislación laboral, nómina, prestaciones, seguridad social, PILA, EPS, AFP, ARL, cajas de compensación, novedades, contratación y retiro.</li>
+        <li><strong>4 - Bueno:</strong> Tiene conocimientos sólidos y experiencia práctica; puede requerir consultas puntuales.</li>
+        <li><strong>3 - Aceptable:</strong> Conoce los procesos, pero presenta vacíos importantes o necesita supervisión.</li>
+        <li><strong>2 - Bajo:</strong> Conocimientos superficiales y poca experiencia práctica.</li>
+        <li><strong>1 - Insuficiente:</strong> No demuestra dominio de los procesos esenciales.</li>
+      </ul>
+      <p><strong>Preguntas clave:</strong></p>
+      <ul>
+        <li>Describa el proceso completo que sigue para liquidar una nómina mensual, incluyendo el manejo de novedades y el reporte a seguridad social (PILA).</li>
+        <li>¿Cómo maneja un caso de despido injustificado o una reclamación ante el Ministerio del Trabajo? Dé un ejemplo concreto.</li>
+      </ul>
+
+      <h4>2. Liderazgo y gestión de equipos (25%)</h4>
+      <p><strong>Qué evaluar:</strong> Capacidad para dirigir, motivar y desarrollar al equipo de RRHH y al personal de la organización.</p>
+      <ul>
+        <li>Cuénteme sobre una ocasión en la que tuvo que gestionar un cambio organizacional importante. ¿Cómo lo comunicó y lideró en su equipo?</li>
+      </ul>
+
+      <h4>3. Gestión del talento humano y resolución de conflictos (20%)</h4>
+      <p><strong>Qué evaluar:</strong> Habilidad para mediar en conflictos laborales, manejar clima organizacional y retener el talento clave.</p>
+      <ul>
+        <li>Describa una situación de conflicto grave entre dos áreas o empleados clave. ¿Cuál fue su rol y cómo lo resolvió?</li>
+      </ul>
+
+      <h4>4. Confidencialidad, comunicación y toma de decisiones (15%)</h4>
+      <p><strong>Qué evaluar:</strong> Manejo de información sensible, comunicación asertiva con la gerencia y los empleados, y capacidad de decisión ética.</p>
+      <ul>
+        <li>¿Cómo garantiza la confidencialidad de la información de nómina y datos personales de los empleados en su gestión diaria?</li>
+      </ul>
+
+      <h4>5. Organización, análisis y cumplimiento de procesos (10%)</h4>
+      <p><strong>Qué evaluar:</strong> Estructuración de procesos de RRHH, auditoría interna y cumplimiento normativo.</p>
+      <ul>
+        <li>¿Qué indicadores (KPIs) de gestión humana considera indispensables para reportar a la gerencia mensual o trimestralmente?</li>
+      </ul>
+    `
+  },
   marketing: {
     nombre: "Líder de Marketing Digital",
     competencias: [
@@ -1042,89 +1109,36 @@ const CONFIGURACION_CARGOS = {
         <li><strong>5:</strong> Visión integral de la operación, previene impactos comerciales y articula las áreas para asegurar continuidad, servicio y cumplimiento.</li>
       </ul>
     `
-  },
-  jefe_rrhh: {
-    nombre: "Jefe de Recursos Humanos",
-    competencias: [
-      { nombre: 'Conocimiento laboral y manejo de nómina', peso: 30, critica: true, minCritica: 4 },
-      { nombre: 'Liderazgo y gestión de equipos', peso: 25 },
-      { nombre: 'Gestión del talento humano y resolución de conflictos', peso: 20 },
-      { nombre: 'Confidencialidad, comunicación y toma de decisiones', peso: 15 },
-      { nombre: 'Organización, análisis y cumplimiento de procesos', peso: 10 }
-    ],
-    escala: [
-      "5 - Excelente: Domina legislación laboral, nómina, prestaciones, seguridad social, PILA, EPS, AFP, ARL, cajas de compensación, novedades, contratación y retiro.",
-      "4 - Bueno: Tiene conocimientos sólidos y experiencia práctica; puede requerir consultas puntuales.",
-      "3 - Aceptable: Conoce los procesos, pero presenta vacíos importantes o necesita supervisión.",
-      "2 - Bajo: Conocimientos superficiales y poca experiencia práctica.",
-      "1 - Insuficiente: No demuestra dominio de los procesos esenciales."
-    ],
-    interpretacion: [
-      { min: 90, max: 100, texto: '✅ ALTAMENTE RECOMENDADO - Perfil sobresaliente con dominio integral de la gestión de RRHH, nómina y liderazgo estratégico.', clase: 'decision-hire' },
-      { min: 80, max: 89.99, texto: '👍 RECOMENDADO - Cumple con el perfil, demuestra sólidos conocimientos en legislación y gestión de equipos.', clase: 'decision-recommend' },
-      { min: 70, max: 79.99, texto: '⚠️ RECOMENDADO CON PLAN DE DESARROLLO - Tiene bases aceptables, pero requiere fortalecimiento en áreas clave de nómina o liderazgo.', clase: 'decision-reserve' },
-      { min: 60, max: 69.99, texto: '🔍 AJUSTE PARCIAL - Conviene comparar con otros candidatos. Presenta debilidades en gestión laboral o cumplimiento de procesos.', clase: 'decision-reserve' },
-      { min: 0, max: 59.99, texto: '❌ NO RECOMENDADO - No demuestra las competencias clave para la jefatura de recursos humanos.', clase: 'decision-no' }
-    ],
-    guiaEntrevista: `
-      <h4>📋 Matriz de Evaluación Detallada - Jefe de Recursos Humanos</h4>
-      <p style="font-size:13px; color:#666; margin-bottom:15px">⚠️ <strong>Nota importante:</strong> La competencia <strong>"Conocimiento laboral y manejo de nómina"</strong> es crítica y obligatoria. Una calificación menor a 4 en esta área representa un riesgo alto para el cargo, independientemente del puntaje total.</p>
-      
-      <h4>1. Conocimiento laboral y manejo de nómina (30% - Crítica)</h4>
-      <p><strong>Qué evaluar:</strong> Dominio de legislación laboral, nómina, prestaciones, seguridad social, PILA, EPS, AFP, ARL, cajas de compensación, novedades, contratación y retiro.</p>
-      <ul>
-        <li><strong>5 - Excelente:</strong> Domina legislación laboral, nómina, prestaciones, seguridad social, PILA, EPS, AFP, ARL, cajas de compensación, novedades, contratación y retiro.</li>
-        <li><strong>4 - Bueno:</strong> Tiene conocimientos sólidos y experiencia práctica; puede requerir consultas puntuales.</li>
-        <li><strong>3 - Aceptable:</strong> Conoce los procesos, pero presenta vacíos importantes o necesita supervisión.</li>
-        <li><strong>2 - Bajo:</strong> Conocimientos superficiales y poca experiencia práctica.</li>
-        <li><strong>1 - Insuficiente:</strong> No demuestra dominio de los procesos esenciales.</li>
-      </ul>
-      <p><strong>Preguntas clave:</strong></p>
-      <ul>
-        <li>Describa el proceso completo que sigue para liquidar una nómina mensual, incluyendo el manejo de novedades y el reporte a seguridad social (PILA).</li>
-        <li>¿Cómo maneja un caso de despido injustificado o una reclamación ante el Ministerio del Trabajo? Dé un ejemplo concreto.</li>
-      </ul>
-
-      <h4>2. Liderazgo y gestión de equipos (25%)</h4>
-      <p><strong>Qué evaluar:</strong> Capacidad para dirigir, motivar y desarrollar al equipo de RRHH y al personal de la organización.</p>
-      <ul>
-        <li>Cuénteme sobre una ocasión en la que tuvo que gestionar un cambio organizacional importante. ¿Cómo lo comunicó y lideró en su equipo?</li>
-      </ul>
-
-      <h4>3. Gestión del talento humano y resolución de conflictos (20%)</h4>
-      <p><strong>Qué evaluar:</strong> Habilidad para mediar en conflictos laborales, manejar clima organizacional y retener el talento clave.</p>
-      <ul>
-        <li>Describa una situación de conflicto grave entre dos áreas o empleados clave. ¿Cuál fue su rol y cómo lo resolvió?</li>
-      </ul>
-
-      <h4>4. Confidencialidad, comunicación y toma de decisiones (15%)</h4>
-      <p><strong>Qué evaluar:</strong> Manejo de información sensible, comunicación asertiva con la gerencia y los empleados, y capacidad de decisión ética.</p>
-      <ul>
-        <li>¿Cómo garantiza la confidencialidad de la información de nómina y datos personales de los empleados en su gestión diaria?</li>
-      </ul>
-
-      <h4>5. Organización, análisis y cumplimiento de procesos (10%)</h4>
-      <p><strong>Qué evaluar:</strong> Estructuración de procesos de RRHH, auditoría interna y cumplimiento normativo.</p>
-      <ul>
-        <li>¿Qué indicadores (KPIs) de gestión humana considera indispensables para reportar a la gerencia mensual o trimestralmente?</li>
-      </ul>
-    `
   }
 };
 
+// ============ FUNCIÓN DE DETECCIÓN MEJORADA Y ROBUSTA ============
 function getConfiguracionCargo(nombreCargo) {
-  const nombre = (nombreCargo || "").toLowerCase();
-  if (nombre.includes('jefe') && (nombre.includes('recursos humanos') || nombre.includes('rrhh') || nombre.includes('talento humano'))) {
+  // Normalizamos a minúsculas y eliminamos acentos para que la búsqueda sea infalible
+  const nombre = (nombreCargo || "").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+  
+  // 1. Detección explícita y flexible para Jefe/Líder/Gerente de RRHH o Talento Humano
+  const esCargoDirectivo = nombre.includes('jefe') || nombre.includes('lider') || nombre.includes('gerente') || nombre.includes('director') || nombre === 'jefe_rrhh';
+  const esAreaRRHH = nombre.includes('recursos humanos') || nombre.includes('talento humano') || nombre.includes('rrhh') || nombre.includes(' rh ');
+  
+  if (esCargoDirectivo && esAreaRRHH) {
     return CONFIGURACION_CARGOS.jefe_rrhh;
   }
+  // Fallback: si solo menciona el área, también asumimos este perfil por defecto
+  if (esAreaRRHH) {
+    return CONFIGURACION_CARGOS.jefe_rrhh;
+  }
+
+  // 2. Resto de detecciones
   if (nombre.includes('lider') && (nombre.includes('ventas') || nombre.includes('online') || nombre.includes('digital') || nombre.includes('e-commerce') || nombre.includes('departamento'))) {
     return CONFIGURACION_CARGOS.lider_ventas_online;
   }
-  if (nombre.includes('marketing') || nombre.includes('líder') || nombre.includes('lider')) return CONFIGURACION_CARGOS.marketing;
+  if (nombre.includes('marketing') || nombre.includes('lider')) return CONFIGURACION_CARGOS.marketing;
   if (nombre.includes('campo') || nombre.includes('ruta') || nombre.includes('calle') || nombre.includes('visitador') || nombre.includes('terreno')) return CONFIGURACION_CARGOS.asesor_campo;
   if (nombre.includes('coordinador') || nombre.includes('tiendas') || nombre.includes('supervisor') || nombre.includes('retail') || nombre.includes('punto de venta')) return CONFIGURACION_CARGOS.coordinador_tiendas;
   if (nombre.includes('asesor') || nombre.includes('comercial') || nombre.includes('venta')) return CONFIGURACION_CARGOS.asesor;
   if (nombre.includes('auxiliar') || nombre.includes('cartera') || nombre.includes('cobro') || nombre.includes('recibo')) return CONFIGURACION_CARGOS.auxiliar_cartera;
+  
   return CONFIGURACION_CARGOS.marketing; // Fallback por defecto
 }
 
