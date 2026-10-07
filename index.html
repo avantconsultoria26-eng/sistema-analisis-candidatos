@@ -501,7 +501,7 @@
         </div>
         <div class="form-group">
           <label>Nombre del Cargo <span class="required">*</span></label>
-          <input type="text" id="nombreCargo" placeholder="Ej: Jefe de Recursos Humanos, Jefe Talento Humano, Asesor Comercial">
+          <input type="text" id="nombreCargo" placeholder="Ej: Administrador de Punto, Jefe de RRHH, Asesor Comercial">
         </div>
         <div class="form-group">
           <label>Número de Vacantes <span class="required">*</span></label>
@@ -664,6 +664,87 @@ let currentEvalConfig = null;
 
 // ============ CONFIGURACIÓN DINÁMICA POR CARGO ============
 const CONFIGURACION_CARGOS = {
+  administrador_punto: {
+    nombre: "Administrador de Punto",
+    competencias: [
+      { nombre: 'Liderazgo y gestión de equipos', peso: 25 },
+      { nombre: 'Organización y planificación de la operación', peso: 25 },
+      { nombre: 'Resolución de problemas e iniciativa', peso: 20 },
+      { nombre: 'Orientación al servicio al cliente', peso: 15 },
+      { nombre: 'Control, responsabilidad y orientación a resultados', peso: 15 }
+    ],
+    escala: [
+      "5 - Sobresaliente: Demuestra dominio total, presenta ejemplos concretos con resultados medibles, evidencia liderazgo real, autonomía y capacidad para manejar múltiples situaciones simultáneas con excelencia.",
+      "4 - Bueno: Cumple completamente con la competencia, aporta ejemplos claros, muestra iniciativa y capacidad de respuesta efectiva en la operación del punto.",
+      "3 - Aceptable: Conoce y aplica parcialmente la competencia, requiere algo de acompañamiento pero puede desarrollarse bien en el rol con supervisión.",
+      "2 - Básico: Demuestra conocimiento superficial, respuestas vagas o sin ejemplos concretos, necesitaría supervisión constante y entrenamiento intensivo.",
+      "1 - Deficiente: No evidencia la competencia, evita respuestas, no demuestra experiencias previas relevantes o presenta actitudes contrarias al perfil operativo."
+    ],
+    interpretacion: [
+      { min: 90, max: 100, texto: '✅ ALTAMENTE RECOMENDADO - Perfil excepcional para administrar un punto de venta. Demuestra liderazgo sólido, excelente organización operativa, resolución efectiva de problemas, fuerte orientación al cliente y control riguroso de recursos.', clase: 'decision-hire' },
+      { min: 80, max: 89.99, texto: '👍 RECOMENDADO - Cumple con el perfil de administrador de punto. Buen manejo de equipos, organización operativa y resolución de problemas. Curva de adaptación corta.', clase: 'decision-recommend' },
+      { min: 70, max: 79.99, texto: '⚠️ RECOMENDADO CON PLAN DE DESARROLLO - Tiene potencial operativo, pero presenta brechas en alguna competencia clave (liderazgo, organización o control de recursos). Requiere acompañamiento inicial.', clase: 'decision-reserve' },
+      { min: 60, max: 69.99, texto: '🔍 AJUSTE PARCIAL - Conviene comparar con otros candidatos. Podría desempeñarse como segundo al mando o en puntos de menor complejidad, pero aún no evidencia madurez para administrar un punto de forma autónoma.', clase: 'decision-reserve' },
+      { min: 0, max: 59.99, texto: '❌ NO RECOMENDADO - No demuestra las competencias críticas para la administración de un punto de venta (gestión de equipos, control operativo, atención al cliente y manejo de recursos).', clase: 'decision-no' }
+    ],
+    guiaEntrevista: `
+      <h4>📋 Matriz de Evaluación Detallada - Administrador de Punto</h4>
+      <p style="font-size:13px; color:#666; margin-bottom:15px">Esta guía está diseñada para evaluar competencias clave en la administración de un punto de venta (restaurante, food service o similar). Utilice la escala del 1 al 5 según el nivel de evidencia en las respuestas del candidato.</p>
+      
+      <h4>1. Apertura (5 minutos)</h4>
+      <ul>
+        <li>Cuéntame sobre tu trayectoria profesional y tu experiencia administrando puntos de venta, restaurantes o establecimientos similares.</li>
+        <li>¿Qué te motivó a aplicar a este cargo de Administrador de Punto?</li>
+        <li>¿Cómo describirías tu estilo de liderazgo cuando diriges un equipo operativo en un ambiente dinámico?</li>
+      </ul>
+
+      <h4>2. Entrevista por Competencias</h4>
+
+      <h5>A. Liderazgo y gestión de equipos (25%)</h5>
+      <p style="color:#666; font-style:italic; font-size:13px"><strong>Qué evaluar:</strong> Capacidad para dirigir, orientar y movilizar al equipo. Distribución clara de funciones, toma de decisiones, manejo de conflictos, seguimiento, corrección sin confrontaciones innecesarias y experiencias reales liderando personas.</p>
+      <ul>
+        <li>Cuéntame sobre la ocasión en la que tuviste que liderar el equipo más grande o complejo. ¿Cómo distribuiste las funciones y te aseguraste de que cada persona entendiera su rol?</li>
+        <li>Describe una situación en la que tuviste que corregir a un colaborador por un desempeño inadecuado. ¿Cómo lo hiciste para que no generara confrontación innecesaria?</li>
+        <li>Háblame de un conflicto entre dos miembros de tu equipo. ¿Cómo lo manejaste y cuál fue el resultado?</li>
+      </ul>
+
+      <h5>B. Organización y planificación de la operación (25%)</h5>
+      <p style="color:#666; font-style:italic; font-size:13px"><strong>Qué evaluar:</strong> Capacidad para coordinar simultáneamente las diferentes necesidades del punto: priorización, organización de turnos y tareas, anticipación de necesidades, coordinación de cocina, servicio, caja, aseo y almacén, administración del tiempo y control ante situaciones simultáneas.</p>
+      <ul>
+        <li>Describe cómo organizas un turno típico desde que abres el punto hasta que cierras. ¿Qué revisas primero, qué delegas y cómo te aseguras de que todo funcione?</li>
+        <li>Imagina que es viernes en la noche, el punto está lleno, la cocina va atrasada, un mesero se enfermó y tienes un cliente esperando una mesa. ¿Cómo priorizas y coordinas la operación?</li>
+        <li>¿Qué herramientas o métodos usas para organizar turnos, tareas y anticipar las necesidades del punto?</li>
+      </ul>
+
+      <h5>C. Resolución de problemas e iniciativa (20%)</h5>
+      <p style="color:#666; font-style:italic; font-size:13px"><strong>Qué evaluar:</strong> Capacidad para reaccionar frente a novedades y tomar decisiones oportunas. Analiza antes de actuar, identifica alternativas, toma decisiones con criterio, propone soluciones, actúa con autonomía y previene que los problemas se repitan.</p>
+      <ul>
+        <li>Cuéntame sobre el problema más complejo que tuviste que resolver en un punto de venta. ¿Cómo lo analizaste, qué alternativas consideraste y qué decisión tomaste?</li>
+        <li>Describe una ocasión en la que identificaste un problema recurrente en la operación y propusiste una solución para evitar que se repitiera.</li>
+        <li>¿Cómo actúas cuando enfrentas una situación imprevista que no está contemplada en los procedimientos?</li>
+      </ul>
+
+      <h5>D. Orientación al servicio al cliente (15%)</h5>
+      <p style="color:#666; font-style:italic; font-size:13px"><strong>Qué evaluar:</strong> Capacidad para garantizar una experiencia adecuada al cliente. Escucha activa, manejo de quejas con respeto, soluciones efectivas, comunicación asertiva, control de situaciones difíciles, seguimiento y comprensión de que la experiencia del cliente depende de toda la operación.</p>
+      <ul>
+        <li>Cuéntame sobre la ocasión en la que tuviste que manejar la queja más difícil de un cliente. ¿Cómo lo escuchaste, qué solución ofreciste y cómo terminó la situación?</li>
+        <li>¿Cómo te aseguras de que todo el equipo mantenga un estándar de servicio consistente, incluso en momentos de alta presión?</li>
+        <li>¿Qué haces cuando un cliente tiene una experiencia negativa por un fallo operativo (ej: demora en cocina, error en pedido)?</li>
+      </ul>
+
+      <h5>E. Control, responsabilidad y orientación a resultados (15%)</h5>
+      <p style="color:#666; font-style:italic; font-size:13px"><strong>Qué evaluar:</strong> Capacidad para controlar recursos y responder por los resultados del punto. Manejo responsable de caja, inventarios y facturación; detección de inconsistencias; seguimiento a desperdicios y pérdidas; uso de información para tomar decisiones; reportes de novedades; honestidad, responsabilidad y orientación al cumplimiento.</p>
+      <ul>
+        <li>¿Cómo realizas el cierre de caja y qué haces cuando detectas una inconsistencia? Dame un ejemplo concreto.</li>
+        <li>Describe cómo controlas los inventarios y los desperdicios en el punto. ¿Qué indicadores revisas y con qué frecuencia?</li>
+        <li>Háblame de una ocasión en la que detectaste una pérdida o inconsistencia importante. ¿Cómo la manejaste y qué medidas implementaste para evitar que se repitiera?</li>
+      </ul>
+
+      <h4>3. Caso Práctico Integrador</h4>
+      <p><strong>Escenario:</strong> Es sábado al mediodía, el punto está lleno. En cocina hay un atraso de 20 minutos en los pedidos, un mesero acaba de derramar una bebida sobre un cliente (quien está muy molesto), en caja hay una diferencia de $80.000 que debes cuadrar antes del cierre, y tu supervisor te llama para pedirte un reporte urgente de ventas de la semana. Además, uno de tus cocineros te dice que se siente mal y necesita irse. ¿Cómo organizas tu respuesta, qué priorizas y qué decisiones tomas?</p>
+      <p style="color:#666; font-size:13px"><em>Evaluar: priorización, liderazgo bajo presión, resolución de problemas, orientación al cliente, control operativo y manejo simultáneo de múltiples situaciones.</em></p>
+    `
+  },
   jefe_rrhh: {
     nombre: "Jefe de Recursos Humanos / Talento Humano",
     competencias: [
@@ -1114,22 +1195,29 @@ const CONFIGURACION_CARGOS = {
 
 // ============ FUNCIÓN DE DETECCIÓN MEJORADA Y ROBUSTA ============
 function getConfiguracionCargo(nombreCargo) {
-  // Normalizamos a minúsculas y eliminamos acentos para que la búsqueda sea infalible
   const nombre = (nombreCargo || "").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
   
-  // 1. Detección explícita y flexible para Jefe/Líder/Gerente de RRHH o Talento Humano
+  // 1. ADMINISTRADOR DE PUNTO (nuevo - prioridad alta porque es muy específico)
+  if (nombre.includes('administrador') && (nombre.includes('punto') || nombre.includes('pv') || nombre.includes('local') || nombre.includes('restaurante') || nombre.includes('sucursal'))) {
+    return CONFIGURACION_CARGOS.administrador_punto;
+  }
+  // Fallback: solo "admin de punto" o "jefe de punto"
+  if ((nombre.includes('admin') || nombre.includes('jefe')) && nombre.includes('punto')) {
+    return CONFIGURACION_CARGOS.administrador_punto;
+  }
+
+  // 2. JEFE/LÍDER DE RRHH O TALENTO HUMANO
   const esCargoDirectivo = nombre.includes('jefe') || nombre.includes('lider') || nombre.includes('gerente') || nombre.includes('director') || nombre === 'jefe_rrhh';
   const esAreaRRHH = nombre.includes('recursos humanos') || nombre.includes('talento humano') || nombre.includes('rrhh') || nombre.includes(' rh ');
   
   if (esCargoDirectivo && esAreaRRHH) {
     return CONFIGURACION_CARGOS.jefe_rrhh;
   }
-  // Fallback: si solo menciona el área, también asumimos este perfil por defecto
   if (esAreaRRHH) {
     return CONFIGURACION_CARGOS.jefe_rrhh;
   }
 
-  // 2. Resto de detecciones
+  // 3. Resto de detecciones
   if (nombre.includes('lider') && (nombre.includes('ventas') || nombre.includes('online') || nombre.includes('digital') || nombre.includes('e-commerce') || nombre.includes('departamento'))) {
     return CONFIGURACION_CARGOS.lider_ventas_online;
   }
@@ -1550,7 +1638,6 @@ function guardarEvaluacion() {
     alert('⚠️ Debe calificar todas las competencias'); return;
   }
   
-  // Validar competencias críticas
   const cand = candidatos.find(c => c.id == id);
   const config = getConfiguracionCargo(cand.cargo);
   let alertasCriticas = [];
@@ -1682,7 +1769,6 @@ function mostrarResultados() {
     return suma / evaluados.length;
   });
 
-  // Verificar alertas de competencias críticas
   let alertasCriticasHtml = '';
   if (config.competencias) {
     const criticasBajas = config.competencias.filter((comp, i) => {
@@ -1706,7 +1792,6 @@ function mostrarResultados() {
     }
   }
 
-  // PODIO
   let podiumHtml = '<h3 style="color:#2a5298; margin:20px 0 10px">🏆 Podio General</h3><div class="podium" id="podiumToCapture">';
   const medals = ['🥇','🥈','🥉'];
   const classes = ['gold','silver','bronze'];
@@ -1725,7 +1810,6 @@ function mostrarResultados() {
   });
   podiumHtml += '</div>';
 
-  // TABLA DE RANKING
   let tablaHtml = '<h3 style="color:#2a5298; margin:20px 0 10px">📋 Ranking Completo</h3><table><thead><tr><th>#</th><th>Candidato</th><th>Profesión</th><th>Experiencia</th><th>Puntaje</th><th>Semáforo</th><th>Decisión</th></tr></thead><tbody>';
   evaluados.forEach((c, i) => {
     const cSem = obtenerSemaforo(c.eval.puntajeTotal);
@@ -1734,13 +1818,11 @@ function mostrarResultados() {
   });
   tablaHtml += '</tbody></table>';
 
-  // GRÁFICA RADAR
   const chartHtml = `<div class="chart-container" id="chartToCapture">
     <h3>📈 Análisis Radial Comparativo: ${candidatoSeleccionado.nombre}</h3>
     <div class="chart-wrapper"><canvas id="radarChart"></canvas></div>
   </div>`;
 
-  // Tarjeta de datos
   const detailCard = `<div class="candidate-selector-box">
     <h4>🎯 Candidato Seleccionado para Análisis</h4>
     <div class="candidate-detail-card">
@@ -1759,7 +1841,6 @@ function mostrarResultados() {
     </div>
   </div>`;
 
-  // RESUMEN PERSONALIZADO
   const resumenHtml = `<div class="summary-box">
     <h3>📝 Análisis Personalizado: ${candidatoSeleccionado.nombre}</h3>
     <p><strong>Puntaje Total:</strong> ${candidatoSeleccionado.eval.puntajeTotal.toFixed(1)} / 100 puntos | <strong>Posición:</strong> #${posicion} de ${evaluados.length} candidatos</p>
@@ -1768,7 +1849,6 @@ function mostrarResultados() {
     <p><strong>Áreas de mejora:</strong> ${obtenerDebilidades(candidatoSeleccionado.eval, candidatoSeleccionado.cargo)}</p>
   </div>`;
 
-  // BOTONES
   const accionesHtml = `<div class="btn-group" style="justify-content:center; margin-top:30px; flex-wrap:wrap; gap:10px">
     <button class="btn btn-success" onclick="finalizarProceso('${nit}', '${cargo}')">✅ Finalizar Proceso (Cerrar Vacante)</button>
     <button class="btn btn-warning" onclick="reiniciarAnalisis('${nit}', '${cargo}')">🔄 Nuevo Análisis de Candidatos</button>
@@ -1948,7 +2028,6 @@ async function generarPDF(nit, cargo, candId) {
 
     let yPos = 15;
 
-    // ENCABEZADO
     pdf.setFillColor(10, 37, 64);
     pdf.rect(0, 0, pageWidth, 35, 'F');
     pdf.setFillColor(30, 60, 114);
@@ -1967,7 +2046,6 @@ async function generarPDF(nit, cargo, candId) {
 
     yPos = 42;
 
-    // INFORMACION DEL CANDIDATO
     pdf.setTextColor(30, 60, 114);
     pdf.setFontSize(12);
     pdf.setFont('helvetica', 'bold');
@@ -1988,7 +2066,6 @@ async function generarPDF(nit, cargo, candId) {
     pdf.setFont('helvetica', 'bold');
     pdf.text('Puntaje: ' + candidatoSeleccionado.eval.puntajeTotal.toFixed(1) + '/100 | Posicion: #' + posicion + ' de ' + evaluados.length, 15, yPos); yPos += 10;
 
-    // PODIO
     if (yPos > 140) { pdf.addPage(); yPos = 15; }
     pdf.setFontSize(12);
     pdf.setTextColor(30, 60, 114);
@@ -2013,7 +2090,6 @@ async function generarPDF(nit, cargo, candId) {
       yPos += 19;
     });
 
-    // TABLA DE COMPETENCIAS
     if (yPos > 180) { pdf.addPage(); yPos = 15; }
     pdf.setFontSize(12);
     pdf.setTextColor(30, 60, 114);
@@ -2067,7 +2143,6 @@ async function generarPDF(nit, cargo, candId) {
 
     yPos = pdf.lastAutoTable.finalY + 8;
 
-    // ANALISIS Y DECISION
     if (yPos > 200) { pdf.addPage(); yPos = 15; }
     pdf.setFontSize(12);
     pdf.setTextColor(30, 60, 114);
@@ -2076,13 +2151,12 @@ async function generarPDF(nit, cargo, candId) {
 
     const decision = obtenerDecision(candidatoSeleccionado.eval.puntajeTotal, candidatoSeleccionado.cargo);
     
-    // Verificar competencias críticas para el PDF
     const criticasBajasPDF = config.competencias.filter((comp, i) => {
       const umbral = comp.minCritica || 3;
       return comp.critica && candidatoSeleccionado.eval.calificaciones[i] < umbral;
     });
     if (criticasBajasPDF.length > 0) {
-      pdf.setFillColor(243, 156, 18); // Naranja
+      pdf.setFillColor(243, 156, 18);
       pdf.rect(15, yPos, pageWidth - 30, 15, 'F');
       pdf.setTextColor(255, 255, 255);
       pdf.setFontSize(8);
@@ -2133,7 +2207,6 @@ async function generarPDF(nit, cargo, candId) {
     const debLines = pdf.splitTextToSize(deb, pageWidth - 30);
     pdf.text(debLines, 15, yPos);
 
-    // PIE DE PAGINA
     const pageCount = pdf.internal.getNumberOfPages();
     for (let i = 1; i <= pageCount; i++) {
       pdf.setPage(i);
