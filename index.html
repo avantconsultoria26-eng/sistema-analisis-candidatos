@@ -501,7 +501,7 @@
         </div>
         <div class="form-group">
           <label>Nombre del Cargo <span class="required">*</span></label>
-          <input type="text" id="nombreCargo" placeholder="Ej: Administrador de Punto, Jefe de RRHH, Asesor Comercial">
+          <input type="text" id="nombreCargo" placeholder="Ej: Auxiliar Contable, Jefe de RRHH, Asesor Comercial">
         </div>
         <div class="form-group">
           <label>Número de Vacantes <span class="required">*</span></label>
@@ -557,15 +557,15 @@
         </div>
         <div class="form-group">
           <label>Profesión <span class="required">*</span></label>
-          <input type="text" id="profesion" placeholder="Ej: Administrador de Empresas">
+          <input type="text" id="profesion" placeholder="Ej: Tecnólogo en Contabilidad">
         </div>
         <div class="form-group">
           <label>Edad <span class="required">*</span></label>
-          <input type="number" id="edad" min="18" max="70" placeholder="Ej: 32">
+          <input type="number" id="edad" min="18" max="70" placeholder="Ej: 28">
         </div>
         <div class="form-group">
           <label>Tiempo de Experiencia (años) <span class="required">*</span></label>
-          <input type="number" id="experiencia" min="0" max="50" placeholder="Ej: 5">
+          <input type="number" id="experiencia" min="0" max="50" placeholder="Ej: 3">
         </div>
         <div class="form-group">
           <label>Teléfono <span class="required">*</span></label>
@@ -664,6 +664,100 @@ let currentEvalConfig = null;
 
 // ============ CONFIGURACIÓN DINÁMICA POR CARGO ============
 const CONFIGURACION_CARGOS = {
+  auxiliar_contable: {
+    nombre: "Auxiliar Contable",
+    competencias: [
+      { nombre: 'Registro contable y precisión', peso: 30, critica: true, minCritica: 3 },
+      { nombre: 'Conciliaciones bancarias', peso: 25 },
+      { nombre: 'Gestión de cartera', peso: 20 },
+      { nombre: 'Apoyo tributario y cumplimiento', peso: 15 },
+      { nombre: 'Organización y archivo documental', peso: 10 }
+    ],
+    escala: [
+      "5 - Excelente: evidencia dominio claro, experiencia y criterio adecuado.",
+      "4 - Bueno: cumple con lo esperado y presenta conocimientos suficientes.",
+      "3 - Aceptable: tiene conocimientos básicos, pero requiere acompañamiento.",
+      "2 - Bajo: presenta vacíos importantes para desempeñar la función.",
+      "1 - Deficiente: no demuestra conocimientos o experiencia suficiente."
+    ],
+    interpretacion: [
+      { min: 90, max: 100, texto: '✅ AJUSTE SOBRESALIENTE - Perfil altamente recomendado para el cargo. Demuestra dominio técnico integral en registro contable, conciliaciones, cartera, apoyo tributario y organización documental.', clase: 'decision-hire' },
+      { min: 80, max: 89.99, texto: '👍 ALTO AJUSTE - Cumple ampliamente los requerimientos del cargo. Sólidos conocimientos técnicos con experiencia comprobable en las áreas clave de la contabilidad.', clase: 'decision-recommend' },
+      { min: 70, max: 79.99, texto: '⚠️ AJUSTE FAVORABLE - Puede desempeñar el cargo, con algunas oportunidades de fortalecimiento. Conocimientos técnicos adecuados pero con brechas puntuales que requieren acompañamiento.', clase: 'decision-reserve' },
+      { min: 60, max: 69.99, texto: '🔍 AJUSTE PARCIAL - Requiere capacitación o acompañamiento importante. Presenta vacíos técnicos significativos en áreas clave del cargo.', clase: 'decision-reserve' },
+      { min: 0, max: 59.99, texto: '❌ BAJO AJUSTE - No evidencia actualmente las competencias técnicas suficientes para el cargo de auxiliar contable.', clase: 'decision-no' }
+    ],
+    guiaEntrevista: `
+      <h4>📋 Matriz de Evaluación Detallada - Auxiliar Contable</h4>
+      <p style="font-size:13px; color:#666; margin-bottom:15px">⚠️ <strong>Nota importante:</strong> La competencia <strong>"Registro contable y precisión"</strong> es crítica y obligatoria. Una calificación menor a 3 en esta área representa un riesgo operativo para el área contable, independientemente del puntaje total.</p>
+      
+      <h4>1. Apertura (5 minutos)</h4>
+      <ul>
+        <li>Cuéntame sobre tu formación académica y experiencia en el área contable.</li>
+        <li>¿Qué software contable has utilizado y cuál consideras que dominas mejor?</li>
+        <li>¿Qué tipo de empresas o sectores has apoyado contablemente?</li>
+      </ul>
+
+      <h4>2. Entrevista por Competencias</h4>
+
+      <h5>A. Registro contable y precisión (30% - Crítica, Mín: 3/5)</h5>
+      <p style="color:#666; font-style:italic; font-size:13px"><strong>Qué evaluar:</strong> Capacidad para registrar correctamente facturas, comprobantes, notas crédito/débito y demás transacciones, minimizando errores. Conocimiento del PUC, naturaleza de cuentas, causales de débito y crédito.</p>
+      <ul>
+        <li>Describe paso a paso cómo registras una factura de venta con IVA y retención en la fuente. ¿Qué cuentas afectan y por qué?</li>
+        <li>¿Cómo manejas el registro de una nota crédito por devolución de mercancía? ¿Qué validaciones haces antes de registrarla?</li>
+        <li>Cuéntame sobre una ocasión en la que detectaste un error en un registro contable. ¿Cómo lo identificaste y qué hiciste para corregirlo?</li>
+        <li>¿Qué procedimiento sigues para asegurar que los comprobantes queden debidamente soportados antes de contabilizarlos?</li>
+      </ul>
+
+      <h5>B. Conciliaciones bancarias (25%)</h5>
+      <p style="color:#666; font-style:italic; font-size:13px"><strong>Qué evaluar:</strong> Capacidad para comparar, identificar diferencias, investigar inconsistencias y mantener saldos confiables entre libros y extractos bancarios.</p>
+      <ul>
+        <li>Describe tu proceso para realizar una conciliación bancaria. ¿Qué partidas identificas con mayor frecuencia como diferencias?</li>
+        <li>¿Cómo investigas y depuras partidas en tránsito antiguas (cheques no cobrados, transferencias sin aplicar)?</li>
+        <li>Cuéntame sobre una conciliación compleja que hayas resuelto. ¿Cuál era el problema y cómo lo solucionaste?</li>
+        <li>¿Con qué frecuencia realizas conciliaciones y qué herramientas utilizas para hacerlas eficientes?</li>
+      </ul>
+
+      <h5>C. Gestión de cartera (20%)</h5>
+      <p style="color:#666; font-style:italic; font-size:13px"><strong>Qué evaluar:</strong> Manejo y seguimiento de cuentas por cobrar y pagar, vencimientos, pagos y actualización de saldos.</p>
+      <ul>
+        <li>¿Cómo organizas el seguimiento de cuentas por cobrar para identificar oportunamente los vencimientos?</li>
+        <li>Describe cómo aplicas un pago recibido cuando el cliente tiene varias facturas abiertas. ¿Qué criterio utilizas?</li>
+        <li>¿Qué haces cuando detectas un saldo pendiente antiguo que no se ha podido conciliar con el cliente?</li>
+        <li>Cuéntame sobre tu experiencia gestionando cuentas por pagar. ¿Cómo priorizas los pagos y aseguras que no se vencan?</li>
+      </ul>
+
+      <h5>D. Apoyo tributario y cumplimiento (15%)</h5>
+      <p style="color:#666; font-style:italic; font-size:13px"><strong>Qué evaluar:</strong> Capacidad para recopilar y validar información que servirá de soporte al contador para obligaciones tributarias (retención en la fuente, IVA, información exógena).</p>
+      <ul>
+        <li>¿Qué información preparas mensualmente para apoyar la declaración de retención en la fuente e IVA?</li>
+        <li>¿Cómo validas que las facturas recibidas cumplan con los requisitos fiscales antes de registrarlas?</li>
+        <li>¿Has participado en la preparación de información exógena? ¿Qué formatos o reportes has manejado?</li>
+        <li>¿Qué haces cuando un proveedor no envía la factura electrónica o esta no cumple con los requisitos de la DIAN?</li>
+      </ul>
+
+      <h5>E. Organización y archivo documental (10%)</h5>
+      <p style="color:#666; font-style:italic; font-size:13px"><strong>Qué evaluar:</strong> Orden, trazabilidad y facilidad para localizar soportes contables y fiscales. Cumplimiento de plazos y políticas de archivo.</p>
+      <ul>
+        <li>¿Cómo organizas el archivo físico y digital de los soportes contables? ¿Qué sistema de codificación utilizas?</li>
+        <li>¿Cuánto tiempo te toma localizar un soporte específico cuando la contadora o un auditor lo solicita?</li>
+        <li>¿Qué haces para asegurar que los documentos tengan la trazabilidad completa (factura, soporte de pago, comprobante contable)?</li>
+        <li>¿Cómo gestionas los plazos de conservación de documentos según la normativa vigente?</li>
+      </ul>
+
+      <h4>3. Caso Práctico Integrador</h4>
+      <p><strong>Escenario:</strong> Es día 5 del mes y estás en pleno cierre contable. Tienes las siguientes situaciones simultáneas:</p>
+      <ul>
+        <li>La conciliación bancaria de la cuenta principal muestra una diferencia de $2.500.000 que no logras identificar.</li>
+        <li>Un proveedor reclama un pago que según tus registros ya se realizó hace dos meses, pero no encuentras el soporte de aplicación.</li>
+        <li>La contadora te solicita urgente la relación de retenciones practicadas del mes anterior para la declaración de este mes.</li>
+        <li>En la revisión de facturas electrónicas recibidas, detectas que 3 facturas no cumplen con los requisitos de la DIAN y deben devolverse al proveedor.</li>
+        <li>Un auditor interno solicita los soportes de 15 comprobantes de egresos de un trimestre anterior.</li>
+      </ul>
+      <p><strong>¿Cómo priorizas estas tareas, qué decisiones tomas y en qué orden las ejecutas?</strong></p>
+      <p style="color:#666; font-size:13px"><em>Evaluar: priorización, precisión técnica, capacidad de investigación, manejo de presión, organización y cumplimiento de plazos.</em></p>
+    `
+  },
   administrador_punto: {
     nombre: "Administrador de Punto",
     competencias: [
@@ -788,25 +882,21 @@ const CONFIGURACION_CARGOS = {
       </ul>
 
       <h4>2. Liderazgo y gestión de equipos (25%)</h4>
-      <p><strong>Qué evaluar:</strong> Capacidad para dirigir, motivar y desarrollar al equipo de RRHH y al personal de la organización.</p>
       <ul>
         <li>Cuénteme sobre una ocasión en la que tuvo que gestionar un cambio organizacional importante. ¿Cómo lo comunicó y lideró en su equipo?</li>
       </ul>
 
       <h4>3. Gestión del talento humano y resolución de conflictos (20%)</h4>
-      <p><strong>Qué evaluar:</strong> Habilidad para mediar en conflictos laborales, manejar clima organizacional y retener el talento clave.</p>
       <ul>
         <li>Describa una situación de conflicto grave entre dos áreas o empleados clave. ¿Cuál fue su rol y cómo lo resolvió?</li>
       </ul>
 
       <h4>4. Confidencialidad, comunicación y toma de decisiones (15%)</h4>
-      <p><strong>Qué evaluar:</strong> Manejo de información sensible, comunicación asertiva con la gerencia y los empleados, y capacidad de decisión ética.</p>
       <ul>
         <li>¿Cómo garantiza la confidencialidad de la información de nómina y datos personales de los empleados en su gestión diaria?</li>
       </ul>
 
       <h4>5. Organización, análisis y cumplimiento de procesos (10%)</h4>
-      <p><strong>Qué evaluar:</strong> Estructuración de procesos de RRHH, auditoría interna y cumplimiento normativo.</p>
       <ul>
         <li>¿Qué indicadores (KPIs) de gestión humana considera indispensables para reportar a la gerencia mensual o trimestralmente?</li>
       </ul>
@@ -999,31 +1089,26 @@ const CONFIGURACION_CARGOS = {
       </ul>
       <h4>2. Entrevista por Competencias</h4>
       <h5>A. Orientación al logro (20%)</h5>
-      <p style="color:#666; font-style:italic; font-size:13px">Fundamental: el cargo está directamente relacionado con ventas, cumplimiento de metas e indicadores.</p>
       <ul>
         <li>Háblame de una meta comercial ambiciosa que hayas tenido que cumplir. ¿Cuál era el objetivo, qué estrategia usaste y cuál fue el resultado final?</li>
         <li>¿Cómo haces seguimiento a tus indicadores de ventas diarios/semanales? Dame un ejemplo concreto de cómo mejoraste un indicador bajo.</li>
       </ul>
       <h5>B. Orientación al cliente y abordaje en calle (18%)</h5>
-      <p style="color:#666; font-style:italic; font-size:13px">Debe tener facilidad para acercarse al cliente, generar confianza, asesorar y convertir oportunidades en ventas.</p>
       <ul>
         <li>Imagina que vas por una zona comercial visitando puntos de venta. ¿Cómo abordas a un cliente que no te conoce y parece desinteresado? Describe tu proceso paso a paso.</li>
         <li>Cuéntame sobre una ocasión en la que convertiste un "no" inicial en una venta exitosa.</li>
       </ul>
       <h5>C. Honestidad e integridad (17%)</h5>
-      <p style="color:#666; font-style:italic; font-size:13px">Existe manejo de inventario, dinero, puntos de venta y relaciones con aliados. Es una competencia que no conviene sacrificar por resultados.</p>
       <ul>
         <li>En tu experiencia manejando dinero o inventario en campo, ¿alguna vez detectaste una inconsistencia? ¿Cómo la manejaste?</li>
         <li>Imagina que un aliado comercial te ofrece un beneficio personal a cambio de favorecer su punto de venta sobre otros. ¿Qué harías?</li>
       </ul>
       <h5>D. Organización y dinamismo (13%)</h5>
-      <p style="color:#666; font-style:italic; font-size:13px">Necesaria para manejar diferentes puntos, desplazamientos, seguimiento de indicadores y múltiples actividades durante el día.</p>
       <ul>
         <li>Describe cómo planificas tu ruta de visitas diarias. ¿Qué herramientas usas para organizarte?</li>
         <li>Tienes 8 puntos que visitar en un día, pero uno te toma más tiempo del esperado. ¿Cómo reorganizas tu agenda?</li>
       </ul>
       <h5>E. Manejo de presión y resiliencia (12%)</h5>
-      <p style="color:#666; font-style:italic; font-size:13px">En ventas habrá rechazo, presión por metas, cambios y situaciones difíciles. La capacidad de mantenerse funcional es importante.</p>
       <ul>
         <li>Cuéntame sobre un día particularmente difícil en tu trabajo anterior. ¿Cómo lo manejaste emocional y operativamente?</li>
         <li>¿Cómo manejas la presión cuando te falta una semana para cerrar el mes y aún estás lejos de tu meta?</li>
@@ -1070,28 +1155,24 @@ const CONFIGURACION_CARGOS = {
       <h4>2. Entrevista por Competencias</h4>
       
       <h5>A. Orientación a Resultados y Cumplimiento de Metas (30%)</h5>
-      <p style="color:#666; font-style:italic; font-size:13px"><strong>Definición:</strong> Capacidad para dirigir esfuerzos al logro de presupuestos de venta, análisis de indicadores y ejecución de planes correctivos.</p>
       <ul>
         <li>Háblame de una ocasión en la que las tiendas a tu cargo estaban por debajo del presupuesto de ventas. ¿Qué indicadores analizaste y qué plan correctivo ejecutaste para revertir la situación?</li>
         <li>¿Cómo haces el seguimiento semanal o quincenal a los KPIs de tus tiendas? Dame un ejemplo de una acción que tomaste basándote en esos datos.</li>
       </ul>
 
       <h5>B. Liderazgo y Desarrollo de Equipos / Aliados (25%)</h5>
-      <p style="color:#666; font-style:italic; font-size:13px"><strong>Definición:</strong> Habilidad para guiar, capacitar y potenciar el desempeño comercial de administradores y equipos en punto de venta.</p>
       <ul>
         <li>Cuéntame sobre un administrador o vendedor con bajo desempeño que lograste desarrollar y convertir en un colaborador destacado. ¿Qué acciones específicas tomaste?</li>
         <li>¿Cómo garantizas que los estándares de atención y venta se mantengan uniformes en todas las tiendas que coordinas, a pesar de la distancia?</li>
       </ul>
 
       <h5>C. Visión Comercial y Activación de Ventas (25%)</h5>
-      <p style="color:#666; font-style:italic; font-size:13px"><strong>Definición:</strong> Destreza para identificar oportunidades de negocio, proponer estrategias locales y dinamizar la rotación de mercancía.</p>
       <ul>
         <li>Describe una estrategia local o activación comercial que hayas propuesto e implementado en una tienda específica para dinamizar la rotación de un producto con baja salida. ¿Cuál fue el resultado?</li>
         <li>¿Cómo identificas nuevas oportunidades de negocio o mejoras en la exhibición cuando realizas tus visitas a terreno?</li>
       </ul>
 
       <h5>D. Gestión Operativa y Resolución de Problemas (20%)</h5>
-      <p style="color:#666; font-style:italic; font-size:13px"><strong>Definición:</strong> Eficiencia en el control de estándares de marca, inventarios y autonomía en la resolución de situaciones imprevistas en terreno.</p>
       <ul>
         <li>Cuéntame sobre una situación imprevista crítica en una tienda (ej: falla de sistema, problema grave de inventario, conflicto con un cliente importante). ¿Cómo la resolviste con autonomía?</li>
         <li>¿Qué metodología utilizas para auditar y asegurar el cumplimiento de los estándares de marca e inventarios durante tus visitas?</li>
@@ -1099,7 +1180,6 @@ const CONFIGURACION_CARGOS = {
 
       <h4>3. Caso Práctico Integrador</h4>
       <p><strong>Escenario:</strong> Eres Coordinador de 5 tiendas. A mitad de mes, la Tienda A va con un 40% de cumplimiento de meta y su administrador acaba de renunciar. La Tienda B tiene un faltante de inventario significativo detectado esta mañana. La Tienda C te solicita aprobación urgente para una activación comercial no presupuestada que podría recuperar ventas. Tienes solo un día para visitar una de ellas personalmente. ¿Cuál visitas, por qué y cómo gestionas las otras dos situaciones a distancia?</p>
-      <p style="color:#666; font-size:13px"><em>Evaluar: priorización, orientación a resultados, liderazgo a distancia, visión comercial y resolución de problemas.</em></p>
     `
   },
   lider_ventas_online: {
@@ -1131,7 +1211,6 @@ const CONFIGURACION_CARGOS = {
       <p style="font-size:13px; color:#666; margin-bottom:15px">⚠️ <strong>Nota importante:</strong> Las competencias marcadas como <strong>críticas</strong> (Resultados, Gestión Comercial Online y Liderazgo) concentran el 63% de la evaluación. Una calificación menor a 3 en estas áreas es una señal de alerta, independientemente del puntaje total.</p>
       
       <h4>1. Orientación a Resultados y Cumplimiento de Metas Digitales (25% - Crítica)</h4>
-      <p><strong>Qué evaluar:</strong> Capacidad para asumir metas, realizar seguimiento al presupuesto, identificar desviaciones y ejecutar planes de acción.</p>
       <ul>
         <li><strong>1:</strong> No evidencia experiencia trabajando con metas ni indicadores. Respuestas generales, sin acciones concretas.</li>
         <li><strong>2:</strong> Ha trabajado con metas, pero su seguimiento es reactivo y depende de instrucciones de terceros.</li>
@@ -1141,7 +1220,6 @@ const CONFIGURACION_CARGOS = {
       </ul>
 
       <h4>2. Gestión Comercial de Canales Online / E-commerce (20% - Crítica)</h4>
-      <p><strong>Qué evaluar:</strong> Capacidad para administrar comercialmente un canal digital y generar crecimiento sostenible.</p>
       <ul>
         <li><strong>1:</strong> No demuestra conocimiento práctico de ventas digitales o e-commerce.</li>
         <li><strong>2:</strong> Conocimientos básicos, depende principalmente de promociones o descuentos para impulsar ventas.</li>
@@ -1151,7 +1229,6 @@ const CONFIGURACION_CARGOS = {
       </ul>
 
       <h4>3. Liderazgo y Desarrollo de Equipos (18% - Crítica)</h4>
-      <p><strong>Qué evaluar:</strong> Capacidad para dirigir, desarrollar, acompañar y exigir resultados al equipo.</p>
       <ul>
         <li><strong>1:</strong> Dificultades para explicar cómo lideraría, delegaría o corregiría situaciones del equipo.</li>
         <li><strong>2:</strong> Experiencia limitada en liderazgo, se enfoca principalmente en control o supervisión.</li>
@@ -1161,7 +1238,6 @@ const CONFIGURACION_CARGOS = {
       </ul>
 
       <h4>4. Analítica Comercial y Toma de Decisiones (15%)</h4>
-      <p><strong>Qué evaluar:</strong> Capacidad para transformar datos comerciales en decisiones y acciones concretas.</p>
       <ul>
         <li><strong>1:</strong> Toma decisiones por intuición, dificultades para interpretar indicadores.</li>
         <li><strong>2:</strong> Reconoce indicadores básicos, pero con poca profundidad analítica.</li>
@@ -1171,7 +1247,6 @@ const CONFIGURACION_CARGOS = {
       </ul>
 
       <h4>5. Experiencia del Cliente y Conversión Digital (12%)</h4>
-      <p><strong>Qué evaluar:</strong> Capacidad para garantizar que la experiencia del cliente contribuya directamente a la conversión, recompra y fidelización.</p>
       <ul>
         <li><strong>1:</strong> Considera la experiencia del cliente como responsabilidad exclusiva de servicio al cliente.</li>
         <li><strong>2:</strong> Reconoce su importancia, pero plantea acciones poco estructuradas.</li>
@@ -1181,7 +1256,6 @@ const CONFIGURACION_CARGOS = {
       </ul>
 
       <h4>6. Gestión Operativa, Inventarios y Coordinación Interáreas (10%)</h4>
-      <p><strong>Qué evaluar:</strong> Capacidad para coordinar ventas online con logística, inventarios, tecnología, mercadeo y servicio al cliente.</p>
       <ul>
         <li><strong>1:</strong> Visión aislada del área comercial, dificultades para coordinar con otras áreas.</li>
         <li><strong>2:</strong> Reconoce dependencias operativas, pero actúa principalmente de forma reactiva.</li>
@@ -1197,16 +1271,23 @@ const CONFIGURACION_CARGOS = {
 function getConfiguracionCargo(nombreCargo) {
   const nombre = (nombreCargo || "").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
   
-  // 1. ADMINISTRADOR DE PUNTO (nuevo - prioridad alta porque es muy específico)
+  // 1. AUXILIAR CONTABLE (nuevo - prioridad alta, debe ir antes de auxiliar_cartera)
+  if (nombre.includes('contable') || nombre.includes('contabilidad') || nombre.includes('contador auxiliar') || nombre.includes('asistente contable')) {
+    // Verificar que no sea un cargo de coordinación de contabilidad (que sería más senior)
+    if (!nombre.includes('gerente') && !nombre.includes('director')) {
+      return CONFIGURACION_CARGOS.auxiliar_contable;
+    }
+  }
+
+  // 2. ADMINISTRADOR DE PUNTO
   if (nombre.includes('administrador') && (nombre.includes('punto') || nombre.includes('pv') || nombre.includes('local') || nombre.includes('restaurante') || nombre.includes('sucursal'))) {
     return CONFIGURACION_CARGOS.administrador_punto;
   }
-  // Fallback: solo "admin de punto" o "jefe de punto"
   if ((nombre.includes('admin') || nombre.includes('jefe')) && nombre.includes('punto')) {
     return CONFIGURACION_CARGOS.administrador_punto;
   }
 
-  // 2. JEFE/LÍDER DE RRHH O TALENTO HUMANO
+  // 3. JEFE/LÍDER DE RRHH O TALENTO HUMANO
   const esCargoDirectivo = nombre.includes('jefe') || nombre.includes('lider') || nombre.includes('gerente') || nombre.includes('director') || nombre === 'jefe_rrhh';
   const esAreaRRHH = nombre.includes('recursos humanos') || nombre.includes('talento humano') || nombre.includes('rrhh') || nombre.includes(' rh ');
   
@@ -1217,7 +1298,7 @@ function getConfiguracionCargo(nombreCargo) {
     return CONFIGURACION_CARGOS.jefe_rrhh;
   }
 
-  // 3. Resto de detecciones
+  // 4. Resto de detecciones
   if (nombre.includes('lider') && (nombre.includes('ventas') || nombre.includes('online') || nombre.includes('digital') || nombre.includes('e-commerce') || nombre.includes('departamento'))) {
     return CONFIGURACION_CARGOS.lider_ventas_online;
   }
@@ -1724,7 +1805,7 @@ function cargarCandidatosResultados() {
     selCand.disabled = true;
     return;
   }
-  evaluados.sort((a, b) => evaluaciones[b.id].puntajeTotal - evaluaciones[a.id].puntajeTotal);
+  evaluados.sort((a, b) => evaluaciones[b.id].puntajeTotal - evaluados[a.id].puntajeTotal);
   selCand.innerHTML = '<option value="">-- Seleccione candidato --</option>';
   evaluados.forEach((c, i) => {
     const eval_ = evaluaciones[c.id];
