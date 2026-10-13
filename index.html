@@ -501,7 +501,7 @@
         </div>
         <div class="form-group">
           <label>Nombre del Cargo <span class="required">*</span></label>
-          <input type="text" id="nombreCargo" placeholder="Ej: Auxiliar Contable, Jefe de RRHH, Asesor Comercial">
+          <input type="text" id="nombreCargo" placeholder="Ej: Jefe de Servicio, Auxiliar Contable, Asesor Comercial">
         </div>
         <div class="form-group">
           <label>Número de Vacantes <span class="required">*</span></label>
@@ -557,15 +557,15 @@
         </div>
         <div class="form-group">
           <label>Profesión <span class="required">*</span></label>
-          <input type="text" id="profesion" placeholder="Ej: Tecnólogo en Contabilidad">
+          <input type="text" id="profesion" placeholder="Ej: Administrador de Empresas">
         </div>
         <div class="form-group">
           <label>Edad <span class="required">*</span></label>
-          <input type="number" id="edad" min="18" max="70" placeholder="Ej: 28">
+          <input type="number" id="edad" min="18" max="70" placeholder="Ej: 32">
         </div>
         <div class="form-group">
           <label>Tiempo de Experiencia (años) <span class="required">*</span></label>
-          <input type="number" id="experiencia" min="0" max="50" placeholder="Ej: 3">
+          <input type="number" id="experiencia" min="0" max="50" placeholder="Ej: 5">
         </div>
         <div class="form-group">
           <label>Teléfono <span class="required">*</span></label>
@@ -664,6 +664,210 @@ let currentEvalConfig = null;
 
 // ============ CONFIGURACIÓN DINÁMICA POR CARGO ============
 const CONFIGURACION_CARGOS = {
+  jefe_servicio: {
+    nombre: "Jefe de Servicio",
+    competencias: [
+      { nombre: 'Liderazgo y coordinación del equipo', peso: 25 },
+      { nombre: 'Organización y programación del servicio', peso: 25 },
+      { nombre: 'Orientación al servicio y manejo de clientes', peso: 20 },
+      { nombre: 'Control operativo y administrativo', peso: 15 },
+      { nombre: 'Gestión de proveedores, pedidos e inventarios', peso: 15 }
+    ],
+    escala: [
+      "5 - Sobresaliente: Demuestra seguridad, criterio práctico, capacidad de anticipación y toma decisiones claras orientadas al servicio y a los resultados.",
+      "4 - Bueno: Demuestra buen criterio, organiza sus acciones, identifica prioridades y propone soluciones acordes con la operación.",
+      "3 - Aceptable: Responde de manera adecuada y plantea acciones funcionales, aunque con poca profundidad o anticipación.",
+      "2 - Bajo: Tiene una idea básica, pero sus respuestas son incompletas y necesita mucho acompañamiento para actuar correctamente.",
+      "1 - Deficiente: No demuestra manejo del tema, responde de forma confusa o propone acciones poco adecuadas para el cargo."
+    ],
+    interpretacion: [
+      { min: 90, max: 100, texto: '✅ SOBRESALIENTE - Perfil excepcional para liderar el servicio. Demuestra liderazgo sólido, excelente organización operativa, fuerte orientación al cliente, control riguroso y gestión efectiva de proveedores e inventarios.', clase: 'decision-hire' },
+      { min: 80, max: 89.99, texto: '👍 BUENO - Cumple ampliamente con el perfil requerido. Buen manejo de equipos, organización del servicio y resolución de situaciones operativas. Curva de adaptación corta.', clase: 'decision-recommend' },
+      { min: 70, max: 79.99, texto: '⚠️ ACEPTABLE - Puede desempeñar el cargo, pero presenta oportunidades de fortalecimiento en alguna competencia clave. Requiere acompañamiento inicial.', clase: 'decision-reserve' },
+      { min: 60, max: 69.99, texto: '🔍 BAJO - Presenta vacíos significativos. Requiere capacitación o acompañamiento importante antes de asumir el cargo de forma autónoma.', clase: 'decision-reserve' },
+      { min: 0, max: 59.99, texto: '❌ DEFICIENTE - No evidencia las competencias necesarias para liderar el servicio. No se recomienda para el cargo.', clase: 'decision-no' }
+    ],
+    guiaEntrevista: `
+      <h4>📋 Matriz de Evaluación Detallada - Jefe de Servicio</h4>
+      <p style="font-size:13px; color:#666; margin-bottom:15px">Esta guía está diseñada para evaluar competencias clave en la jefatura de un servicio operativo (restaurante, hotelería, eventos, catering o similar). Utilice la escala del 1 al 5 según el nivel de evidencia en las respuestas del candidato.</p>
+      
+      <h4>1. Apertura (5 minutos)</h4>
+      <ul>
+        <li>Cuéntame sobre tu trayectoria profesional y tu experiencia liderando equipos de servicio.</li>
+        <li>¿Qué te motivó a aplicar a este cargo de Jefe de Servicio?</li>
+        <li>¿Cómo describirías tu estilo de liderazgo cuando coordinas un equipo operativo en un ambiente dinámico?</li>
+      </ul>
+
+      <h4>2. Entrevista por Competencias</h4>
+
+      <h5>A. Liderazgo y coordinación del equipo (25%)</h5>
+      <p style="color:#666; font-style:italic; font-size:13px"><strong>Qué evaluar:</strong> Capacidad para organizar, corregir y mantener al equipo enfocado. Distribución de tareas, comunicación clara, seguimiento y liderazgo bajo presión.</p>
+      <div class="guia-table-wrapper">
+        <table class="guia-table">
+          <thead>
+            <tr>
+              <th>1 - Deficiente</th>
+              <th>2 - Bajo</th>
+              <th>3 - Aceptable</th>
+              <th>4 - Bueno</th>
+              <th>5 - Sobresaliente</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>No sabe cómo organizar o corregir al equipo.</td>
+              <td>Da instrucciones básicas, pero sin seguimiento claro.</td>
+              <td>Organiza al equipo y aborda dificultades de forma adecuada.</td>
+              <td>Distribuye tareas, comunica claramente y hace seguimiento.</td>
+              <td>Lidera con seguridad, reorganiza rápidamente y mantiene al equipo enfocado durante situaciones de presión.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p style="margin-top:10px"><strong>Preguntas clave:</strong></p>
+      <ul>
+        <li>Cuéntame sobre la ocasión en la que tuviste que liderar el equipo más grande o complejo. ¿Cómo distribuiste las funciones y te aseguraste de que cada persona entendiera su rol?</li>
+        <li>Describe una situación en la que tuviste que corregir a un colaborador por un desempeño inadecuado. ¿Cómo lo hiciste?</li>
+        <li>Háblame de un momento de alta presión en el servicio. ¿Cómo mantuviste al equipo enfocado y organizado?</li>
+      </ul>
+
+      <h5>B. Organización y programación del servicio (25%)</h5>
+      <p style="color:#666; font-style:italic; font-size:13px"><strong>Qué evaluar:</strong> Capacidad para organizar turnos, priorizar necesidades, distribuir personal y anticiparse a imprevistos.</p>
+      <div class="guia-table-wrapper">
+        <table class="guia-table">
+          <thead>
+            <tr>
+              <th>1 - Deficiente</th>
+              <th>2 - Bajo</th>
+              <th>3 - Aceptable</th>
+              <th>4 - Bueno</th>
+              <th>5 - Sobresaliente</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>No logra organizar turnos ni priorizar necesidades.</td>
+              <td>Organiza de forma reactiva y con poca claridad.</td>
+              <td>Distribuye personal y tareas de forma funcional.</td>
+              <td>Considera horarios, demanda, descansos y contingencias.</td>
+              <td>Se anticipa a las necesidades y mantiene la continuidad del servicio aun ante ausencias o imprevistos.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p style="margin-top:10px"><strong>Preguntas clave:</strong></p>
+      <ul>
+        <li>Describe cómo programas los turnos de tu equipo. ¿Qué variables consideras antes de definir la programación semanal?</li>
+        <li>Imagina que dos colaboradores te avisan que no podrán asistir el día de mayor demanda. ¿Cómo reorganizas el servicio?</li>
+        <li>¿Qué herramientas o métodos usas para anticipar las necesidades del servicio y evitar improvisaciones?</li>
+      </ul>
+
+      <h5>C. Orientación al servicio y manejo de clientes (20%)</h5>
+      <p style="color:#666; font-style:italic; font-size:13px"><strong>Qué evaluar:</strong> Capacidad para abordar inconformidades, escuchar al cliente, ofrecer soluciones efectivas y recuperar la experiencia sin afectar la operación.</p>
+      <div class="guia-table-wrapper">
+        <table class="guia-table">
+          <thead>
+            <tr>
+              <th>1 - Deficiente</th>
+              <th>2 - Bajo</th>
+              <th>3 - Aceptable</th>
+              <th>4 - Bueno</th>
+              <th>5 - Sobresaliente</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>No sabe cómo abordar una inconformidad o puede empeorar la situación.</td>
+              <td>Escucha al cliente, pero ofrece soluciones poco claras.</td>
+              <td>Atiende respetuosamente y plantea una solución adecuada.</td>
+              <td>Escucha, verifica, soluciona y hace seguimiento.</td>
+              <td>Maneja la situación con empatía, criterio y rapidez, recuperando la experiencia del cliente sin afectar innecesariamente la operación.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p style="margin-top:10px"><strong>Preguntas clave:</strong></p>
+      <ul>
+        <li>Cuéntame sobre la ocasión en la que tuviste que manejar la queja más difícil de un cliente. ¿Cómo lo escuchaste, qué solución ofreciste y cómo terminó la situación?</li>
+        <li>¿Cómo te aseguras de que todo el equipo mantenga un estándar de servicio consistente, incluso en momentos de alta presión?</li>
+        <li>¿Qué haces cuando un cliente tiene una experiencia negativa por un fallo operativo?</li>
+      </ul>
+
+      <h5>D. Control operativo y administrativo (15%)</h5>
+      <p style="color:#666; font-style:italic; font-size:13px"><strong>Qué evaluar:</strong> Capacidad para revisar, controlar, documentar novedades y proponer acciones preventivas.</p>
+      <div class="guia-table-wrapper">
+        <table class="guia-table">
+          <thead>
+            <tr>
+              <th>1 - Deficiente</th>
+              <th>2 - Bajo</th>
+              <th>3 - Aceptable</th>
+              <th>4 - Bueno</th>
+              <th>5 - Sobresaliente</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>No identifica qué debe revisar o controlar.</td>
+              <td>Realiza verificaciones parciales y puede omitir información importante.</td>
+              <td>Revisa y reporta correctamente las novedades.</td>
+              <td>Verifica soportes, identifica posibles causas y documenta adecuadamente.</td>
+              <td>Además de controlar, identifica causas y propone acciones preventivas para evitar recurrencias.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p style="margin-top:10px"><strong>Preguntas clave:</strong></p>
+      <ul>
+        <li>¿Qué aspectos operativos y administrativos revisas diariamente al iniciar y cerrar tu turno?</li>
+        <li>Cuéntame sobre una ocasión en la que detectaste una novedad importante. ¿Cómo la documentaste y qué acciones tomaste?</li>
+        <li>¿Qué indicadores o controles utilizas para asegurar que el servicio se mantenga dentro de los estándares esperados?</li>
+      </ul>
+
+      <h5>E. Gestión de proveedores, pedidos e inventarios (15%)</h5>
+      <p style="color:#666; font-style:italic; font-size:13px"><strong>Qué evaluar:</strong> Capacidad para gestionar pedidos, recibir productos, controlar existencias y anticiparse a faltantes.</p>
+      <div class="guia-table-wrapper">
+        <table class="guia-table">
+          <thead>
+            <tr>
+              <th>1 - Deficiente</th>
+              <th>2 - Bajo</th>
+              <th>3 - Aceptable</th>
+              <th>4 - Bueno</th>
+              <th>5 - Sobresaliente</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Recibe o solicita productos sin realizar controles.</td>
+              <td>Hace verificaciones básicas, pero incompletas.</td>
+              <td>Revisa cantidades, condiciones y necesidades antes de recibir o solicitar.</td>
+              <td>Controla pedido, recepción, existencias y novedades correctamente.</td>
+              <td>Se anticipa a faltantes, detecta diferencias oportunamente y toma decisiones que protegen la continuidad de la operación.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p style="margin-top:10px"><strong>Preguntas clave:</strong></p>
+      <ul>
+        <li>Describe tu proceso para solicitar pedidos a proveedores. ¿Qué criterios usas para definir cantidades y momentos de pedido?</li>
+        <li>¿Cómo verificas la recepción de un pedido? ¿Qué haces cuando detectas diferencias en cantidad o calidad?</li>
+        <li>Cuéntame sobre una ocasión en la que anticipaste un faltante crítico. ¿Cómo lo manejaste para no afectar el servicio?</li>
+      </ul>
+
+      <h4>3. Caso Práctico Integrador</h4>
+      <p><strong>Escenario:</strong> Es viernes en la noche, el servicio está lleno. En este momento enfrentas las siguientes situaciones simultáneas:</p>
+      <ul>
+        <li>Un cliente importante se queja porque su pedido lleva 35 minutos y aún no llega (debería tardar 15).</li>
+        <li>Uno de tus colaboradores clave te avisa que se siente mal y debe irse inmediatamente.</li>
+        <li>El proveedor que debía entregar un insumo crítico para el fin de semana no llega y no contesta el teléfono.</li>
+        <li>En el cierre parcial de caja aparece una diferencia de $150.000 que debes cuadrar antes de terminar el turno.</li>
+        <li>Tu supervisor te llama para pedirte un reporte urgente de las ventas y novedades del día.</li>
+      </ul>
+      <p><strong>¿Cómo priorizas estas situaciones, qué decisiones tomas y en qué orden las ejecutas?</strong></p>
+      <p style="color:#666; font-size:13px"><em>Evaluar: priorización, liderazgo bajo presión, orientación al cliente, control operativo, gestión de proveedores y manejo simultáneo de múltiples situaciones.</em></p>
+    `
+  },
   auxiliar_contable: {
     nombre: "Auxiliar Contable",
     competencias: [
@@ -701,61 +905,46 @@ const CONFIGURACION_CARGOS = {
       <h4>2. Entrevista por Competencias</h4>
 
       <h5>A. Registro contable y precisión (30% - Crítica, Mín: 3/5)</h5>
-      <p style="color:#666; font-style:italic; font-size:13px"><strong>Qué evaluar:</strong> Capacidad para registrar correctamente facturas, comprobantes, notas crédito/débito y demás transacciones, minimizando errores. Conocimiento del PUC, naturaleza de cuentas, causales de débito y crédito.</p>
       <ul>
         <li>Describe paso a paso cómo registras una factura de venta con IVA y retención en la fuente. ¿Qué cuentas afectan y por qué?</li>
         <li>¿Cómo manejas el registro de una nota crédito por devolución de mercancía? ¿Qué validaciones haces antes de registrarla?</li>
         <li>Cuéntame sobre una ocasión en la que detectaste un error en un registro contable. ¿Cómo lo identificaste y qué hiciste para corregirlo?</li>
-        <li>¿Qué procedimiento sigues para asegurar que los comprobantes queden debidamente soportados antes de contabilizarlos?</li>
       </ul>
 
       <h5>B. Conciliaciones bancarias (25%)</h5>
-      <p style="color:#666; font-style:italic; font-size:13px"><strong>Qué evaluar:</strong> Capacidad para comparar, identificar diferencias, investigar inconsistencias y mantener saldos confiables entre libros y extractos bancarios.</p>
       <ul>
         <li>Describe tu proceso para realizar una conciliación bancaria. ¿Qué partidas identificas con mayor frecuencia como diferencias?</li>
-        <li>¿Cómo investigas y depuras partidas en tránsito antiguas (cheques no cobrados, transferencias sin aplicar)?</li>
-        <li>Cuéntame sobre una conciliación compleja que hayas resuelto. ¿Cuál era el problema y cómo lo solucionaste?</li>
-        <li>¿Con qué frecuencia realizas conciliaciones y qué herramientas utilizas para hacerlas eficientes?</li>
+        <li>¿Cómo investigas y depuras partidas en tránsito antiguas?</li>
       </ul>
 
       <h5>C. Gestión de cartera (20%)</h5>
-      <p style="color:#666; font-style:italic; font-size:13px"><strong>Qué evaluar:</strong> Manejo y seguimiento de cuentas por cobrar y pagar, vencimientos, pagos y actualización de saldos.</p>
       <ul>
         <li>¿Cómo organizas el seguimiento de cuentas por cobrar para identificar oportunamente los vencimientos?</li>
-        <li>Describe cómo aplicas un pago recibido cuando el cliente tiene varias facturas abiertas. ¿Qué criterio utilizas?</li>
-        <li>¿Qué haces cuando detectas un saldo pendiente antiguo que no se ha podido conciliar con el cliente?</li>
-        <li>Cuéntame sobre tu experiencia gestionando cuentas por pagar. ¿Cómo priorizas los pagos y aseguras que no se vencan?</li>
+        <li>Describe cómo aplicas un pago recibido cuando el cliente tiene varias facturas abiertas.</li>
       </ul>
 
       <h5>D. Apoyo tributario y cumplimiento (15%)</h5>
-      <p style="color:#666; font-style:italic; font-size:13px"><strong>Qué evaluar:</strong> Capacidad para recopilar y validar información que servirá de soporte al contador para obligaciones tributarias (retención en la fuente, IVA, información exógena).</p>
       <ul>
         <li>¿Qué información preparas mensualmente para apoyar la declaración de retención en la fuente e IVA?</li>
-        <li>¿Cómo validas que las facturas recibidas cumplan con los requisitos fiscales antes de registrarlas?</li>
-        <li>¿Has participado en la preparación de información exógena? ¿Qué formatos o reportes has manejado?</li>
-        <li>¿Qué haces cuando un proveedor no envía la factura electrónica o esta no cumple con los requisitos de la DIAN?</li>
+        <li>¿Cómo validas que las facturas recibidas cumplan con los requisitos fiscales?</li>
       </ul>
 
       <h5>E. Organización y archivo documental (10%)</h5>
-      <p style="color:#666; font-style:italic; font-size:13px"><strong>Qué evaluar:</strong> Orden, trazabilidad y facilidad para localizar soportes contables y fiscales. Cumplimiento de plazos y políticas de archivo.</p>
       <ul>
-        <li>¿Cómo organizas el archivo físico y digital de los soportes contables? ¿Qué sistema de codificación utilizas?</li>
+        <li>¿Cómo organizas el archivo físico y digital de los soportes contables?</li>
         <li>¿Cuánto tiempo te toma localizar un soporte específico cuando la contadora o un auditor lo solicita?</li>
-        <li>¿Qué haces para asegurar que los documentos tengan la trazabilidad completa (factura, soporte de pago, comprobante contable)?</li>
-        <li>¿Cómo gestionas los plazos de conservación de documentos según la normativa vigente?</li>
       </ul>
 
       <h4>3. Caso Práctico Integrador</h4>
       <p><strong>Escenario:</strong> Es día 5 del mes y estás en pleno cierre contable. Tienes las siguientes situaciones simultáneas:</p>
       <ul>
         <li>La conciliación bancaria de la cuenta principal muestra una diferencia de $2.500.000 que no logras identificar.</li>
-        <li>Un proveedor reclama un pago que según tus registros ya se realizó hace dos meses, pero no encuentras el soporte de aplicación.</li>
-        <li>La contadora te solicita urgente la relación de retenciones practicadas del mes anterior para la declaración de este mes.</li>
-        <li>En la revisión de facturas electrónicas recibidas, detectas que 3 facturas no cumplen con los requisitos de la DIAN y deben devolverse al proveedor.</li>
+        <li>Un proveedor reclama un pago que según tus registros ya se realizó hace dos meses.</li>
+        <li>La contadora te solicita urgente la relación de retenciones practicadas del mes anterior.</li>
+        <li>Detectas que 3 facturas electrónicas recibidas no cumplen con los requisitos de la DIAN.</li>
         <li>Un auditor interno solicita los soportes de 15 comprobantes de egresos de un trimestre anterior.</li>
       </ul>
       <p><strong>¿Cómo priorizas estas tareas, qué decisiones tomas y en qué orden las ejecutas?</strong></p>
-      <p style="color:#666; font-size:13px"><em>Evaluar: priorización, precisión técnica, capacidad de investigación, manejo de presión, organización y cumplimiento de plazos.</em></p>
     `
   },
   administrador_punto: {
@@ -787,56 +976,45 @@ const CONFIGURACION_CARGOS = {
       
       <h4>1. Apertura (5 minutos)</h4>
       <ul>
-        <li>Cuéntame sobre tu trayectoria profesional y tu experiencia administrando puntos de venta, restaurantes o establecimientos similares.</li>
+        <li>Cuéntame sobre tu trayectoria profesional y tu experiencia administrando puntos de venta.</li>
         <li>¿Qué te motivó a aplicar a este cargo de Administrador de Punto?</li>
-        <li>¿Cómo describirías tu estilo de liderazgo cuando diriges un equipo operativo en un ambiente dinámico?</li>
       </ul>
 
       <h4>2. Entrevista por Competencias</h4>
 
       <h5>A. Liderazgo y gestión de equipos (25%)</h5>
-      <p style="color:#666; font-style:italic; font-size:13px"><strong>Qué evaluar:</strong> Capacidad para dirigir, orientar y movilizar al equipo. Distribución clara de funciones, toma de decisiones, manejo de conflictos, seguimiento, corrección sin confrontaciones innecesarias y experiencias reales liderando personas.</p>
       <ul>
-        <li>Cuéntame sobre la ocasión en la que tuviste que liderar el equipo más grande o complejo. ¿Cómo distribuiste las funciones y te aseguraste de que cada persona entendiera su rol?</li>
-        <li>Describe una situación en la que tuviste que corregir a un colaborador por un desempeño inadecuado. ¿Cómo lo hiciste para que no generara confrontación innecesaria?</li>
-        <li>Háblame de un conflicto entre dos miembros de tu equipo. ¿Cómo lo manejaste y cuál fue el resultado?</li>
+        <li>Cuéntame sobre la ocasión en la que tuviste que liderar el equipo más grande o complejo.</li>
+        <li>Describe una situación en la que tuviste que corregir a un colaborador por un desempeño inadecuado.</li>
+        <li>Háblame de un conflicto entre dos miembros de tu equipo. ¿Cómo lo manejaste?</li>
       </ul>
 
       <h5>B. Organización y planificación de la operación (25%)</h5>
-      <p style="color:#666; font-style:italic; font-size:13px"><strong>Qué evaluar:</strong> Capacidad para coordinar simultáneamente las diferentes necesidades del punto: priorización, organización de turnos y tareas, anticipación de necesidades, coordinación de cocina, servicio, caja, aseo y almacén, administración del tiempo y control ante situaciones simultáneas.</p>
       <ul>
-        <li>Describe cómo organizas un turno típico desde que abres el punto hasta que cierras. ¿Qué revisas primero, qué delegas y cómo te aseguras de que todo funcione?</li>
-        <li>Imagina que es viernes en la noche, el punto está lleno, la cocina va atrasada, un mesero se enfermó y tienes un cliente esperando una mesa. ¿Cómo priorizas y coordinas la operación?</li>
-        <li>¿Qué herramientas o métodos usas para organizar turnos, tareas y anticipar las necesidades del punto?</li>
+        <li>Describe cómo organizas un turno típico desde que abres el punto hasta que cierras.</li>
+        <li>Imagina que es viernes en la noche, el punto está lleno, la cocina va atrasada, un mesero se enfermó y tienes un cliente esperando una mesa. ¿Cómo priorizas?</li>
       </ul>
 
       <h5>C. Resolución de problemas e iniciativa (20%)</h5>
-      <p style="color:#666; font-style:italic; font-size:13px"><strong>Qué evaluar:</strong> Capacidad para reaccionar frente a novedades y tomar decisiones oportunas. Analiza antes de actuar, identifica alternativas, toma decisiones con criterio, propone soluciones, actúa con autonomía y previene que los problemas se repitan.</p>
       <ul>
-        <li>Cuéntame sobre el problema más complejo que tuviste que resolver en un punto de venta. ¿Cómo lo analizaste, qué alternativas consideraste y qué decisión tomaste?</li>
-        <li>Describe una ocasión en la que identificaste un problema recurrente en la operación y propusiste una solución para evitar que se repitiera.</li>
-        <li>¿Cómo actúas cuando enfrentas una situación imprevista que no está contemplada en los procedimientos?</li>
+        <li>Cuéntame sobre el problema más complejo que tuviste que resolver en un punto de venta.</li>
+        <li>Describe una ocasión en la que identificaste un problema recurrente y propusiste una solución.</li>
       </ul>
 
       <h5>D. Orientación al servicio al cliente (15%)</h5>
-      <p style="color:#666; font-style:italic; font-size:13px"><strong>Qué evaluar:</strong> Capacidad para garantizar una experiencia adecuada al cliente. Escucha activa, manejo de quejas con respeto, soluciones efectivas, comunicación asertiva, control de situaciones difíciles, seguimiento y comprensión de que la experiencia del cliente depende de toda la operación.</p>
       <ul>
-        <li>Cuéntame sobre la ocasión en la que tuviste que manejar la queja más difícil de un cliente. ¿Cómo lo escuchaste, qué solución ofreciste y cómo terminó la situación?</li>
-        <li>¿Cómo te aseguras de que todo el equipo mantenga un estándar de servicio consistente, incluso en momentos de alta presión?</li>
-        <li>¿Qué haces cuando un cliente tiene una experiencia negativa por un fallo operativo (ej: demora en cocina, error en pedido)?</li>
+        <li>Cuéntame sobre la ocasión en la que tuviste que manejar la queja más difícil de un cliente.</li>
+        <li>¿Cómo te aseguras de que todo el equipo mantenga un estándar de servicio consistente?</li>
       </ul>
 
       <h5>E. Control, responsabilidad y orientación a resultados (15%)</h5>
-      <p style="color:#666; font-style:italic; font-size:13px"><strong>Qué evaluar:</strong> Capacidad para controlar recursos y responder por los resultados del punto. Manejo responsable de caja, inventarios y facturación; detección de inconsistencias; seguimiento a desperdicios y pérdidas; uso de información para tomar decisiones; reportes de novedades; honestidad, responsabilidad y orientación al cumplimiento.</p>
       <ul>
-        <li>¿Cómo realizas el cierre de caja y qué haces cuando detectas una inconsistencia? Dame un ejemplo concreto.</li>
-        <li>Describe cómo controlas los inventarios y los desperdicios en el punto. ¿Qué indicadores revisas y con qué frecuencia?</li>
-        <li>Háblame de una ocasión en la que detectaste una pérdida o inconsistencia importante. ¿Cómo la manejaste y qué medidas implementaste para evitar que se repitiera?</li>
+        <li>¿Cómo realizas el cierre de caja y qué haces cuando detectas una inconsistencia?</li>
+        <li>Describe cómo controlas los inventarios y los desperdicios en el punto.</li>
       </ul>
 
       <h4>3. Caso Práctico Integrador</h4>
-      <p><strong>Escenario:</strong> Es sábado al mediodía, el punto está lleno. En cocina hay un atraso de 20 minutos en los pedidos, un mesero acaba de derramar una bebida sobre un cliente (quien está muy molesto), en caja hay una diferencia de $80.000 que debes cuadrar antes del cierre, y tu supervisor te llama para pedirte un reporte urgente de ventas de la semana. Además, uno de tus cocineros te dice que se siente mal y necesita irse. ¿Cómo organizas tu respuesta, qué priorizas y qué decisiones tomas?</p>
-      <p style="color:#666; font-size:13px"><em>Evaluar: priorización, liderazgo bajo presión, resolución de problemas, orientación al cliente, control operativo y manejo simultáneo de múltiples situaciones.</em></p>
+      <p><strong>Escenario:</strong> Es sábado al mediodía, el punto está lleno. En cocina hay un atraso de 20 minutos, un mesero acaba de derramar una bebida sobre un cliente, en caja hay una diferencia de $80.000, tu supervisor te llama para un reporte urgente, y uno de tus cocineros se siente mal. ¿Cómo organizas tu respuesta?</p>
     `
   },
   jefe_rrhh: {
@@ -864,26 +1042,17 @@ const CONFIGURACION_CARGOS = {
     ],
     guiaEntrevista: `
       <h4>📋 Matriz de Evaluación Detallada - Jefe de Recursos Humanos / Talento Humano</h4>
-      <p style="font-size:13px; color:#666; margin-bottom:15px">⚠️ <strong>Nota importante:</strong> La competencia <strong>"Conocimiento laboral y manejo de nómina"</strong> es crítica y obligatoria. Una calificación menor a 4 en esta área representa un riesgo alto para el cargo, independientemente del puntaje total.</p>
+      <p style="font-size:13px; color:#666; margin-bottom:15px">⚠️ <strong>Nota importante:</strong> La competencia <strong>"Conocimiento laboral y manejo de nómina"</strong> es crítica y obligatoria. Una calificación menor a 4 en esta área representa un riesgo alto para el cargo.</p>
       
-      <h4>1. Conocimiento laboral y manejo de nómina (30% - Crítica)</h4>
-      <p><strong>Qué evaluar:</strong> Dominio de legislación laboral, nómina, prestaciones, seguridad social, PILA, EPS, AFP, ARL, cajas de compensación, novedades, contratación y retiro.</p>
-      <ul>
-        <li><strong>5 - Excelente:</strong> Domina legislación laboral, nómina, prestaciones, seguridad social, PILA, EPS, AFP, ARL, cajas de compensación, novedades, contratación y retiro.</li>
-        <li><strong>4 - Bueno:</strong> Tiene conocimientos sólidos y experiencia práctica; puede requerir consultas puntuales.</li>
-        <li><strong>3 - Aceptable:</strong> Conoce los procesos, pero presenta vacíos importantes o necesita supervisión.</li>
-        <li><strong>2 - Bajo:</strong> Conocimientos superficiales y poca experiencia práctica.</li>
-        <li><strong>1 - Insuficiente:</strong> No demuestra dominio de los procesos esenciales.</li>
-      </ul>
-      <p><strong>Preguntas clave:</strong></p>
+      <h4>1. Conocimiento laboral y manejo de nómina (30% - Crítica, Mín: 4/5)</h4>
       <ul>
         <li>Describa el proceso completo que sigue para liquidar una nómina mensual, incluyendo el manejo de novedades y el reporte a seguridad social (PILA).</li>
-        <li>¿Cómo maneja un caso de despido injustificado o una reclamación ante el Ministerio del Trabajo? Dé un ejemplo concreto.</li>
+        <li>¿Cómo maneja un caso de despido injustificado o una reclamación ante el Ministerio del Trabajo?</li>
       </ul>
 
       <h4>2. Liderazgo y gestión de equipos (25%)</h4>
       <ul>
-        <li>Cuénteme sobre una ocasión en la que tuvo que gestionar un cambio organizacional importante. ¿Cómo lo comunicó y lideró en su equipo?</li>
+        <li>Cuénteme sobre una ocasión en la que tuvo que gestionar un cambio organizacional importante.</li>
       </ul>
 
       <h4>3. Gestión del talento humano y resolución de conflictos (20%)</h4>
@@ -893,12 +1062,12 @@ const CONFIGURACION_CARGOS = {
 
       <h4>4. Confidencialidad, comunicación y toma de decisiones (15%)</h4>
       <ul>
-        <li>¿Cómo garantiza la confidencialidad de la información de nómina y datos personales de los empleados en su gestión diaria?</li>
+        <li>¿Cómo garantiza la confidencialidad de la información de nómina y datos personales?</li>
       </ul>
 
       <h4>5. Organización, análisis y cumplimiento de procesos (10%)</h4>
       <ul>
-        <li>¿Qué indicadores (KPIs) de gestión humana considera indispensables para reportar a la gerencia mensual o trimestralmente?</li>
+        <li>¿Qué indicadores (KPIs) de gestión humana considera indispensables para reportar a la gerencia?</li>
       </ul>
     `
   },
@@ -1016,39 +1185,21 @@ const CONFIGURACION_CARGOS = {
           <tbody>
             <tr>
               <td><strong>Servicio al Cliente y Comunicación Asertiva</strong><br><small>(20%)</small></td>
-              <td>Cuéntame sobre una ocasión en la que un cliente manifestó inconformidad por un proceso de cobro. ¿Cómo manejaste la situación y qué hiciste para conservar una buena relación?</td>
-              <td>No demuestra habilidades. Responde de forma confrontativa o evita el conflicto.</td>
-              <td>Escucha al cliente, pero ofrece pocas soluciones o no controla la situación.</td>
-              <td>Atiende con respeto, explica la situación y logra resolver parcialmente el inconveniente.</td>
-              <td>Escucha activamente, muestra empatía, negocia alternativas y mantiene la relación comercial.</td>
-              <td>Convierte una situación difícil en una oportunidad de fidelización, logrando un acuerdo beneficioso para ambas partes.</td>
-            </tr>
-            <tr>
-              <td><strong>Visión Comercial y Enfoque en Resultados</strong><br><small>(15%)</small></td>
-              <td>Imagina que el área comercial solicita aprobar un pedido urgente para un cliente con pagos vencidos. ¿Cómo analizarías la situación y qué decisión tomarías?</td>
-              <td>Aprueba o rechaza sin analizar el riesgo o las políticas.</td>
-              <td>Considera algunos aspectos, pero su decisión carece de argumentos sólidos.</td>
-              <td>Evalúa la cartera, consulta políticas y propone una decisión razonable.</td>
-              <td>Analiza el riesgo, plantea alternativas (abonos, acuerdos, garantías) y comunica su decisión objetivamente.</td>
-              <td>Equilibra el riesgo financiero con la necesidad comercial, proponiendo soluciones que protegen la cartera sin afectar la relación.</td>
+              <td>Cuéntame sobre una ocasión en la que un cliente manifestó inconformidad por un proceso de cobro.</td>
+              <td>No demuestra habilidades.</td>
+              <td>Escucha, pero ofrece pocas soluciones.</td>
+              <td>Atiende con respeto y resuelve parcialmente.</td>
+              <td>Escucha activamente, muestra empatía, negocia alternativas.</td>
+              <td>Convierte la situación en fidelización.</td>
             </tr>
             <tr>
               <td><strong>Manejo de Cartera y Gestión de Cobro</strong><br><small>(35%)</small></td>
-              <td>Con una cartera amplia y facturas vencidas, ¿qué criterios utilizas para priorizar el contacto y qué estrategias has implementado para incentivar pagos oportunos?</td>
-              <td>No tiene método de priorización ni aporta ejemplos de estrategias. Trabaja de manera improvisada.</td>
-              <td>Prioriza únicamente por fecha/monto y solo ha participado en acciones sin evidenciar impacto.</td>
-              <td>Utiliza criterios básicos (antigüedad, valor) y describe una estrategia sencilla con resultados aceptables.</td>
-              <td>Prioriza según riesgo, historial y probabilidad de recuperación; implementó acciones de seguimiento/negociación que mejoraron indicadores.</td>
-              <td>Aplica metodología estructurada basada en indicadores y lideró/propuso iniciativas innovadoras con resultados medibles en recuperación y disminución de mora.</td>
-            </tr>
-            <tr>
-              <td><strong>Análisis y Atención al Detalle</strong><br><small>(30%)</small></td>
-              <td>¿Cómo verificas que pagos, notas crédito y devoluciones queden correctamente aplicados? Háblame de una ocasión en la que detectaste y solucionaste una inconsistencia en la cartera.</td>
-              <td>No tiene proceso de validación, depende de otros y no identifica errores o responsabiliza a otros.</td>
-              <td>Realiza revisiones superficiales que pueden generar errores; detecta el error pero no plantea acciones correctivas.</td>
-              <td>Sigue procedimientos establecidos, verifica información, identifica el problema, lo corrige y documenta la solución.</td>
-              <td>Realiza cruces de información y conciliaciones; analiza la causa raíz, coordina la corrección y propone controles preventivos.</td>
-              <td>Implementa controles preventivos, detecta inconsistencias antes de que impacten, fortalece controles y evita la recurrencia del error.</td>
+              <td>Con una cartera amplia y facturas vencidas, ¿qué criterios utilizas para priorizar el contacto?</td>
+              <td>No tiene método.</td>
+              <td>Prioriza solo por fecha/monto.</td>
+              <td>Utiliza criterios básicos.</td>
+              <td>Prioriza según riesgo e historial.</td>
+              <td>Aplica metodología estructurada con resultados medibles.</td>
             </tr>
           </tbody>
         </table>
@@ -1067,59 +1218,39 @@ const CONFIGURACION_CARGOS = {
       { nombre: 'Compromiso', peso: 10 }
     ],
     escala: [
-      "5 - Sobresaliente: Demuestra dominio total, presenta ejemplos concretos con resultados medibles, evidencia liderazgo y autonomía en situaciones complejas.",
-      "4 - Bueno: Cumple completamente con la competencia, aporta ejemplos claros, muestra iniciativa y capacidad de respuesta efectiva.",
-      "3 - Aceptable: Conoce y aplica parcialmente la competencia, requiere algo de acompañamiento pero puede desarrollarse bien en el rol.",
-      "2 - Básico: Demuestra conocimiento superficial, respuestas vagas o sin ejemplos concretos, necesitaría supervisión constante.",
-      "1 - Deficiente: No evidencia la competencia, evita respuestas, no demuestra experiencias previas relevantes o presenta actitudes contrarias al perfil."
+      "5 - Sobresaliente: Demuestra dominio total, presenta ejemplos concretos con resultados medibles.",
+      "4 - Bueno: Cumple completamente con la competencia, aporta ejemplos claros.",
+      "3 - Aceptable: Conoce y aplica parcialmente la competencia.",
+      "2 - Básico: Demuestra conocimiento superficial, respuestas vagas.",
+      "1 - Deficiente: No evidencia la competencia."
     ],
     interpretacion: [
-      { min: 90, max: 100, texto: '✅ ALTAMENTE RECOMENDADO - Perfil ideal para ventas de campo. Demuestra orientación al logro excepcional, abordaje comercial efectivo, alta integridad y capacidad para trabajar en entornos dinámicos con autonomía.', clase: 'decision-hire' },
-      { min: 80, max: 89.99, texto: '👍 RECOMENDADO - Cumple con el perfil comercial de campo requerido. Buen manejo de clientes, orientación a resultados y valores sólidos. Curva de adaptación corta.', clase: 'decision-recommend' },
-      { min: 70, max: 79.99, texto: '⚠️ RECOMENDADO CON PLAN DE DESARROLLO - Tiene potencial comercial, pero presenta brechas en alguna competencia clave (manejo de presión, organización o abordaje de clientes). Requiere acompañamiento inicial.', clase: 'decision-reserve' },
-      { min: 60, max: 69.99, texto: '🔍 AJUSTE PARCIAL - Conviene comparar con otros candidatos. Podría desempeñarse en roles de apoyo comercial o con supervisión cercana, pero no de forma autónoma en campo.', clase: 'decision-reserve' },
-      { min: 0, max: 59.99, texto: '❌ NO RECOMENDADO - No demuestra las competencias críticas para el trabajo comercial en campo (manejo de inventario, dinero, clientes y presión por metas).', clase: 'decision-no' }
+      { min: 90, max: 100, texto: '✅ ALTAMENTE RECOMENDADO - Perfil ideal para ventas de campo.', clase: 'decision-hire' },
+      { min: 80, max: 89.99, texto: '👍 RECOMENDADO - Cumple con el perfil comercial de campo requerido.', clase: 'decision-recommend' },
+      { min: 70, max: 79.99, texto: '⚠️ RECOMENDADO CON PLAN DE DESARROLLO - Tiene potencial comercial, pero presenta brechas.', clase: 'decision-reserve' },
+      { min: 60, max: 69.99, texto: '🔍 AJUSTE PARCIAL - Podría desempeñarse en roles de apoyo comercial.', clase: 'decision-reserve' },
+      { min: 0, max: 59.99, texto: '❌ NO RECOMENDADO - No demuestra las competencias críticas.', clase: 'decision-no' }
     ],
     guiaEntrevista: `
       <h4>1. Apertura (5 minutos)</h4>
       <ul>
         <li>Cuéntame sobre tu trayectoria profesional y experiencia en ventas o trabajo de campo.</li>
-        <li>¿Qué te motivó a aplicar a este cargo de asesor comercial de campo?</li>
-        <li>¿Cómo describirías tu estilo de trabajo en ambientes dinámicos y con metas exigentes?</li>
       </ul>
       <h4>2. Entrevista por Competencias</h4>
       <h5>A. Orientación al logro (20%)</h5>
       <ul>
-        <li>Háblame de una meta comercial ambiciosa que hayas tenido que cumplir. ¿Cuál era el objetivo, qué estrategia usaste y cuál fue el resultado final?</li>
-        <li>¿Cómo haces seguimiento a tus indicadores de ventas diarios/semanales? Dame un ejemplo concreto de cómo mejoraste un indicador bajo.</li>
+        <li>Háblame de una meta comercial ambiciosa que hayas tenido que cumplir.</li>
       </ul>
       <h5>B. Orientación al cliente y abordaje en calle (18%)</h5>
       <ul>
-        <li>Imagina que vas por una zona comercial visitando puntos de venta. ¿Cómo abordas a un cliente que no te conoce y parece desinteresado? Describe tu proceso paso a paso.</li>
-        <li>Cuéntame sobre una ocasión en la que convertiste un "no" inicial en una venta exitosa.</li>
+        <li>¿Cómo abordas a un cliente que no te conoce y parece desinteresado?</li>
       </ul>
       <h5>C. Honestidad e integridad (17%)</h5>
       <ul>
-        <li>En tu experiencia manejando dinero o inventario en campo, ¿alguna vez detectaste una inconsistencia? ¿Cómo la manejaste?</li>
-        <li>Imagina que un aliado comercial te ofrece un beneficio personal a cambio de favorecer su punto de venta sobre otros. ¿Qué harías?</li>
-      </ul>
-      <h5>D. Organización y dinamismo (13%)</h5>
-      <ul>
-        <li>Describe cómo planificas tu ruta de visitas diarias. ¿Qué herramientas usas para organizarte?</li>
-        <li>Tienes 8 puntos que visitar en un día, pero uno te toma más tiempo del esperado. ¿Cómo reorganizas tu agenda?</li>
-      </ul>
-      <h5>E. Manejo de presión y resiliencia (12%)</h5>
-      <ul>
-        <li>Cuéntame sobre un día particularmente difícil en tu trabajo anterior. ¿Cómo lo manejaste emocional y operativamente?</li>
-        <li>¿Cómo manejas la presión cuando te falta una semana para cerrar el mes y aún estás lejos de tu meta?</li>
-      </ul>
-      <h5>F. Trabajo en equipo (10%) y G. Compromiso (10%)</h5>
-      <ul>
-        <li>Cuéntame sobre una ocasión en la que colaboraste con un compañero para cerrar una venta o resolver un problema con un cliente.</li>
-        <li>¿Qué te mantiene motivado a largo plazo en un cargo comercial de campo?</li>
+        <li>¿Alguna vez detectaste una inconsistencia manejando dinero o inventario?</li>
       </ul>
       <h4>3. Caso Práctico Integrador</h4>
-      <p><strong>Escenario:</strong> Es martes a las 10:00 a.m. Estás en una ruta de visitas comerciales. Tu meta del mes va al 60% y faltan 8 días. En el primer punto el dueño no está, en el segundo te reciben fríamente, en el tercero hay una inconsistencia de inventario que debes reportar, y te llaman del centro comercial para una reunión urgente a las 2:00 p.m. con tu supervisor. ¿Cómo organizas tu día y qué decisiones tomas?</p>
+      <p><strong>Escenario:</strong> Es martes a las 10:00 a.m. Tu meta del mes va al 60% y faltan 8 días. En el primer punto el dueño no está, en el segundo te reciben fríamente, en el tercero hay una inconsistencia de inventario, y te llaman para una reunión urgente. ¿Cómo organizas tu día?</p>
     `
   },
   coordinador_tiendas: {
@@ -1131,55 +1262,43 @@ const CONFIGURACION_CARGOS = {
       { nombre: 'Gestión Operativa y Resolución de Problemas', peso: 20 }
     ],
     escala: [
-      "5 - Sobresaliente: Demuestra dominio total, presenta ejemplos concretos con resultados medibles, evidencia liderazgo estratégico y autonomía en la gestión de múltiples puntos de venta.",
-      "4 - Bueno: Cumple completamente con la competencia, aporta ejemplos claros de gestión de equipos y KPIs, muestra iniciativa y capacidad de respuesta efectiva.",
-      "3 - Aceptable: Conoce y aplica parcialmente la competencia, requiere algo de acompañamiento en el análisis de indicadores o gestión de conflictos, pero tiene potencial.",
-      "2 - Básico: Demuestra conocimiento superficial, respuestas vagas o sin ejemplos concretos de liderazgo, necesitaría supervisión constante en terreno.",
-      "1 - Deficiente: No evidencia la competencia, evita respuestas, no demuestra experiencias previas relevantes en gestión retail o presenta actitudes contrarias al perfil."
+      "5 - Sobresaliente: Demuestra dominio total, presenta ejemplos concretos con resultados medibles.",
+      "4 - Bueno: Cumple completamente con la competencia, aporta ejemplos claros.",
+      "3 - Aceptable: Conoce y aplica parcialmente la competencia.",
+      "2 - Básico: Demuestra conocimiento superficial, respuestas vagas.",
+      "1 - Deficiente: No evidencia la competencia."
     ],
     interpretacion: [
-      { min: 90, max: 100, texto: '✅ ALTAMENTE RECOMENDADO - Perfil excepcional para la coordinación de tiendas. Demuestra sólida orientación a resultados, liderazgo transformador de equipos y excelente visión comercial y operativa.', clase: 'decision-hire' },
-      { min: 80, max: 89.99, texto: '👍 RECOMENDADO - Cumple con el perfil de coordinación retail. Buen manejo de KPIs, capacidad para desarrollar equipos y resolver problemas operativos. Curva de adaptación corta.', clase: 'decision-recommend' },
-      { min: 70, max: 79.99, texto: '⚠️ RECOMENDADO CON PLAN DE DESARROLLO - Tiene potencial de liderazgo, pero presenta brechas en alguna competencia clave (ej: análisis de indicadores o activación comercial). Requiere acompañamiento inicial.', clase: 'decision-reserve' },
-      { min: 60, max: 69.99, texto: '🔍 AJUSTE PARCIAL - Conviene comparar con otros candidatos. Podría desempeñarse como jefe de tienda individual, pero aún no evidencia madurez para coordinar múltiples puntos de venta.', clase: 'decision-reserve' },
-      { min: 0, max: 59.99, texto: '❌ NO RECOMENDADO - No demuestra las competencias críticas para la coordinación retail (gestión de presupuestos, desarrollo de equipos y control operativo).', clase: 'decision-no' }
+      { min: 90, max: 100, texto: '✅ ALTAMENTE RECOMENDADO - Perfil excepcional para la coordinación de tiendas.', clase: 'decision-hire' },
+      { min: 80, max: 89.99, texto: '👍 RECOMENDADO - Cumple con el perfil de coordinación retail.', clase: 'decision-recommend' },
+      { min: 70, max: 79.99, texto: '⚠️ RECOMENDADO CON PLAN DE DESARROLLO - Tiene potencial de liderazgo.', clase: 'decision-reserve' },
+      { min: 60, max: 69.99, texto: '🔍 AJUSTE PARCIAL - Podría desempeñarse como jefe de tienda individual.', clase: 'decision-reserve' },
+      { min: 0, max: 59.99, texto: '❌ NO RECOMENDADO - No demuestra las competencias críticas.', clase: 'decision-no' }
     ],
     guiaEntrevista: `
       <h4>1. Apertura (5 minutos)</h4>
       <ul>
-        <li>Cuéntame sobre tu trayectoria profesional en el sector retail y tu experiencia gestionando puntos de venta o equipos comerciales.</li>
-        <li>¿Qué te motivó a aplicar a este cargo de Coordinador de Tiendas?</li>
-        <li>¿Cómo describirías tu estilo de liderazgo cuando debes supervisar a varios administradores de tienda a la vez?</li>
+        <li>Cuéntame sobre tu trayectoria profesional en el sector retail.</li>
       </ul>
-
       <h4>2. Entrevista por Competencias</h4>
-      
-      <h5>A. Orientación a Resultados y Cumplimiento de Metas (30%)</h5>
+      <h5>A. Orientación a Resultados (30%)</h5>
       <ul>
-        <li>Háblame de una ocasión en la que las tiendas a tu cargo estaban por debajo del presupuesto de ventas. ¿Qué indicadores analizaste y qué plan correctivo ejecutaste para revertir la situación?</li>
-        <li>¿Cómo haces el seguimiento semanal o quincenal a los KPIs de tus tiendas? Dame un ejemplo de una acción que tomaste basándote en esos datos.</li>
+        <li>Háblame de una ocasión en la que las tiendas a tu cargo estaban por debajo del presupuesto.</li>
       </ul>
-
-      <h5>B. Liderazgo y Desarrollo de Equipos / Aliados (25%)</h5>
+      <h5>B. Liderazgo y Desarrollo de Equipos (25%)</h5>
       <ul>
-        <li>Cuéntame sobre un administrador o vendedor con bajo desempeño que lograste desarrollar y convertir en un colaborador destacado. ¿Qué acciones específicas tomaste?</li>
-        <li>¿Cómo garantizas que los estándares de atención y venta se mantengan uniformes en todas las tiendas que coordinas, a pesar de la distancia?</li>
+        <li>Cuéntame sobre un administrador o vendedor con bajo desempeño que lograste desarrollar.</li>
       </ul>
-
-      <h5>C. Visión Comercial y Activación de Ventas (25%)</h5>
+      <h5>C. Visión Comercial (25%)</h5>
       <ul>
-        <li>Describe una estrategia local o activación comercial que hayas propuesto e implementado en una tienda específica para dinamizar la rotación de un producto con baja salida. ¿Cuál fue el resultado?</li>
-        <li>¿Cómo identificas nuevas oportunidades de negocio o mejoras en la exhibición cuando realizas tus visitas a terreno?</li>
+        <li>Describe una estrategia local o activación comercial que hayas implementado.</li>
       </ul>
-
-      <h5>D. Gestión Operativa y Resolución de Problemas (20%)</h5>
+      <h5>D. Gestión Operativa (20%)</h5>
       <ul>
-        <li>Cuéntame sobre una situación imprevista crítica en una tienda (ej: falla de sistema, problema grave de inventario, conflicto con un cliente importante). ¿Cómo la resolviste con autonomía?</li>
-        <li>¿Qué metodología utilizas para auditar y asegurar el cumplimiento de los estándares de marca e inventarios durante tus visitas?</li>
+        <li>Cuéntame sobre una situación imprevista crítica en una tienda. ¿Cómo la resolviste?</li>
       </ul>
-
       <h4>3. Caso Práctico Integrador</h4>
-      <p><strong>Escenario:</strong> Eres Coordinador de 5 tiendas. A mitad de mes, la Tienda A va con un 40% de cumplimiento de meta y su administrador acaba de renunciar. La Tienda B tiene un faltante de inventario significativo detectado esta mañana. La Tienda C te solicita aprobación urgente para una activación comercial no presupuestada que podría recuperar ventas. Tienes solo un día para visitar una de ellas personalmente. ¿Cuál visitas, por qué y cómo gestionas las otras dos situaciones a distancia?</p>
+      <p><strong>Escenario:</strong> Eres Coordinador de 5 tiendas. La Tienda A va con 40% de meta y su administrador renunció. La Tienda B tiene un faltante de inventario. La Tienda C solicita una activación no presupuestada. ¿Cuál visitas y cómo gestionas las otras?</p>
     `
   },
   lider_ventas_online: {
@@ -1200,68 +1319,33 @@ const CONFIGURACION_CARGOS = {
       "1 - Muy bajo: No evidencia la competencia requerida."
     ],
     interpretacion: [
-      { min: 90, max: 100, texto: '✅ PERFIL ALTAMENTE ALINEADO - Excelente dominio de las competencias críticas y capacidad probada para liderar el canal digital.', clase: 'decision-hire' },
-      { min: 80, max: 89.99, texto: '👍 PERFIL CON ALTA ALINEACIÓN - Buen manejo de las dimensiones clave, listo para asumir el rol con una curva de adaptación corta.', clase: 'decision-recommend' },
-      { min: 70, max: 79.99, texto: '⚠️ PERFIL ADECUADO, CON ASPECTOS POR VALIDAR - Cumple lo esperado, pero requiere revisar brechas en competencias críticas antes de decidir.', clase: 'decision-reserve' },
-      { min: 60, max: 69.99, texto: '🔍 PRESENTA BRECHAS RELEVANTES - El perfil muestra debilidades en áreas clave. Se recomienda solo si no hay mejores candidatos y con un plan de desarrollo fuerte.', clase: 'decision-reserve' },
-      { min: 0, max: 59.99, texto: '❌ BAJO NIVEL DE ALINEACIÓN - No cumple con las exigencias del cargo, especialmente en responsabilidades centrales.', clase: 'decision-no' }
+      { min: 90, max: 100, texto: '✅ PERFIL ALTAMENTE ALINEADO - Excelente dominio de las competencias críticas.', clase: 'decision-hire' },
+      { min: 80, max: 89.99, texto: '👍 PERFIL CON ALTA ALINEACIÓN - Buen manejo de las dimensiones clave.', clase: 'decision-recommend' },
+      { min: 70, max: 79.99, texto: '⚠️ PERFIL ADECUADO, CON ASPECTOS POR VALIDAR.', clase: 'decision-reserve' },
+      { min: 60, max: 69.99, texto: '🔍 PRESENTA BRECHAS RELEVANTES.', clase: 'decision-reserve' },
+      { min: 0, max: 59.99, texto: '❌ BAJO NIVEL DE ALINEACIÓN.', clase: 'decision-no' }
     ],
     guiaEntrevista: `
       <h4>📋 Matriz de Evaluación Detallada - Líder de Ventas Online</h4>
-      <p style="font-size:13px; color:#666; margin-bottom:15px">⚠️ <strong>Nota importante:</strong> Las competencias marcadas como <strong>críticas</strong> (Resultados, Gestión Comercial Online y Liderazgo) concentran el 63% de la evaluación. Una calificación menor a 3 en estas áreas es una señal de alerta, independientemente del puntaje total.</p>
+      <p style="font-size:13px; color:#666; margin-bottom:15px">⚠️ <strong>Nota importante:</strong> Las competencias marcadas como <strong>críticas</strong> concentran el 63% de la evaluación.</p>
       
-      <h4>1. Orientación a Resultados y Cumplimiento de Metas Digitales (25% - Crítica)</h4>
+      <h4>1. Orientación a Resultados (25% - Crítica)</h4>
       <ul>
-        <li><strong>1:</strong> No evidencia experiencia trabajando con metas ni indicadores. Respuestas generales, sin acciones concretas.</li>
-        <li><strong>2:</strong> Ha trabajado con metas, pero su seguimiento es reactivo y depende de instrucciones de terceros.</li>
-        <li><strong>3:</strong> Realiza seguimiento adecuado, reconoce desviaciones y propone acciones razonables para recuperar resultados.</li>
-        <li><strong>4:</strong> Gestiona metas de manera estructurada, utiliza indicadores, anticipa desviaciones y establece planes de acción medibles.</li>
-        <li><strong>5:</strong> Alta orientación a resultados, anticipación, seguimiento riguroso y capacidad comprobada para superar metas mediante decisiones basadas en datos.</li>
+        <li><strong>5:</strong> Alta orientación a resultados, anticipación y capacidad para superar metas.</li>
+        <li><strong>3:</strong> Realiza seguimiento adecuado y reconoce desviaciones.</li>
+        <li><strong>1:</strong> No evidencia experiencia trabajando con metas ni indicadores.</li>
       </ul>
 
-      <h4>2. Gestión Comercial de Canales Online / E-commerce (20% - Crítica)</h4>
+      <h4>2. Gestión Comercial Online (20% - Crítica)</h4>
       <ul>
-        <li><strong>1:</strong> No demuestra conocimiento práctico de ventas digitales o e-commerce.</li>
-        <li><strong>2:</strong> Conocimientos básicos, depende principalmente de promociones o descuentos para impulsar ventas.</li>
-        <li><strong>3:</strong> Comprende la dinámica comercial online y propone estrategias funcionales para aumentar ventas.</li>
-        <li><strong>4:</strong> Maneja integralmente categorías, promociones, conversión, campañas y oportunidades de crecimiento.</li>
-        <li><strong>5:</strong> Visión estratégica del canal, conecta comportamiento del cliente, rentabilidad, conversión y crecimiento con experiencia generando resultados digitales.</li>
+        <li><strong>5:</strong> Visión estratégica del canal, conecta comportamiento del cliente con resultados.</li>
+        <li><strong>1:</strong> No demuestra conocimiento práctico de ventas digitales.</li>
       </ul>
 
-      <h4>3. Liderazgo y Desarrollo de Equipos (18% - Crítica)</h4>
+      <h4>3. Liderazgo (18% - Crítica)</h4>
       <ul>
-        <li><strong>1:</strong> Dificultades para explicar cómo lideraría, delegaría o corregiría situaciones del equipo.</li>
-        <li><strong>2:</strong> Experiencia limitada en liderazgo, se enfoca principalmente en control o supervisión.</li>
-        <li><strong>3:</strong> Lidera adecuadamente, establece objetivos, realiza seguimiento y brinda retroalimentación.</li>
-        <li><strong>4:</strong> Desarrolla activamente al equipo, identifica brechas, realiza coaching y gestiona el desempeño.</li>
-        <li><strong>5:</strong> Liderazgo sólido, capacidad para desarrollar talento, gestionar alto y bajo desempeño y construir equipos autónomos orientados al resultado.</li>
-      </ul>
-
-      <h4>4. Analítica Comercial y Toma de Decisiones (15%)</h4>
-      <ul>
-        <li><strong>1:</strong> Toma decisiones por intuición, dificultades para interpretar indicadores.</li>
-        <li><strong>2:</strong> Reconoce indicadores básicos, pero con poca profundidad analítica.</li>
-        <li><strong>3:</strong> Interpreta correctamente los principales KPIs y los utiliza para tomar decisiones.</li>
-        <li><strong>4:</strong> Relaciona varios indicadores, identifica causas y establece acciones basadas en análisis.</li>
-        <li><strong>5:</strong> Pensamiento analítico avanzado, identifica relaciones causa-efecto y convierte rápidamente los datos en decisiones comerciales estratégicas.</li>
-      </ul>
-
-      <h4>5. Experiencia del Cliente y Conversión Digital (12%)</h4>
-      <ul>
-        <li><strong>1:</strong> Considera la experiencia del cliente como responsabilidad exclusiva de servicio al cliente.</li>
-        <li><strong>2:</strong> Reconoce su importancia, pero plantea acciones poco estructuradas.</li>
-        <li><strong>3:</strong> Identifica puntos críticos del recorrido del cliente y propone soluciones adecuadas.</li>
-        <li><strong>4:</strong> Relaciona experiencia del cliente con conversión, recompra y resultados comerciales.</li>
-        <li><strong>5:</strong> Visión integral del customer journey, capacidad para convertir hallazgos del cliente en mejoras comerciales medibles.</li>
-      </ul>
-
-      <h4>6. Gestión Operativa, Inventarios y Coordinación Interáreas (10%)</h4>
-      <ul>
-        <li><strong>1:</strong> Visión aislada del área comercial, dificultades para coordinar con otras áreas.</li>
-        <li><strong>2:</strong> Reconoce dependencias operativas, pero actúa principalmente de forma reactiva.</li>
-        <li><strong>3:</strong> Coordina adecuadamente con las áreas involucradas y resuelve situaciones operativas habituales.</li>
-        <li><strong>4:</strong> Anticipa riesgos, establece acuerdos de trabajo y coordina efectivamente múltiples áreas.</li>
-        <li><strong>5:</strong> Visión integral de la operación, previene impactos comerciales y articula las áreas para asegurar continuidad, servicio y cumplimiento.</li>
+        <li><strong>5:</strong> Liderazgo sólido, capacidad para desarrollar talento.</li>
+        <li><strong>1:</strong> Dificultades para explicar cómo lideraría al equipo.</li>
       </ul>
     `
   }
@@ -1271,15 +1355,20 @@ const CONFIGURACION_CARGOS = {
 function getConfiguracionCargo(nombreCargo) {
   const nombre = (nombreCargo || "").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
   
-  // 1. AUXILIAR CONTABLE (nuevo - prioridad alta, debe ir antes de auxiliar_cartera)
+  // 1. JEFE DE SERVICIO (nuevo - prioridad ALTA, debe ir antes de otras detecciones genéricas)
+  // Detecta: "jefe de servicio", "jefe servicio", "supervisor de servicio", "líder de servicio", "jefe_servicio"
+  if (nombre.includes('servicio') && (nombre.includes('jefe') || nombre.includes('supervisor') || nombre.includes('lider') || nombre === 'jefe_servicio')) {
+    return CONFIGURACION_CARGOS.jefe_servicio;
+  }
+
+  // 2. AUXILIAR CONTABLE (debe ir antes de auxiliar_cartera)
   if (nombre.includes('contable') || nombre.includes('contabilidad') || nombre.includes('contador auxiliar') || nombre.includes('asistente contable')) {
-    // Verificar que no sea un cargo de coordinación de contabilidad (que sería más senior)
     if (!nombre.includes('gerente') && !nombre.includes('director')) {
       return CONFIGURACION_CARGOS.auxiliar_contable;
     }
   }
 
-  // 2. ADMINISTRADOR DE PUNTO
+  // 3. ADMINISTRADOR DE PUNTO
   if (nombre.includes('administrador') && (nombre.includes('punto') || nombre.includes('pv') || nombre.includes('local') || nombre.includes('restaurante') || nombre.includes('sucursal'))) {
     return CONFIGURACION_CARGOS.administrador_punto;
   }
@@ -1287,7 +1376,7 @@ function getConfiguracionCargo(nombreCargo) {
     return CONFIGURACION_CARGOS.administrador_punto;
   }
 
-  // 3. JEFE/LÍDER DE RRHH O TALENTO HUMANO
+  // 4. JEFE/LÍDER DE RRHH O TALENTO HUMANO
   const esCargoDirectivo = nombre.includes('jefe') || nombre.includes('lider') || nombre.includes('gerente') || nombre.includes('director') || nombre === 'jefe_rrhh';
   const esAreaRRHH = nombre.includes('recursos humanos') || nombre.includes('talento humano') || nombre.includes('rrhh') || nombre.includes(' rh ');
   
@@ -1298,7 +1387,7 @@ function getConfiguracionCargo(nombreCargo) {
     return CONFIGURACION_CARGOS.jefe_rrhh;
   }
 
-  // 4. Resto de detecciones
+  // 5. Resto de detecciones
   if (nombre.includes('lider') && (nombre.includes('ventas') || nombre.includes('online') || nombre.includes('digital') || nombre.includes('e-commerce') || nombre.includes('departamento'))) {
     return CONFIGURACION_CARGOS.lider_ventas_online;
   }
