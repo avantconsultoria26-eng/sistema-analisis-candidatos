@@ -24,7 +24,6 @@
     box-shadow: 0 20px 60px rgba(0,0,0,0.15);
     overflow: hidden;
   }
-  
   header {
     background: linear-gradient(135deg, #0a2540 0%, #1e3c72 50%, #2a5298 100%);
     color: #fff;
@@ -36,117 +35,37 @@
   header::before {
     content: '';
     position: absolute;
-    top: -50%;
-    right: -50%;
-    width: 200%;
-    height: 200%;
+    top: -50%; right: -50%;
+    width: 200%; height: 200%;
     background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
     animation: shimmer 4s infinite linear;
   }
-  @keyframes shimmer {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-  }
-  header h1 { 
-    font-size: 32px; 
-    margin-bottom: 8px; 
-    position: relative;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-  }
-  header p { 
-    opacity: 0.9; 
-    font-size: 16px; 
-    position: relative;
-    font-weight: 300;
-  }
-  .heart-icon {
-    color: #87CEEB;
-    animation: heartbeat 1.5s ease-in-out infinite;
-    display: inline-block;
-  }
-  @keyframes heartbeat {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.15); }
-  }
+  @keyframes shimmer { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+  header h1 { font-size: 32px; margin-bottom: 8px; position: relative; text-shadow: 2px 2px 4px rgba(0,0,0,0.3); }
+  header p { opacity: 0.9; font-size: 16px; position: relative; font-weight: 300; }
+  .heart-icon { color: #87CEEB; animation: heartbeat 1.5s ease-in-out infinite; display: inline-block; }
+  @keyframes heartbeat { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.15); } }
 
-  .tabs {
-    display: flex;
-    background: #f4f6f9;
-    border-bottom: 2px solid #e1e5eb;
-    overflow-x: auto;
-  }
-  .tab {
-    flex: 1;
-    min-width: 150px;
-    padding: 15px 20px;
-    cursor: pointer;
-    text-align: center;
-    font-weight: 600;
-    color: #666;
-    border-bottom: 3px solid transparent;
-    transition: all 0.3s;
-    font-size: 14px;
-  }
+  .tabs { display: flex; background: #f4f6f9; border-bottom: 2px solid #e1e5eb; overflow-x: auto; }
+  .tab { flex: 1; min-width: 150px; padding: 15px 20px; cursor: pointer; text-align: center; font-weight: 600; color: #666; border-bottom: 3px solid transparent; transition: all 0.3s; font-size: 14px; }
   .tab:hover { background: #e9eef5; color: #2a5298; }
-  .tab.active {
-    color: #2a5298;
-    border-bottom-color: #2a5298;
-    background: #fff;
-  }
+  .tab.active { color: #2a5298; border-bottom-color: #2a5298; background: #fff; }
 
   .tab-content { display: none; padding: 30px; }
   .tab-content.active { display: block; animation: fadeIn 0.4s; }
   @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
   .form-section { margin-bottom: 25px; }
-  .form-section h3 {
-    color: #1e3c72;
-    margin-bottom: 15px;
-    padding-bottom: 8px;
-    border-bottom: 2px solid #e1e5eb;
-    font-size: 18px;
-  }
-  .form-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 15px;
-  }
+  .form-section h3 { color: #1e3c72; margin-bottom: 15px; padding-bottom: 8px; border-bottom: 2px solid #e1e5eb; font-size: 18px; }
+  .form-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 15px; }
   .form-group { display: flex; flex-direction: column; }
-  label {
-    font-weight: 600;
-    margin-bottom: 6px;
-    color: #444;
-    font-size: 13px;
-  }
+  label { font-weight: 600; margin-bottom: 6px; color: #444; font-size: 13px; }
   label .required { color: #e74c3c; }
-  input, select, textarea {
-    padding: 10px 12px;
-    border: 1px solid #ccd3dc;
-    border-radius: 8px;
-    font-size: 14px;
-    transition: border 0.2s, box-shadow 0.2s;
-    font-family: inherit;
-    background: #fff;
-  }
-  input:focus, select:focus, textarea:focus {
-    outline: none;
-    border-color: #2a5298;
-    box-shadow: 0 0 0 3px rgba(42,82,152,0.15);
-  }
+  input, select, textarea { padding: 10px 12px; border: 1px solid #ccd3dc; border-radius: 8px; font-size: 14px; transition: border 0.2s, box-shadow 0.2s; font-family: inherit; background: #fff; }
+  input:focus, select:focus, textarea:focus { outline: none; border-color: #2a5298; box-shadow: 0 0 0 3px rgba(42,82,152,0.15); }
   select:disabled { background: #f0f2f5; color: #999; cursor: not-allowed; }
 
-  .btn {
-    padding: 11px 22px;
-    border: none;
-    border-radius: 8px;
-    font-weight: 600;
-    cursor: pointer;
-    font-size: 14px;
-    transition: all 0.25s;
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-  }
+  .btn { padding: 11px 22px; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 14px; transition: all 0.25s; display: inline-flex; align-items: center; gap: 6px; }
   .btn-primary { background: linear-gradient(135deg, #1e3c72, #2a5298); color: #fff; }
   .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(42,82,152,0.3); }
   .btn-success { background: linear-gradient(135deg, #27ae60, #229954); color: #fff; }
@@ -158,50 +77,18 @@
   .btn-pdf { background: linear-gradient(135deg, #c0392b, #a93226); color: #fff; }
   .btn-pdf:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(192,57,43,0.3); }
 
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 15px;
-    background: #fff;
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-  }
-  th {
-    background: linear-gradient(135deg, #1e3c72, #2a5298);
-    color: #fff;
-    padding: 12px;
-    text-align: left;
-    font-size: 13px;
-  }
-  td {
-    padding: 11px 12px;
-    border-bottom: 1px solid #eef1f5;
-    font-size: 14px;
-  }
+  table { width: 100%; border-collapse: collapse; margin-top: 15px; background: #fff; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+  th { background: linear-gradient(135deg, #1e3c72, #2a5298); color: #fff; padding: 12px; text-align: left; font-size: 13px; }
+  td { padding: 11px 12px; border-bottom: 1px solid #eef1f5; font-size: 14px; }
   tr:hover { background: #f8fafc; }
-  .badge {
-    display: inline-block;
-    padding: 4px 10px;
-    border-radius: 12px;
-    font-size: 12px;
-    font-weight: 600;
-  }
+  .badge { display: inline-block; padding: 4px 10px; border-radius: 12px; font-size: 12px; font-weight: 600; }
   .badge-success { background: #d4edda; color: #155724; }
   .badge-warning { background: #fff3cd; color: #856404; }
   .badge-danger { background: #f8d7da; color: #721c24; }
   .badge-info { background: #d1ecf1; color: #0c5460; }
   .badge-primary { background: #d6e4f5; color: #1e3c72; }
 
-  .traffic-light {
-    display: inline-block;
-    width: 14px;
-    height: 14px;
-    border-radius: 50%;
-    margin-right: 6px;
-    vertical-align: middle;
-    box-shadow: 0 0 4px rgba(0,0,0,0.2);
-  }
+  .traffic-light { display: inline-block; width: 14px; height: 14px; border-radius: 50%; margin-right: 6px; vertical-align: middle; box-shadow: 0 0 4px rgba(0,0,0,0.2); }
   .traffic-red { background: #e74c3c; }
   .traffic-orange { background: #f39c12; }
   .traffic-green { background: #27ae60; }
@@ -211,35 +98,15 @@
   .matrix-table select { width: 100%; }
   .total-row { background: #f0f4f9 !important; font-weight: 700; }
 
-  .scale-reference {
-    background: #f8fafc;
-    border-left: 4px solid #2a5298;
-    padding: 15px 20px;
-    border-radius: 6px;
-    margin-bottom: 20px;
-    font-size: 13px;
-  }
+  .scale-reference { background: #f8fafc; border-left: 4px solid #2a5298; padding: 15px 20px; border-radius: 6px; margin-bottom: 20px; font-size: 13px; }
   .scale-reference h4 { color: #2a5298; margin-bottom: 10px; }
   .scale-reference ul { list-style: none; padding-left: 0; }
   .scale-reference li { padding: 4px 0; border-bottom: 1px dashed #dde3ea; }
   .scale-reference li:last-child { border-bottom: none; }
   .scale-reference strong { color: #2a5298; }
 
-  .podium {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 20px;
-    margin: 20px 0;
-  }
-  .podium-card {
-    background: linear-gradient(135deg, #fff, #f8fafc);
-    border-radius: 12px;
-    padding: 25px;
-    text-align: center;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-    border: 2px solid transparent;
-    transition: transform 0.3s;
-  }
+  .podium { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin: 20px 0; }
+  .podium-card { background: linear-gradient(135deg, #fff, #f8fafc); border-radius: 12px; padding: 25px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.08); border: 2px solid transparent; transition: transform 0.3s; }
   .podium-card:hover { transform: translateY(-5px); }
   .podium-card.gold { border-color: #f1c40f; background: linear-gradient(135deg, #fff9e6, #fff); }
   .podium-card.silver { border-color: #bdc3c7; background: linear-gradient(135deg, #f8f9fa, #fff); }
@@ -247,190 +114,47 @@
   .podium-card.selected-cand { border-color: #2a5298; box-shadow: 0 0 0 4px rgba(42,82,152,0.2); }
   .medal { font-size: 48px; margin-bottom: 10px; }
   .podium-card h3 { color: #2a5298; margin-bottom: 8px; }
-  .podium-score {
-    font-size: 32px;
-    font-weight: 700;
-    margin: 10px 0;
-  }
+  .podium-score { font-size: 32px; font-weight: 700; margin: 10px 0; }
   .podium-card p { font-size: 13px; color: #666; margin: 4px 0; }
 
-  .chart-container {
-    background: #fff;
-    padding: 20px;
-    border-radius: 12px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-    margin: 20px 0;
-  }
+  .chart-container { background: #fff; padding: 20px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); margin: 20px 0; }
   .chart-container h3 { color: #2a5298; margin-bottom: 15px; text-align: center; }
   .chart-wrapper { max-width: 550px; margin: 0 auto; }
 
-  .summary-box {
-    background: linear-gradient(135deg, #f0f4f9, #fff);
-    border-radius: 12px;
-    padding: 25px;
-    margin: 20px 0;
-    border-left: 5px solid #2a5298;
-  }
+  .summary-box { background: linear-gradient(135deg, #f0f4f9, #fff); border-radius: 12px; padding: 25px; margin: 20px 0; border-left: 5px solid #2a5298; }
   .summary-box h3 { color: #2a5298; margin-bottom: 15px; }
   .summary-box p { line-height: 1.7; margin-bottom: 10px; color: #444; }
 
-  .decision-box {
-    padding: 20px;
-    border-radius: 10px;
-    margin: 15px 0;
-    font-weight: 600;
-    text-align: center;
-    font-size: 16px;
-  }
-  .decision-hire { background: #d4edda; color: #155724; border: 2px solid #27ae60; }
-  .decision-recommend { background: #d1ecf1; color: #0c5460; border: 2px solid #17a2b8; }
-  .decision-reserve { background: #fff3cd; color: #856404; border: 2px solid #f39c12; }
-  .decision-no { background: #f8d7da; color: #721c24; border: 2px solid #e74c3c; }
-
-  .alert {
-    padding: 15px 20px;
-    border-radius: 8px;
-    margin: 15px 0;
-    font-size: 14px;
-  }
+  .alert { padding: 15px 20px; border-radius: 8px; margin: 15px 0; font-size: 14px; }
   .alert-info { background: #d1ecf1; color: #0c5460; border-left: 4px solid #17a2b8; }
   .alert-warning { background: #fff3cd; color: #856404; border-left: 4px solid #f39c12; }
   .alert-success { background: #d4edda; color: #155724; border-left: 4px solid #27ae60; }
+  .alert-danger { background: #f8d7da; color: #721c24; border-left: 4px solid #e74c3c; }
 
-  .empty-state {
-    text-align: center;
-    padding: 40px 20px;
-    color: #888;
-  }
+  .empty-state { text-align: center; padding: 40px 20px; color: #888; }
   .empty-state .icon { font-size: 60px; margin-bottom: 15px; }
 
-  .cargo-selector {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-top: 10px;
-    flex-wrap: wrap;
-  }
-  .vacancy-badge {
-    background: #27ae60;
-    color: #fff;
-    padding: 6px 14px;
-    border-radius: 20px;
-    font-weight: 700;
-    font-size: 13px;
-    white-space: nowrap;
-  }
+  .vacancy-badge { background: #27ae60; color: #fff; padding: 6px 14px; border-radius: 20px; font-weight: 700; font-size: 13px; white-space: nowrap; }
   .vacancy-badge.zero { background: #e74c3c; }
-  .candidates-badge {
-    background: #2a5298;
-    color: #fff;
-    padding: 6px 14px;
-    border-radius: 20px;
-    font-weight: 700;
-    font-size: 13px;
-    white-space: nowrap;
-  }
+  .candidates-badge { background: #2a5298; color: #fff; padding: 6px 14px; border-radius: 20px; font-weight: 700; font-size: 13px; white-space: nowrap; }
 
-  .candidate-list-item {
-    background: #f8fafc;
-    padding: 15px;
-    border-radius: 8px;
-    margin-bottom: 10px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-left: 4px solid #2a5298;
-    flex-wrap: wrap;
-    gap: 10px;
-  }
+  .candidate-list-item { background: #f8fafc; padding: 15px; border-radius: 8px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; border-left: 4px solid #2a5298; flex-wrap: wrap; gap: 10px; }
   .candidate-info strong { color: #2a5298; }
   .candidate-info small { color: #777; display: block; margin-top: 3px; }
 
-  .cascade-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 15px;
-    margin-bottom: 20px;
-    background: linear-gradient(135deg, #f0f4f9, #fff);
-    padding: 20px;
-    border-radius: 10px;
-    border: 1px solid #e1e5eb;
-  }
+  .cascade-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; margin-bottom: 20px; background: linear-gradient(135deg, #f0f4f9, #fff); padding: 20px; border-radius: 10px; border: 1px solid #e1e5eb; }
   .cascade-step { position: relative; }
-  .cascade-step::before {
-    content: attr(data-step);
-    position: absolute;
-    top: -10px;
-    left: 10px;
-    background: #2a5298;
-    color: #fff;
-    width: 24px;
-    height: 24px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 12px;
-    font-weight: 700;
-  }
-  .cascade-info {
-    background: #e8f0fb;
-    border-left: 4px solid #2a5298;
-    padding: 12px 16px;
-    border-radius: 6px;
-    margin-bottom: 15px;
-    font-size: 14px;
-    color: #1e3c72;
-  }
+  .cascade-step::before { content: attr(data-step); position: absolute; top: -10px; left: 10px; background: #2a5298; color: #fff; width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; }
+  .cascade-info { background: #e8f0fb; border-left: 4px solid #2a5298; padding: 12px 16px; border-radius: 6px; margin-bottom: 15px; font-size: 14px; color: #1e3c72; }
   .cascade-info strong { color: #2a5298; }
 
-  .candidate-selector-box {
-    background: linear-gradient(135deg, #fff9e6, #fff);
-    border: 2px solid #f1c40f;
-    border-radius: 12px;
-    padding: 20px;
-    margin: 20px 0;
-  }
-  .candidate-selector-box h4 {
-    color: #856404;
-    margin-bottom: 12px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-  .candidate-detail-card {
-    background: #fff;
-    border-radius: 10px;
-    padding: 15px;
-    margin-top: 15px;
-    border-left: 4px solid #f1c40f;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    gap: 10px;
-    font-size: 13px;
-  }
+  .candidate-selector-box { background: linear-gradient(135deg, #fff9e6, #fff); border: 2px solid #f1c40f; border-radius: 12px; padding: 20px; margin: 20px 0; }
+  .candidate-selector-box h4 { color: #856404; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
+  .candidate-detail-card { background: #fff; border-radius: 10px; padding: 15px; margin-top: 15px; border-left: 4px solid #f1c40f; display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 10px; font-size: 13px; }
   .candidate-detail-card div strong { color: #2a5298; display: block; font-size: 11px; text-transform: uppercase; margin-bottom: 3px; }
 
-  details.guia-entrevista {
-    background: #fff;
-    border: 1px solid #e1e5eb;
-    border-radius: 8px;
-    margin-top: 15px;
-    overflow: hidden;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-  }
-  details.guia-entrevista summary {
-    cursor: pointer;
-    font-weight: 600;
-    color: #2a5298;
-    padding: 15px;
-    background: #f8fafc;
-    list-style: none;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    transition: background 0.2s;
-  }
+  details.guia-entrevista { background: #fff; border: 1px solid #e1e5eb; border-radius: 8px; margin-top: 15px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.04); }
+  details.guia-entrevista summary { cursor: pointer; font-weight: 600; color: #2a5298; padding: 15px; background: #f8fafc; list-style: none; display: flex; align-items: center; gap: 8px; transition: background 0.2s; }
   details.guia-entrevista summary:hover { background: #e8f0fb; }
   details.guia-entrevista summary::-webkit-details-marker { display: none; }
   details.guia-entrevista summary::before { content: '📖'; font-size: 18px; }
@@ -442,7 +166,7 @@
   .guia-content li { margin-bottom: 6px; }
   .guia-content p { margin-bottom: 10px; }
   .guia-content strong { color: #2a5298; }
-  
+
   .guia-table-wrapper { overflow-x: auto; margin-top: 10px; border-radius: 6px; border: 1px solid #e1e5eb; }
   .guia-table { width: 100%; border-collapse: collapse; font-size: 12px; min-width: 800px; }
   .guia-table th { background: #2a5298; color: #fff; padding: 10px; text-align: left; font-weight: 600; border: 1px solid #1e3c72; }
@@ -471,75 +195,39 @@
     <div class="tab" data-tab="resultados">4. Resultados</div>
   </div>
 
-  <!-- TAB 1: EMPRESA Y CARGO -->
   <div class="tab-content active" id="tab-empresa">
     <div class="form-section">
       <h3>🏢 Registrar Empresa</h3>
       <div class="form-grid">
-        <div class="form-group">
-          <label>NIT <span class="required">*</span></label>
-          <input type="text" id="nit" placeholder="Ej: 900.123.456-7">
-        </div>
-        <div class="form-group">
-          <label>Nombre de la Empresa <span class="required">*</span></label>
-          <input type="text" id="nombreEmpresa" placeholder="Ej: Tech Solutions S.A.S">
-        </div>
+        <div class="form-group"><label>NIT <span class="required">*</span></label><input type="text" id="nit" placeholder="Ej: 900.123.456-7"></div>
+        <div class="form-group"><label>Nombre de la Empresa <span class="required">*</span></label><input type="text" id="nombreEmpresa" placeholder="Ej: Tech Solutions S.A.S"></div>
       </div>
-      <div class="btn-group" style="margin-top:15px">
-        <button class="btn btn-primary" onclick="agregarEmpresa()">➕ Agregar Empresa</button>
-      </div>
+      <div style="margin-top:15px"><button class="btn btn-primary" onclick="agregarEmpresa()">➕ Agregar Empresa</button></div>
     </div>
-
     <div class="form-section">
       <h3>💼 Gestionar Cargos / Vacantes</h3>
       <div class="form-grid">
-        <div class="form-group">
-          <label>Seleccionar Empresa <span class="required">*</span></label>
-          <select id="empresaCargo">
-            <option value="">-- Seleccione --</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label>Nombre del Cargo <span class="required">*</span></label>
-          <input type="text" id="nombreCargo" placeholder="Ej: Jefe de Servicio, Auxiliar Contable, Asesor Comercial">
-        </div>
-        <div class="form-group">
-          <label>Número de Vacantes <span class="required">*</span></label>
-          <input type="number" id="numVacantes" min="1" value="1">
-        </div>
+        <div class="form-group"><label>Seleccionar Empresa <span class="required">*</span></label><select id="empresaCargo"><option value="">-- Seleccione --</option></select></div>
+        <div class="form-group"><label>Nombre del Cargo <span class="required">*</span></label><input type="text" id="nombreCargo" placeholder="Ej: Jefe de Servicio, Auxiliar Contable"></div>
+        <div class="form-group"><label>Número de Vacantes <span class="required">*</span></label><input type="number" id="numVacantes" min="1" value="1"></div>
       </div>
-      <div class="btn-group" style="margin-top:15px">
-        <button class="btn btn-success" onclick="agregarCargo()">➕ Agregar Cargo</button>
-      </div>
+      <div style="margin-top:15px"><button class="btn btn-success" onclick="agregarCargo()">➕ Agregar Cargo</button></div>
     </div>
-
     <div class="form-section">
       <h3>📋 Empresas y Cargos Registrados</h3>
       <div id="listaEmpresas"></div>
     </div>
   </div>
 
-  <!-- TAB 2: CANDIDATOS -->
   <div class="tab-content" id="tab-candidatos">
     <div class="form-section">
       <h3>👤 Registrar Candidato</h3>
-      <div class="alert alert-info">
-        💡 <strong>Nota:</strong> Puede registrar múltiples candidatos para la misma vacante. Todos los campos marcados con <span style="color:#e74c3c">*</span> son obligatorios.
-      </div>
+      <div class="alert alert-info">💡 <strong>Nota:</strong> Puede registrar múltiples candidatos para la misma vacante.</div>
       <div class="form-grid">
-        <div class="form-group">
-          <label>Empresa <span class="required">*</span></label>
-          <select id="empresaCandidato" onchange="cargarCargosCandidato()">
-            <option value="">-- Seleccione --</option>
-          </select>
-        </div>
+        <div class="form-group"><label>Empresa <span class="required">*</span></label><select id="empresaCandidato" onchange="cargarCargosCandidato()"><option value="">-- Seleccione --</option></select></div>
         <div class="form-group">
           <label>Cargo <span class="required">*</span></label>
-          <div class="cargo-selector">
-            <select id="cargoCandidato" style="flex:1" onchange="mostrarVacantes()">
-              <option value="">-- Seleccione cargo --</option>
-            </select>
-          </div>
+          <select id="cargoCandidato" onchange="mostrarVacantes()"><option value="">-- Seleccione cargo --</option></select>
           <div id="infoVacanteCargo" style="margin-top:8px; display:none">
             <span class="vacancy-badge" id="vacanteInfo">0 vacantes</span>
             <span class="candidates-badge" id="candidatosInfo">0 candidatos</span>
@@ -547,108 +235,44 @@
         </div>
       </div>
       <div class="form-grid" style="margin-top:15px">
-        <div class="form-group">
-          <label>Cédula <span class="required">*</span></label>
-          <input type="text" id="cedula" placeholder="Ej: 1020304050">
-        </div>
-        <div class="form-group">
-          <label>Nombres y Apellidos <span class="required">*</span></label>
-          <input type="text" id="nombreCandidato" placeholder="Ej: Juan Pérez García">
-        </div>
-        <div class="form-group">
-          <label>Profesión <span class="required">*</span></label>
-          <input type="text" id="profesion" placeholder="Ej: Administrador de Empresas">
-        </div>
-        <div class="form-group">
-          <label>Edad <span class="required">*</span></label>
-          <input type="number" id="edad" min="18" max="70" placeholder="Ej: 32">
-        </div>
-        <div class="form-group">
-          <label>Tiempo de Experiencia (años) <span class="required">*</span></label>
-          <input type="number" id="experiencia" min="0" max="50" placeholder="Ej: 5">
-        </div>
-        <div class="form-group">
-          <label>Teléfono <span class="required">*</span></label>
-          <input type="tel" id="telefono" placeholder="Ej: 3001234567">
-        </div>
-        <div class="form-group">
-          <label>Correo Electrónico <span class="required">*</span></label>
-          <input type="email" id="correo" placeholder="Ej: juan@email.com">
-        </div>
-        <div class="form-group" style="grid-column: span 2">
-          <label>Dirección <span class="required">*</span></label>
-          <input type="text" id="direccion" placeholder="Ej: Calle 123 # 45-67, Bogotá">
-        </div>
+        <div class="form-group"><label>Cédula <span class="required">*</span></label><input type="text" id="cedula" placeholder="Ej: 1020304050"></div>
+        <div class="form-group"><label>Nombres y Apellidos <span class="required">*</span></label><input type="text" id="nombreCandidato" placeholder="Ej: Juan Pérez García"></div>
+        <div class="form-group"><label>Profesión <span class="required">*</span></label><input type="text" id="profesion" placeholder="Ej: Administrador de Empresas"></div>
+        <div class="form-group"><label>Edad <span class="required">*</span></label><input type="number" id="edad" min="18" max="70" placeholder="Ej: 32"></div>
+        <div class="form-group"><label>Tiempo de Experiencia (años) <span class="required">*</span></label><input type="number" id="experiencia" min="0" max="50" placeholder="Ej: 5"></div>
+        <div class="form-group"><label>Teléfono <span class="required">*</span></label><input type="tel" id="telefono" placeholder="Ej: 3001234567"></div>
+        <div class="form-group"><label>Correo Electrónico <span class="required">*</span></label><input type="email" id="correo" placeholder="Ej: juan@email.com"></div>
+        <div class="form-group" style="grid-column: span 2"><label>Dirección <span class="required">*</span></label><input type="text" id="direccion" placeholder="Ej: Calle 123 # 45-67, Bogotá"></div>
       </div>
-      <div class="btn-group" style="margin-top:15px">
-        <button class="btn btn-success" onclick="agregarCandidato()">➕ Registrar Candidato</button>
-      </div>
+      <div style="margin-top:15px"><button class="btn btn-success" onclick="agregarCandidato()">➕ Registrar Candidato</button></div>
     </div>
-
     <div class="form-section">
       <h3>👥 Candidatos Registrados</h3>
       <div id="listaCandidatos"></div>
     </div>
   </div>
 
-  <!-- TAB 3: EVALUACIÓN -->
   <div class="tab-content" id="tab-evaluacion">
     <div class="form-section">
       <h3>📊 Matriz de Evaluación</h3>
-
       <div class="cascade-grid">
-        <div class="cascade-step" data-step="1">
-          <label>1. Seleccione Empresa <span class="required">*</span></label>
-          <select id="evalEmpresa" onchange="cargarCargosEval()" style="width:100%">
-            <option value="">-- Seleccione empresa --</option>
-          </select>
-        </div>
-        <div class="cascade-step" data-step="2">
-          <label>2. Seleccione Cargo <span class="required">*</span></label>
-          <select id="evalCargo" onchange="cargarCandidatosEval()" disabled style="width:100%">
-            <option value="">-- Primero seleccione empresa --</option>
-          </select>
-        </div>
-        <div class="cascade-step" data-step="3">
-          <label>3. Seleccione Candidato <span class="required">*</span></label>
-          <select id="evalCandidato" onchange="cargarEvaluacion()" disabled style="width:100%">
-            <option value="">-- Primero seleccione cargo --</option>
-          </select>
-        </div>
+        <div class="cascade-step" data-step="1"><label>1. Seleccione Empresa <span class="required">*</span></label><select id="evalEmpresa" onchange="cargarCargosEval()" style="width:100%"><option value="">-- Seleccione empresa --</option></select></div>
+        <div class="cascade-step" data-step="2"><label>2. Seleccione Cargo <span class="required">*</span></label><select id="evalCargo" onchange="cargarCandidatosEval()" disabled style="width:100%"><option value="">-- Primero seleccione empresa --</option></select></div>
+        <div class="cascade-step" data-step="3"><label>3. Seleccione Candidato <span class="required">*</span></label><select id="evalCandidato" onchange="cargarEvaluacion()" disabled style="width:100%"><option value="">-- Primero seleccione cargo --</option></select></div>
       </div>
-
       <div id="infoCandidatoEval"></div>
       <div id="matrizEvaluacion"></div>
-      
-      <div class="btn-group" style="margin-top:15px">
-        <button class="btn btn-primary" onclick="guardarEvaluacion()">💾 Guardar Evaluación</button>
-      </div>
+      <div style="margin-top:15px"><button class="btn btn-primary" onclick="guardarEvaluacion()">💾 Guardar Evaluación</button></div>
     </div>
   </div>
 
-  <!-- TAB 4: RESULTADOS -->
   <div class="tab-content" id="tab-resultados">
     <div class="form-section">
       <h3>🏆 Resultados del Análisis</h3>
       <div class="cascade-grid">
-        <div class="cascade-step" data-step="1">
-          <label>1. Empresa <span class="required">*</span></label>
-          <select id="filtroEmpresa" onchange="cargarCargosResultados()" style="width:100%">
-            <option value="">-- Seleccione empresa --</option>
-          </select>
-        </div>
-        <div class="cascade-step" data-step="2">
-          <label>2. Cargo <span class="required">*</span></label>
-          <select id="filtroCargo" onchange="cargarCandidatosResultados()" disabled style="width:100%">
-            <option value="">-- Primero seleccione empresa --</option>
-          </select>
-        </div>
-        <div class="cascade-step" data-step="3">
-          <label>3. Candidato a Analizar <span class="required">*</span></label>
-          <select id="filtroCandidato" onchange="mostrarResultados()" disabled style="width:100%">
-            <option value="">-- Primero seleccione cargo --</option>
-          </select>
-        </div>
+        <div class="cascade-step" data-step="1"><label>1. Empresa <span class="required">*</span></label><select id="filtroEmpresa" onchange="cargarCargosResultados()" style="width:100%"><option value="">-- Seleccione empresa --</option></select></div>
+        <div class="cascade-step" data-step="2"><label>2. Cargo <span class="required">*</span></label><select id="filtroCargo" onchange="cargarCandidatosResultados()" disabled style="width:100%"><option value="">-- Primero seleccione empresa --</option></select></div>
+        <div class="cascade-step" data-step="3"><label>3. Candidato a Analizar <span class="required">*</span></label><select id="filtroCandidato" onchange="mostrarResultados()" disabled style="width:100%"><option value="">-- Primero seleccione cargo --</option></select></div>
       </div>
       <div id="contenidoResultados"></div>
     </div>
@@ -677,196 +301,17 @@ const CONFIGURACION_CARGOS = {
       "5 - Sobresaliente: Demuestra seguridad, criterio práctico, capacidad de anticipación y toma decisiones claras orientadas al servicio y a los resultados.",
       "4 - Bueno: Demuestra buen criterio, organiza sus acciones, identifica prioridades y propone soluciones acordes con la operación.",
       "3 - Aceptable: Responde de manera adecuada y plantea acciones funcionales, aunque con poca profundidad o anticipación.",
-      "2 - Bajo: Tiene una idea básica, pero sus respuestas son incompletas y necesita mucho acompañamiento para actuar correctamente.",
-      "1 - Deficiente: No demuestra manejo del tema, responde de forma confusa o propone acciones poco adecuadas para el cargo."
+      "2 - Bajo: Tiene una idea básica, pero sus respuestas son incompletas y necesita mucho acompañamiento.",
+      "1 - Deficiente: No demuestra manejo del tema, responde de forma confusa o propone acciones poco adecuadas."
     ],
     interpretacion: [
-      { min: 90, max: 100, texto: '✅ SOBRESALIENTE - Perfil excepcional para liderar el servicio. Demuestra liderazgo sólido, excelente organización operativa, fuerte orientación al cliente, control riguroso y gestión efectiva de proveedores e inventarios.', clase: 'decision-hire' },
-      { min: 80, max: 89.99, texto: '👍 BUENO - Cumple ampliamente con el perfil requerido. Buen manejo de equipos, organización del servicio y resolución de situaciones operativas. Curva de adaptación corta.', clase: 'decision-recommend' },
-      { min: 70, max: 79.99, texto: '⚠️ ACEPTABLE - Puede desempeñar el cargo, pero presenta oportunidades de fortalecimiento en alguna competencia clave. Requiere acompañamiento inicial.', clase: 'decision-reserve' },
-      { min: 60, max: 69.99, texto: '🔍 BAJO - Presenta vacíos significativos. Requiere capacitación o acompañamiento importante antes de asumir el cargo de forma autónoma.', clase: 'decision-reserve' },
-      { min: 0, max: 59.99, texto: '❌ DEFICIENTE - No evidencia las competencias necesarias para liderar el servicio. No se recomienda para el cargo.', clase: 'decision-no' }
+      { min: 90, max: 100, texto: '✅ SOBRESALIENTE - Perfil excepcional para liderar el servicio.', clase: 'decision-hire' },
+      { min: 80, max: 89.99, texto: '👍 BUENO - Cumple ampliamente con el perfil requerido.', clase: 'decision-recommend' },
+      { min: 70, max: 79.99, texto: '⚠️ ACEPTABLE - Puede desempeñar el cargo con oportunidades de fortalecimiento.', clase: 'decision-reserve' },
+      { min: 60, max: 69.99, texto: '🔍 BAJO - Presenta vacíos significativos, requiere capacitación.', clase: 'decision-reserve' },
+      { min: 0, max: 59.99, texto: '❌ DEFICIENTE - No evidencia las competencias necesarias.', clase: 'decision-no' }
     ],
-    guiaEntrevista: `
-      <h4>📋 Matriz de Evaluación Detallada - Jefe de Servicio</h4>
-      <p style="font-size:13px; color:#666; margin-bottom:15px">Esta guía está diseñada para evaluar competencias clave en la jefatura de un servicio operativo (restaurante, hotelería, eventos, catering o similar). Utilice la escala del 1 al 5 según el nivel de evidencia en las respuestas del candidato.</p>
-      
-      <h4>1. Apertura (5 minutos)</h4>
-      <ul>
-        <li>Cuéntame sobre tu trayectoria profesional y tu experiencia liderando equipos de servicio.</li>
-        <li>¿Qué te motivó a aplicar a este cargo de Jefe de Servicio?</li>
-        <li>¿Cómo describirías tu estilo de liderazgo cuando coordinas un equipo operativo en un ambiente dinámico?</li>
-      </ul>
-
-      <h4>2. Entrevista por Competencias</h4>
-
-      <h5>A. Liderazgo y coordinación del equipo (25%)</h5>
-      <p style="color:#666; font-style:italic; font-size:13px"><strong>Qué evaluar:</strong> Capacidad para organizar, corregir y mantener al equipo enfocado. Distribución de tareas, comunicación clara, seguimiento y liderazgo bajo presión.</p>
-      <div class="guia-table-wrapper">
-        <table class="guia-table">
-          <thead>
-            <tr>
-              <th>1 - Deficiente</th>
-              <th>2 - Bajo</th>
-              <th>3 - Aceptable</th>
-              <th>4 - Bueno</th>
-              <th>5 - Sobresaliente</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>No sabe cómo organizar o corregir al equipo.</td>
-              <td>Da instrucciones básicas, pero sin seguimiento claro.</td>
-              <td>Organiza al equipo y aborda dificultades de forma adecuada.</td>
-              <td>Distribuye tareas, comunica claramente y hace seguimiento.</td>
-              <td>Lidera con seguridad, reorganiza rápidamente y mantiene al equipo enfocado durante situaciones de presión.</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <p style="margin-top:10px"><strong>Preguntas clave:</strong></p>
-      <ul>
-        <li>Cuéntame sobre la ocasión en la que tuviste que liderar el equipo más grande o complejo. ¿Cómo distribuiste las funciones y te aseguraste de que cada persona entendiera su rol?</li>
-        <li>Describe una situación en la que tuviste que corregir a un colaborador por un desempeño inadecuado. ¿Cómo lo hiciste?</li>
-        <li>Háblame de un momento de alta presión en el servicio. ¿Cómo mantuviste al equipo enfocado y organizado?</li>
-      </ul>
-
-      <h5>B. Organización y programación del servicio (25%)</h5>
-      <p style="color:#666; font-style:italic; font-size:13px"><strong>Qué evaluar:</strong> Capacidad para organizar turnos, priorizar necesidades, distribuir personal y anticiparse a imprevistos.</p>
-      <div class="guia-table-wrapper">
-        <table class="guia-table">
-          <thead>
-            <tr>
-              <th>1 - Deficiente</th>
-              <th>2 - Bajo</th>
-              <th>3 - Aceptable</th>
-              <th>4 - Bueno</th>
-              <th>5 - Sobresaliente</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>No logra organizar turnos ni priorizar necesidades.</td>
-              <td>Organiza de forma reactiva y con poca claridad.</td>
-              <td>Distribuye personal y tareas de forma funcional.</td>
-              <td>Considera horarios, demanda, descansos y contingencias.</td>
-              <td>Se anticipa a las necesidades y mantiene la continuidad del servicio aun ante ausencias o imprevistos.</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <p style="margin-top:10px"><strong>Preguntas clave:</strong></p>
-      <ul>
-        <li>Describe cómo programas los turnos de tu equipo. ¿Qué variables consideras antes de definir la programación semanal?</li>
-        <li>Imagina que dos colaboradores te avisan que no podrán asistir el día de mayor demanda. ¿Cómo reorganizas el servicio?</li>
-        <li>¿Qué herramientas o métodos usas para anticipar las necesidades del servicio y evitar improvisaciones?</li>
-      </ul>
-
-      <h5>C. Orientación al servicio y manejo de clientes (20%)</h5>
-      <p style="color:#666; font-style:italic; font-size:13px"><strong>Qué evaluar:</strong> Capacidad para abordar inconformidades, escuchar al cliente, ofrecer soluciones efectivas y recuperar la experiencia sin afectar la operación.</p>
-      <div class="guia-table-wrapper">
-        <table class="guia-table">
-          <thead>
-            <tr>
-              <th>1 - Deficiente</th>
-              <th>2 - Bajo</th>
-              <th>3 - Aceptable</th>
-              <th>4 - Bueno</th>
-              <th>5 - Sobresaliente</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>No sabe cómo abordar una inconformidad o puede empeorar la situación.</td>
-              <td>Escucha al cliente, pero ofrece soluciones poco claras.</td>
-              <td>Atiende respetuosamente y plantea una solución adecuada.</td>
-              <td>Escucha, verifica, soluciona y hace seguimiento.</td>
-              <td>Maneja la situación con empatía, criterio y rapidez, recuperando la experiencia del cliente sin afectar innecesariamente la operación.</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <p style="margin-top:10px"><strong>Preguntas clave:</strong></p>
-      <ul>
-        <li>Cuéntame sobre la ocasión en la que tuviste que manejar la queja más difícil de un cliente. ¿Cómo lo escuchaste, qué solución ofreciste y cómo terminó la situación?</li>
-        <li>¿Cómo te aseguras de que todo el equipo mantenga un estándar de servicio consistente, incluso en momentos de alta presión?</li>
-        <li>¿Qué haces cuando un cliente tiene una experiencia negativa por un fallo operativo?</li>
-      </ul>
-
-      <h5>D. Control operativo y administrativo (15%)</h5>
-      <p style="color:#666; font-style:italic; font-size:13px"><strong>Qué evaluar:</strong> Capacidad para revisar, controlar, documentar novedades y proponer acciones preventivas.</p>
-      <div class="guia-table-wrapper">
-        <table class="guia-table">
-          <thead>
-            <tr>
-              <th>1 - Deficiente</th>
-              <th>2 - Bajo</th>
-              <th>3 - Aceptable</th>
-              <th>4 - Bueno</th>
-              <th>5 - Sobresaliente</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>No identifica qué debe revisar o controlar.</td>
-              <td>Realiza verificaciones parciales y puede omitir información importante.</td>
-              <td>Revisa y reporta correctamente las novedades.</td>
-              <td>Verifica soportes, identifica posibles causas y documenta adecuadamente.</td>
-              <td>Además de controlar, identifica causas y propone acciones preventivas para evitar recurrencias.</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <p style="margin-top:10px"><strong>Preguntas clave:</strong></p>
-      <ul>
-        <li>¿Qué aspectos operativos y administrativos revisas diariamente al iniciar y cerrar tu turno?</li>
-        <li>Cuéntame sobre una ocasión en la que detectaste una novedad importante. ¿Cómo la documentaste y qué acciones tomaste?</li>
-        <li>¿Qué indicadores o controles utilizas para asegurar que el servicio se mantenga dentro de los estándares esperados?</li>
-      </ul>
-
-      <h5>E. Gestión de proveedores, pedidos e inventarios (15%)</h5>
-      <p style="color:#666; font-style:italic; font-size:13px"><strong>Qué evaluar:</strong> Capacidad para gestionar pedidos, recibir productos, controlar existencias y anticiparse a faltantes.</p>
-      <div class="guia-table-wrapper">
-        <table class="guia-table">
-          <thead>
-            <tr>
-              <th>1 - Deficiente</th>
-              <th>2 - Bajo</th>
-              <th>3 - Aceptable</th>
-              <th>4 - Bueno</th>
-              <th>5 - Sobresaliente</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Recibe o solicita productos sin realizar controles.</td>
-              <td>Hace verificaciones básicas, pero incompletas.</td>
-              <td>Revisa cantidades, condiciones y necesidades antes de recibir o solicitar.</td>
-              <td>Controla pedido, recepción, existencias y novedades correctamente.</td>
-              <td>Se anticipa a faltantes, detecta diferencias oportunamente y toma decisiones que protegen la continuidad de la operación.</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <p style="margin-top:10px"><strong>Preguntas clave:</strong></p>
-      <ul>
-        <li>Describe tu proceso para solicitar pedidos a proveedores. ¿Qué criterios usas para definir cantidades y momentos de pedido?</li>
-        <li>¿Cómo verificas la recepción de un pedido? ¿Qué haces cuando detectas diferencias en cantidad o calidad?</li>
-        <li>Cuéntame sobre una ocasión en la que anticipaste un faltante crítico. ¿Cómo lo manejaste para no afectar el servicio?</li>
-      </ul>
-
-      <h4>3. Caso Práctico Integrador</h4>
-      <p><strong>Escenario:</strong> Es viernes en la noche, el servicio está lleno. En este momento enfrentas las siguientes situaciones simultáneas:</p>
-      <ul>
-        <li>Un cliente importante se queja porque su pedido lleva 35 minutos y aún no llega (debería tardar 15).</li>
-        <li>Uno de tus colaboradores clave te avisa que se siente mal y debe irse inmediatamente.</li>
-        <li>El proveedor que debía entregar un insumo crítico para el fin de semana no llega y no contesta el teléfono.</li>
-        <li>En el cierre parcial de caja aparece una diferencia de $150.000 que debes cuadrar antes de terminar el turno.</li>
-        <li>Tu supervisor te llama para pedirte un reporte urgente de las ventas y novedades del día.</li>
-      </ul>
-      <p><strong>¿Cómo priorizas estas situaciones, qué decisiones tomas y en qué orden las ejecutas?</strong></p>
-      <p style="color:#666; font-size:13px"><em>Evaluar: priorización, liderazgo bajo presión, orientación al cliente, control operativo, gestión de proveedores y manejo simultáneo de múltiples situaciones.</em></p>
-    `
+    guiaEntrevista: '<h4>📋 Matriz de Evaluación - Jefe de Servicio</h4><p>Evalúe cada competencia del 1 al 5 según los criterios específicos.</p><h5>1. Liderazgo y coordinación del equipo (25%)</h5><ul><li>5: Lidera con seguridad, reorganiza rápidamente bajo presión.</li><li>4: Distribuye tareas, comunica claramente y hace seguimiento.</li><li>3: Organiza al equipo y aborda dificultades adecuadamente.</li><li>2: Da instrucciones básicas sin seguimiento claro.</li><li>1: No sabe cómo organizar o corregir al equipo.</li></ul><h5>2. Organización y programación del servicio (25%)</h5><ul><li>5: Se anticipa a necesidades, mantiene continuidad ante imprevistos.</li><li>4: Considera horarios, demanda, descansos y contingencias.</li><li>3: Distribuye personal y tareas de forma funcional.</li><li>2: Organiza de forma reactiva y con poca claridad.</li><li>1: No logra organizar turnos ni priorizar necesidades.</li></ul><h5>3. Orientación al servicio y manejo de clientes (20%)</h5><ul><li>5: Maneja con empatía y rapidez, recupera la experiencia del cliente.</li><li>4: Escucha, verifica, soluciona y hace seguimiento.</li><li>3: Atiende respetuosamente y plantea solución adecuada.</li><li>2: Escucha pero ofrece soluciones poco claras.</li><li>1: No sabe abordar inconformidades o empeora la situación.</li></ul><h5>4. Control operativo y administrativo (15%)</h5><ul><li>5: Controla, identifica causas y propone acciones preventivas.</li><li>4: Verifica soportes, identifica causas y documenta adecuadamente.</li><li>3: Revisa y reporta correctamente las novedades.</li><li>2: Realiza verificaciones parciales, omite información.</li><li>1: No identifica qué debe revisar o controlar.</li></ul><h5>5. Gestión de proveedores, pedidos e inventarios (15%)</h5><ul><li>5: Se anticipa a faltantes, detecta diferencias oportunamente.</li><li>4: Controla pedido, recepción, existencias y novedades.</li><li>3: Revisa cantidades, condiciones y necesidades.</li><li>2: Hace verificaciones básicas incompletas.</li><li>1: Recibe o solicita productos sin controles.</li></ul>'
   },
   auxiliar_contable: {
     nombre: "Auxiliar Contable",
@@ -885,67 +330,13 @@ const CONFIGURACION_CARGOS = {
       "1 - Deficiente: no demuestra conocimientos o experiencia suficiente."
     ],
     interpretacion: [
-      { min: 90, max: 100, texto: '✅ AJUSTE SOBRESALIENTE - Perfil altamente recomendado para el cargo. Demuestra dominio técnico integral en registro contable, conciliaciones, cartera, apoyo tributario y organización documental.', clase: 'decision-hire' },
-      { min: 80, max: 89.99, texto: '👍 ALTO AJUSTE - Cumple ampliamente los requerimientos del cargo. Sólidos conocimientos técnicos con experiencia comprobable en las áreas clave de la contabilidad.', clase: 'decision-recommend' },
-      { min: 70, max: 79.99, texto: '⚠️ AJUSTE FAVORABLE - Puede desempeñar el cargo, con algunas oportunidades de fortalecimiento. Conocimientos técnicos adecuados pero con brechas puntuales que requieren acompañamiento.', clase: 'decision-reserve' },
-      { min: 60, max: 69.99, texto: '🔍 AJUSTE PARCIAL - Requiere capacitación o acompañamiento importante. Presenta vacíos técnicos significativos en áreas clave del cargo.', clase: 'decision-reserve' },
-      { min: 0, max: 59.99, texto: '❌ BAJO AJUSTE - No evidencia actualmente las competencias técnicas suficientes para el cargo de auxiliar contable.', clase: 'decision-no' }
+      { min: 90, max: 100, texto: '✅ AJUSTE SOBRESALIENTE - Perfil altamente recomendado.', clase: 'decision-hire' },
+      { min: 80, max: 89.99, texto: '👍 ALTO AJUSTE - Cumple ampliamente los requerimientos.', clase: 'decision-recommend' },
+      { min: 70, max: 79.99, texto: '⚠️ AJUSTE FAVORABLE - Puede desempeñar el cargo con fortalecimiento.', clase: 'decision-reserve' },
+      { min: 60, max: 69.99, texto: '🔍 AJUSTE PARCIAL - Requiere capacitación importante.', clase: 'decision-reserve' },
+      { min: 0, max: 59.99, texto: '❌ BAJO AJUSTE - No evidencia competencias suficientes.', clase: 'decision-no' }
     ],
-    guiaEntrevista: `
-      <h4>📋 Matriz de Evaluación Detallada - Auxiliar Contable</h4>
-      <p style="font-size:13px; color:#666; margin-bottom:15px">⚠️ <strong>Nota importante:</strong> La competencia <strong>"Registro contable y precisión"</strong> es crítica y obligatoria. Una calificación menor a 3 en esta área representa un riesgo operativo para el área contable, independientemente del puntaje total.</p>
-      
-      <h4>1. Apertura (5 minutos)</h4>
-      <ul>
-        <li>Cuéntame sobre tu formación académica y experiencia en el área contable.</li>
-        <li>¿Qué software contable has utilizado y cuál consideras que dominas mejor?</li>
-        <li>¿Qué tipo de empresas o sectores has apoyado contablemente?</li>
-      </ul>
-
-      <h4>2. Entrevista por Competencias</h4>
-
-      <h5>A. Registro contable y precisión (30% - Crítica, Mín: 3/5)</h5>
-      <ul>
-        <li>Describe paso a paso cómo registras una factura de venta con IVA y retención en la fuente. ¿Qué cuentas afectan y por qué?</li>
-        <li>¿Cómo manejas el registro de una nota crédito por devolución de mercancía? ¿Qué validaciones haces antes de registrarla?</li>
-        <li>Cuéntame sobre una ocasión en la que detectaste un error en un registro contable. ¿Cómo lo identificaste y qué hiciste para corregirlo?</li>
-      </ul>
-
-      <h5>B. Conciliaciones bancarias (25%)</h5>
-      <ul>
-        <li>Describe tu proceso para realizar una conciliación bancaria. ¿Qué partidas identificas con mayor frecuencia como diferencias?</li>
-        <li>¿Cómo investigas y depuras partidas en tránsito antiguas?</li>
-      </ul>
-
-      <h5>C. Gestión de cartera (20%)</h5>
-      <ul>
-        <li>¿Cómo organizas el seguimiento de cuentas por cobrar para identificar oportunamente los vencimientos?</li>
-        <li>Describe cómo aplicas un pago recibido cuando el cliente tiene varias facturas abiertas.</li>
-      </ul>
-
-      <h5>D. Apoyo tributario y cumplimiento (15%)</h5>
-      <ul>
-        <li>¿Qué información preparas mensualmente para apoyar la declaración de retención en la fuente e IVA?</li>
-        <li>¿Cómo validas que las facturas recibidas cumplan con los requisitos fiscales?</li>
-      </ul>
-
-      <h5>E. Organización y archivo documental (10%)</h5>
-      <ul>
-        <li>¿Cómo organizas el archivo físico y digital de los soportes contables?</li>
-        <li>¿Cuánto tiempo te toma localizar un soporte específico cuando la contadora o un auditor lo solicita?</li>
-      </ul>
-
-      <h4>3. Caso Práctico Integrador</h4>
-      <p><strong>Escenario:</strong> Es día 5 del mes y estás en pleno cierre contable. Tienes las siguientes situaciones simultáneas:</p>
-      <ul>
-        <li>La conciliación bancaria de la cuenta principal muestra una diferencia de $2.500.000 que no logras identificar.</li>
-        <li>Un proveedor reclama un pago que según tus registros ya se realizó hace dos meses.</li>
-        <li>La contadora te solicita urgente la relación de retenciones practicadas del mes anterior.</li>
-        <li>Detectas que 3 facturas electrónicas recibidas no cumplen con los requisitos de la DIAN.</li>
-        <li>Un auditor interno solicita los soportes de 15 comprobantes de egresos de un trimestre anterior.</li>
-      </ul>
-      <p><strong>¿Cómo priorizas estas tareas, qué decisiones tomas y en qué orden las ejecutas?</strong></p>
-    `
+    guiaEntrevista: '<h4>📋 Matriz de Evaluación - Auxiliar Contable</h4><p><strong>⚠️ Nota:</strong> "Registro contable y precisión" es crítica (mínimo 3/5).</p><h5>1. Registro contable y precisión (30% - Crítica)</h5><ul><li>Describa el registro de una factura de venta con IVA y retefuente.</li><li>¿Cómo maneja una nota crédito por devolución?</li><li>Cuénteme sobre un error contable que haya detectado y corregido.</li></ul><h5>2. Conciliaciones bancarias (25%)</h5><ul><li>Describa su proceso de conciliación bancaria.</li><li>¿Cómo depura partidas en tránsito antiguas?</li></ul><h5>3. Gestión de cartera (20%)</h5><ul><li>¿Cómo organiza el seguimiento de cuentas por cobrar?</li><li>¿Cómo aplica un pago con varias facturas abiertas?</li></ul><h5>4. Apoyo tributario (15%)</h5><ul><li>¿Qué información prepara para retención en la fuente e IVA?</li><li>¿Cómo valida facturas electrónicas?</li></ul><h5>5. Organización y archivo (10%)</h5><ul><li>¿Cómo organiza el archivo físico y digital?</li><li>¿Cuánto tarda en localizar un soporte?</li></ul>'
   },
   administrador_punto: {
     nombre: "Administrador de Punto",
@@ -957,65 +348,20 @@ const CONFIGURACION_CARGOS = {
       { nombre: 'Control, responsabilidad y orientación a resultados', peso: 15 }
     ],
     escala: [
-      "5 - Sobresaliente: Demuestra dominio total, presenta ejemplos concretos con resultados medibles, evidencia liderazgo real, autonomía y capacidad para manejar múltiples situaciones simultáneas con excelencia.",
-      "4 - Bueno: Cumple completamente con la competencia, aporta ejemplos claros, muestra iniciativa y capacidad de respuesta efectiva en la operación del punto.",
-      "3 - Aceptable: Conoce y aplica parcialmente la competencia, requiere algo de acompañamiento pero puede desarrollarse bien en el rol con supervisión.",
-      "2 - Básico: Demuestra conocimiento superficial, respuestas vagas o sin ejemplos concretos, necesitaría supervisión constante y entrenamiento intensivo.",
-      "1 - Deficiente: No evidencia la competencia, evita respuestas, no demuestra experiencias previas relevantes o presenta actitudes contrarias al perfil operativo."
+      "5 - Sobresaliente: Demuestra dominio total, ejemplos concretos con resultados medibles.",
+      "4 - Bueno: Cumple completamente, aporta ejemplos claros, muestra iniciativa.",
+      "3 - Aceptable: Conoce y aplica parcialmente, requiere acompañamiento.",
+      "2 - Básico: Conocimiento superficial, respuestas vagas.",
+      "1 - Deficiente: No evidencia la competencia."
     ],
     interpretacion: [
-      { min: 90, max: 100, texto: '✅ ALTAMENTE RECOMENDADO - Perfil excepcional para administrar un punto de venta. Demuestra liderazgo sólido, excelente organización operativa, resolución efectiva de problemas, fuerte orientación al cliente y control riguroso de recursos.', clase: 'decision-hire' },
-      { min: 80, max: 89.99, texto: '👍 RECOMENDADO - Cumple con el perfil de administrador de punto. Buen manejo de equipos, organización operativa y resolución de problemas. Curva de adaptación corta.', clase: 'decision-recommend' },
-      { min: 70, max: 79.99, texto: '⚠️ RECOMENDADO CON PLAN DE DESARROLLO - Tiene potencial operativo, pero presenta brechas en alguna competencia clave (liderazgo, organización o control de recursos). Requiere acompañamiento inicial.', clase: 'decision-reserve' },
-      { min: 60, max: 69.99, texto: '🔍 AJUSTE PARCIAL - Conviene comparar con otros candidatos. Podría desempeñarse como segundo al mando o en puntos de menor complejidad, pero aún no evidencia madurez para administrar un punto de forma autónoma.', clase: 'decision-reserve' },
-      { min: 0, max: 59.99, texto: '❌ NO RECOMENDADO - No demuestra las competencias críticas para la administración de un punto de venta (gestión de equipos, control operativo, atención al cliente y manejo de recursos).', clase: 'decision-no' }
+      { min: 90, max: 100, texto: '✅ ALTAMENTE RECOMENDADO - Perfil excepcional.', clase: 'decision-hire' },
+      { min: 80, max: 89.99, texto: '👍 RECOMENDADO - Cumple con el perfil.', clase: 'decision-recommend' },
+      { min: 70, max: 79.99, texto: '⚠️ RECOMENDADO CON PLAN DE DESARROLLO.', clase: 'decision-reserve' },
+      { min: 60, max: 69.99, texto: '🔍 AJUSTE PARCIAL - Conviene comparar candidatos.', clase: 'decision-reserve' },
+      { min: 0, max: 59.99, texto: '❌ NO RECOMENDADO.', clase: 'decision-no' }
     ],
-    guiaEntrevista: `
-      <h4>📋 Matriz de Evaluación Detallada - Administrador de Punto</h4>
-      <p style="font-size:13px; color:#666; margin-bottom:15px">Esta guía está diseñada para evaluar competencias clave en la administración de un punto de venta (restaurante, food service o similar). Utilice la escala del 1 al 5 según el nivel de evidencia en las respuestas del candidato.</p>
-      
-      <h4>1. Apertura (5 minutos)</h4>
-      <ul>
-        <li>Cuéntame sobre tu trayectoria profesional y tu experiencia administrando puntos de venta.</li>
-        <li>¿Qué te motivó a aplicar a este cargo de Administrador de Punto?</li>
-      </ul>
-
-      <h4>2. Entrevista por Competencias</h4>
-
-      <h5>A. Liderazgo y gestión de equipos (25%)</h5>
-      <ul>
-        <li>Cuéntame sobre la ocasión en la que tuviste que liderar el equipo más grande o complejo.</li>
-        <li>Describe una situación en la que tuviste que corregir a un colaborador por un desempeño inadecuado.</li>
-        <li>Háblame de un conflicto entre dos miembros de tu equipo. ¿Cómo lo manejaste?</li>
-      </ul>
-
-      <h5>B. Organización y planificación de la operación (25%)</h5>
-      <ul>
-        <li>Describe cómo organizas un turno típico desde que abres el punto hasta que cierras.</li>
-        <li>Imagina que es viernes en la noche, el punto está lleno, la cocina va atrasada, un mesero se enfermó y tienes un cliente esperando una mesa. ¿Cómo priorizas?</li>
-      </ul>
-
-      <h5>C. Resolución de problemas e iniciativa (20%)</h5>
-      <ul>
-        <li>Cuéntame sobre el problema más complejo que tuviste que resolver en un punto de venta.</li>
-        <li>Describe una ocasión en la que identificaste un problema recurrente y propusiste una solución.</li>
-      </ul>
-
-      <h5>D. Orientación al servicio al cliente (15%)</h5>
-      <ul>
-        <li>Cuéntame sobre la ocasión en la que tuviste que manejar la queja más difícil de un cliente.</li>
-        <li>¿Cómo te aseguras de que todo el equipo mantenga un estándar de servicio consistente?</li>
-      </ul>
-
-      <h5>E. Control, responsabilidad y orientación a resultados (15%)</h5>
-      <ul>
-        <li>¿Cómo realizas el cierre de caja y qué haces cuando detectas una inconsistencia?</li>
-        <li>Describe cómo controlas los inventarios y los desperdicios en el punto.</li>
-      </ul>
-
-      <h4>3. Caso Práctico Integrador</h4>
-      <p><strong>Escenario:</strong> Es sábado al mediodía, el punto está lleno. En cocina hay un atraso de 20 minutos, un mesero acaba de derramar una bebida sobre un cliente, en caja hay una diferencia de $80.000, tu supervisor te llama para un reporte urgente, y uno de tus cocineros se siente mal. ¿Cómo organizas tu respuesta?</p>
-    `
+    guiaEntrevista: '<h4>📋 Matriz de Evaluación - Administrador de Punto</h4><h5>1. Liderazgo y gestión de equipos (25%)</h5><ul><li>Cuéntame sobre el equipo más grande que has liderado.</li><li>¿Cómo corriges a un colaborador sin generar confrontación?</li></ul><h5>2. Organización y planificación (25%)</h5><ul><li>¿Cómo organizas un turno típico de apertura a cierre?</li><li>Viernes noche, punto lleno, cocina atrasada, mesero enfermo. ¿Cómo priorizas?</li></ul><h5>3. Resolución de problemas (20%)</h5><ul><li>Problema más complejo que resolviste en un punto.</li><li>¿Cómo actúas ante imprevistos no contemplados?</li></ul><h5>4. Orientación al cliente (15%)</h5><ul><li>Queja más difícil que manejaste. ¿Cómo terminó?</li></ul><h5>5. Control y resultados (15%)</h5><ul><li>¿Cómo realizas el cierre de caja y manejas inconsistencias?</li><li>¿Cómo controlas inventarios y desperdicios?</li></ul>'
   },
   jefe_rrhh: {
     nombre: "Jefe de Recursos Humanos / Talento Humano",
@@ -1027,49 +373,20 @@ const CONFIGURACION_CARGOS = {
       { nombre: 'Organización, análisis y cumplimiento de procesos', peso: 10 }
     ],
     escala: [
-      "5 - Excelente: Domina legislación laboral, nómina, prestaciones, seguridad social, PILA, EPS, AFP, ARL, cajas de compensación, novedades, contratación y retiro.",
-      "4 - Bueno: Tiene conocimientos sólidos y experiencia práctica; puede requerir consultas puntuales.",
-      "3 - Aceptable: Conoce los procesos, pero presenta vacíos importantes o necesita supervisión.",
+      "5 - Excelente: Domina legislación laboral, nómina, PILA, EPS, AFP, ARL.",
+      "4 - Bueno: Conocimientos sólidos, puede requerir consultas puntuales.",
+      "3 - Aceptable: Conoce procesos pero presenta vacíos importantes.",
       "2 - Bajo: Conocimientos superficiales y poca experiencia práctica.",
       "1 - Insuficiente: No demuestra dominio de los procesos esenciales."
     ],
     interpretacion: [
-      { min: 90, max: 100, texto: '✅ ALTAMENTE RECOMENDADO - Perfil sobresaliente con dominio integral de la gestión de RRHH, nómina y liderazgo estratégico.', clase: 'decision-hire' },
-      { min: 80, max: 89.99, texto: '👍 RECOMENDADO - Cumple con el perfil, demuestra sólidos conocimientos en legislación y gestión de equipos.', clase: 'decision-recommend' },
-      { min: 70, max: 79.99, texto: '⚠️ RECOMENDADO CON PLAN DE DESARROLLO - Tiene bases aceptables, pero requiere fortalecimiento en áreas clave de nómina o liderazgo.', clase: 'decision-reserve' },
-      { min: 60, max: 69.99, texto: '🔍 AJUSTE PARCIAL - Conviene comparar con otros candidatos. Presenta debilidades en gestión laboral o cumplimiento de procesos.', clase: 'decision-reserve' },
-      { min: 0, max: 59.99, texto: '❌ NO RECOMENDADO - No demuestra las competencias clave para la jefatura de recursos humanos.', clase: 'decision-no' }
+      { min: 90, max: 100, texto: '✅ ALTAMENTE RECOMENDADO - Perfil sobresaliente.', clase: 'decision-hire' },
+      { min: 80, max: 89.99, texto: '👍 RECOMENDADO - Cumple con el perfil.', clase: 'decision-recommend' },
+      { min: 70, max: 79.99, texto: '⚠️ RECOMENDADO CON PLAN DE DESARROLLO.', clase: 'decision-reserve' },
+      { min: 60, max: 69.99, texto: '🔍 AJUSTE PARCIAL.', clase: 'decision-reserve' },
+      { min: 0, max: 59.99, texto: '❌ NO RECOMENDADO.', clase: 'decision-no' }
     ],
-    guiaEntrevista: `
-      <h4>📋 Matriz de Evaluación Detallada - Jefe de Recursos Humanos / Talento Humano</h4>
-      <p style="font-size:13px; color:#666; margin-bottom:15px">⚠️ <strong>Nota importante:</strong> La competencia <strong>"Conocimiento laboral y manejo de nómina"</strong> es crítica y obligatoria. Una calificación menor a 4 en esta área representa un riesgo alto para el cargo.</p>
-      
-      <h4>1. Conocimiento laboral y manejo de nómina (30% - Crítica, Mín: 4/5)</h4>
-      <ul>
-        <li>Describa el proceso completo que sigue para liquidar una nómina mensual, incluyendo el manejo de novedades y el reporte a seguridad social (PILA).</li>
-        <li>¿Cómo maneja un caso de despido injustificado o una reclamación ante el Ministerio del Trabajo?</li>
-      </ul>
-
-      <h4>2. Liderazgo y gestión de equipos (25%)</h4>
-      <ul>
-        <li>Cuénteme sobre una ocasión en la que tuvo que gestionar un cambio organizacional importante.</li>
-      </ul>
-
-      <h4>3. Gestión del talento humano y resolución de conflictos (20%)</h4>
-      <ul>
-        <li>Describa una situación de conflicto grave entre dos áreas o empleados clave. ¿Cuál fue su rol y cómo lo resolvió?</li>
-      </ul>
-
-      <h4>4. Confidencialidad, comunicación y toma de decisiones (15%)</h4>
-      <ul>
-        <li>¿Cómo garantiza la confidencialidad de la información de nómina y datos personales?</li>
-      </ul>
-
-      <h4>5. Organización, análisis y cumplimiento de procesos (10%)</h4>
-      <ul>
-        <li>¿Qué indicadores (KPIs) de gestión humana considera indispensables para reportar a la gerencia?</li>
-      </ul>
-    `
+    guiaEntrevista: '<h4>📋 Matriz de Evaluación - Jefe de RRHH</h4><p><strong>⚠️ Nota:</strong> "Conocimiento laboral y nómina" es crítica (mínimo 4/5).</p><h5>1. Conocimiento laboral y nómina (30% - Crítica)</h5><ul><li>Describa el proceso completo de liquidación de nómina mensual y reporte PILA.</li><li>¿Cómo maneja un despido o reclamación ante Ministerio del Trabajo?</li></ul><h5>2. Liderazgo y gestión de equipos (25%)</h5><ul><li>Cuénteme sobre un cambio organizacional que gestionó.</li></ul><h5>3. Gestión del talento y conflictos (20%)</h5><ul><li>Describa un conflicto grave que resolvió entre áreas.</li></ul><h5>4. Confidencialidad y toma de decisiones (15%)</h5><ul><li>¿Cómo garantiza confidencialidad de nómina?</li></ul><h5>5. Organización y procesos (10%)</h5><ul><li>¿Qué KPIs de gestión humana reporta a gerencia?</li></ul>'
   },
   marketing: {
     nombre: "Líder de Marketing Digital",
@@ -1086,20 +403,20 @@ const CONFIGURACION_CARGOS = {
       { nombre: 'Ajuste Cultural', peso: 10 }
     ],
     escala: [
-      "5 - Excelente: Responde con seguridad, ejemplos reales, resultados medibles, pensamiento estratégico, ideas innovadoras, liderazgo.",
-      "4 - Bueno: Tiene experiencia, responde correctamente, presenta indicadores, lidera con poca supervisión.",
-      "3 - Aceptable: Conoce la teoría, ha ejecutado campañas, le falta visión estratégica, requiere acompañamiento.",
-      "2 - Bajo: Respuestas generales, sin métricas, poco conocimiento práctico, escasa creatividad.",
-      "1 - Deficiente: No demuestra experiencia, evita ejemplos, desconoce conceptos, no evidencia liderazgo."
+      "5 - Excelente: Seguridad, ejemplos reales, resultados medibles.",
+      "4 - Bueno: Experiencia, responde correctamente.",
+      "3 - Aceptable: Conoce teoría, requiere acompañamiento.",
+      "2 - Bajo: Respuestas generales, sin métricas.",
+      "1 - Deficiente: No demuestra experiencia."
     ],
     interpretacion: [
-      { min: 90, max: 100, texto: '✅ CONTRATAR - Perfil sobresaliente con liderazgo estratégico y fuerte orientación a resultados.', clase: 'decision-hire' },
-      { min: 80, max: 89.99, texto: '👍 MUY RECOMENDADO - Puede asumir el cargo con una curva de adaptación corta.', clase: 'decision-recommend' },
-      { min: 70, max: 79.99, texto: '⚠️ RECOMENDADO CON RESERVAS - Tiene potencial, pero presenta brechas en competencias clave; validar referencias.', clase: 'decision-reserve' },
-      { min: 60, max: 69.99, texto: '⛔ NO RECOMENDADO para este nivel de liderazgo. Podría encajar en rol de ejecución.', clase: 'decision-no' },
-      { min: 0, max: 59.99, texto: '❌ NO CONTINUAR - El perfil no cumple con los requisitos críticos del cargo.', clase: 'decision-no' }
+      { min: 90, max: 100, texto: '✅ CONTRATAR - Perfil sobresaliente.', clase: 'decision-hire' },
+      { min: 80, max: 89.99, texto: '👍 MUY RECOMENDADO.', clase: 'decision-recommend' },
+      { min: 70, max: 79.99, texto: '⚠️ RECOMENDADO CON RESERVAS.', clase: 'decision-reserve' },
+      { min: 60, max: 69.99, texto: '⛔ NO RECOMENDADO para liderazgo.', clase: 'decision-no' },
+      { min: 0, max: 59.99, texto: '❌ NO CONTINUAR.', clase: 'decision-no' }
     ],
-    guiaEntrevista: "<p>Guía estándar de evaluación para roles de liderazgo en marketing digital. Enfocarse en casos de éxito, métricas de ROI, gestión de equipos y estrategia omnicanal.</p>"
+    guiaEntrevista: '<h4>📋 Evaluación - Líder de Marketing Digital</h4><p>Enfocarse en casos de éxito, métricas ROI, gestión de equipos y estrategia omnicanal.</p>'
   },
   asesor: {
     nombre: "Asesor Comercial",
@@ -1114,35 +431,19 @@ const CONFIGURACION_CARGOS = {
     ],
     escala: [
       "5 - Excelente: Supera ampliamente lo esperado.",
-      "4 - Bueno: Cumple completamente con la competencia.",
-      "3 - Aceptable: Cumple parcialmente; requiere acompañamiento inicial.",
+      "4 - Bueno: Cumple completamente.",
+      "3 - Aceptable: Cumple parcialmente.",
       "2 - Bajo: Presenta debilidades importantes.",
       "1 - Deficiente: No evidencia la competencia."
     ],
     interpretacion: [
-      { min: 92, max: 100, texto: '✅ ALTAMENTE RECOMENDADO - Evidencia un excelente ajuste al cargo y alto potencial de desempeño (Promedio 4.6 - 5.0).', clase: 'decision-hire' },
-      { min: 80, max: 91.99, texto: '👍 RECOMENDADO - Cumple con el perfil y presenta fortalezas relevantes (Promedio 4.0 - 4.5).', clase: 'decision-recommend' },
-      { min: 70, max: 79.99, texto: '⚠️ RECOMENDADO CON PLAN DE DESARROLLO - Requiere fortalecimiento en algunas competencias (Promedio 3.5 - 3.9).', clase: 'decision-reserve' },
-      { min: 60, max: 69.99, texto: '🔍 AJUSTE PARCIAL - Conviene comparar con otros candidatos antes de decidir (Promedio 3.0 - 3.4).', clase: 'decision-reserve' },
-      { min: 0, max: 59.99, texto: '❌ NO RECOMENDADO - No demuestra las competencias clave para el cargo (Promedio < 3.0).', clase: 'decision-no' }
+      { min: 92, max: 100, texto: '✅ ALTAMENTE RECOMENDADO.', clase: 'decision-hire' },
+      { min: 80, max: 91.99, texto: '👍 RECOMENDADO.', clase: 'decision-recommend' },
+      { min: 70, max: 79.99, texto: '⚠️ RECOMENDADO CON PLAN DE DESARROLLO.', clase: 'decision-reserve' },
+      { min: 60, max: 69.99, texto: '🔍 AJUSTE PARCIAL.', clase: 'decision-reserve' },
+      { min: 0, max: 59.99, texto: '❌ NO RECOMENDADO.', clase: 'decision-no' }
     ],
-    guiaEntrevista: `
-      <h4>1. Apertura (5 minutos)</h4>
-      <ul>
-        <li>Cuéntame sobre ti.</li>
-        <li>¿Qué te llamó la atención de esta oportunidad laboral?</li>
-        <li>¿Por qué te gustaría trabajar en ventas?</li>
-      </ul>
-      <h4>2. Entrevista por competencias</h4>
-      <h5>A. Orientación al cliente</h5>
-      <ul><li>Cuéntame sobre una ocasión en la que atendiste un cliente difícil y lograste resolver la situación.</li></ul>
-      <h5>B. Orientación al logro y ventas</h5>
-      <ul><li>Háblame de una meta comercial que hayas tenido que cumplir y cómo la alcanzaste.</li></ul>
-      <h5>C. Honestidad e integridad</h5>
-      <ul><li>Si al cerrar caja encuentras dinero de más, ¿qué harías?</li></ul>
-      <h4>3. Casos Prácticos</h4>
-      <p><strong>Escenario:</strong> Es sábado a las 4:30 p.m. El almacén está lleno. Un cliente quiere cambiar un producto, otro espera para pagar, suena el teléfono y debes hacer cierre parcial de caja en 15 minutos. ¿Cómo prioriza?</p>
-    `
+    guiaEntrevista: '<h4>📋 Evaluación - Asesor Comercial</h4><h5>Orientación al cliente</h5><ul><li>Cuéntame sobre un cliente difícil que resolviste.</li></ul><h5>Orientación al logro</h5><ul><li>Háblame de una meta comercial que cumpliste.</li></ul><h5>Honestidad</h5><ul><li>Si al cerrar caja encuentras dinero de más, ¿qué harías?</li></ul>'
   },
   auxiliar_cartera: {
     nombre: "Auxiliar de Cartera",
@@ -1153,58 +454,20 @@ const CONFIGURACION_CARGOS = {
       { nombre: 'Análisis y Atención al Detalle', peso: 30 }
     ],
     escala: [
-      "5 - Sobresaliente: Demuestra dominio total, propone mejoras, maneja situaciones complejas con excelencia y genera impacto positivo medible.",
-      "4 - Bueno: Aplica metodologías estructuradas, resuelve problemas eficazmente y mantiene altos estándares de calidad.",
-      "3 - Aceptable: Sigue procedimientos establecidos, cumple con lo esperado y resuelve inconvenientes de manera estándar.",
-      "2 - Básico: Conocimiento superficial, requiere supervisión constante, soluciones limitadas o reactivas.",
-      "1 - Deficiente: No demuestra las competencias, carece de método, evita responsabilidades o genera conflictos."
+      "5 - Sobresaliente: Demuestra dominio total.",
+      "4 - Bueno: Aplica metodologías estructuradas.",
+      "3 - Aceptable: Sigue procedimientos establecidos.",
+      "2 - Básico: Conocimiento superficial.",
+      "1 - Deficiente: No demuestra competencias."
     ],
     interpretacion: [
-      { min: 90, max: 100, texto: '✅ ALTAMENTE RECOMENDADO - Perfil sobresaliente con excelente manejo de cartera, negociación y atención al detalle.', clase: 'decision-hire' },
-      { min: 80, max: 89.99, texto: '👍 RECOMENDADO - Cumple con el perfil, demuestra buenas prácticas de cobro y análisis. Curva de aprendizaje corta.', clase: 'decision-recommend' },
-      { min: 70, max: 79.99, texto: '⚠️ RECOMENDADO CON PLAN DE DESARROLLO - Tiene bases aceptables, pero requiere fortalecimiento en negociación o análisis detallado.', clase: 'decision-reserve' },
-      { min: 60, max: 69.99, texto: '🔍 AJUSTE PARCIAL - Conviene comparar con otros candidatos. Presenta debilidades en gestión de cobro o atención al detalle.', clase: 'decision-reserve' },
-      { min: 0, max: 59.99, texto: '❌ NO RECOMENDADO - No demuestra las competencias clave para el manejo de cartera y conciliación.', clase: 'decision-no' }
+      { min: 90, max: 100, texto: '✅ ALTAMENTE RECOMENDADO.', clase: 'decision-hire' },
+      { min: 80, max: 89.99, texto: '👍 RECOMENDADO.', clase: 'decision-recommend' },
+      { min: 70, max: 79.99, texto: '⚠️ RECOMENDADO CON PLAN DE DESARROLLO.', clase: 'decision-reserve' },
+      { min: 60, max: 69.99, texto: '🔍 AJUSTE PARCIAL.', clase: 'decision-reserve' },
+      { min: 0, max: 59.99, texto: '❌ NO RECOMENDADO.', clase: 'decision-no' }
     ],
-    guiaEntrevista: `
-      <h4>📋 Matriz de Evaluación Detallada - Auxiliar de Cartera</h4>
-      <p style="font-size:13px; color:#666; margin-bottom:15px">Utilice esta guía para calificar del 1 al 5 según el nivel de evidencia en las respuestas del candidato.</p>
-      <div class="guia-table-wrapper">
-        <table class="guia-table">
-          <thead>
-            <tr>
-              <th style="width:16%">Competencia</th>
-              <th style="width:24%">Pregunta Clave</th>
-              <th style="width:12%">1 - Deficiente</th>
-              <th style="width:12%">2 - Básico</th>
-              <th style="width:12%">3 - Aceptable</th>
-              <th style="width:12%">4 - Bueno</th>
-              <th style="width:12%">5 - Sobresaliente</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><strong>Servicio al Cliente y Comunicación Asertiva</strong><br><small>(20%)</small></td>
-              <td>Cuéntame sobre una ocasión en la que un cliente manifestó inconformidad por un proceso de cobro.</td>
-              <td>No demuestra habilidades.</td>
-              <td>Escucha, pero ofrece pocas soluciones.</td>
-              <td>Atiende con respeto y resuelve parcialmente.</td>
-              <td>Escucha activamente, muestra empatía, negocia alternativas.</td>
-              <td>Convierte la situación en fidelización.</td>
-            </tr>
-            <tr>
-              <td><strong>Manejo de Cartera y Gestión de Cobro</strong><br><small>(35%)</small></td>
-              <td>Con una cartera amplia y facturas vencidas, ¿qué criterios utilizas para priorizar el contacto?</td>
-              <td>No tiene método.</td>
-              <td>Prioriza solo por fecha/monto.</td>
-              <td>Utiliza criterios básicos.</td>
-              <td>Prioriza según riesgo e historial.</td>
-              <td>Aplica metodología estructurada con resultados medibles.</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    `
+    guiaEntrevista: '<h4>📋 Evaluación - Auxiliar de Cartera</h4><h5>Servicio al Cliente (20%)</h5><ul><li>Cuéntame sobre un cliente inconforme con el cobro.</li></ul><h5>Manejo de Cartera (35%)</h5><ul><li>¿Qué criterios usas para priorizar el contacto?</li></ul><h5>Análisis y Detalle (30%)</h5><ul><li>¿Cómo verificas que pagos queden correctamente aplicados?</li></ul>'
   },
   asesor_campo: {
     nombre: "Asesor Comercial de Campo",
@@ -1218,40 +481,20 @@ const CONFIGURACION_CARGOS = {
       { nombre: 'Compromiso', peso: 10 }
     ],
     escala: [
-      "5 - Sobresaliente: Demuestra dominio total, presenta ejemplos concretos con resultados medibles.",
-      "4 - Bueno: Cumple completamente con la competencia, aporta ejemplos claros.",
-      "3 - Aceptable: Conoce y aplica parcialmente la competencia.",
-      "2 - Básico: Demuestra conocimiento superficial, respuestas vagas.",
+      "5 - Sobresaliente: Demuestra dominio total.",
+      "4 - Bueno: Cumple completamente.",
+      "3 - Aceptable: Conoce y aplica parcialmente.",
+      "2 - Básico: Conocimiento superficial.",
       "1 - Deficiente: No evidencia la competencia."
     ],
     interpretacion: [
-      { min: 90, max: 100, texto: '✅ ALTAMENTE RECOMENDADO - Perfil ideal para ventas de campo.', clase: 'decision-hire' },
-      { min: 80, max: 89.99, texto: '👍 RECOMENDADO - Cumple con el perfil comercial de campo requerido.', clase: 'decision-recommend' },
-      { min: 70, max: 79.99, texto: '⚠️ RECOMENDADO CON PLAN DE DESARROLLO - Tiene potencial comercial, pero presenta brechas.', clase: 'decision-reserve' },
-      { min: 60, max: 69.99, texto: '🔍 AJUSTE PARCIAL - Podría desempeñarse en roles de apoyo comercial.', clase: 'decision-reserve' },
-      { min: 0, max: 59.99, texto: '❌ NO RECOMENDADO - No demuestra las competencias críticas.', clase: 'decision-no' }
+      { min: 90, max: 100, texto: '✅ ALTAMENTE RECOMENDADO.', clase: 'decision-hire' },
+      { min: 80, max: 89.99, texto: '👍 RECOMENDADO.', clase: 'decision-recommend' },
+      { min: 70, max: 79.99, texto: '⚠️ RECOMENDADO CON PLAN DE DESARROLLO.', clase: 'decision-reserve' },
+      { min: 60, max: 69.99, texto: '🔍 AJUSTE PARCIAL.', clase: 'decision-reserve' },
+      { min: 0, max: 59.99, texto: '❌ NO RECOMENDADO.', clase: 'decision-no' }
     ],
-    guiaEntrevista: `
-      <h4>1. Apertura (5 minutos)</h4>
-      <ul>
-        <li>Cuéntame sobre tu trayectoria profesional y experiencia en ventas o trabajo de campo.</li>
-      </ul>
-      <h4>2. Entrevista por Competencias</h4>
-      <h5>A. Orientación al logro (20%)</h5>
-      <ul>
-        <li>Háblame de una meta comercial ambiciosa que hayas tenido que cumplir.</li>
-      </ul>
-      <h5>B. Orientación al cliente y abordaje en calle (18%)</h5>
-      <ul>
-        <li>¿Cómo abordas a un cliente que no te conoce y parece desinteresado?</li>
-      </ul>
-      <h5>C. Honestidad e integridad (17%)</h5>
-      <ul>
-        <li>¿Alguna vez detectaste una inconsistencia manejando dinero o inventario?</li>
-      </ul>
-      <h4>3. Caso Práctico Integrador</h4>
-      <p><strong>Escenario:</strong> Es martes a las 10:00 a.m. Tu meta del mes va al 60% y faltan 8 días. En el primer punto el dueño no está, en el segundo te reciben fríamente, en el tercero hay una inconsistencia de inventario, y te llaman para una reunión urgente. ¿Cómo organizas tu día?</p>
-    `
+    guiaEntrevista: '<h4>📋 Evaluación - Asesor Comercial de Campo</h4><h5>Orientación al logro (20%)</h5><ul><li>Háblame de una meta comercial ambiciosa que cumpliste.</li></ul><h5>Abordaje en calle (18%)</h5><ul><li>¿Cómo abordas a un cliente desinteresado?</li></ul><h5>Honestidad (17%)</h5><ul><li>¿Detectaste alguna inconsistencia manejando dinero?</li></ul>'
   },
   coordinador_tiendas: {
     nombre: "Coordinador de Tiendas / Supervisor Retail",
@@ -1262,44 +505,20 @@ const CONFIGURACION_CARGOS = {
       { nombre: 'Gestión Operativa y Resolución de Problemas', peso: 20 }
     ],
     escala: [
-      "5 - Sobresaliente: Demuestra dominio total, presenta ejemplos concretos con resultados medibles.",
-      "4 - Bueno: Cumple completamente con la competencia, aporta ejemplos claros.",
-      "3 - Aceptable: Conoce y aplica parcialmente la competencia.",
-      "2 - Básico: Demuestra conocimiento superficial, respuestas vagas.",
+      "5 - Sobresaliente: Demuestra dominio total.",
+      "4 - Bueno: Cumple completamente.",
+      "3 - Aceptable: Conoce y aplica parcialmente.",
+      "2 - Básico: Conocimiento superficial.",
       "1 - Deficiente: No evidencia la competencia."
     ],
     interpretacion: [
-      { min: 90, max: 100, texto: '✅ ALTAMENTE RECOMENDADO - Perfil excepcional para la coordinación de tiendas.', clase: 'decision-hire' },
-      { min: 80, max: 89.99, texto: '👍 RECOMENDADO - Cumple con el perfil de coordinación retail.', clase: 'decision-recommend' },
-      { min: 70, max: 79.99, texto: '⚠️ RECOMENDADO CON PLAN DE DESARROLLO - Tiene potencial de liderazgo.', clase: 'decision-reserve' },
-      { min: 60, max: 69.99, texto: '🔍 AJUSTE PARCIAL - Podría desempeñarse como jefe de tienda individual.', clase: 'decision-reserve' },
-      { min: 0, max: 59.99, texto: '❌ NO RECOMENDADO - No demuestra las competencias críticas.', clase: 'decision-no' }
+      { min: 90, max: 100, texto: '✅ ALTAMENTE RECOMENDADO.', clase: 'decision-hire' },
+      { min: 80, max: 89.99, texto: '👍 RECOMENDADO.', clase: 'decision-recommend' },
+      { min: 70, max: 79.99, texto: '⚠️ RECOMENDADO CON PLAN DE DESARROLLO.', clase: 'decision-reserve' },
+      { min: 60, max: 69.99, texto: '🔍 AJUSTE PARCIAL.', clase: 'decision-reserve' },
+      { min: 0, max: 59.99, texto: '❌ NO RECOMENDADO.', clase: 'decision-no' }
     ],
-    guiaEntrevista: `
-      <h4>1. Apertura (5 minutos)</h4>
-      <ul>
-        <li>Cuéntame sobre tu trayectoria profesional en el sector retail.</li>
-      </ul>
-      <h4>2. Entrevista por Competencias</h4>
-      <h5>A. Orientación a Resultados (30%)</h5>
-      <ul>
-        <li>Háblame de una ocasión en la que las tiendas a tu cargo estaban por debajo del presupuesto.</li>
-      </ul>
-      <h5>B. Liderazgo y Desarrollo de Equipos (25%)</h5>
-      <ul>
-        <li>Cuéntame sobre un administrador o vendedor con bajo desempeño que lograste desarrollar.</li>
-      </ul>
-      <h5>C. Visión Comercial (25%)</h5>
-      <ul>
-        <li>Describe una estrategia local o activación comercial que hayas implementado.</li>
-      </ul>
-      <h5>D. Gestión Operativa (20%)</h5>
-      <ul>
-        <li>Cuéntame sobre una situación imprevista crítica en una tienda. ¿Cómo la resolviste?</li>
-      </ul>
-      <h4>3. Caso Práctico Integrador</h4>
-      <p><strong>Escenario:</strong> Eres Coordinador de 5 tiendas. La Tienda A va con 40% de meta y su administrador renunció. La Tienda B tiene un faltante de inventario. La Tienda C solicita una activación no presupuestada. ¿Cuál visitas y cómo gestionas las otras?</p>
-    `
+    guiaEntrevista: '<h4>📋 Evaluación - Coordinador de Tiendas</h4><h5>Orientación a Resultados (30%)</h5><ul><li>Tiendas por debajo del presupuesto. ¿Qué plan correctivo ejecutaste?</li></ul><h5>Liderazgo (25%)</h5><ul><li>Cuéntame sobre un administrador con bajo desempeño que desarrollaste.</li></ul><h5>Visión Comercial (25%)</h5><ul><li>Describe una activación comercial que implementaste.</li></ul><h5>Gestión Operativa (20%)</h5><ul><li>Situación imprevista crítica en una tienda. ¿Cómo la resolviste?</li></ul>'
   },
   lider_ventas_online: {
     nombre: "Líder de Departamento de Ventas Online",
@@ -1312,92 +531,72 @@ const CONFIGURACION_CARGOS = {
       { nombre: 'Gestión Operativa, Inventarios y Coordinación Interáreas', peso: 10 }
     ],
     escala: [
-      "5 - Sobresaliente: Dominio sólido, experiencia demostrable y capacidad para generar impacto.",
-      "4 - Alto: Supera lo esperado; evidencia experiencia y autonomía.",
-      "3 - Adecuado: Cumple con lo esperado para desempeñar el cargo.",
-      "2 - Bajo: Evidencia parcial; requiere acompañamiento importante.",
-      "1 - Muy bajo: No evidencia la competencia requerida."
+      "5 - Sobresaliente: Dominio sólido, experiencia demostrable.",
+      "4 - Alto: Supera lo esperado, evidencia autonomía.",
+      "3 - Adecuado: Cumple con lo esperado.",
+      "2 - Bajo: Evidencia parcial, requiere acompañamiento.",
+      "1 - Muy bajo: No evidencia la competencia."
     ],
     interpretacion: [
-      { min: 90, max: 100, texto: '✅ PERFIL ALTAMENTE ALINEADO - Excelente dominio de las competencias críticas.', clase: 'decision-hire' },
-      { min: 80, max: 89.99, texto: '👍 PERFIL CON ALTA ALINEACIÓN - Buen manejo de las dimensiones clave.', clase: 'decision-recommend' },
+      { min: 90, max: 100, texto: '✅ PERFIL ALTAMENTE ALINEADO.', clase: 'decision-hire' },
+      { min: 80, max: 89.99, texto: '👍 PERFIL CON ALTA ALINEACIÓN.', clase: 'decision-recommend' },
       { min: 70, max: 79.99, texto: '⚠️ PERFIL ADECUADO, CON ASPECTOS POR VALIDAR.', clase: 'decision-reserve' },
       { min: 60, max: 69.99, texto: '🔍 PRESENTA BRECHAS RELEVANTES.', clase: 'decision-reserve' },
       { min: 0, max: 59.99, texto: '❌ BAJO NIVEL DE ALINEACIÓN.', clase: 'decision-no' }
     ],
-    guiaEntrevista: `
-      <h4>📋 Matriz de Evaluación Detallada - Líder de Ventas Online</h4>
-      <p style="font-size:13px; color:#666; margin-bottom:15px">⚠️ <strong>Nota importante:</strong> Las competencias marcadas como <strong>críticas</strong> concentran el 63% de la evaluación.</p>
-      
-      <h4>1. Orientación a Resultados (25% - Crítica)</h4>
-      <ul>
-        <li><strong>5:</strong> Alta orientación a resultados, anticipación y capacidad para superar metas.</li>
-        <li><strong>3:</strong> Realiza seguimiento adecuado y reconoce desviaciones.</li>
-        <li><strong>1:</strong> No evidencia experiencia trabajando con metas ni indicadores.</li>
-      </ul>
-
-      <h4>2. Gestión Comercial Online (20% - Crítica)</h4>
-      <ul>
-        <li><strong>5:</strong> Visión estratégica del canal, conecta comportamiento del cliente con resultados.</li>
-        <li><strong>1:</strong> No demuestra conocimiento práctico de ventas digitales.</li>
-      </ul>
-
-      <h4>3. Liderazgo (18% - Crítica)</h4>
-      <ul>
-        <li><strong>5:</strong> Liderazgo sólido, capacidad para desarrollar talento.</li>
-        <li><strong>1:</strong> Dificultades para explicar cómo lideraría al equipo.</li>
-      </ul>
-    `
+    guiaEntrevista: '<h4>📋 Evaluación - Líder de Ventas Online</h4><p><strong>⚠️ Nota:</strong> Las competencias críticas (Resultados, Gestión Online, Liderazgo) concentran 63% de la evaluación.</p><h5>1. Orientación a Resultados (25% - Crítica)</h5><ul><li>¿Cómo gestionas metas y anticipas desviaciones?</li></ul><h5>2. Gestión Comercial Online (20% - Crítica)</h5><ul><li>¿Cómo administras comercialmente un canal digital?</li></ul><h5>3. Liderazgo (18% - Crítica)</h5><ul><li>¿Cómo desarrollas y exiges resultados al equipo?</li></ul>'
   }
 };
 
-// ============ FUNCIÓN DE DETECCIÓN MEJORADA Y ROBUSTA ============
+// ============ FUNCIÓN DE DETECCIÓN MEJORADA ============
 function getConfiguracionCargo(nombreCargo) {
   const nombre = (nombreCargo || "").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
   
-  // 1. JEFE DE SERVICIO (nuevo - prioridad ALTA, debe ir antes de otras detecciones genéricas)
-  // Detecta: "jefe de servicio", "jefe servicio", "supervisor de servicio", "líder de servicio", "jefe_servicio"
+  // 1. JEFE DE SERVICIO (prioridad ALTA)
   if (nombre.includes('servicio') && (nombre.includes('jefe') || nombre.includes('supervisor') || nombre.includes('lider') || nombre === 'jefe_servicio')) {
     return CONFIGURACION_CARGOS.jefe_servicio;
   }
-
-  // 2. AUXILIAR CONTABLE (debe ir antes de auxiliar_cartera)
-  if (nombre.includes('contable') || nombre.includes('contabilidad') || nombre.includes('contador auxiliar') || nombre.includes('asistente contable')) {
-    if (!nombre.includes('gerente') && !nombre.includes('director')) {
-      return CONFIGURACION_CARGOS.auxiliar_contable;
-    }
-  }
-
-  // 3. ADMINISTRADOR DE PUNTO
-  if (nombre.includes('administrador') && (nombre.includes('punto') || nombre.includes('pv') || nombre.includes('local') || nombre.includes('restaurante') || nombre.includes('sucursal'))) {
-    return CONFIGURACION_CARGOS.administrador_punto;
-  }
-  if ((nombre.includes('admin') || nombre.includes('jefe')) && nombre.includes('punto')) {
-    return CONFIGURACION_CARGOS.administrador_punto;
-  }
-
-  // 4. JEFE/LÍDER DE RRHH O TALENTO HUMANO
-  const esCargoDirectivo = nombre.includes('jefe') || nombre.includes('lider') || nombre.includes('gerente') || nombre.includes('director') || nombre === 'jefe_rrhh';
-  const esAreaRRHH = nombre.includes('recursos humanos') || nombre.includes('talento humano') || nombre.includes('rrhh') || nombre.includes(' rh ');
   
-  if (esCargoDirectivo && esAreaRRHH) {
-    return CONFIGURACION_CARGOS.jefe_rrhh;
+  // 2. AUXILIAR CONTABLE (antes de auxiliar_cartera)
+  if ((nombre.includes('contable') || nombre.includes('contabilidad') || nombre.includes('asistente contable')) && !nombre.includes('gerente') && !nombre.includes('director')) {
+    return CONFIGURACION_CARGOS.auxiliar_contable;
   }
-  if (esAreaRRHH) {
-    return CONFIGURACION_CARGOS.jefe_rrhh;
+  
+  // 3. ADMINISTRADOR DE PUNTO
+  if (nombre.includes('administrador') && (nombre.includes('punto') || nombre.includes('local') || nombre.includes('restaurante') || nombre.includes('sucursal'))) {
+    return CONFIGURACION_CARGOS.administrador_punto;
   }
-
-  // 5. Resto de detecciones
-  if (nombre.includes('lider') && (nombre.includes('ventas') || nombre.includes('online') || nombre.includes('digital') || nombre.includes('e-commerce') || nombre.includes('departamento'))) {
+  if ((nombre.includes('admin') || nombre.includes('jefe')) && nombre.includes('punto') && !nombre.includes('servicio')) {
+    return CONFIGURACION_CARGOS.administrador_punto;
+  }
+  
+  // 4. JEFE/LÍDER DE RRHH
+  const esCargoDirectivo = nombre.includes('jefe') || nombre.includes('lider') || nombre.includes('gerente') || nombre.includes('director');
+  const esAreaRRHH = nombre.includes('recursos humanos') || nombre.includes('talento humano') || nombre.includes('rrhh');
+  if (esCargoDirectivo && esAreaRRHH) return CONFIGURACION_CARGOS.jefe_rrhh;
+  if (esAreaRRHH) return CONFIGURACION_CARGOS.jefe_rrhh;
+  
+  // 5. Resto de detecciones (orden específico para evitar conflictos)
+  if (nombre.includes('lider') && (nombre.includes('ventas') || nombre.includes('online') || nombre.includes('digital') || nombre.includes('e-commerce'))) {
     return CONFIGURACION_CARGOS.lider_ventas_online;
   }
-  if (nombre.includes('marketing') || nombre.includes('lider')) return CONFIGURACION_CARGOS.marketing;
-  if (nombre.includes('campo') || nombre.includes('ruta') || nombre.includes('calle') || nombre.includes('visitador') || nombre.includes('terreno')) return CONFIGURACION_CARGOS.asesor_campo;
-  if (nombre.includes('coordinador') || nombre.includes('tiendas') || nombre.includes('supervisor') || nombre.includes('retail') || nombre.includes('punto de venta')) return CONFIGURACION_CARGOS.coordinador_tiendas;
-  if (nombre.includes('asesor') || nombre.includes('comercial') || nombre.includes('venta')) return CONFIGURACION_CARGOS.asesor;
-  if (nombre.includes('auxiliar') || nombre.includes('cartera') || nombre.includes('cobro') || nombre.includes('recibo')) return CONFIGURACION_CARGOS.auxiliar_cartera;
+  if (nombre.includes('campo') || nombre.includes('ruta') || nombre.includes('calle') || nombre.includes('visitador') || nombre.includes('terreno')) {
+    return CONFIGURACION_CARGOS.asesor_campo;
+  }
+  if (nombre.includes('coordinador') || nombre.includes('tiendas') || nombre.includes('supervisor') || nombre.includes('retail')) {
+    return CONFIGURACION_CARGOS.coordinador_tiendas;
+  }
+  if (nombre.includes('marketing')) return CONFIGURACION_CARGOS.marketing;
+  if (nombre.includes('cartera') || nombre.includes('cobro') || nombre.includes('recibo')) {
+    return CONFIGURACION_CARGOS.auxiliar_cartera;
+  }
+  if (nombre.includes('auxiliar')) return CONFIGURACION_CARGOS.auxiliar_cartera;
+  if (nombre.includes('asesor') || nombre.includes('comercial') || nombre.includes('venta')) {
+    return CONFIGURACION_CARGOS.asesor;
+  }
+  if (nombre.includes('lider')) return CONFIGURACION_CARGOS.marketing;
   
-  return CONFIGURACION_CARGOS.marketing; // Fallback por defecto
+  return CONFIGURACION_CARGOS.marketing;
 }
 
 // ============ NAVEGACIÓN TABS ============
@@ -1442,8 +641,7 @@ function agregarEmpresa() {
 
 function eliminarEmpresa(nit) {
   if (!confirm('¿Eliminar esta empresa y todos sus cargos/candidatos?')) return;
-  const candsAEliminar = candidatos.filter(c => c.nitEmpresa === nit);
-  candsAEliminar.forEach(c => delete evaluaciones[c.id]);
+  candidatos.filter(c => c.nitEmpresa === nit).forEach(c => delete evaluaciones[c.id]);
   empresas = empresas.filter(e => e.nit !== nit);
   candidatos = candidatos.filter(c => c.nitEmpresa !== nit);
   guardar();
@@ -1473,8 +671,7 @@ function eliminarCargo(nit, idxCargo) {
   if (!confirm('¿Eliminar este cargo y sus candidatos asociados?')) return;
   const empresa = empresas.find(e => e.nit === nit);
   const cargoNombre = empresa.cargos[idxCargo].nombre;
-  const candsAEliminar = candidatos.filter(c => c.nitEmpresa === nit && c.cargo === cargoNombre);
-  candsAEliminar.forEach(c => delete evaluaciones[c.id]);
+  candidatos.filter(c => c.nitEmpresa === nit && c.cargo === cargoNombre).forEach(c => delete evaluaciones[c.id]);
   empresa.cargos.splice(idxCargo, 1);
   candidatos = candidatos.filter(c => !(c.nitEmpresa === nit && c.cargo === cargoNombre));
   guardar();
@@ -1490,21 +687,15 @@ function renderEmpresas() {
   }
   let html = '';
   empresas.forEach(emp => {
-    html += `<div style="background:#f8fafc; padding:15px; border-radius:10px; margin-bottom:15px; border-left:4px solid #2a5298">
-      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px; flex-wrap:wrap; gap:10px">
-        <div><strong style="color:#2a5298; font-size:16px">${emp.nombre}</strong><br>
-        <small style="color:#777">NIT: ${emp.nit}</small></div>
-        <button class="btn btn-danger" onclick="eliminarEmpresa('${emp.nit}')" style="padding:6px 12px; font-size:12px">🗑️ Eliminar</button>
-      </div>`;
+    html += '<div style="background:#f8fafc; padding:15px; border-radius:10px; margin-bottom:15px; border-left:4px solid #2a5298"><div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px; flex-wrap:wrap; gap:10px"><div><strong style="color:#2a5298; font-size:16px">' + emp.nombre + '</strong><br><small style="color:#777">NIT: ' + emp.nit + '</small></div><button class="btn btn-danger" onclick="eliminarEmpresa(\'' + emp.nit + '\')" style="padding:6px 12px; font-size:12px">🗑️ Eliminar</button></div>';
     if (emp.cargos.length > 0) {
       html += '<table><thead><tr><th>Cargo</th><th>Vacantes</th><th>Candidatos</th><th>Acción</th></tr></thead><tbody>';
       emp.cargos.forEach((c, i) => {
         const candsCount = candidatos.filter(x => x.nitEmpresa === emp.nit && x.cargo === c.nombre).length;
         const disp = c.vacantesDisponibles;
-        const badgeVac = disp > 0 ? `<span class="badge badge-success">${disp} disp.</span>` : `<span class="badge badge-danger">Agotado</span>`;
-        const badgeCand = `<span class="badge badge-primary">${candsCount} postulados</span>`;
-        html += `<tr><td>${c.nombre}</td><td>${badgeVac} / ${c.vacantes}</td><td>${badgeCand}</td>
-          <td><button class="btn btn-danger" onclick="eliminarCargo('${emp.nit}', ${i})" style="padding:5px 10px; font-size:11px">🗑️</button></td></tr>`;
+        const badgeVac = disp > 0 ? '<span class="badge badge-success">' + disp + ' disp.</span>' : '<span class="badge badge-danger">Agotado</span>';
+        const badgeCand = '<span class="badge badge-primary">' + candsCount + ' postulados</span>';
+        html += '<tr><td>' + c.nombre + '</td><td>' + badgeVac + ' / ' + c.vacantes + '</td><td>' + badgeCand + '</td><td><button class="btn btn-danger" onclick="eliminarCargo(\'' + emp.nit + '\', ' + i + ')" style="padding:5px 10px; font-size:11px">🗑️</button></td></tr>';
       });
       html += '</tbody></table>';
     } else {
@@ -1518,7 +709,7 @@ function renderEmpresas() {
 function actualizarSelectsEmpresas() {
   const sel1 = document.getElementById('empresaCargo');
   const sel2 = document.getElementById('empresaCandidato');
-  const opts = '<option value="">-- Seleccione --</option>' + empresas.map(e => `<option value="${e.nit}">${e.nombre} (${e.nit})</option>`).join('');
+  const opts = '<option value="">-- Seleccione --</option>' + empresas.map(e => '<option value="' + e.nit + '">' + e.nombre + ' (' + e.nit + ')</option>').join('');
   sel1.innerHTML = opts;
   sel2.innerHTML = opts;
   document.getElementById('cargoCandidato').innerHTML = '<option value="">-- Seleccione cargo --</option>';
@@ -1534,11 +725,11 @@ function cargarCargosCandidato() {
   if (!nit) return;
   const empresa = empresas.find(e => e.nit === nit);
   if (!empresa) return;
-  empresa.cargos.forEach((c, i) => {
+  empresa.cargos.forEach(c => {
     const candsCount = candidatos.filter(x => x.nitEmpresa === nit && x.cargo === c.nombre).length;
     const opt = document.createElement('option');
     opt.value = c.nombre;
-    opt.textContent = `${c.nombre} (${c.vacantes} vac. | ${candsCount} cand.)`;
+    opt.textContent = c.nombre + ' (' + c.vacantes + ' vac. | ' + candsCount + ' cand.)';
     sel.appendChild(opt);
   });
 }
@@ -1551,9 +742,9 @@ function mostrarVacantes() {
   const empresa = empresas.find(e => e.nit === nit);
   const c = empresa.cargos.find(x => x.nombre === cargo);
   const candsCount = candidatos.filter(x => x.nitEmpresa === nit && x.cargo === cargo).length;
-  document.getElementById('vacanteInfo').textContent = `${c.vacantes} vacante${c.vacantes!==1?'s':''}`;
+  document.getElementById('vacanteInfo').textContent = c.vacantes + ' vacante' + (c.vacantes!==1?'s':'');
   document.getElementById('vacanteInfo').className = 'vacancy-badge' + (c.vacantesDisponibles === 0 ? ' zero' : '');
-  document.getElementById('candidatosInfo').textContent = `${candsCount} candidato${candsCount!==1?'s':''}`;
+  document.getElementById('candidatosInfo').textContent = candsCount + ' candidato' + (candsCount!==1?'s':'');
   cont.style.display = 'block';
 }
 
@@ -1572,21 +763,14 @@ function agregarCandidato() {
   if (!nit || !cargo || !cedula || !nombre || !profesion || !edad || exp === '' || !telefono || !correo || !direccion) {
     alert('⚠️ Todos los campos son obligatorios'); return;
   }
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  if (!emailRegex.test(correo)) { alert('⚠️ El correo electrónico no es válido'); return; }
-  if (candidatos.find(c => c.cedula === cedula)) {
-    alert('⚠️ Ya existe un candidato con esa cédula'); return;
-  }
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(correo)) { alert('⚠️ Correo inválido'); return; }
+  if (candidatos.find(c => c.cedula === cedula)) { alert('⚠️ Ya existe un candidato con esa cédula'); return; }
   const empresa = empresas.find(e => e.nit === nit);
   candidatos.push({
-    id: Date.now(),
-    cedula, nombre, profesion,
-    edad: parseInt(edad),
-    experiencia: parseInt(exp),
+    id: Date.now(), cedula, nombre, profesion,
+    edad: parseInt(edad), experiencia: parseInt(exp),
     telefono, correo, direccion,
-    nitEmpresa: nit,
-    empresa: empresa.nombre,
-    cargo
+    nitEmpresa: nit, empresa: empresa.nombre, cargo
   });
   guardar();
   ['cedula','nombreCandidato','profesion','edad','experiencia','telefono','correo','direccion'].forEach(id => document.getElementById(id).value = '');
@@ -1614,37 +798,23 @@ function renderCandidatos() {
   }
   const grupos = {};
   candidatos.forEach(c => {
-    const key = `${c.nitEmpresa}|${c.cargo}`;
+    const key = c.nitEmpresa + '|' + c.cargo;
     if (!grupos[key]) grupos[key] = { empresa: c.empresa, cargo: c.cargo, cands: [] };
     grupos[key].cands.push(c);
   });
   let html = '';
   Object.values(grupos).forEach(g => {
-    html += `<div style="background:#e8f0fb; padding:12px 16px; border-radius:8px 8px 0 0; margin-top:15px; border-left:4px solid #2a5298">
-      <strong style="color:#2a5298">${g.empresa}</strong> - ${g.cargo}
-      <span class="badge badge-primary" style="margin-left:10px">${g.cands.length} candidato${g.cands.length!==1?'s':''}</span>
-    </div>`;
+    html += '<div style="background:#e8f0fb; padding:12px 16px; border-radius:8px 8px 0 0; margin-top:15px; border-left:4px solid #2a5298"><strong style="color:#2a5298">' + g.empresa + '</strong> - ' + g.cargo + '<span class="badge badge-primary" style="margin-left:10px">' + g.cands.length + ' candidato' + (g.cands.length!==1?'s':'') + '</span></div>';
     g.cands.forEach(c => {
       const eval_ = evaluaciones[c.id];
       let estado = '';
-      if (eval_) {
+      if (eval_ && eval_.puntajeTotal > 0) {
         const sem = obtenerSemaforo(eval_.puntajeTotal);
-        estado = `<span class="badge badge-success"><span class="traffic-light ${sem.clase}"></span>${eval_.puntajeTotal.toFixed(1)} pts</span>`;
+        estado = '<span class="badge badge-success"><span class="traffic-light ' + sem.clase + '"></span>' + eval_.puntajeTotal.toFixed(1) + ' pts</span>';
       } else {
-        estado = `<span class="badge badge-warning">Pendiente</span>`;
+        estado = '<span class="badge badge-warning">Pendiente</span>';
       }
-      html += `<div class="candidate-list-item" style="border-radius:0; margin-bottom:0; border-top:1px solid #e1e5eb">
-        <div class="candidate-info">
-          <strong>${c.nombre}</strong> - CC ${c.cedula}
-          <small>${c.profesion} | ${c.edad} años | ${c.experiencia} años exp.</small>
-          <small>📞 ${c.telefono} | ✉️ ${c.correo}</small>
-          <small>📍 ${c.direccion}</small>
-        </div>
-        <div style="display:flex; gap:8px; align-items:center; flex-wrap:wrap">
-          ${estado}
-          <button class="btn btn-danger" onclick="eliminarCandidato(${c.id})" style="padding:6px 12px; font-size:12px">🗑️</button>
-        </div>
-      </div>`;
+      html += '<div class="candidate-list-item" style="border-radius:0; margin-bottom:0; border-top:1px solid #e1e5eb"><div class="candidate-info"><strong>' + c.nombre + '</strong> - CC ' + c.cedula + '<small>' + c.profesion + ' | ' + c.edad + ' años | ' + c.experiencia + ' años exp.</small><small>📞 ' + c.telefono + ' | ✉️ ' + c.correo + '</small><small>📍 ' + c.direccion + '</small></div><div style="display:flex; gap:8px; align-items:center; flex-wrap:wrap">' + estado + '<button class="btn btn-danger" onclick="eliminarCandidato(' + c.id + ')" style="padding:6px 12px; font-size:12px">🗑️</button></div></div>';
     });
   });
   cont.innerHTML = html;
@@ -1653,8 +823,7 @@ function renderCandidatos() {
 // ============ EVALUACIÓN EN CASCADA ============
 function inicializarEvalCascada() {
   const selEmp = document.getElementById('evalEmpresa');
-  selEmp.innerHTML = '<option value="">-- Seleccione empresa --</option>' +
-    empresas.map(e => `<option value="${e.nit}">${e.nombre}</option>`).join('');
+  selEmp.innerHTML = '<option value="">-- Seleccione empresa --</option>' + empresas.map(e => '<option value="' + e.nit + '">' + e.nombre + '</option>').join('');
   document.getElementById('evalCargo').innerHTML = '<option value="">-- Primero seleccione empresa --</option>';
   document.getElementById('evalCargo').disabled = true;
   document.getElementById('evalCandidato').innerHTML = '<option value="">-- Primero seleccione cargo --</option>';
@@ -1679,9 +848,7 @@ function cargarCargosEval() {
     return;
   }
   const empresa = empresas.find(e => e.nit === nit);
-  const cargsConCands = empresa.cargos.filter(c =>
-    candidatos.some(x => x.nitEmpresa === nit && x.cargo === c.nombre)
-  );
+  const cargsConCands = empresa.cargos.filter(c => candidatos.some(x => x.nitEmpresa === nit && x.cargo === c.nombre));
   if (cargsConCands.length === 0) {
     selCargo.innerHTML = '<option value="">-- Sin candidatos registrados --</option>';
     selCargo.disabled = true;
@@ -1692,7 +859,7 @@ function cargarCargosEval() {
     const candsCount = candidatos.filter(x => x.nitEmpresa === nit && x.cargo === c.nombre).length;
     const opt = document.createElement('option');
     opt.value = c.nombre;
-    opt.textContent = `${c.nombre} (${candsCount} candidato${candsCount!==1?'s':''})`;
+    opt.textContent = c.nombre + ' (' + candsCount + ' candidato' + (candsCount!==1?'s':'') + ')';
     selCargo.appendChild(opt);
   });
   selCargo.disabled = false;
@@ -1719,10 +886,10 @@ function cargarCandidatosEval() {
   selCand.innerHTML = '<option value="">-- Seleccione candidato --</option>';
   cands.forEach(c => {
     const eval_ = evaluaciones[c.id];
-    const estado = eval_ ? ` ✓ (${eval_.puntajeTotal.toFixed(1)} pts)` : '';
+    const estado = (eval_ && eval_.puntajeTotal > 0) ? ' ✓ (' + eval_.puntajeTotal.toFixed(1) + ' pts)' : '';
     const opt = document.createElement('option');
     opt.value = c.id;
-    opt.textContent = `${c.nombre} - CC ${c.cedula}${estado}`;
+    opt.textContent = c.nombre + ' - CC ' + c.cedula + estado;
     selCand.appendChild(opt);
   });
   selCand.disabled = false;
@@ -1735,47 +902,26 @@ function cargarEvaluacion() {
   if (!id) { cont.innerHTML = ''; infoCont.innerHTML = ''; currentEvalConfig = null; return; }
   
   const cand = candidatos.find(c => c.id == id);
+  if (!cand) { cont.innerHTML = '<div class="alert alert-danger">Candidato no encontrado</div>'; return; }
+  
   currentEvalConfig = getConfiguracionCargo(cand.cargo);
   const eval_ = evaluaciones[id] || {};
 
-  infoCont.innerHTML = `
-    <div class="cascade-info">
-      <strong>👤 Evaluando a:</strong> ${cand.nombre} (CC ${cand.cedula}) |
-      <strong>Profesión:</strong> ${cand.profesion} |
-      <strong>Edad:</strong> ${cand.edad} años |
-      <strong>Experiencia:</strong> ${cand.experiencia} años |
-      <strong>Cargo:</strong> ${cand.cargo} en ${cand.empresa}
-    </div>
-    <details class="guia-entrevista">
-      <summary>📖 Ver Guía de Evaluación y Criterios del Perfil (Clic para desplegar)</summary>
-      <div class="guia-content">
-        ${currentEvalConfig.guiaEntrevista}
-      </div>
-    </details>`;
+  infoCont.innerHTML = '<div class="cascade-info"><strong>👤 Evaluando a:</strong> ' + cand.nombre + ' (CC ' + cand.cedula + ') | <strong>Profesión:</strong> ' + cand.profesion + ' | <strong>Edad:</strong> ' + cand.edad + ' años | <strong>Experiencia:</strong> ' + cand.experiencia + ' años | <strong>Cargo:</strong> ' + cand.cargo + ' en ' + cand.empresa + '</div><details class="guia-entrevista"><summary>📖 Ver Guía de Evaluación y Criterios del Perfil (Clic para desplegar)</summary><div class="guia-content">' + currentEvalConfig.guiaEntrevista + '</div></details>';
 
   let escalaHtml = '<div class="scale-reference"><h4>📖 Escala de Calificación General</h4><ul>';
-  currentEvalConfig.escala.forEach(item => {
-    escalaHtml += `<li>${item}</li>`;
-  });
+  currentEvalConfig.escala.forEach(item => { escalaHtml += '<li>' + item + '</li>'; });
   escalaHtml += '</ul></div>';
 
-  let html = `<table class="matrix-table">
-    <thead><tr><th>Competencia</th><th>Peso</th><th>Calificación (1-5)</th><th>Puntaje Ponderado</th></tr></thead><tbody>`;
+  let html = '<table class="matrix-table"><thead><tr><th>Competencia</th><th>Peso</th><th>Calificación (1-5)</th><th>Puntaje Ponderado</th></tr></thead><tbody>';
   currentEvalConfig.competencias.forEach((comp, i) => {
     const calif = eval_.calificaciones ? (eval_.calificaciones[i] || '') : '';
     const puntaje = calif ? ((calif / 5) * comp.peso).toFixed(2) : '-';
-    html += `<tr>
-      <td><strong>${comp.nombre}</strong> ${comp.critica ? '<span style="color:#e74c3c; font-size:11px">(Crítica, Mín: ' + (comp.minCritica || 3) + ')</span>' : ''}</td>
-      <td>${comp.peso}%</td>
-      <td><select onchange="actualizarPuntaje(${i}, this.value)" style="width:100%">
-        <option value="">--</option>
-        ${[5,4,3,2,1].map(n => `<option value="${n}" ${calif==n?'selected':''}>${n} - ${['','Muy bajo','Bajo','Adecuado','Alto','Sobresaliente'][n]}</option>`).join('')}
-      </select></td>
-      <td id="puntaje-${i}">${puntaje}</td>
-    </tr>`;
+    const criticaLabel = comp.critica ? ' <span style="color:#e74c3c; font-size:11px">(Crítica, Mín: ' + (comp.minCritica || 3) + ')</span>' : '';
+    html += '<tr><td><strong>' + comp.nombre + '</strong>' + criticaLabel + '</td><td>' + comp.peso + '%</td><td><select onchange="actualizarPuntaje(' + i + ', this.value)" style="width:100%"><option value="">--</option><option value="5" ' + (calif==5?'selected':'') + '>5 - Sobresaliente</option><option value="4" ' + (calif==4?'selected':'') + '>4 - Bueno</option><option value="3" ' + (calif==3?'selected':'') + '>3 - Aceptable</option><option value="2" ' + (calif==2?'selected':'') + '>2 - Bajo</option><option value="1" ' + (calif==1?'selected':'') + '>1 - Deficiente</option></select></td><td id="puntaje-' + i + '">' + puntaje + '</td></tr>';
   });
   const total = eval_.puntajeTotal || 0;
-  html += `<tr class="total-row"><td colspan="3"><strong>TOTAL</strong></td><td id="puntajeTotal"><strong>${total.toFixed(1)} / 100</strong></td></tr>`;
+  html += '<tr class="total-row"><td colspan="3"><strong>TOTAL</strong></td><td id="puntajeTotal"><strong>' + total.toFixed(1) + ' / 100</strong></td></tr>';
   html += '</tbody></table>';
   
   cont.innerHTML = escalaHtml + html;
@@ -1797,7 +943,7 @@ function actualizarPuntaje(idx, valor) {
     }
   });
   evaluaciones[id].puntajeTotal = total;
-  document.getElementById('puntajeTotal').innerHTML = `<strong>${total.toFixed(1)} / 100</strong>`;
+  document.getElementById('puntajeTotal').innerHTML = '<strong>' + total.toFixed(1) + ' / 100</strong>';
 }
 
 function guardarEvaluacion() {
@@ -1816,18 +962,18 @@ function guardarEvaluacion() {
     config.competencias.forEach((comp, i) => {
       const umbral = comp.minCritica || 3;
       if (comp.critica && eval_.calificaciones[i] < umbral) {
-        alertasCriticas.push(`• ${comp.nombre} (Nota: ${eval_.calificaciones[i]}/5, Mínimo requerido: ${umbral})`);
+        alertasCriticas.push('• ' + comp.nombre + ' (Nota: ' + eval_.calificaciones[i] + '/5, Mínimo: ' + umbral + ')');
       }
     });
   }
   
   if (alertasCriticas.length > 0) {
-    const confirmar = confirm(`⚠️ ADVERTENCIA DE COMPETENCIAS CRÍTICAS:\n\nLas siguientes competencias críticas tienen una calificación inferior al mínimo requerido, lo cual representa un riesgo alto para el rol, independientemente del puntaje total:\n\n${alertasCriticas.join('\n')}\n\n¿Desea guardar la evaluación de todos modos?`);
+    const confirmar = confirm('⚠️ ADVERTENCIA DE COMPETENCIAS CRÍTICAS:\n\n' + alertasCriticas.join('\n') + '\n\n¿Desea guardar la evaluación de todos modos?');
     if (!confirmar) return;
   }
 
   guardar();
-  alert(`✅ Evaluación guardada para ${cand.nombre}. Puntaje: ${eval_.puntajeTotal.toFixed(1)}/100`);
+  alert('✅ Evaluación guardada para ' + cand.nombre + '. Puntaje: ' + eval_.puntajeTotal.toFixed(1) + '/100');
   renderCandidatos();
   cargarCandidatosEval();
   document.getElementById('evalCandidato').value = id;
@@ -1836,8 +982,7 @@ function guardarEvaluacion() {
 // ============ RESULTADOS EN CASCADA ============
 function inicializarResultadosCascada() {
   const selEmp = document.getElementById('filtroEmpresa');
-  selEmp.innerHTML = '<option value="">-- Seleccione empresa --</option>' +
-    empresas.map(e => `<option value="${e.nit}">${e.nombre}</option>`).join('');
+  selEmp.innerHTML = '<option value="">-- Seleccione empresa --</option>' + empresas.map(e => '<option value="' + e.nit + '">' + e.nombre + '</option>').join('');
   document.getElementById('filtroCargo').innerHTML = '<option value="">-- Primero seleccione empresa --</option>';
   document.getElementById('filtroCargo').disabled = true;
   document.getElementById('filtroCandidato').innerHTML = '<option value="">-- Primero seleccione cargo --</option>';
@@ -1858,9 +1003,7 @@ function cargarCargosResultados() {
     return;
   }
   const empresa = empresas.find(e => e.nit === nit);
-  const cargsConCands = empresa.cargos.filter(c =>
-    candidatos.some(x => x.nitEmpresa === nit && x.cargo === c.nombre)
-  );
+  const cargsConCands = empresa.cargos.filter(c => candidatos.some(x => x.nitEmpresa === nit && x.cargo === c.nombre));
   if (cargsConCands.length === 0) {
     selCargo.innerHTML = '<option value="">-- Sin candidatos --</option>';
     selCargo.disabled = true;
@@ -1871,7 +1014,7 @@ function cargarCargosResultados() {
     const candsCount = candidatos.filter(x => x.nitEmpresa === nit && x.cargo === c.nombre).length;
     const opt = document.createElement('option');
     opt.value = c.nombre;
-    opt.textContent = `${c.nombre} (${candsCount} candidato${candsCount!==1?'s':''})`;
+    opt.textContent = c.nombre + ' (' + candsCount + ' candidato' + (candsCount!==1?'s':'') + ')';
     selCargo.appendChild(opt);
   });
   selCargo.disabled = false;
@@ -1894,153 +1037,136 @@ function cargarCandidatosResultados() {
     selCand.disabled = true;
     return;
   }
-  evaluados.sort((a, b) => evaluaciones[b.id].puntajeTotal - evaluados[a.id].puntajeTotal);
+  evaluados.sort((a, b) => evaluaciones[b.id].puntajeTotal - evaluaciones[a.id].puntajeTotal);
   selCand.innerHTML = '<option value="">-- Seleccione candidato --</option>';
   evaluados.forEach((c, i) => {
     const eval_ = evaluaciones[c.id];
     const sem = obtenerSemaforo(eval_.puntajeTotal);
     const opt = document.createElement('option');
     opt.value = c.id;
-    opt.textContent = `${i+1}. ${c.nombre} - ${eval_.puntajeTotal.toFixed(1)} pts (${sem.texto})`;
+    opt.textContent = (i+1) + '. ' + c.nombre + ' - ' + eval_.puntajeTotal.toFixed(1) + ' pts (' + sem.texto + ')';
     selCand.appendChild(opt);
   });
   selCand.disabled = false;
 }
 
+// ============ FUNCIÓN PRINCIPAL DE RESULTADOS CON MANEJO DE ERRORES ============
 function mostrarResultados() {
-  const nit = document.getElementById('filtroEmpresa').value;
-  const cargo = document.getElementById('filtroCargo').value;
-  const candId = document.getElementById('filtroCandidato').value;
-  const cont = document.getElementById('contenidoResultados');
+  try {
+    const nit = document.getElementById('filtroEmpresa').value;
+    const cargo = document.getElementById('filtroCargo').value;
+    const candId = document.getElementById('filtroCandidato').value;
+    const cont = document.getElementById('contenidoResultados');
 
-  if (!nit || !cargo || !candId) { cont.innerHTML = ''; return; }
+    if (!nit || !cargo || !candId) { 
+      cont.innerHTML = '<div class="alert alert-warning">Seleccione empresa, cargo y candidato</div>'; 
+      return; 
+    }
 
-  const empresa = empresas.find(e => e.nit === nit);
-  const cargoObj = empresa.cargos.find(c => c.nombre === cargo);
-  const cands = candidatos.filter(c => c.nitEmpresa === nit && c.cargo === cargo);
-  const evaluados = cands.filter(c => evaluaciones[c.id] && evaluaciones[c.id].puntajeTotal > 0)
-    .map(c => ({ ...c, eval: evaluaciones[c.id] }))
-    .sort((a, b) => b.eval.puntajeTotal - a.eval.puntajeTotal);
+    const empresa = empresas.find(e => e.nit === nit);
+    if (!empresa) { cont.innerHTML = '<div class="alert alert-danger">Empresa no encontrada</div>'; return; }
+    
+    const cargoObj = empresa.cargos.find(c => c.nombre === cargo);
+    if (!cargoObj) { cont.innerHTML = '<div class="alert alert-danger">Cargo no encontrado</div>'; return; }
+    
+    const cands = candidatos.filter(c => c.nitEmpresa === nit && c.cargo === cargo);
+    const evaluados = cands
+      .filter(c => evaluaciones[c.id] && evaluaciones[c.id].puntajeTotal > 0 && evaluaciones[c.id].calificaciones)
+      .map(c => ({ ...c, eval: evaluaciones[c.id] }))
+      .sort((a, b) => b.eval.puntajeTotal - a.eval.puntajeTotal);
 
-  const candidatoSeleccionado = evaluados.find(c => c.id == candId);
-  if (!candidatoSeleccionado) {
-    cont.innerHTML = '<div class="alert alert-warning">⚠️ Candidato no encontrado</div>';
-    return;
-  }
+    if (evaluados.length === 0) {
+      cont.innerHTML = '<div class="alert alert-warning">No hay candidatos evaluados para este cargo</div>';
+      return;
+    }
 
-  const config = getConfiguracionCargo(candidatoSeleccionado.cargo);
-  const ganador = evaluados[0];
-  const posicion = evaluados.findIndex(c => c.id == candId) + 1;
-  const decision = obtenerDecision(candidatoSeleccionado.eval.puntajeTotal, candidatoSeleccionado.cargo);
-  const sem = obtenerSemaforo(candidatoSeleccionado.eval.puntajeTotal);
+    const candidatoSeleccionado = evaluados.find(c => c.id == candId);
+    if (!candidatoSeleccionado) {
+      cont.innerHTML = '<div class="alert alert-warning">Candidato no encontrado. Seleccione otro.</div>';
+      return;
+    }
 
-  const promedios = config.competencias.map((comp, i) => {
-    const suma = evaluados.reduce((acc, c) => acc + c.eval.calificaciones[i], 0);
-    return suma / evaluados.length;
-  });
+    // Validar que el candidato tenga calificaciones completas
+    if (!candidatoSeleccionado.eval.calificaciones || candidatoSeleccionado.eval.calificaciones.length === 0) {
+      cont.innerHTML = '<div class="alert alert-danger">El candidato no tiene calificaciones completas. Vuelva a evaluarlo.</div>';
+      return;
+    }
 
-  let alertasCriticasHtml = '';
-  if (config.competencias) {
+    const config = getConfiguracionCargo(candidatoSeleccionado.cargo);
+    if (!config || !config.competencias) {
+      cont.innerHTML = '<div class="alert alert-danger">Configuración del cargo no encontrada</div>';
+      return;
+    }
+
+    const posicion = evaluados.findIndex(c => c.id == candId) + 1;
+    const decision = obtenerDecision(candidatoSeleccionado.eval.puntajeTotal, candidatoSeleccionado.cargo);
+    const sem = obtenerSemaforo(candidatoSeleccionado.eval.puntajeTotal);
+
+    // Calcular promedios con validación
+    const promedios = config.competencias.map((comp, i) => {
+      const suma = evaluados.reduce((acc, c) => {
+        const val = (c.eval.calificaciones && c.eval.calificaciones[i]) ? c.eval.calificaciones[i] : 0;
+        return acc + val;
+      }, 0);
+      return evaluados.length > 0 ? suma / evaluados.length : 0;
+    });
+
+    // Alertas de competencias críticas
+    let alertasCriticasHtml = '';
     const criticasBajas = config.competencias.filter((comp, i) => {
       const umbral = comp.minCritica || 3;
       return comp.critica && candidatoSeleccionado.eval.calificaciones[i] < umbral;
     });
     if (criticasBajas.length > 0) {
-      alertasCriticasHtml = `
-        <div class="alert alert-warning" style="margin-bottom: 20px;">
-          <strong>⚠️ ALERTA DE COMPETENCIAS CRÍTICAS:</strong><br>
-          El candidato presenta calificaciones inferiores al mínimo requerido en competencias fundamentales para el rol. Esto representa un riesgo alto, independientemente del puntaje total.
-          <ul style="margin-top: 8px; margin-bottom: 0;">
-            ${criticasBajas.map(c => {
-              const idx = config.competencias.findIndex(comp => comp.nombre === c.nombre);
-              const umbral = c.minCritica || 3;
-              return `<li><strong>${c.nombre}</strong>: ${candidatoSeleccionado.eval.calificaciones[idx]}/5 (Mínimo: ${umbral})</li>`;
-            }).join('')}
-          </ul>
-        </div>
-      `;
+      alertasCriticasHtml = '<div class="alert alert-warning" style="margin-bottom: 20px;"><strong>⚠️ ALERTA DE COMPETENCIAS CRÍTICAS:</strong><br>El candidato presenta calificaciones inferiores al mínimo requerido.<ul style="margin-top: 8px; margin-bottom: 0;">';
+      criticasBajas.forEach(c => {
+        const idx = config.competencias.findIndex(comp => comp.nombre === c.nombre);
+        const umbral = c.minCritica || 3;
+        alertasCriticasHtml += '<li><strong>' + c.nombre + '</strong>: ' + candidatoSeleccionado.eval.calificaciones[idx] + '/5 (Mínimo: ' + umbral + ')</li>';
+      });
+      alertasCriticasHtml += '</ul></div>';
     }
+
+    // PODIO
+    let podiumHtml = '<h3 style="color:#2a5298; margin:20px 0 10px">🏆 Podio General</h3><div class="podium">';
+    const medals = ['🥇','🥈','🥉'];
+    const classes = ['gold','silver','bronze'];
+    evaluados.slice(0, 3).forEach((c, i) => {
+      const cSem = obtenerSemaforo(c.eval.puntajeTotal);
+      const isSelected = c.id == candId;
+      podiumHtml += '<div class="podium-card ' + classes[i] + ' ' + (isSelected ? 'selected-cand' : '') + '"><div class="medal">' + medals[i] + (isSelected ? ' 👈' : '') + '</div><h3>' + c.nombre + '</h3><div class="podium-score" style="color:' + cSem.color + '">' + c.eval.puntajeTotal.toFixed(1) + '</div><p><strong>' + c.profesion + '</strong></p><p>' + c.edad + ' años | ' + c.experiencia + ' años exp.</p><p>CC: ' + c.cedula + '</p><div style="margin-top:10px">' + obtenerBadgeDecision(c.eval.puntajeTotal, c.cargo) + '</div></div>';
+    });
+    podiumHtml += '</div>';
+
+    // TABLA DE RANKING
+    let tablaHtml = '<h3 style="color:#2a5298; margin:20px 0 10px">📋 Ranking Completo</h3><table><thead><tr><th>#</th><th>Candidato</th><th>Profesión</th><th>Experiencia</th><th>Puntaje</th><th>Semáforo</th><th>Decisión</th></tr></thead><tbody>';
+    evaluados.forEach((c, i) => {
+      const cSem = obtenerSemaforo(c.eval.puntajeTotal);
+      const highlight = c.id == candId ? 'style="background:#fff9e6 !important; font-weight:700"' : '';
+      tablaHtml += '<tr ' + highlight + '><td><strong>' + (i+1) + '</strong></td><td>' + c.nombre + (c.id==candId?' 👈':'') + '<br><small>CC ' + c.cedula + '</small></td><td>' + c.profesion + '</td><td>' + c.experiencia + ' años</td><td><strong>' + c.eval.puntajeTotal.toFixed(1) + '</strong></td><td><span class="traffic-light ' + cSem.clase + '"></span>' + cSem.texto + '</td><td>' + obtenerBadgeDecision(c.eval.puntajeTotal, c.cargo) + '</td></tr>';
+    });
+    tablaHtml += '</tbody></table>';
+
+    // GRÁFICA
+    const chartHtml = '<div class="chart-container"><h3>📈 Análisis Radial Comparativo: ' + candidatoSeleccionado.nombre + '</h3><div class="chart-wrapper"><canvas id="radarChart"></canvas></div></div>';
+
+    // Tarjeta de datos
+    const detailCard = '<div class="candidate-selector-box"><h4>🎯 Candidato Seleccionado para Análisis</h4><div class="candidate-detail-card"><div><strong>Nombre</strong>' + candidatoSeleccionado.nombre + '</div><div><strong>Cédula</strong>' + candidatoSeleccionado.cedula + '</div><div><strong>Profesión</strong>' + candidatoSeleccionado.profesion + '</div><div><strong>Edad</strong>' + candidatoSeleccionado.edad + ' años</div><div><strong>Experiencia</strong>' + candidatoSeleccionado.experiencia + ' años</div><div><strong>Teléfono</strong>' + candidatoSeleccionado.telefono + '</div><div><strong>Correo</strong>' + candidatoSeleccionado.correo + '</div><div><strong>Dirección</strong>' + candidatoSeleccionado.direccion + '</div><div><strong>Empresa</strong>' + candidatoSeleccionado.empresa + '</div><div><strong>Cargo</strong>' + candidatoSeleccionado.cargo + '</div><div><strong>Puntaje</strong><span style="color:' + sem.color + '; font-weight:700; font-size:16px">' + candidatoSeleccionado.eval.puntajeTotal.toFixed(1) + '/100</span></div><div><strong>Posición</strong>#' + posicion + ' de ' + evaluados.length + '</div></div></div>';
+
+    // RESUMEN
+    const resumenHtml = '<div class="summary-box"><h3>📝 Análisis Personalizado: ' + candidatoSeleccionado.nombre + '</h3><p><strong>Puntaje Total:</strong> ' + candidatoSeleccionado.eval.puntajeTotal.toFixed(1) + ' / 100 puntos | <strong>Posición:</strong> #' + posicion + ' de ' + evaluados.length + ' candidatos</p><p><strong>Análisis individual:</strong> ' + generarAnalisis(candidatoSeleccionado) + '</p><p><strong>Competencias destacadas:</strong> ' + obtenerFortalezas(candidatoSeleccionado.eval, candidatoSeleccionado.cargo) + '</p><p><strong>Áreas de mejora:</strong> ' + obtenerDebilidades(candidatoSeleccionado.eval, candidatoSeleccionado.cargo) + '</p></div>';
+
+    // BOTONES
+    const accionesHtml = '<div style="display:flex; justify-content:center; margin-top:30px; flex-wrap:wrap; gap:10px"><button class="btn btn-success" onclick="finalizarProceso(\'' + nit + '\', \'' + cargo + '\')">✅ Finalizar Proceso</button><button class="btn btn-warning" onclick="reiniciarAnalisis(\'' + nit + '\', \'' + cargo + '\')">🔄 Nuevo Análisis</button><button class="btn btn-pdf" onclick="generarPDF(\'' + nit + '\', \'' + cargo + '\', ' + candId + ')">📄 Descargar PDF</button></div>';
+
+    cont.innerHTML = '<div class="alert alert-info"><strong>📌 Vacante:</strong> ' + cargo + ' en <strong>' + empresa.nombre + '</strong> | <strong>Vacantes:</strong> ' + cargoObj.vacantes + ' | <strong>Candidatos evaluados:</strong> ' + evaluados.length + ' de ' + cands.length + '</div>' + alertasCriticasHtml + detailCard + podiumHtml + tablaHtml + chartHtml + resumenHtml + accionesHtml;
+
+    setTimeout(() => dibujarRadar(candidatoSeleccionado, evaluados, promedios), 100);
+    
+  } catch (error) {
+    console.error('Error en mostrarResultados:', error);
+    document.getElementById('contenidoResultados').innerHTML = '<div class="alert alert-danger"><strong>❌ Error al generar resultados:</strong> ' + error.message + '<br><small>Revise la consola del navegador (F12) para más detalles.</small></div>';
   }
-
-  let podiumHtml = '<h3 style="color:#2a5298; margin:20px 0 10px">🏆 Podio General</h3><div class="podium" id="podiumToCapture">';
-  const medals = ['🥇','🥈','🥉'];
-  const classes = ['gold','silver','bronze'];
-  evaluados.slice(0, 3).forEach((c, i) => {
-    const cSem = obtenerSemaforo(c.eval.puntajeTotal);
-    const isSelected = c.id == candId;
-    podiumHtml += `<div class="podium-card ${classes[i]} ${isSelected ? 'selected-cand' : ''}">
-      <div class="medal">${medals[i]}${isSelected ? ' 👈' : ''}</div>
-      <h3>${c.nombre}</h3>
-      <div class="podium-score" style="color:${cSem.color}">${c.eval.puntajeTotal.toFixed(1)}</div>
-      <p><strong>${c.profesion}</strong></p>
-      <p>${c.edad} años | ${c.experiencia} años exp.</p>
-      <p>CC: ${c.cedula}</p>
-      <div style="margin-top:10px">${obtenerBadgeDecision(c.eval.puntajeTotal, c.cargo)}</div>
-    </div>`;
-  });
-  podiumHtml += '</div>';
-
-  let tablaHtml = '<h3 style="color:#2a5298; margin:20px 0 10px">📋 Ranking Completo</h3><table><thead><tr><th>#</th><th>Candidato</th><th>Profesión</th><th>Experiencia</th><th>Puntaje</th><th>Semáforo</th><th>Decisión</th></tr></thead><tbody>';
-  evaluados.forEach((c, i) => {
-    const cSem = obtenerSemaforo(c.eval.puntajeTotal);
-    const highlight = c.id == candId ? 'style="background:#fff9e6 !important; font-weight:700"' : '';
-    tablaHtml += `<tr ${highlight}><td><strong>${i+1}</strong></td><td>${c.nombre}${c.id==candId?' 👈':''}<br><small>CC ${c.cedula}</small></td><td>${c.profesion}</td><td>${c.experiencia} años</td><td><strong>${c.eval.puntajeTotal.toFixed(1)}</strong></td><td><span class="traffic-light ${cSem.clase}"></span>${cSem.texto}</td><td>${obtenerBadgeDecision(c.eval.puntajeTotal, c.cargo)}</td></tr>`;
-  });
-  tablaHtml += '</tbody></table>';
-
-  const chartHtml = `<div class="chart-container" id="chartToCapture">
-    <h3>📈 Análisis Radial Comparativo: ${candidatoSeleccionado.nombre}</h3>
-    <div class="chart-wrapper"><canvas id="radarChart"></canvas></div>
-  </div>`;
-
-  const detailCard = `<div class="candidate-selector-box">
-    <h4>🎯 Candidato Seleccionado para Análisis</h4>
-    <div class="candidate-detail-card">
-      <div><strong>Nombre</strong>${candidatoSeleccionado.nombre}</div>
-      <div><strong>Cédula</strong>${candidatoSeleccionado.cedula}</div>
-      <div><strong>Profesión</strong>${candidatoSeleccionado.profesion}</div>
-      <div><strong>Edad</strong>${candidatoSeleccionado.edad} años</div>
-      <div><strong>Experiencia</strong>${candidatoSeleccionado.experiencia} años</div>
-      <div><strong>Teléfono</strong>${candidatoSeleccionado.telefono}</div>
-      <div><strong>Correo</strong>${candidatoSeleccionado.correo}</div>
-      <div><strong>Dirección</strong>${candidatoSeleccionado.direccion}</div>
-      <div><strong>Empresa</strong>${candidatoSeleccionado.empresa}</div>
-      <div><strong>Cargo</strong>${candidatoSeleccionado.cargo}</div>
-      <div><strong>Puntaje</strong><span style="color:${sem.color}; font-weight:700; font-size:16px">${candidatoSeleccionado.eval.puntajeTotal.toFixed(1)}/100</span></div>
-      <div><strong>Posición</strong>#${posicion} de ${evaluados.length}</div>
-    </div>
-  </div>`;
-
-  const resumenHtml = `<div class="summary-box">
-    <h3>📝 Análisis Personalizado: ${candidatoSeleccionado.nombre}</h3>
-    <p><strong>Puntaje Total:</strong> ${candidatoSeleccionado.eval.puntajeTotal.toFixed(1)} / 100 puntos | <strong>Posición:</strong> #${posicion} de ${evaluados.length} candidatos</p>
-    <p><strong>Análisis individual:</strong> ${generarAnalisis(candidatoSeleccionado)}</p>
-    <p><strong>Competencias destacadas:</strong> ${obtenerFortalezas(candidatoSeleccionado.eval, candidatoSeleccionado.cargo)}</p>
-    <p><strong>Áreas de mejora:</strong> ${obtenerDebilidades(candidatoSeleccionado.eval, candidatoSeleccionado.cargo)}</p>
-  </div>`;
-
-  const accionesHtml = `<div class="btn-group" style="justify-content:center; margin-top:30px; flex-wrap:wrap; gap:10px">
-    <button class="btn btn-success" onclick="finalizarProceso('${nit}', '${cargo}')">✅ Finalizar Proceso (Cerrar Vacante)</button>
-    <button class="btn btn-warning" onclick="reiniciarAnalisis('${nit}', '${cargo}')">🔄 Nuevo Análisis de Candidatos</button>
-    <button class="btn btn-pdf" onclick="generarPDF('${nit}', '${cargo}', ${candId})">📄 Descargar PDF con Podio y Gráficas</button>
-  </div>`;
-
-  cont.innerHTML = `
-    <div class="alert alert-info">
-      <strong>📌 Vacante:</strong> ${cargo} en <strong>${empresa.nombre}</strong> |
-      <strong>Vacantes:</strong> ${cargoObj.vacantes} |
-      <strong>Candidatos evaluados:</strong> ${evaluados.length} de ${cands.length}
-    </div>
-    ${alertasCriticasHtml}
-    ${detailCard}
-    ${podiumHtml}
-    ${tablaHtml}
-    ${chartHtml}
-    ${resumenHtml}
-    ${accionesHtml}
-  `;
-
-  setTimeout(() => dibujarRadar(candidatoSeleccionado, evaluados, promedios), 100);
 }
 
 function obtenerDecision(puntaje, nombreCargo) {
@@ -2054,7 +1180,7 @@ function obtenerBadgeDecision(puntaje, nombreCargo) {
   const interp = config.interpretacion.find(i => puntaje >= i.min && puntaje <= i.max) || config.interpretacion[config.interpretacion.length - 1];
   if (interp.clase === 'decision-hire') return '<span class="badge badge-success">Altamente Recomendado</span>';
   if (interp.clase === 'decision-recommend') return '<span class="badge badge-info">Recomendado</span>';
-  if (interp.clase === 'decision-reserve') return '<span class="badge badge-warning">Con Plan de Desarrollo / Ajuste Parcial</span>';
+  if (interp.clase === 'decision-reserve') return '<span class="badge badge-warning">Con Plan de Desarrollo</span>';
   return '<span class="badge badge-danger">No Recomendado</span>';
 }
 
@@ -2069,14 +1195,14 @@ function generarAnalisis(cand) {
   
   let analisisBase = "";
   if (criticasBajas.length > 0) {
-    analisisBase += `⚠️ A pesar de un puntaje total de ${p}, se detectan brechas significativas en competencias críticas del rol (${criticasBajas.map(c => c.nombre).join(', ')}). Esto representa un riesgo operativo y comercial. `;
+    analisisBase += '⚠️ A pesar de un puntaje de ' + p + ', hay brechas en competencias críticas (' + criticasBajas.map(c => c.nombre).join(', ') + '). ';
   }
 
-  if (p >= 90) return analisisBase + `El candidato demuestra un perfil excepcional con dominio integral de las competencias evaluadas. Con ${exp} años de experiencia, evidencia liderazgo estratégico, visión innovadora y capacidad para generar resultados medibles. Es el candidato ideal para asumir el cargo con autonomía total.`;
-  if (p >= 80) return analisisBase + `Perfil sólido con ${exp} años de experiencia. Demuestra dominio en la mayoría de competencias con resultados comprobables. Su curva de adaptación será corta y puede aportar valor inmediato al equipo.`;
-  if (p >= 70) return analisisBase + `Candidato con potencial y ${exp} años de experiencia. Presenta fortalezas claras pero también brechas en algunas competencias clave que requieren validación adicional mediante referencias y expectativas salariales.`;
-  if (p >= 60) return analisisBase + `Perfil con conocimientos básicos y ${exp} años de experiencia. Podría desempeñarse mejor en roles de ejecución o especialista en lugar de posiciones de liderazgo.`;
-  return analisisBase + `El candidato no evidencia las competencias críticas requeridas para el cargo. A pesar de ${exp} años de experiencia, las respuestas no demuestran capacidad para asumir las responsabilidades del puesto.`;
+  if (p >= 90) return analisisBase + 'Perfil excepcional con ' + exp + ' años de experiencia. Evidencia liderazgo estratégico y capacidad para generar resultados medibles.';
+  if (p >= 80) return analisisBase + 'Perfil sólido con ' + exp + ' años de experiencia. Dominio en la mayoría de competencias. Curva de adaptación corta.';
+  if (p >= 70) return analisisBase + 'Candidato con potencial y ' + exp + ' años de experiencia. Presenta fortalezas claras pero también brechas que requieren validación.';
+  if (p >= 60) return analisisBase + 'Perfil con conocimientos básicos y ' + exp + ' años de experiencia. Podría desempeñarse mejor en roles de ejecución.';
+  return analisisBase + 'No evidencia las competencias críticas requeridas. A pesar de ' + exp + ' años de experiencia, las respuestas no demuestran capacidad para el puesto.';
 }
 
 function obtenerFortalezas(eval_, nombreCargo) {
@@ -2084,7 +1210,7 @@ function obtenerFortalezas(eval_, nombreCargo) {
   const ordenadas = config.competencias.map((c, i) => ({ nombre: c.nombre, calif: eval_.calificaciones[i] }))
     .filter(x => x.calif >= 4)
     .sort((a, b) => b.calif - a.calif);
-  return ordenadas.length ? ordenadas.map(x => `${x.nombre} (${x.calif}/5)`).join(', ') : 'No se identificaron fortalezas destacadas';
+  return ordenadas.length ? ordenadas.map(x => x.nombre + ' (' + x.calif + '/5)').join(', ') : 'No se identificaron fortalezas destacadas';
 }
 
 function obtenerDebilidades(eval_, nombreCargo) {
@@ -2092,88 +1218,98 @@ function obtenerDebilidades(eval_, nombreCargo) {
   const ordenadas = config.competencias.map((c, i) => ({ nombre: c.nombre, calif: eval_.calificaciones[i] }))
     .filter(x => x.calif <= 3)
     .sort((a, b) => a.calif - b.calif);
-  return ordenadas.length ? ordenadas.map(x => `${x.nombre} (${x.calif}/5)`).join(', ') : 'No se identificaron debilidades significativas';
+  return ordenadas.length ? ordenadas.map(x => x.nombre + ' (' + x.calif + '/5)').join(', ') : 'No se identificaron debilidades significativas';
 }
 
 let radarChartInstance = null;
 function dibujarRadar(candSeleccionado, evaluados, promedios) {
-  const ctx = document.getElementById('radarChart').getContext('2d');
-  if (radarChartInstance) radarChartInstance.destroy();
-  
-  const config = getConfiguracionCargo(candSeleccionado.cargo);
-  
-  const datasets = [
-    {
-      label: candSeleccionado.nombre + ' (Seleccionado)',
-      data: candSeleccionado.eval.calificaciones,
-      backgroundColor: 'rgba(42, 82, 152, 0.3)',
-      borderColor: '#2a5298',
-      borderWidth: 3,
-      pointBackgroundColor: '#2a5298',
-      pointBorderColor: '#fff',
-      pointRadius: 6
-    },
-    {
-      label: 'Promedio del grupo',
-      data: promedios,
-      backgroundColor: 'rgba(149, 165, 166, 0.2)',
-      borderColor: '#95a5a6',
-      borderWidth: 2,
-      borderDash: [5, 5],
-      pointBackgroundColor: '#95a5a6',
-      pointBorderColor: '#fff',
-      pointRadius: 4
-    }
-  ];
-
-  if (evaluados.length > 1 && evaluados[0].id !== candSeleccionado.id) {
-    datasets.push({
-      label: evaluados[0].nombre + ' (Líder)',
-      data: evaluados[0].eval.calificaciones,
-      backgroundColor: 'rgba(241, 196, 15, 0.15)',
-      borderColor: '#f1c40f',
-      borderWidth: 2,
-      pointBackgroundColor: '#f1c40f',
-      pointBorderColor: '#fff',
-      pointRadius: 4
-    });
-  }
-
-  radarChartInstance = new Chart(ctx, {
-    type: 'radar',
-    data: {
-      labels: config.competencias.map(c => c.nombre),
-      datasets: datasets
-    },
-    options: {
-      responsive: true,
-      scales: {
-        r: {
-          beginAtZero: true,
-          max: 5,
-          ticks: { stepSize: 1, font: { size: 11 } },
-          pointLabels: { font: { size: 12, weight: '600' } }
-        }
+  try {
+    const canvas = document.getElementById('radarChart');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    if (radarChartInstance) radarChartInstance.destroy();
+    
+    const config = getConfiguracionCargo(candSeleccionado.cargo);
+    
+    // Validar calificaciones
+    const calificacionesCand = candSeleccionado.eval.calificaciones.map(c => (typeof c === 'number' && c > 0) ? c : 0);
+    const promediosValidos = promedios.map(p => (typeof p === 'number' && !isNaN(p)) ? p : 0);
+    
+    const datasets = [
+      {
+        label: candSeleccionado.nombre + ' (Seleccionado)',
+        data: calificacionesCand,
+        backgroundColor: 'rgba(42, 82, 152, 0.3)',
+        borderColor: '#2a5298',
+        borderWidth: 3,
+        pointBackgroundColor: '#2a5298',
+        pointBorderColor: '#fff',
+        pointRadius: 6
       },
-      plugins: {
-        legend: { position: 'top', labels: { font: { size: 13, weight: '600' } } }
+      {
+        label: 'Promedio del grupo',
+        data: promediosValidos,
+        backgroundColor: 'rgba(149, 165, 166, 0.2)',
+        borderColor: '#95a5a6',
+        borderWidth: 2,
+        borderDash: [5, 5],
+        pointBackgroundColor: '#95a5a6',
+        pointBorderColor: '#fff',
+        pointRadius: 4
       }
+    ];
+
+    if (evaluados.length > 1 && evaluados[0].id !== candSeleccionado.id) {
+      const calificacionesLider = evaluados[0].eval.calificaciones.map(c => (typeof c === 'number' && c > 0) ? c : 0);
+      datasets.push({
+        label: evaluados[0].nombre + ' (Líder)',
+        data: calificacionesLider,
+        backgroundColor: 'rgba(241, 196, 15, 0.15)',
+        borderColor: '#f1c40f',
+        borderWidth: 2,
+        pointBackgroundColor: '#f1c40f',
+        pointBorderColor: '#fff',
+        pointRadius: 4
+      });
     }
-  });
+
+    radarChartInstance = new Chart(ctx, {
+      type: 'radar',
+      data: {
+        labels: config.competencias.map(c => c.nombre),
+        datasets: datasets
+      },
+      options: {
+        responsive: true,
+        scales: {
+          r: {
+            beginAtZero: true,
+            max: 5,
+            ticks: { stepSize: 1, font: { size: 11 } },
+            pointLabels: { font: { size: 12, weight: '600' } }
+          }
+        },
+        plugins: {
+          legend: { position: 'top', labels: { font: { size: 13, weight: '600' } } }
+        }
+      }
+    });
+  } catch (error) {
+    console.error('Error al dibujar radar:', error);
+  }
 }
 
 // ============ GENERAR PDF ============
 async function generarPDF(nit, cargo, candId) {
-  const btn = event.target;
-  const originalText = btn.innerHTML;
-  btn.innerHTML = '⏳ Generando PDF...';
-  btn.disabled = true;
-
   try {
+    const btn = event.target;
+    const originalText = btn.innerHTML;
+    btn.innerHTML = '⏳ Generando PDF...';
+    btn.disabled = true;
+
     const { jsPDF } = window.jspdf;
     const pdf = new jsPDF('p', 'mm', 'letter');
     const pageWidth = pdf.internal.pageSize.getWidth();
-    const pageHeight = pdf.internal.pageSize.getHeight();
     
     const empresa = empresas.find(e => e.nit === nit);
     const cands = candidatos.filter(c => c.nitEmpresa === nit && c.cargo === cargo);
@@ -2182,17 +1318,15 @@ async function generarPDF(nit, cargo, candId) {
       .sort((a, b) => b.eval.puntajeTotal - a.eval.puntajeTotal);
 
     const candidatoSeleccionado = evaluados.find(c => c.id == candId);
-    if (!candidatoSeleccionado) {
-      throw new Error('Candidato no encontrado');
-    }
+    if (!candidatoSeleccionado) throw new Error('Candidato no encontrado');
 
     const config = getConfiguracionCargo(candidatoSeleccionado.cargo);
     const posicion = evaluados.findIndex(c => c.id == candId) + 1;
     const fecha = new Date().toLocaleDateString('es-CO', { year: 'numeric', month: 'long', day: 'numeric' });
     
     const promedios = config.competencias.map((comp, i) => {
-      const suma = evaluados.reduce((acc, c) => acc + c.eval.calificaciones[i], 0);
-      return suma / evaluados.length;
+      const suma = evaluados.reduce((acc, c) => acc + (c.eval.calificaciones[i] || 0), 0);
+      return evaluados.length > 0 ? suma / evaluados.length : 0;
     });
     const promTotal = evaluados.reduce((acc, c) => acc + c.eval.puntajeTotal, 0) / evaluados.length;
 
@@ -2207,7 +1341,6 @@ async function generarPDF(nit, cargo, candId) {
     pdf.setFontSize(16);
     pdf.setFont('helvetica', 'bold');
     pdf.text('AVANT, CONSULTORIA DE TALENTO HUMANO', pageWidth / 2, 12, { align: 'center' });
-    
     pdf.setFontSize(10);
     pdf.setFont('helvetica', 'normal');
     pdf.text('Sistema de Analisis de Perfiles de Candidatos', pageWidth / 2, 20, { align: 'center' });
@@ -2215,7 +1348,6 @@ async function generarPDF(nit, cargo, candId) {
     pdf.text('Reporte generado: ' + fecha, pageWidth / 2, 28, { align: 'center' });
 
     yPos = 42;
-
     pdf.setTextColor(30, 60, 114);
     pdf.setFontSize(12);
     pdf.setFont('helvetica', 'bold');
@@ -2254,7 +1386,6 @@ async function generarPDF(nit, cargo, candId) {
       pdf.setFontSize(9);
       pdf.setFont('helvetica', 'bold');
       pdf.text(medals[i] + ': ' + c.nombre + ' - ' + c.eval.puntajeTotal.toFixed(1) + ' pts', 18, yPos + 7);
-      
       pdf.setFont('helvetica', 'normal');
       pdf.text(c.profesion + ' | ' + c.experiencia + ' anos exp.', 18, yPos + 13);
       yPos += 19;
@@ -2279,36 +1410,19 @@ async function generarPDF(nit, cargo, candId) {
     });
 
     const diffTotal = candidatoSeleccionado.eval.puntajeTotal - promTotal;
-    tableData.push([
-      'TOTAL',
-      '100%',
-      candidatoSeleccionado.eval.puntajeTotal.toFixed(1),
-      promTotal.toFixed(1),
-      (diffTotal >= 0 ? '+' : '') + diffTotal.toFixed(1)
-    ]);
+    tableData.push(['TOTAL', '100%', candidatoSeleccionado.eval.puntajeTotal.toFixed(1), promTotal.toFixed(1), (diffTotal >= 0 ? '+' : '') + diffTotal.toFixed(1)]);
 
     pdf.autoTable({
       startY: yPos,
       head: [['Competencia', 'Peso', 'Candidato', 'Promedio', 'Diferencia']],
       body: tableData,
       theme: 'grid',
-      headStyles: {
-        fillColor: [30, 60, 114],
-        textColor: 255,
-        fontStyle: 'bold',
-        fontSize: 8
-      },
+      headStyles: { fillColor: [30, 60, 114], textColor: 255, fontStyle: 'bold', fontSize: 8 },
       bodyStyles: { fontSize: 7 },
       alternateRowStyles: { fillColor: [248, 250, 252] },
       margin: { left: 15, right: 15 },
       styles: { cellPadding: 2, halign: 'center', overflow: 'linebreak' },
-      columnStyles: { 
-        0: { halign: 'left', cellWidth: 60 },
-        1: { cellWidth: 15 },
-        2: { cellWidth: 18 },
-        3: { cellWidth: 20 },
-        4: { cellWidth: 20 }
-      }
+      columnStyles: { 0: { halign: 'left', cellWidth: 60 }, 1: { cellWidth: 15 }, 2: { cellWidth: 18 }, 3: { cellWidth: 20 }, 4: { cellWidth: 20 } }
     });
 
     yPos = pdf.lastAutoTable.finalY + 8;
@@ -2331,20 +1445,16 @@ async function generarPDF(nit, cargo, candId) {
       pdf.setTextColor(255, 255, 255);
       pdf.setFontSize(8);
       pdf.setFont('helvetica', 'bold');
-      pdf.text('ALERTA: Calificaciones < ' + (criticasBajasPDF[0].minCritica || 3) + ' en competencias criticas (Riesgo alto)', 18, yPos + 7);
+      pdf.text('ALERTA: Calificaciones < ' + (criticasBajasPDF[0].minCritica || 3) + ' en competencias criticas', 18, yPos + 7);
       yPos += 18;
     }
 
-    const decisionColor = decision.clase === 'decision-hire' ? [39, 174, 96] : 
-                          decision.clase === 'decision-no' ? [231, 76, 60] : 
-                          decision.clase === 'decision-reserve' ? [243, 156, 18] : [52, 152, 219];
-    
+    const decisionColor = decision.clase === 'decision-hire' ? [39, 174, 96] : decision.clase === 'decision-no' ? [231, 76, 60] : decision.clase === 'decision-reserve' ? [243, 156, 18] : [52, 152, 219];
     pdf.setFillColor(...decisionColor);
     pdf.rect(15, yPos, pageWidth - 30, 20, 'F');
     pdf.setTextColor(255, 255, 255);
     pdf.setFontSize(8);
     pdf.setFont('helvetica', 'bold');
-    
     const decisionText = decision.texto.replace(/[✅👍️❌]/g, '').trim();
     const decLines = pdf.splitTextToSize(decisionText, pageWidth - 34);
     pdf.text(decLines, 18, yPos + 7);
@@ -2393,45 +1503,39 @@ async function generarPDF(nit, cargo, candId) {
     pdf.save(nombreArchivo);
     alert('✅ PDF generado exitosamente');
 
-  } catch (error) {
-    console.error('Error detallado:', error);
-    alert('❌ Error al generar el PDF: ' + error.message);
-  } finally {
     btn.innerHTML = originalText;
     btn.disabled = false;
+  } catch (error) {
+    console.error('Error en generarPDF:', error);
+    alert('❌ Error al generar el PDF: ' + error.message);
+    event.target.innerHTML = '📄 Descargar PDF';
+    event.target.disabled = false;
   }
 }
 
 // ============ ACCIONES FINALES ============
 function finalizarProceso(nit, cargo) {
-  if (!confirm('¿Confirmar el cierre de esta vacante? Se marcará como finalizada.')) return;
+  if (!confirm('¿Confirmar el cierre de esta vacante?')) return;
   const empresa = empresas.find(e => e.nit === nit);
   const cargoObj = empresa.cargos.find(c => c.nombre === cargo);
   cargoObj.estado = 'CERRADA';
   cargoObj.vacantesDisponibles = 0;
   guardar();
-  alert('✅ Proceso finalizado. La vacante ha sido cerrada exitosamente.');
+  alert('✅ Proceso finalizado.');
   renderEmpresas();
-  document.getElementById('contenidoResultados').innerHTML = `
-    <div class="alert alert-success">
-      <h3>✅ Proceso Finalizado</h3>
-      <p>La vacante <strong>${cargo}</strong> en <strong>${empresa.nombre}</strong> ha sido cerrada.</p>
-      <p>El proceso de selección ha concluido exitosamente.</p>
-    </div>
-  `;
+  document.getElementById('contenidoResultados').innerHTML = '<div class="alert alert-success"><h3>✅ Proceso Finalizado</h3><p>La vacante <strong>' + cargo + '</strong> en <strong>' + empresa.nombre + '</strong> ha sido cerrada.</p></div>';
 }
 
 function reiniciarAnalisis(nit, cargo) {
-  if (!confirm('¿Eliminar todos los candidatos y evaluaciones de este cargo para iniciar un nuevo análisis?')) return;
+  if (!confirm('¿Eliminar todos los candidatos y evaluaciones de este cargo?')) return;
   const empresa = empresas.find(e => e.nit === nit);
   const cargoObj = empresa.cargos.find(c => c.nombre === cargo);
-  const candsAEliminar = candidatos.filter(c => c.nitEmpresa === nit && c.cargo === cargo);
-  candsAEliminar.forEach(c => delete evaluaciones[c.id]);
+  candidatos.filter(c => c.nitEmpresa === nit && c.cargo === cargo).forEach(c => delete evaluaciones[c.id]);
   candidatos = candidatos.filter(c => !(c.nitEmpresa === nit && c.cargo === cargo));
   cargoObj.vacantesDisponibles = cargoObj.vacantes;
   delete cargoObj.estado;
   guardar();
-  alert('🔄 Candidatos eliminados. Vacante restablecida para nuevo análisis.');
+  alert('🔄 Candidatos eliminados. Vacante restablecida.');
   renderCandidatos();
   renderEmpresas();
   inicializarResultadosCascada();
